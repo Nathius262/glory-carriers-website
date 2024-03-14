@@ -20,11 +20,15 @@ Glory Carriers Ministry Int'l is a  global ministry designed to bring men into t
 To get started with the development of this website locally, follow these steps:
 
 1. Clone this repository to your local machine.
-   ```bash git clone https://github.com/your-username/glory-carriers-website.git ```
+```bash
+    git clone https://github.com/your-username/glory-carriers-website.git 
+```
 
 Navigate into the project directory.
 
-```bash cd glory-carriers-website```
+```bash
+    cd glory-carriers-website
+```
 
 Open the index.html file in your preferred web browser to preview the website.
 
