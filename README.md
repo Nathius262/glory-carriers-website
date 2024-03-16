@@ -21,7 +21,7 @@ To get started with the development of this website locally, follow these steps:
 
 1. Clone this repository to your local machine.
 ```bash
-    git clone https://github.com/your-username/glory-carriers-website.git 
+    git clone https://github.com/Nathius262/glory-carriers-website.git
 ```
 
 Navigate into the project directory.
