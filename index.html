@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+		<meta name="description" content="Glory Carriers Ministry Int'l is a  global ministry designed to bring men into the light of God's Glory, untill all eyes can see Christ revealed.">
+		<meta name="keywords" content="GCMI, Embassy of Glory, Glory Carriers, Glory Carriers Ministry">
+		<meta name="author" content="GCMI">
+
+		<!--========open graph social share=========-->
+		<meta property="og:title" content="Glory Carriers Ministry Int'l">
+		<meta property="og:description" content="Glory Carriers Ministry Int'l is a  global ministry designed to bring men into the light of God's Glory, untill all eyes can see Christ revealed.">
+		<meta property="og:image" content="">
+		<meta property="og:url" content="">
+
+		<!--========twitter social share=========-->
+		<meta name="twitter:card" content="summary_large_image">
+		<meta name="twitter:title" content="Glory Carriers Ministry Int'l" id="twitterTitle">
+		<meta name="twitter:description" content="Glory Carriers Ministry Int'l is a  global ministry designed to bring men into the light of God's Glory, untill all eyes can see Christ revealed." id="twitterDescription">
+		<meta name="twitter:image" content="" id="twitterImage">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <title>GCMI</title>
+        
+
+        <!--==========LINKS=========-->
+        <link rel="icon" href="assets/img/g_logo.png" type="image/png"  sizes="16x16" />
+        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="assets/css/pageloader.css">
+    </head>
+    <body>
+        <div>
+            <button id="screen-mode">
+                dark mode
+            </button>
+        </div>
+
+        <!--============PRELOADER==============-->
+        <div id="preloader">
+            <div class="container">
+                <div class="ring"></div>
+                <div class="ring"></div>
+                <div class="ring"></div>
+                <div class="loading">
+                    <img width="80" src="assets/img/g_logo.png" alt="GCMI G_logo">
+                </div>
+            </div>
+        </div>
+        <!--============PRELOADER END==============-->
+
+        <!--============HEADER SECTION==============-->
+        <header></header>
+        <!--============HEADER END==============-->
+
+        <!--============MAIN BODY==============-->
+        <main></main>
+        <!--============MAIN BODY END==============-->
+
+        <!--============FOOTER SECTION==============-->
+        <footer></footer>
+        <!--============FOOTER END==============-->
+
+        
+        <!--==========JAVASCRIPT=========-->
+        <script>
+            window.addEventListener('load', ()=>{
+              setInterval(()=>{
+                //document.querySelector("#preloader").classList.add('hidden-item')
+				//document.querySelector("#root").classList.remove('show-hidden')
+              }, 3000)
+
+              document.querySelector('#screen-mode').addEventListener('click', ()=> {
+                document.querySelector('body').classList.toggle('body-dark')
+              })
+            })
+        </script>
+        <!--==========JAVASCRIPT END=========-->
+
+    </body>
+</html>
