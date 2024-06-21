@@ -14,6 +14,23 @@
 }
 
 
+
+/* nexa.css */
+/* nexa.css */
+@font-face {
+    font-family: 'Nexa';
+    src: url('../font/Nexa-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Nexa';
+    src: url('../font/Nexa-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
 /* Ellipse 1 */
 
 body{
@@ -22,7 +39,10 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
     overflow-x: hidden;
-    font-family: Nexa-Bold;
+    font-family: Nexa;
+}
+a{
+    font-weight: bold;
 }
 
 .ft-upper{
@@ -40,6 +60,7 @@ body{
 
 #header a{
     color: var(--white);
+    font-weight: bold;
 }
 
 #header a:hover{
@@ -56,13 +77,13 @@ body{
 }
 .birthing{
     font-size: 90px;
-    font-weight: 400;
+    font-weight: bold;
     text-align: left;
 
 }
 .glory{
     font-size: 30px;
-    font-weight: 400;
+    font-weight: bold;
     letter-spacing: 0.35em;
     text-align: left;
     line-height: 0%;
@@ -110,12 +131,13 @@ body{
     z-index: 1000;
 }
 .live-stream{
-    font-size: 25px;
+    font-size: 20px;
     letter-spacing: 0.08em;
     text-align: left;
     background-color: var(--bg-red);
     padding: 2px 4px;
     border-radius: 10px;
+    font-weight: bold;
 }
 
 
@@ -147,7 +169,7 @@ body{
 }
 .about h2{
     font-size: 30px;
-    font-weight: 400;
+    font-weight: bold;
     line-height: 38.46px;
     letter-spacing: 0.46em;
     text-align: left;
@@ -156,7 +178,6 @@ body{
 
 .about a{
     font-size: 16px;
-    font-weight: 400;
     line-height: 22px;
     letter-spacing: 0.46em;
     text-align: left;
@@ -191,20 +212,19 @@ body{
     background-color: #020325;
     text-align: end !important;
 }
-#event h2, #event h4{
-    text-align: end !important;
-}
-#event h2{
-    font-size: 100px;
-    font-weight: 400;
-    line-height: 80px;
-    letter-spacing: 0.09em;
+
+
+#event h2 {
+    font-size: 85px;
+    font-weight: bold;
+    line-height: 60px;
+    letter-spacing: 0.0001em;
     text-align: left;
 }
+
 #event h4{
     font-size: 32px;
-    font-weight: 400;
-    line-height: 41.02px;
+    font-weight: bold;
     letter-spacing: 0.46em;
     text-align: left;
     
@@ -216,8 +236,8 @@ body{
 }
 
 #media h4{
-    font-size: 40px;
-    font-weight: 400;
+    font-size: 35px;
+    font-weight: bold;
     line-height: 51.28px;
     letter-spacing: 0.46em;
     text-align: left;
@@ -271,6 +291,19 @@ body{
 
 }
 
+
+/**********
+**********
+**********
+MEDIA QUERY @ screen size below 768px
+**********
+**********
+**********/
+
+@media (min-width: 768px) {
+   
+}
+
 /**********
 **********
 **********
@@ -287,7 +320,7 @@ MEDIA QUERY @ screen size below 632
         z-index: 1000;
     }
     .live-stream{
-        font-size: 25px;
+        font-size: 20px;
         letter-spacing: 0.08em;
         text-align: left;
         background-color: var(--bg-red);
