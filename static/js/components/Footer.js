@@ -57,7 +57,7 @@ function Footer(){
                     </div>
                     <ul class="ft-upper fw-normal fs-5">
                         <li><a href="event.html">Event</a></li>
-                        <li><a href="">Join a Department Us</a></li>
+                        <li><a href="join_department.html">Join a Department Us</a></li>
                         <li><a href="">Testimonies</a></li>
                     </ul>
                 </div>

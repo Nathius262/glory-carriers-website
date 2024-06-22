@@ -11,6 +11,7 @@
     --bg-blue-transparent: #141668;
     --blue-transparent: #287ea3da;
     --yellow: #FFD771;
+    --fire-red: #FF7171;
 }
 
 
@@ -267,6 +268,18 @@ a{
     justify-self: center;
     justify-items: center;
     margin-bottom: 0;
+}
+
+.department-bg{
+    width: 606px;
+    height: 610px;
+    top: 580px;
+    left: 1147px;
+    gap: 0px;
+    border-radius: 489px 0px 0px 0px;
+    opacity: 0px;
+    background: linear-gradient(180deg, rgba(225, 43, 255, 0.15) 0%, rgba(197, 123, 255, 0.15) 100%);
+
 }
 
 /* FOOTER SECTION*/
