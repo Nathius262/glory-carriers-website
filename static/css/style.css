@@ -139,6 +139,11 @@ a{
     border-radius: 10px;
     font-weight: bold;
 }
+.live-stream a{
+    background: none;
+    text-decoration: none;
+    color: var(--white);
+}
 
 
 /* Year Theme */
