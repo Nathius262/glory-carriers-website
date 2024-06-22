@@ -56,7 +56,7 @@ function Footer(){
                         Connect
                     </div>
                     <ul class="ft-upper fw-normal fs-5">
-                        <li><a href="">Event</a></li>
+                        <li><a href="event.html">Event</a></li>
                         <li><a href="">Join a Department Us</a></li>
                         <li><a href="">Testimonies</a></li>
                     </ul>
