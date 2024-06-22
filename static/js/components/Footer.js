@@ -24,8 +24,14 @@ function Footer(){
                 <div class="col-md-4">
                 
                     <div class="d-grid">
-                        <div class="my-1"><img src="static/img/icon/email.png" width="30" alt="email"> glorycarriersministryint’l@gmail.com</div>
-                        <div class="my-1"><img src="static/img/icon/phone.png" width="30" alt="phone"> +234 000 000 000, +234 000 000 000</div>
+                        <div class="my-1 d-sm-flex align-items-center"><img src="static/img/icon/email.png" width="30" alt="email"> <a class="nav-link fw-light fs-6 mx-1" href="mailto:glorycarriersministryint’l@gmail.com">glorycarriersministryint’l@gmail.com</a></div>
+                        <div class="my-1 d-sm-flex align-items-center justify-content-center">
+                            <img class="" src="static/img/icon/phone.png" width="30" alt="phone"> 
+                            <div class="d-sm-flex mx-1">
+                                <a class="nav-link fw-light fs-6" href="tel:+234 000 000 000">+234 000 000 000, </a>
+                                <a class="nav-link fw-light fs-6" href="tel:+234 000 000 000">+234 000 000 000</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
