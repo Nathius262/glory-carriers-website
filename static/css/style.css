@@ -270,18 +270,19 @@ a{
     margin-bottom: 0;
 }
 
-.department-bg{
+/* DEPARTMENT*/
+.department-bg {
+    position: absolute;
+    z-index: -34;
     width: 606px;
     height: 610px;
-    top: 580px;
-    left: 1147px;
+    bottom: 0;
+    right: 0;
     gap: 0px;
     border-radius: 489px 0px 0px 0px;
     opacity: 0px;
     background: linear-gradient(180deg, rgba(225, 43, 255, 0.15) 0%, rgba(197, 123, 255, 0.15) 100%);
-
 }
-
 /* FOOTER SECTION*/
 #footer{
     background: url('../img/footer.jfif');
