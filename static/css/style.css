@@ -283,6 +283,21 @@ a{
     opacity: 0px;
     background: linear-gradient(180deg, rgba(225, 43, 255, 0.15) 0%, rgba(197, 123, 255, 0.15) 100%);
 }
+
+.department-bg-bottom{
+    position: absolute;
+    z-index: -3;
+    width: 30%;
+    height: 30%;
+    top: 85%;
+    left: 40%;
+    gap: 0px;
+    border-radius: 30pc 30pc 0px 0px;
+    opacity: 0px;
+    background: linear-gradient(180deg, rgba(47, 43, 255, 0.34) 0%, rgba(2, 0, 77, 0.34) 100%);
+
+}
+
 /* FOOTER SECTION*/
 #footer{
     background: url('../img/footer.jfif');
