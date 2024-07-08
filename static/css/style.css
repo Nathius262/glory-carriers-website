@@ -315,6 +315,17 @@ a{
     background: linear-gradient(180deg, rgba(225, 43, 255, 0.15) 0%, rgba(197, 123, 255, 0.15) 100%);
 }
 
+/*ZOE RECORD*/
+.zbg1, .zbg2, .zbg3, .zbg4{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.zbg4{
+    right: 0 !important;
+}
+
 .department-bg-bottom{
     position: absolute;
     z-index: -3;
