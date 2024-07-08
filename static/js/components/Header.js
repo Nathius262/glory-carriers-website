@@ -23,7 +23,7 @@ function Header(){
                         <a class="nav-link" href="#">Giving</a>
                     </li> 
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Media</a>
+                        <a class="nav-link" href="media.html">Media</a>
                     </li> 
                     <li class="nav-item">
                         <a class="nav-link" href="#">Contact Us</a>
