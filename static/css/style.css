@@ -135,6 +135,7 @@ a{
     z-index: -3;
 }
 
+
 /*LIVE STREAM */
 #live-stream{
     position: absolute;
@@ -315,6 +316,20 @@ a{
     background: linear-gradient(180deg, rgba(225, 43, 255, 0.15) 0%, rgba(197, 123, 255, 0.15) 100%);
 }
 
+.ellipse_circle{
+    position: absolute;
+    z-index: -34;
+    width: 606px;
+    height: 610px;
+    bottom: 0;
+    right: -200px;
+    gap: 0px;
+    border-radius: 489px;
+    opacity: 0px;
+    background: linear-gradient(180deg, rgba(225, 43, 255, 0.15) 0%, rgba(197, 123, 255, 0.15) 100%);
+
+}
+
 /*ZOE RECORD*/
 
 .relative-container {
@@ -373,6 +388,24 @@ a{
     background: linear-gradient(180deg, rgba(47, 43, 255, 0.34) 0%, rgba(2, 0, 77, 0.34) 100%);
 
 }
+
+/*NOW WORD*/
+
+.now-word {
+    position: relative;
+    height: 300px;
+    width: 80vw;
+    background: var(--bg-blue-transparent);
+    display: flex;
+    justify-content: center;
+    
+}
+.now-word img{
+    width: 500px;
+    position: absolute;
+    
+}
+
 
 /* FOOTER SECTION*/
 #footer{
