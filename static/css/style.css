@@ -326,6 +326,58 @@ a{
     right: 0 !important;
 }
 
+.relative-container {
+    position: relative;
+    background: var(--bg-blue-transparent);
+    height: 300px;
+    width: 80vw;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+}
+
+.relative-container .container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.relative-container .zbg1 {
+    top: 10%;
+    left: 0;
+    width:300px;
+    height:auto;
+}
+
+.relative-container .zbg2 {
+    z-index: 999;
+    top: 60%;
+    right: 0;
+    width:300px;
+    height:auto;
+}
+
+.relative-container .zbg3 {
+    top: 10%;
+    left: 30vw;
+    width:300px;
+    height:auto;
+}
+
+.relative-container .zbg4 {
+    top: 10%;
+    left: 50vw;
+    width:300px;
+    height:auto;
+}
+
+.relative-container img {
+    width: 100%;
+    height: 100%;
+    object-fit:fill;
+}
+
+
 .department-bg-bottom{
     position: absolute;
     z-index: -3;
@@ -375,8 +427,27 @@ MEDIA QUERY @ screen size below 768px
 **********
 **********/
 
-@media (min-width: 768px) {
+@media (max-width: 768px) {
    
+    .relative-container .zbg1 {
+        width:250px;
+        height:auto;
+    }
+    
+    .relative-container .zbg2 {
+        width:250px;
+        height:auto;
+    }
+    
+    .relative-container .zbg3 {
+        width:250px;
+        height:auto;
+    }
+    
+    .relative-container .zbg4 {
+        width:250px;
+        height:auto;
+    }
 }
 
 /**********
@@ -406,6 +477,7 @@ MEDIA QUERY @ screen size below 632
     .about .about-bg-text{       
         font-size: 180px;
     }
+
     
 }
 
@@ -438,5 +510,25 @@ MEDIA QUERY  @ screen size below 438
     .about .about-bg-text{       
         font-size: 100px;
         line-height: 160px;
+    }
+
+    .relative-container .zbg1 {
+        width:230px;
+        height:auto;
+    }
+    
+    .relative-container .zbg2 {
+        width:230px;
+        height:auto;
+    }
+    
+    .relative-container .zbg3 {
+        width:230px;
+        height:auto;
+    }
+    
+    .relative-container .zbg4 {
+        width:230px;
+        height:auto;
     }
 }

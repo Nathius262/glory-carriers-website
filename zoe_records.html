@@ -48,16 +48,17 @@
                 <!---=========INTRO BEGIN========-->
                 <section class="mt-5 pt-5 mb-0 ft-upper">
                     <div class="container mt-5" >
-                        <div class="row justify-content-center align-items-end">
-                            <div class="col-md-8 justify-content-center rounded-4" style="position: relative;background:var( --bg-blue-transparent);height: 300px;">
+                        <div class="row justify-content-center align-items-end container">
+                            <div class="col-md-8 justify-content-center container rounded-4 relative-container">
                                 <div class="row justify-content-center latest_media">
-                                    <div class="col-sm-4 container zbg1"><img  width="100%" src="static/img/z1.jfif" alt=""></div>
-                                    <div class="col-sm-5 containerzbg2"><img  width="100%" src="static/img/z4.jfif" alt=""></div>
-                                    <div class="col-sm-4 container zbg3"><img  width="100%" src="static/img/z2.jfif" alt=""></div>
-                                    <div class="col-sm-4 container zbg4"><img  width="100%" src="static/img/z3.jfif" alt=""></div>
+                                    <div class="col-sm-4 container zbg1"><img src="static/img/zz2.jfif" alt=""></div>
+                                    <div class="col-sm-5 container zbg2"><img src="static/img/zz1.jfif" alt=""></div>
+                                    <div class="col-sm-4 container zbg3"><img src="static/img/zz3.jfif" alt=""></div>
+                                    <div class="col-sm-4 container zbg4"><img src="static/img/zz4.jfif" alt=""></div>
                                 </div>
                             </div>
                         </div>
+                        
                     </div>
 
                     <div class=""></div>
@@ -125,15 +126,12 @@
 
         <!--========JavaScript================ -->
         <script>
-            window.addEventListener('load', ()=>{
+            window.addEventListener('load', () => {
               setInterval(()=>{
                 document.querySelector("#preloader").classList.add('hidden-item')
 				document.querySelector("#root").classList.remove('show-hidden')
               }, 3000)
 
-              /*document.querySelector('#screen-mode').addEventListener('click', ()=> {
-                document.querySelector('body').classList.toggle('body-dark')
-              })*/
             })
         </script>
 
