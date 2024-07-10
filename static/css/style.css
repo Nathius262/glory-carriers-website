@@ -316,65 +316,47 @@ a{
 }
 
 /*ZOE RECORD*/
-.zbg1, .zbg2, .zbg3, .zbg4{
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-.zbg4{
-    right: 0 !important;
-}
 
 .relative-container {
     position: relative;
-    background: var(--bg-blue-transparent);
     height: 300px;
     width: 80vw;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(2, 1fr);
+    overflow: hidden;
 }
+
+.relative-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(../img/zz3.jfif);
+    background-size: cover;
+    background-repeat: no-repeat;
+    filter: blur(3px); /* Adjust the blur radius as needed */
+    z-index: -1;
+}
+
+.relative-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Black overlay with 50% opacity */
+    z-index: -1;
+}
+
 
 .relative-container .container {
     position: absolute;
     width: 100%;
     height: 100%;
-}
-
-.relative-container .zbg1 {
-    top: 10%;
-    left: 0;
-    width:300px;
-    height:auto;
-}
-
-.relative-container .zbg2 {
-    z-index: 999;
-    top: 60%;
-    right: 0;
-    width:300px;
-    height:auto;
-}
-
-.relative-container .zbg3 {
-    top: 10%;
-    left: 30vw;
-    width:300px;
-    height:auto;
-}
-
-.relative-container .zbg4 {
-    top: 10%;
-    left: 50vw;
-    width:300px;
-    height:auto;
-}
-
-.relative-container img {
-    width: 100%;
-    height: 100%;
-    object-fit:fill;
 }
 
 
@@ -428,25 +410,8 @@ MEDIA QUERY @ screen size below 768px
 **********/
 
 @media (max-width: 768px) {
-   
-    .relative-container .zbg1 {
-        width:250px;
-        height:auto;
-    }
-    
-    .relative-container .zbg2 {
-        width:250px;
-        height:auto;
-    }
-    
-    .relative-container .zbg3 {
-        width:250px;
-        height:auto;
-    }
-    
-    .relative-container .zbg4 {
-        width:250px;
-        height:auto;
+    .relative-container {
+        width: 100vw;
     }
 }
 
@@ -512,23 +477,4 @@ MEDIA QUERY  @ screen size below 438
         line-height: 160px;
     }
 
-    .relative-container .zbg1 {
-        width:230px;
-        height:auto;
-    }
-    
-    .relative-container .zbg2 {
-        width:230px;
-        height:auto;
-    }
-    
-    .relative-container .zbg3 {
-        width:230px;
-        height:auto;
-    }
-    
-    .relative-container .zbg4 {
-        width:230px;
-        height:auto;
-    }
 }
