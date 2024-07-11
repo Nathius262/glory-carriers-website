@@ -330,6 +330,19 @@ a{
 
 }
 
+.ellipse_circle_blue {
+    position: absolute;
+    z-index: -34;
+    width: 606px;
+    height: 610px;
+    bottom: -140vh;
+    left: 0;
+    gap: 0px;
+    border-radius: 489px;
+    opacity: 0px;
+    background: linear-gradient(180deg, rgba(47, 43, 255, 0.34) 0%, rgba(2, 0, 77, 0.34) 100%);
+}
+
 /*ZOE RECORD*/
 
 .relative-container {
@@ -398,7 +411,7 @@ a{
     background: var(--bg-blue-transparent);
     display: flex;
     justify-content: center;
-    
+
 }
 .now-word img{
     width: 500px;

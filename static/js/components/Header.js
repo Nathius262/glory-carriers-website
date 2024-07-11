@@ -20,7 +20,7 @@ function Header(){
                         <a class="nav-link" href="event.html">Event</a>
                     </li> 
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Giving</a>
+                        <a class="nav-link" href="giving.html">Giving</a>
                     </li> 
                     <li class="nav-item">
                         <a class="nav-link" href="media.html">Media</a>

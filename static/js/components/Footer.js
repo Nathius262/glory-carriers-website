@@ -46,7 +46,7 @@ function Footer(){
                         Quick Link
                     </div>
                     <ul class="ft-upper">
-                        <li><a href="">Give</a></li>
+                        <li><a href="giving.html">Give</a></li>
                         <li><a href="">About Us</a></li>
                         <li><a href="">Media</a></li>
                     </ul>
