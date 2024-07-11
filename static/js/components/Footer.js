@@ -47,8 +47,8 @@ function Footer(){
                     </div>
                     <ul class="ft-upper">
                         <li><a href="giving.html">Give</a></li>
-                        <li><a href="">About Us</a></li>
-                        <li><a href="">Media</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="media.html">Media</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-4">

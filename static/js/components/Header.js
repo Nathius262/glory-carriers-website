@@ -14,7 +14,7 @@ function Header(){
                         <a class="nav-link" href="index">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About Us</a>
+                        <a class="nav-link" href="about.html">About Us</a>
                     </li> 
                     <li class="nav-item">
                         <a class="nav-link" href="event.html">Event</a>
