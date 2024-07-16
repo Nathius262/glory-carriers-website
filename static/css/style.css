@@ -77,7 +77,7 @@ a{
     overflow: hidden;
 }
 .birthing{
-    font-size: 90px;
+    font-size: 70px;
     font-weight: bold;
     text-align: left;
 
@@ -97,12 +97,14 @@ a{
     text-align: left;
     position: relative;
 }
-.text_year{
-    font-family: Nexa-Light;
+.text_year {
+    font-family: Nexa;
     font-size: 40px;
-    font-weight: 400;
+    font-weight: 300;
     text-align: left;
     position: absolute;
+    left: 42px;
+    top: -18px;
 }
 
 .the{
@@ -504,9 +506,52 @@ MEDIA QUERY  @ screen size below 438
 **********/
 
 @media screen and (max-width:438px) {
+
+
+    .birthing{
+        font-size: calc(70px * .8);
+        font-weight: bold;
+        text-align: left;
+    
+    }
+    .glory{
+        font-size: calc(30px * .8);
+        font-weight: bold;
+        letter-spacing: 0.2em;
+        text-align: left;
+        line-height: 0%;
+    }
+    
+    .year{
+        font-size: calc(16px * .8);
+        font-weight: 400;
+        letter-spacing: 0.35em;
+        text-align: left;
+        position: relative;
+    }
+    .text_year {
+        font-family: Nexa;
+        font-size: calc(40px * .8);
+        font-weight: 300;
+        text-align: left;
+        letter-spacing: -.1rem;
+        position: absolute;
+        left: 33px;
+        top: -15px;
+    }
+    
+    .the{
+        font-size: calc(24px * .8);
+        font-weight: 400;
+        text-align: left;
+        background-color: var(--bg-purplish);
+        border-radius: 10pc;
+        padding: 10px;
+    }
+
     #live-stream{
         position: absolute;
-        bottom: 95%;
+        bottom: 97%;
         left: 2%;
         z-index: 1000;
     }
