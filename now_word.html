@@ -16,7 +16,6 @@
         <meta name="twitter:description" content="Glory Carriers Ministry Int'l is a  global ministry designed to bring men into the light of God's Glory, untill all eyes can see Christ revealed." id="twitterDescription">
         <meta name="twitter:image" content="static/img/logo.png" id="twitterImage">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="static/css/pageloader.css">
         <title>GCMI</title>
         
         <style>
@@ -28,21 +27,9 @@
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>    
     </head>
     <body>
-         <!--============PRELOADER==============-->
-         <div id="preloader">
-            <div class="container">
-                <div class="ring"></div>
-                <div class="ring"></div>
-                <div class="ring"></div>
-                <div class="loading">
-                    <img width="80" src="static/img/g_logo.png" alt="GCMI G_logo">
-                </div>
-            </div>
-        </div>
-        <!--============PRELOADER END==============-->
 
         <!--============ROOT SECTION==============-->
-        <section id="root" class="show-hidden">
+        <section id="root" class="position-relative overflow-x-hidden">
             <!--=========HEADER BEGIN===========-->
             <nav id="header" class="navbar navbar-expand-md navbar-dark  fixed-top mediumnavigation nav-down" aria-label="Fourth navbar example">
                 
@@ -73,7 +60,7 @@
                     <div class="container mt-5">
                         <div class="mt-5 pt-5 ft-upper fw-bold text-center fs-4" style="color:var(--fire-red)">About Now Word</div>
                         <p class="mb-3 text-dark container">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. </p>
-                        <div class="row justify-content-center align-items-center">
+                        <div class="container row justify-content-center align-items-center">
                             <div class="col-sm-3 mb-4 m-3 p-3 d-flex justify-content-center align-items-center bg-secondary text-dark">
                                 <div class="">
                                     <img width="20" class="me-1" src="static/img/icon/now_word.png" alt="now-word">
@@ -155,15 +142,7 @@
         <!--============ROOT SECTION END==============-->
 
         <!--========JavaScript================ -->
-        <script>
-            window.addEventListener('load', () => {
-              setInterval(()=>{
-                document.querySelector("#preloader").classList.add('hidden-item')
-				document.querySelector("#root").classList.remove('show-hidden')
-              }, 3000)
 
-            })
-        </script>
 
 		<script type="module" src="static/js/app.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
