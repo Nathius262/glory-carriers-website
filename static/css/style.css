@@ -288,12 +288,12 @@ a{
 .media-top{
     position: absolute;
     width: 100%; 
-    bottom: 20px;
+    bottom: 50px;
 }
 
 .latest_media h4{
     font-family: Nexa-Bold;
-    font-size: 24px;
+    font-size: 30px;
     font-weight: 500;
     line-height: 28px;
     letter-spacing: 0.91em;
@@ -303,7 +303,7 @@ a{
 
 .latest_media h2{
     font-family: 'Trajan Pro 3' !important;
-    font-size: 50px;
+    font-size: 70px;
     font-weight: 500;
     line-height: 50px;
     text-align: left;
@@ -576,6 +576,7 @@ MEDIA QUERY  @ screen size below 438
 
     .media-top{
         /*top: calc(300px * .99); */
+        bottom: 70px;
     }
     
     .latest_media h4{
