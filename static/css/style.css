@@ -303,7 +303,7 @@ a{
 
 .latest_media h2{
     font-family: 'Trajan Pro 3' !important;
-    font-size: 70px;
+    font-size: 60px;
     font-weight: 500;
     line-height: 50px;
     text-align: left;
@@ -576,7 +576,6 @@ MEDIA QUERY  @ screen size below 438
 
     .media-top{
         /*top: calc(300px * .99); */
-        bottom: 70px;
     }
     
     .latest_media h4{
