@@ -594,4 +594,14 @@ MEDIA QUERY  @ screen size below 438
         width: calc(200px * .8);
     }
 
+    .tithe-text div{
+        font-size: 14px;
+    }
+    .tithe-text .h2, .tithe-text .h1{
+        font-size: 16px;
+    }
+    .tithe-text img{
+        width: 70;
+    }
+
 }
