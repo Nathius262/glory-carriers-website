@@ -16,6 +16,7 @@
         <meta name="twitter:description" content="Glory Carriers Ministry Int'l is a  global ministry designed to bring men into the light of God's Glory, untill all eyes can see Christ revealed." id="twitterDescription">
         <meta name="twitter:image" content="static/img/logo.png" id="twitterImage">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="static/css/pageloader.css">
         <title>GCMI</title>
         
         <style>
@@ -28,6 +29,18 @@
     </head>
     <body>
 
+            <!--============PRELOADER==============-->
+            <div id="preloader">
+            <div class="container">
+                <div class="ring"></div>
+                <div class="ring"></div>
+                <div class="ring"></div>
+                <div class="loading">
+                    <img width="80" src="static/img/g_logo.png" alt="GCMI G_logo">
+                </div>
+            </div>
+        </div>
+        <!--============PRELOADER END==============-->
         <!--============ROOT SECTION==============-->
         <section id="root" class="position-relative overflow-x-hidden">
             <!--=========HEADER BEGIN===========-->
@@ -142,7 +155,18 @@
         <!--============ROOT SECTION END==============-->
 
         <!--========JavaScript================ -->
+        <script>
+            window.addEventListener('load', ()=>{
+              setInterval(()=>{
+                document.querySelector("#preloader").classList.add('hidden-item')
+				document.querySelector("#root").classList.remove('show-hidden')
+              }, 3000)
 
+              /*document.querySelector('#screen-mode').addEventListener('click', ()=> {
+                document.querySelector('body').classList.toggle('body-dark')
+              })*/
+            })
+        </script>
 
 		<script type="module" src="static/js/app.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
