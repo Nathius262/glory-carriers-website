@@ -1,16 +1,15 @@
-import express from 'express';
-import path from 'path';
 
-
-const app = express()
-
-
-app.use((req, res, next) =>{
-    if (req.path.substr(-1) === '/' && req.path.endsWith('/')){        
-        req.url = req.url.slice(0, -1);
+// middlewares/removeTrailingSlash.js
+const removeTrailingSlash = (req, res, next) => {
+    // Ignore paths that are allowed to have trailing slashes
+    const allowTrailingSlash = ['/media/'];
+  
+    if (req.path !== '/' && req.path.endsWith('/') && !allowTrailingSlash.includes(req.path)) {
+      const query = req.url.slice(req.path.length);
+      res.redirect(301, req.path.slice(0, -1) + query);
+    } else {
+      next();
     }
-    next();
-
-});
-
-export default app;
+};
+  
+export default removeTrailingSlash;
