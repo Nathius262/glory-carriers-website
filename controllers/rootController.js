@@ -45,3 +45,5 @@ const renderGiving = async (req, res) => {
         res.status(404).send('page not found');
     }
 };
+
+export {renderIndex, renderAbout, renderContact, renderDepartment, renderEvent, renderGiving}

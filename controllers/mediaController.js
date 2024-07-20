@@ -30,3 +30,5 @@ const renderNowWord = async (req, res) => {
         res.status(404).send('page not found');
     }
 };
+
+export {renderMedia, renderNowWord, renderStream, renderZoeRecord}
