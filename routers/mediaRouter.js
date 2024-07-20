@@ -2,7 +2,7 @@ import { Router } from "express";
 import {renderMedia, renderNowWord, renderStream, renderZoeRecord} from "../controllers/mediaController.js"
 
 
-router = Router();
+const router = Router();
 
 //Media Routes
 router.get('/', renderMedia);
