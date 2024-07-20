@@ -5,7 +5,7 @@ import {renderMedia, renderNowWord, renderStream, renderZoeRecord} from "../cont
 const router = Router();
 
 //Media Routes
-router.get('/', renderMedia);
+router.get('', renderMedia);
 router.get('/now-word', renderNowWord);
 router.get('/stream', renderStream);
 router.get('/zoe-records', renderZoeRecord);
