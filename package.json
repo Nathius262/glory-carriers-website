@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "Welcome to the Glory Carriers Ministry Int'l Website repository! This repository contains all the code and resources for building and maintaining the official website of Glory Carriers Ministry Int'l.",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index",
+    "dev": "nodemon index"
   },
   "repository": {
     "type": "git",
