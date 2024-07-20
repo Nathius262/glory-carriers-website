@@ -8,6 +8,7 @@ import path from 'path';
 import {internalServerError, pageNotFound} from './middlewares/errorHandler.js'
 import staticFiles from "./config/staticFiles.js"
 import hbs from "./config/settings.js"
+//import pathNormalizer from './middlewares/normalizer.js';
 import rootRouter from "./routers/rootRouter.js"
 import mediaRouter from "./routers/mediaRouter.js"
 
@@ -21,6 +22,7 @@ const __dirname = path.dirname(__filename);
 const PORT = process.env.PORT || 3000;
 
 const app = express();
+//app.use(pathNormalizer);
 
 //settings
 app.engine('html', hbs.engine);
@@ -37,6 +39,7 @@ app.use('/media/', mediaRouter);
 //middlewares
 app.use(internalServerError);
 app.use(pageNotFound);
+
 
 // Start the server
 app.listen(PORT, () => {
