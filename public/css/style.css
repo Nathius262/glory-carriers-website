@@ -47,8 +47,12 @@ body{
 }
 a{
     font-weight: bold;
+    text-decoration: none;
 }
-
+p{
+    font-family: Nexa;
+    font-size: 20px;
+}
 .ft-upper{
     text-transform: uppercase;
 }
@@ -456,6 +460,49 @@ a{
     letter-spacing: 0.14em;
     text-align: left;
 
+}
+
+@media screen and (min-width:960px){
+    .birthing{
+        font-size: calc(70px * 1.7);
+        font-weight: bold;
+        text-align: left;
+    
+    }
+    .glory{
+        font-size: calc(30px * 1.7);
+        font-weight: bold;
+        letter-spacing: 0.3em;
+        text-align: left;
+        line-height: 0%;
+    }
+    
+    .year{
+        font-size: calc(16px * 1.7);
+        font-weight: 400;
+        letter-spacing: 0.35em;
+        text-align: left;
+        position: relative;
+    }
+    .text_year {
+        font-family: Nexa;
+        font-size: calc(40px * 1.7);
+        font-weight: 300;
+        text-align: left;
+        letter-spacing: -.2rem;
+        position: absolute;
+        left: 70px;
+        top: -30px;
+    }
+    
+    .the{
+        font-size: calc(24px * 1.7);
+        font-weight: 400;
+        text-align: left;
+        background-color: var(--bg-purplish);
+        border-radius: 10pc;
+        padding: 10px;
+    }
 }
 
 /**********
