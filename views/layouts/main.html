@@ -37,7 +37,7 @@
 
     </head>
     <body>
-         <!--============PRELOADER==============-->
+         <!--============PRELOADER============
          <div id="preloader">
             <div class="container">
                 <div class="ring"></div>
@@ -48,10 +48,10 @@
                 </div>
             </div>
         </div>
-        <!--============PRELOADER END==============-->
+        ============PRELOADER END==============-->
 
         <!--============ROOT SECTION==============-->
-        <section id="root" class="show-hidden position-relative overflow-x-hidden">
+        <section id="root" class=" position-relative overflow-x-hidden">
             <!--=========HEADER BEGIN===========-->
             <nav id="header" class="navbar navbar-expand-md navbar-dark  fixed-top mediumnavigation nav-down" aria-label="Fourth navbar example">
                 {{> header}}
@@ -71,15 +71,15 @@
         </section>
         <!--============ROOT SECTION END==============-->
 
-        <!--========JavaScript================ -->
+        <!--========JavaScript=========
         <script>
             window.addEventListener('load', ()=>{
               setInterval(()=>{
-                document.querySelector("#preloader").classList.add('hidden-item')
+                //document.querySelector("#preloader").classList.add('hidden-item')
 				document.querySelector("#root").classList.remove('show-hidden')
-              }, 3000)
+              }, 2000)
             })
-        </script>
+        </script>======= -->
 
 		<script type="module" src="js/app.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>

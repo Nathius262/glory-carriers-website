@@ -14,6 +14,22 @@
     --fire-red: #FF7171;
 }
 
+.pagination {
+    --bs-pagination-color: var(--bg-blue-transparent);
+    --bs-pagination-bg: var(--bs-body-bg);
+    --bs-pagination-border-color: var(--bs-border-color);
+    --bs-pagination-hover-color: var(--bs-link-hover-color);
+    --bs-pagination-hover-border-color: var(--bs-border-color);
+    --bs-pagination-focus-color: var(--bs-link-hover-color);
+    --bs-pagination-focus-bg: var(--bs-secondary-bg);
+    --bs-pagination-active-color: #fff;
+    --bs-pagination-active-bg: var(--bg-blue-transparent);
+    --bs-pagination-active-border-color: var(--bg-blue-transparent);
+    --bs-pagination-disabled-color: var(--bs-secondary-color);
+    --bs-pagination-disabled-bg: var(--bs-secondary-bg);
+    --bs-pagination-disabled-border-color: var(--bs-border-color);
+}
+
 
 
 /* nexa.css */
@@ -45,6 +61,14 @@ body{
     overflow-x: hidden;
     font-family: Nexa;
 }
+
+#navbarsExample04 a:hover{
+    background-color: var(--blue);
+    color: var(--bg-body) !important;
+    border-radius: 5px;
+    transition: background-color .5s linear;
+}
+
 a{
     font-weight: bold;
     text-decoration: none;
@@ -161,6 +185,11 @@ p{
     border-radius: 10px;
     font-weight: bold;
 }
+.live-stream:hover{
+    background-color: var(--blue);
+    transition: background-color .5s ease-in-out;
+    
+}
 .live-stream a{
     background: none;
     text-decoration: none;
@@ -214,7 +243,11 @@ p{
     color: var(--black);
     border-radius: 10px;
 }
-
+.about a:hover{
+    background-color: var(--blue);
+    transition: background-color .5s ease;
+    color: var(--bg-blue-transparent);
+}
 .about img{
     border-radius: 2pc;
 }
