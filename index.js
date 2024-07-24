@@ -3,6 +3,9 @@ import express from 'express';
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import path from 'path';
+import bodyParser from 'body-parser';
+import multer from 'multer';
+
 
 //custom import
 import {internalServerError, pageNotFound} from './middlewares/errorHandler.js'
@@ -28,6 +31,11 @@ app.use(removeTrailingSlash );
 app.engine('html', hbs.engine);
 app.set('view engine', 'html');
 app.set('views', path.join(__dirname, 'views'));
+
+// Middleware to parse JSON bodies
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: true}))
+//app.use(multer().array())
 
 //staticfiles
 app.use(staticFiles);

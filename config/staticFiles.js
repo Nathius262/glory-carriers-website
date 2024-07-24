@@ -13,5 +13,6 @@ const app = express();
 // Serve static files (CSS, JS, images)
 app.use('', express.static(path.join(__dirname, '..', 'public')));
 app.use('/media', express.static(path.join(__dirname, '..', 'public')));
+app.use('/media/sermon', express.static(path.join(__dirname, '..', 'public')));
 
 export default app;
