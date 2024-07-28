@@ -15,15 +15,15 @@ document.getElementById('uploadForm').addEventListener('submit', async function(
   
       if (response.ok) {
         status.innerHTML = 'Upload successful!';
-        console.log('Upload successful:', result);
-        form.values = ""
+        alert('Upload successful:', result);
+        window.location.reload()
       } else {
         status.innerHTML = `Upload failed: ${result.message}`;
-        console.error('Upload failed:', result);
+        alert('Upload failed:', result);
       }
     } catch (error) {
       status.innerHTML = `Upload failed: ${error.message}`;
-      console.error('Upload error:', error);
+      alert('Upload error:', error);
     } finally {
       progressBar.style.display = 'none';
     }
