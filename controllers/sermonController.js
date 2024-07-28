@@ -1,32 +1,71 @@
 import pool from '../config/databaseConfig.js';
 
+
+function capitalizeWords(str) {
+  return str.replace(/\b\w/g, char => char.toUpperCase());
+}
 // Function to handle adding a new sermon
 export const createSermon = async (req, res) => {
-    console.log('Form data:', req);
-    console.log('Form data received:', req.body);
-    console.log('Form data received:', req.data);
-    console.log('Files received:', req.files);
-  
-    // Handle file and form data processing
-    try {
-      // Perform your database operations or other logic here
-      // For example:
-      // const result = await pool.query('INSERT INTO sermons ...', [req.body.title, req.files['audio'][0].path, req.files['image'][0].path]);
-  
-      res.redirect('/media'); // Redirect after successful processing
-    } catch (err) {
-      console.error('Error:', err);
-      res.status(500).send('Server Error');
+  try {
+
+    // Check if the files are received
+    if (!req.files['audio'] || !req.files['image']) {
+      return res.status(400).json({
+        success: false,
+        message: 'Missing required files',
+      });
     }
+
+    // Get the Cloudinary results from the files
+    const audioResult = req.files['audio'][0];
+    const imageResult = req.files['image'][0];
+
+    const audioFileName = audioResult.originalname.split('.')[0]; // Get the file name without extension
+
+    // Capitalize each word of the audio file name and use it as the title
+    const title = capitalizeWords(audioFileName.replace(/-/g, ' ')); // Replace hyphens with spaces
+
+
+    const result = await pool.query('INSERT INTO sermons (title, audio_url, image_url, video_url) VALUES ($1, $2, $3, $4)', [title, audioResult.path, imageResult.path, req.body.video_url]);
+
+    res.status(200).json({
+      success: true,
+      message: 'Uploaded successfully',
+      
+    });
+  } catch (err) {
+    console.error('Error:', err);
+    res.status(500).json({
+      success: false,
+      message: 'Server Error',
+      data: err,
+    });
+  }
 };
-  
+
 
 // Function to handle retrieving all sermons
 export const getAllSermons = async (req, res) => {
   try {
-    const result = await pool.query('SELECT * FROM sermons ORDER BY date DESC');
-    console.log('data fetch')
-    res.render('media', { sermons: result.rows });
+    const page = parseInt(req.query.page) || 1;
+    const itemsPerPage = parseInt(req.query.itemsPerPage) || 12;
+    const offset = (page - 1) * itemsPerPage;
+
+    const result = await pool.query(
+      'SELECT * FROM sermons ORDER BY date DESC LIMIT $1 OFFSET $2',
+      [itemsPerPage, offset]
+    );
+
+    const totalResult = await pool.query('SELECT COUNT(*) FROM sermons');
+    const totalItems = parseInt(totalResult.rows[0].count);
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+    res.render('media', {
+      sermons: result.rows,
+      currentPage: page,
+      totalPages: totalPages,
+      itemsPerPage: itemsPerPage
+    });
   } catch (err) {
     console.error(err);
     res.status(500).send('Server Error');

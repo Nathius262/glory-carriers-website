@@ -6,24 +6,20 @@ import upload from '../config/multerConfig.js';
 const router = Router();
 
 // Route to render the form for adding a new sermon
-router.get('/sermon/create', (req, res) => {
+router.get('/create-sermon', (req, res) => {
     res.render('./sermons/createSermon');
 });
 
 // Route to render the form for adding a new sermon
-router.post('/sermon/create', (req, res) => {
-    console.log(req.body)
-    console.log(req.files)
-});
-
-//Media Routes
-router.route('/')
-    .get(getAllSermons);
+router.route('/sermon')
+    .get(getAllSermons)
+    .post(upload.fields([
+        {name: 'audio', maxCount:1},
+        {name: 'image', maxCount:1}
+    ]), createSermon);
 
 
-router.post('/sermon/post', createSermon);
-
-router.route('/:id')
+router.route('/sermon/:id')
     .get(getSermonById)
     .put(upload.fields([{ name: 'audio', maxCount: 1 }, { name: 'image', maxCount: 1 }]), updateSermon)
     .delete(deleteSermon);

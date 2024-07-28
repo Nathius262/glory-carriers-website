@@ -33,8 +33,8 @@ app.set('view engine', 'html');
 app.set('views', path.join(__dirname, 'views'));
 
 // Middleware to parse JSON bodies
-app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.json())
 //app.use(multer().array())
 
 //staticfiles

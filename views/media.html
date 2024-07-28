@@ -12,15 +12,15 @@
 
 <main>
     <!---=========INTRO BEGIN========-->
-    <section class="intro mb-0 ft-upper position-relative" style="background: url(img/media_bg.jfif); background-size: cover; background-repeat: no-repeat; display: flex; align-items: flex-end;">
+    <section class="intro mb-0 ft-upper position-relative" style="background: url({{sermons.[0].image_url}}); background-size: cover; background-repeat: no-repeat; display: flex; align-items: flex-end;">
         <div class="media-top" >
             <div class="row justify-content-center">
                 <div class="col-md-8 justify-content-center" >
                     <div class="d-grid justify-content-center latest_media">
                         <h4 class="text-center fs-6 fw-bold">Latest Sermon</h4>
-                        <h2 class="text-center">A Call To Prayer</h2>
+                        <h2 class="text-center">{{sermons.[0].title}}</h2>
                         <div class="d-flex justify-content-center">
-                            <a href="#"><img src="img/icon/download.png" width="200" alt="download"></a>
+                            <a href="{{sermons.[0].audio_url}}"><img src="img/icon/download.png" width="200" alt="download"></a>
                         </div>
                     </div>
                 </div>
@@ -38,16 +38,19 @@
         <div class="container mt-5">
         
             <div class="row justify-content-start align-items-center">
+
+                {{#each sermons}}
                 <div class="col-lg-3 p-3 col-md-4 col-sm-6 col mb-4">
-                    <div class="">
-                        <img width="100%" class="rounded-4" src="img/m1.jfif" alt="tehilla">
+                    <div class="" style="height: 300px;">
+                        <img class="rounded-4" style="object-fit: cover; height: 100%; width: 100%;" src="{{this.image_url}}" alt="{{this.title}}">
                     </div>
                     <div class="d-flex justify-content-between mx-3 mx-auto mt-1 px-5 text-secondary container text-center ft-upper fs-6">
                         <a href="#"><img src="img/icon/download1.png" width="25" alt=""></a>
-                        <a href="#"><img src="img/icon/listen1.png" width="25" alt=""></a>
-                        <a href="#"><img src="img/icon/stream.png" width="25" alt=""></a>
+                        <a href="{{this.audio_url}}"><img src="img/icon/listen1.png" width="25" alt=""></a>
+                        <a href="{{this.video_url}}"><img src="img/icon/stream.png" width="25" alt=""></a>
                     </div>
                 </div>
+                {{/each}}
                 <div class="col-lg-3 p-3 col-md-4 col-sm-6 col mb-4">
                     <div class="">
                         <img width="100%" class="rounded-4" src="img/m1.jfif" alt="tehilla">
@@ -162,21 +165,35 @@
                 
             </div>
 
-            <div class="d-flex justify-content-center ">
-                <nav aria-label="...">
-                    <ul class="pagination">
+            <div class="d-flex justify-content-center">
+                <nav aria-label="Page navigation">
+                  <ul class="pagination">
+                    {{#if (gt currentPage 1)}}
+                      <li class="page-item">
+                        <a class="page-link" href="?page={{subtract currentPage 1}}">Previous</a>
+                      </li>
+                    {{else}}
                       <li class="page-item disabled">
                         <a class="page-link">Previous</a>
                       </li>
-                      <li class="page-item"><a class="page-link" href="#">1</a></li>
-                      <li class="page-item active" aria-current="page">
-                        <a class="page-link" href="#">2</a>
+                    {{/if}}
+              
+                    {{#each (range 1 totalPages)}}
+                      <li class="page-item {{#if (eq this ../currentPage)}}active{{/if}}">
+                        <a class="page-link" href="?page={{this}}">{{this}}</a>
                       </li>
-                      <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    {{/each}}
+              
+                    {{#if (lt currentPage totalPages)}}
                       <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
+                        <a class="page-link" href="?page={{add currentPage 1}}">Next</a>
                       </li>
-                    </ul>
+                    {{else}}
+                      <li class="page-item disabled">
+                        <a class="page-link">Next</a>
+                      </li>
+                    {{/if}}
+                  </ul>
                 </nav>
             </div>
         </div>

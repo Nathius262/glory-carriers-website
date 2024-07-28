@@ -17,7 +17,19 @@ const hbs = handlebars.create({
       if (typeof text !== 'string') return '';
       const words = text.split(' ');
       return words.slice(0, wordCount).join(' ') + (words.length > wordCount ? '...' : '');
-    }   
+    },
+    add: (a, b) => a + b,
+    subtract: (a, b) => a - b,
+    range: (start, end) => {
+      let result = [];
+      for (let i = start; i <= end; i++) {
+        result.push(i);
+      }
+      return result;
+    },
+    eq: (a, b) => a === b,
+    gt: (a, b) => a > b,
+    lt: (a, b) => a < b
   }
 });
 
