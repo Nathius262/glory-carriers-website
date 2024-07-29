@@ -1,16 +1,23 @@
 import { Router } from "express";
-import {renderNowWord, renderStream, renderZoeRecord} from "../controllers/mediaController.js"
+import { renderStream } from "../controllers/mediaController.js"
 import {createSermon, updateSermon, deleteSermon, getAllSermons, getSermonById} from "../controllers/sermonController.js"
+import { newNowword, getAllNowword } from "../controllers/nowwordController.js";
+import { newZoeRecord, getAllZoeRecord } from "../controllers/zoeRecordController.js";
 import upload from '../config/multerConfig.js';
+import setSection from "../middlewares/uploadLocation.js";
 
 const router = Router();
 
-// Route to render the form for adding a new sermon
+///////////////////////////
+///////////////////////////
+////// SERMON ROUTE ///////
+///////////////////////////
+///////////////////////////
+
 router.get('/create-sermon', (req, res) => {
     res.render('./sermons/createSermon');
 });
 
-// Route to render the form for adding a new sermon
 router.route('/sermon')
     .get(getAllSermons)
     .post(upload.fields([
@@ -25,8 +32,41 @@ router.route('/sermon/:id')
     .delete(deleteSermon);
 
 
-router.get('/now-word', renderNowWord);
+////////////////////////////
+////////////////////////////
+////  NOWWORD ROUTE ////////
+////////////////////////////
+////////////////////////////
+
+router.get('/create-now-word', (req, res) => {
+    res.render('./nowword/create_now_word');
+});
+
+router.route('/now-word')
+    .get(getAllNowword)
+    .post(setSection('now_word'), upload.fields([{name: 'file', maxCount:1}]), newNowword);
+
+
+////////////////////////////
+////////////////////////////
+////  ZOE RECORD ROUTE /////
+////////////////////////////
+////////////////////////////
+
+router.get('/create-zoe-record', (req, res) => {
+    res.render('./zoe_record/create_zoe_record');
+});
+
+router.route('/zoe-record')
+    .get(getAllZoeRecord)
+    .post(setSection('zoe_record'), upload.fields([{ name: 'audio', maxCount: 1 }, { name: 'image', maxCount: 1 }]), newZoeRecord);
+
+////////////////////////////
+////////////////////////////
+/////// STREAM ROUTE ///////
+////////////////////////////
+////////////////////////////
+
 router.get('/stream', renderStream);
-router.get('/zoe-records', renderZoeRecord);
 
 export default router;

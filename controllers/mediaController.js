@@ -1,12 +1,4 @@
 
-const renderZoeRecord = async (req, res) => {
-    try {
-        res.render('zoe_record');
-    } catch (error) {
-        res.status(404).send('page not found');
-    }
-};
-
 const renderStream = async (req, res) => {
     try {
         res.render('stream');
@@ -15,12 +7,4 @@ const renderStream = async (req, res) => {
     }
 };
 
-const renderNowWord = async (req, res) => {
-    try {
-        res.render('now_word');
-    } catch (error) {
-        res.status(404).send('page not found');
-    }
-};
-
-export {renderNowWord, renderStream, renderZoeRecord}
+export {renderStream}

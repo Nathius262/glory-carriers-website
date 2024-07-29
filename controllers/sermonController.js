@@ -1,9 +1,7 @@
 import pool from '../config/databaseConfig.js';
+import capitalizeWords from '../utils/utils.js';
 
 
-function capitalizeWords(str) {
-  return str.replace(/\b\w/g, char => char.toUpperCase());
-}
 // Function to handle adding a new sermon
 export const createSermon = async (req, res) => {
   try {
@@ -60,7 +58,7 @@ export const getAllSermons = async (req, res) => {
     const totalItems = parseInt(totalResult.rows[0].count);
     const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-    res.render('media', {
+    res.render('./sermons/media', {
       sermons: result.rows,
       currentPage: page,
       totalPages: totalPages,

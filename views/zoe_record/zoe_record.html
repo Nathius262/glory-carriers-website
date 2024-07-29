@@ -23,16 +23,18 @@
             <p class="mb-3 text-dark">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. </p>
             <p class="mb-3 text-dark">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. </p>
             <div class="row justify-content-start align-items-center">
+                {{#each zoe_record}}
                 <div class="col-lg-4 p-3 col-md-6 col-sm-12 mb-4">
                     <div class="" style="height: 300px;">
-                        <img class="rounded-4 container" style="object-fit: cover; height: 100%; width: 100%;" src="img/z1.jfif" alt="tehilla">
+                        <img class="rounded-4 container" style="object-fit: cover; height: 100%; width: 100%;" src="{{this.image_url}}" alt="{{this.title}}">
                     </div>
                     <div class="d-flex justify-content-between mx-3 mx-auto mt-1 px-5 text-secondary container text-center ft-upper fs-6">
-                        <a href="#"><img src="img/icon/download1.png" width="25" alt=""></a>
-                        <a href="#"><img src="img/icon/listen1.png" width="25" alt=""></a>
+                        <a href="{{this.audio_url}}"><img src="img/icon/download1.png" width="25" alt=""></a>
+                        <a href="{{this.audio_url}}"><img src="img/icon/listen1.png" width="25" alt=""></a>
                         <a href="#"><img src="img/icon/stream.png" width="25" alt=""></a>
                     </div>
                 </div>
+                {{/each}}
 
                 <div class="col-lg-4 p-3 col-md-6 col-sm-12 mb-4">
                     <div class="" style="height: 300px;">
@@ -67,6 +69,38 @@
                     </div>
                 </div>
                 
+            </div>
+
+            <div class="d-flex justify-content-center">
+                <nav aria-label="Page navigation">
+                  <ul class="pagination">
+                    {{#if (gt currentPage 1)}}
+                      <li class="page-item">
+                        <a class="page-link" href="?page={{subtract currentPage 1}}">Previous</a>
+                      </li>
+                    {{else}}
+                      <li class="page-item disabled">
+                        <a class="page-link">Previous</a>
+                      </li>
+                    {{/if}}
+              
+                    {{#each (range 1 totalPages)}}
+                      <li class="page-item {{#if (eq this ../currentPage)}}active{{/if}}">
+                        <a class="page-link" href="?page={{this}}">{{this}}</a>
+                      </li>
+                    {{/each}}
+              
+                    {{#if (lt currentPage totalPages)}}
+                      <li class="page-item">
+                        <a class="page-link" href="?page={{add currentPage 1}}">Next</a>
+                      </li>
+                    {{else}}
+                      <li class="page-item disabled">
+                        <a class="page-link">Next</a>
+                      </li>
+                    {{/if}}
+                  </ul>
+                </nav>
             </div>
         </div>
        </section>

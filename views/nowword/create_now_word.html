@@ -1,0 +1,13 @@
+<main class="mt-5 py-5 container">
+    <form action="/media/now-word" method="POST" id="uploadForm" enctype="multipart/form-data" class="text-dark">
+        <div>
+          <label for="file">Ebook File:</label>
+          <input type="file" id="file" name="file" accept="application/pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document" required>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+    <progress id="progressBar" value="0" max="100" style="width: 100%; display: none;"></progress>
+    <div id="status"></div>
+</main>
+
+<script src="js/uploader.js"></script>

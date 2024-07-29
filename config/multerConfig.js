@@ -25,7 +25,10 @@ const storage = new CloudinaryStorage({
     const year = date.getFullYear();
     const month = date.toLocaleString('default', { month: 'long' }); // Full month name, e.g., "June"
 
-    let folderName = `sermons/${year}/${month}`; // Dynamic folder path
+    // Get the section (or folder) from the request
+    const section = req.section || 'sermons'; // Default to 'sermons' if section is not set
+
+    let folderName = `${section}/${year}/${month}`; // Dynamic folder path
     let resourceType = 'auto'; // Default resource type, can be auto, image, raw, or video based on file type
     let publicId = file.originalname.split('.')[0]; // Use the original name without extension
 
@@ -41,6 +44,8 @@ const storage = new CloudinaryStorage({
       resourceType = 'video'; // Cloudinary treats audio files as video
     } else if (file.mimetype.startsWith('image')) {
       resourceType = 'image';
+    } else if (['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'text/plain'].includes(file.mimetype)) {
+      resourceType = 'raw';
     }
 
     return {
