@@ -1,0 +1,60 @@
+<main>
+
+    <section class=" mb-5" style="margin-top: 100px;">
+        <div class="container mt-5">
+
+            <div>
+                <h2>Sermon Search Result: {{searchTerm}}</h2>
+            </div>
+        
+            <div class="row justify-content-start align-items-center">
+
+                {{#each sermons}}
+                <div class="col-lg-3 p-3 col-md-4 col-sm-6 col mb-4">
+                    <div class="" style="height: 300px;">
+                        <img class="rounded-4" style="object-fit: cover; height: 100%; width: 100%;" src="{{this.image_url}}" alt="{{this.title}}">
+                    </div>
+                    <div class="d-flex justify-content-between mx-3 mx-auto mt-1 px-5 text-secondary container text-center ft-upper fs-6">
+                        <a href="#"><img src="img/icon/download1.png" width="25" alt=""></a>
+                        <a href="{{this.audio_url}}"><img src="img/icon/listen1.png" width="25" alt=""></a>
+                        <a href="{{this.video_url}}"><img src="img/icon/stream.png" width="25" alt=""></a>
+                    </div>
+                </div>
+                {{/each}}             
+            </div>
+
+            <div class="d-flex justify-content-center">
+                <nav aria-label="Page navigation">
+                  <ul class="pagination">
+                    {{#if (gt sermonCurrentPage 1)}}
+                      <li class="page-item">
+                        <a class="page-link" href="?page={{subtract sermonCurrentPage 1}}">Previous</a>
+                      </li>
+                    {{else}}
+                      <li class="page-item disabled">
+                        <a class="page-link">Previous</a>
+                      </li>
+                    {{/if}}
+              
+                    {{#each (range 1 totalSermonPages)}}
+                      <li class="page-item {{#if (eq this ../sermonCurrentPage)}}active{{/if}}">
+                        <a class="page-link" href="?page={{this}}">{{this}}</a>
+                      </li>
+                    {{/each}}
+              
+                    {{#if (lt sermonCurrentPage totalSermonPages)}}
+                      <li class="page-item">
+                        <a class="page-link" href="?page={{add sermonCurrentPage 1}}">Next</a>
+                      </li>
+                    {{else}}
+                      <li class="page-item disabled">
+                        <a class="page-link">Next</a>
+                      </li>
+                    {{/if}}
+                  </ul>
+                </nav>
+            </div>
+        </div>
+       </section>
+    
+</main>

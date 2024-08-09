@@ -66,7 +66,7 @@ export const getAllSermons = async (req, res) => {
     });
   } catch (err) {
     console.error(err);
-    res.status(500).send('Server Error');
+    res.status(500).render('./errors/500', { message: 'Internal Server Error', error: err });
   }
 };
 
