@@ -1,4 +1,4 @@
-import {searchSermon} from './searchController.js'
+import {searchSermon, searchZoeRecord, searchNowword} from './searchController.js'
 const renderStream = async (req, res) => {
     try {
         res.render('stream');
@@ -10,7 +10,18 @@ const renderStream = async (req, res) => {
 
 const renderSearch = async (req, res) => {
     try {
-      res.render('search', await searchSermon(req));
+      const [sermonData, zoeRecordData, nowwordData] = await Promise.all([
+        searchSermon(req),
+        searchZoeRecord(req),
+        searchNowword(req),
+      ]);
+  
+      // Combine data and render template
+      res.render('search', {
+        sermonData,
+        zoeRecordData,
+        nowwordData
+      });
     } catch (err) {
       console.error(err);
       res.status(500).send('Server Error');

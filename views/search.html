@@ -1,16 +1,16 @@
 <main>
 
-
+  <!--============SERMON SEARCH RESULT=============-->
   <section class=" mb-5" style="margin-top: 100px;">
     <div class="container mt-5">
 
       <div class="text-dark">
-        <h2 class="fw-bold">Sermon Search Result: {{searchTerm}}</h2>
+        <h2 class="fw-bold">Sermon Search Result: {{sermonData.searchTerm}}</h2>
       </div>
   
       <div class="row justify-content-start align-items-center">
 
-          {{#each sermons}}
+          {{#each sermonData.sermons}}
           <div class="col-lg-3 p-3 col-md-4 col-sm-6 col mb-4">
             <div class="" style="height: 300px;">
               <img class="rounded-4" style="object-fit: cover; height: 100%; width: 100%;" src="{{this.image_url}}" alt="{{this.title}}">
@@ -27,9 +27,9 @@
       <div class="d-flex justify-content-center">
           <nav aria-label="Page navigation">
             <ul class="pagination">
-              {{#if (gt sermonCurrentPage 1)}}
+              {{#if (gt sermonData.sermonCurrentPage 1)}}
                 <li class="page-item">
-                  <a class="page-link" href="?page={{subtract sermonCurrentPage 1}}">Previous</a>
+                  <a class="page-link" href="?search={{sermonData.searchTerm}}&sermonPage={{subtract sermonData.sermonCurrentPage 1}}">Previous</a>
                 </li>
               {{else}}
                 <li class="page-item disabled">
@@ -37,15 +37,16 @@
                 </li>
               {{/if}}
         
-              {{#each (range 1 totalSermonPages)}}
-                <li class="page-item {{#if (eq this ../sermonCurrentPage)}}active{{/if}}">
-                  <a class="page-link" href="?page={{this}}">{{this}}</a>
+              {{#each (range 1 sermonData.totalSermonPages)}}
+              
+                <li class="page-item {{#if (eq this ../sermonData.sermonCurrentPage)}}active{{/if}}">
+                  <a class="page-link" href="?search={{../sermonData.searchTerm}}&sermonPage={{this}}">{{this}}</a>
                 </li>
               {{/each}}
         
-              {{#if (lt sermonCurrentPage totalSermonPages)}}
+              {{#if (lt sermonData.sermonCurrentPage sermonData.totalSermonPages)}}
                 <li class="page-item">
-                  <a class="page-link" href="?page={{add sermonCurrentPage 1}}">Next</a>
+                  <a class="page-link" href="?search={{sermonData.searchTerm}}&sermonPage={{add sermonData.sermonCurrentPage 1}}">Next</a>
                 </li>
               {{else}}
                 <li class="page-item disabled">
@@ -57,5 +58,118 @@
       </div>
     </div>
   </section>
-    
+
+  <!--============ZOE RECORDS SEARCH RESULT=============-->
+  <section class=" mb-5" style="margin-top: 100px;">
+    <div class="container mt-5">
+
+      <div class="text-dark">
+        <h2 class="fw-bold">Zoe Reords Search Result: {{zoeRecordData.searchTerm}}</h2>
+      </div>
+  
+      <div class="row justify-content-start align-items-center">
+
+          {{#each zoeRecordData.records}}
+          <div class="col-lg-3 p-3 col-md-4 col-sm-6 col mb-4">
+            <div class="" style="height: 300px;">
+              <img class="rounded-4" style="object-fit: cover; height: 100%; width: 100%;" src="{{this.image_url}}" alt="{{this.title}}">
+            </div>
+            <div class="d-flex justify-content-between mx-3 mx-auto mt-1 px-5 text-secondary container text-center ft-upper fs-6">
+              <a href="#"><img src="img/icon/download1.png" width="25" alt=""></a>
+              <a href="{{this.audio_url}}"><img src="img/icon/listen1.png" width="25" alt=""></a>
+              <a href="{{this.video_url}}"><img src="img/icon/stream.png" width="25" alt=""></a>
+            </div>
+          </div>
+          {{/each}}             
+      </div>
+
+      <div class="d-flex justify-content-center">
+          <nav aria-label="Page navigation">
+            <ul class="pagination">
+              {{#if (gt zoeRecordData.recordCurrentPage 1)}}
+                <li class="page-item">
+                  <a class="page-link" href="?search={{zoeRecordData.searchTerm}}&recordPage={{subtract zoeRecordData.sermonCurrentPage 1}}">Previous</a>
+                </li>
+              {{else}}
+                <li class="page-item disabled">
+                  <a class="page-link">Previous</a>
+                </li>
+              {{/if}}
+        
+              {{#each (range 1 zoeRecordData.totalRecordPages)}}
+              
+                <li class="page-item {{#if (eq this ../zoeRecordData.recordCurrentPage)}}active{{/if}}">
+                  <a class="page-link" href="?search={{../zoeRecordData.searchTerm}}&recordPage={{this}}">{{this}}</a>
+                </li>
+              {{/each}}
+        
+              {{#if (lt zoeRecordData.recordCurrentPage zoeRecordData.totalReordPages)}}
+                <li class="page-item">
+                  <a class="page-link" href="?search={{zoeRecordData.searchTerm}}&recordPage={{add zoeRecordData.recordCurrentPage 1}}">Next</a>
+                </li>
+              {{else}}
+                <li class="page-item disabled">
+                  <a class="page-link">Next</a>
+                </li>
+              {{/if}}
+            </ul>
+          </nav>
+      </div>
+    </div>
+  </section>
+
+  <!--============NOWWORD SEARCH RESULT=============-->
+  <section class=" mb-5">
+    <div class="container mt-5">
+      <div class="text-dark">
+        <h2 class="fw-bold">Nowword Search Result: {{nowwordData.searchTerm}}</h2>
+      </div>
+       
+        <div class="container row justify-content-center align-items-center">
+
+            {{#each nowwordData.nowwords}}
+            <a href="{{this.file_url}}" class="col-sm-3 mb-4 m-3 p-3 nw-link d-flex justify-content-center align-items-center bg-secondary text-dark">
+                <div class="">
+                    <img width="20" class="me-1" src="img/icon/now_word.png" alt="now-word">
+                </div>
+                <div class="text-center fw-normal ft-upper fs-6">
+                    {{this.title}}
+                </div>
+            </a>
+            {{/each}}
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <nav aria-label="Page navigation">
+              <ul class="pagination">
+                {{#if (gt nowwordData.nowwordCurrentPage 1)}}
+                  <li class="page-item">
+                    <a class="page-link" href="?search={{nowwordData.searchTerm}}&nowwordPage={{subtract nowwordData.nowwordCurrentPage 1}}">Previous</a>
+                  </li>
+                {{else}}
+                  <li class="page-item disabled">
+                    <a class="page-link">Previous</a>
+                  </li>
+                {{/if}}
+          
+                {{#each (range 1 nowwordData.totalNowwordPages)}}
+                  <li class="page-item {{#if (eq this ../nowwordData.nowwordCurrentPage)}}active{{/if}}">
+                    <a class="page-link" href="?search={{../nowwordData.searchTerm}}&nowwordPage={{this}}">{{this}}</a>
+                  </li>
+                {{/each}}
+          
+                {{#if (lt nowwordData.nowwordCurrentPage nowwordData.totalNowwordPages)}}
+                  <li class="page-item">
+                    <a class="page-link" href="?search={{nowwordData.searchTerm}}&nowwordPage={{add nowwordData.nowwordCurrentPage 1}}">Next</a>
+                  </li>
+                {{else}}
+                  <li class="page-item disabled">
+                    <a class="page-link">Next</a>
+                  </li>
+                {{/if}}
+              </ul>
+            </nav>
+        </div>
+    </div>
+   </section>
 </main>
