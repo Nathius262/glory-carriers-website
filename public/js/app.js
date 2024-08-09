@@ -1,5 +1,5 @@
 let y_top_objectEl = document.querySelectorAll('.scroll-y-top-el')
-let y_down_objectEl = document.querySelectorAll('.scroll-down-top-el')
+let y_down_objectEl = document.querySelectorAll('.scroll-y-down-el')
 let x_top_objectEl = document.querySelectorAll('.scroll-x-top-el')
 let x_down_objectEl = document.querySelectorAll('.scroll-x-down-el')
 
