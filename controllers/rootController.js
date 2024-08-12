@@ -1,6 +1,16 @@
+import pool from "../config/databaseConfig.js";
+
 const renderIndex= async (req, res) => {
     try {
-        res.render('index');
+        const result = await pool.query(
+            'SELECT * FROM sermons ORDER BY date DESC LIMIT $1 OFFSET $2',
+            [2, 2]
+        );
+
+        //console.log(result.rows)
+        res.render('index', {
+            sermons: result.rows,
+        });
     } catch (error) {
         res.status(404).send('page not found');
     }

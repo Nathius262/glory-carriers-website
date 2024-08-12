@@ -27,6 +27,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">Contact Us</a>
             </li> 
+            {{#if search}}
             <li class="nav-item">
                 <div id="search" class="w-100">
                     <form action="/search" method="get" id="search-form" class="d-flex justify-content-between align-items-center mx-auto" style="background-color: #f8f9fa; border-radius: 30px; padding: 5px;">
@@ -36,6 +37,7 @@
                 </div>
                   
             </li>
+            {{/if}}
         </ul>
         
     </div>

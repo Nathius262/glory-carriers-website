@@ -103,6 +103,31 @@
         </div>
     </section>
 
+    <section class=" mb-5">
+        <div class="container mt-5">
+            <div>
+                <h4 class="col-12 text-center ft-upper fs-4 fw-bold" style="color: var(--bg-body); text-decoration:underline;">Recent Sermons</h4>
+            </div>
+        
+            <div class="row justify-content-start align-items-center">
+
+                {{#each sermons}}
+                <div class="col-md-6 p-3 mb-4">
+                    <div class="" style="height: 300px;">
+                        <img class="rounded-4" style="object-fit: cover; height: 100%; width: 100%;" src="{{this.image_url}}" alt="{{this.title}}">
+                    </div>
+                    <div class="d-flex justify-content-between mx-3 mx-auto mt-1 px-5 text-secondary container text-center ft-upper fs-6">
+                        <a href="{{this.audio_url}}" class="download-link"><img src="img/icon/download1.png" width="25" alt=""></a>
+                        <a href="{{this.audio_url}}"><img src="img/icon/listen1.png" width="25" alt=""></a>
+                        <a href="{{this.video_url}}"><img src="img/icon/stream.png" width="25" alt=""></a>
+                    </div>
+                </div>
+                {{/each}}
+                
+            </div>
+        </div>
+       </section>
+
     <section class="about pt-5 pb-4 mt-0" id="media">
         <div class="row justify-content-center">
             <h4 class="text-color-blue ft-upper fs-4 text-center">Media</h4>

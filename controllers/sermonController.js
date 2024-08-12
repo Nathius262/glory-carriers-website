@@ -62,7 +62,8 @@ export const getAllSermons = async (req, res) => {
       sermons: result.rows,
       currentPage: page,
       totalPages: totalPages,
-      itemsPerPage: itemsPerPage
+      itemsPerPage: itemsPerPage,
+      search:true
     });
   } catch (err) {
     console.error(err);

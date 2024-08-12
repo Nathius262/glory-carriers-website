@@ -62,7 +62,8 @@ export const newZoeRecord = async (req, res) => {
         zoe_record: result.rows,
         currentPage: page,
         totalPages: totalPages,
-        itemsPerPage: itemsPerPage
+        itemsPerPage: itemsPerPage,
+        search:true
       });
     } catch (err) {
       console.error(err);
