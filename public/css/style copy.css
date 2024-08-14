@@ -54,7 +54,7 @@
 }
 
 body{
-    color: var(--black);
+    color: var(--white);
     /* background: url('../img/bg.jfif');*/
     background-repeat: no-repeat;
     background-size: cover;
@@ -62,8 +62,8 @@ body{
     font-family: Nexa;
 }
 
-.scroll-y-top-el, .scroll-y-down-el, .scroll-x-top-el, .scroll-x-down-el{
-    transition: transform 2s ease;
+.scroll-y-down-el, .scroll-y-top-el, .scroll-x-down-el, .scroll-x-top-el{
+    transform: translate(0);
 }
 
 #navbarsExample04 a:hover{
@@ -104,29 +104,13 @@ p{
 }
 
 .intro {
-    position: relative;
-    color: var(--white);
+    background-image: url(../img/header.jfif);
+    background-size: cover;
     padding: 9rem 0;
-    z-index: 1;    
+    z-index: 1;
+    position: relative;
     overflow: hidden;
-    animation: backgroundTransition 40s infinite;
 }
-
-@keyframes backgroundTransition {
-    0% {
-        background: var(--white) url('../img/header.jfif') no-repeat center center/cover;
-    }
-    45% {
-        background: var(--white) url('../img/wlc.jfif') no-repeat center center/cover;
-    }
-    55% {
-        background: var(--white) url('../img/media_bg.jfif') no-repeat center center/cover;
-    }
-    100% {
-        background: var(--blue) url('../img/zz2.jfif') no-repeat center center/cover;
-    }
-}
-
 .birthing{
     font-size: 80px;
     font-weight: bold;
@@ -240,7 +224,7 @@ p{
 /* homepage about */
 .about{
     position: relative;
-    background: linear-gradient(-270deg, var(--white), var(--white));
+    background: linear-gradient(-270deg, var(--bg-blue-transparent), var(--bg-body));
 
 }
 .about h2{
@@ -257,17 +241,16 @@ p{
     line-height: 22px;
     letter-spacing: 0.46em;
     text-align: left;
-    background: var(--blue-transparent);
+    background: var(--gold);
     padding: 7px;
     text-decoration: none;
-    color: var(--white);
+    color: var(--black);
     border-radius: 10px;
 }
 .about a:hover{
-    background-color: var(--white);
-    border: 1px solid var(--black);
+    background-color: var(--blue);
     transition: background-color .5s ease;
-    color: var(--black);
+    color: var(--bg-blue-transparent);
 }
 .about img{
     border-radius: 2pc;
@@ -513,7 +496,6 @@ p{
 /* FOOTER SECTION*/
 #footer{
     background: url('../img/footer.jfif');
-    color: var(--white);
     background-repeat: no-repeat;
     background-size: cover;
 }
