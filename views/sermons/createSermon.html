@@ -1,19 +1,29 @@
 <main class="mt-5 py-5 container">
-    <form action="/media/sermon" method="POST" id="uploadForm" enctype="multipart/form-data" class="text-dark">
-        <div>
-          <label for="audio">Audio File:</label>
-          <input type="file" id="audio" name="audio" accept="audio/*" required>
-        </div>
-        <div>
-          <label for="image">Image File:</label>
-          <input type="file" id="image" name="image" accept="image/*" required>
-        </div>
-        <div>
-          <label for="image">Live Stream Video Link:</label>
-          <input type="url" id="video" name="video_url">
+    <form action="/media/sermon" method="POST" id="uploadForm" enctype="multipart/form-data" class="text-dark needs-validation" novalidate>
+        
+        <div class="mb-3">
+          <label for="audio">Audio File</label>
+          <input type="file" id="audio" name="audio" accept="audio/*" class="form-control" aria-label="file example" required>
+          <div class="invalid-feedback">You need to select an audio file</div>
         </div>
 
-        <button type="submit">Submit</button>
+
+        <div class="mb-3">
+          <label for="image">Image File</label>
+          <input type="file" id="image" name="image" accept="image/*" class="form-control" aria-label="file example" required>
+          <div class="invalid-feedback">You need to select an image file</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="video">Video Stream Link</label>
+          <input type="url" id="video" name="video_url" class="form-control">
+          <div class="invalid-feedback">add video url</div>
+        </div>
+
+        <div class="mb-3">
+          <button class="btn btn-primary" type="submit">Submit form</button>
+        </div>
+
     </form>
     <progress id="progressBar" value="0" max="100" style="width: 100%; display: none;"></progress>
     <div id="status"></div>

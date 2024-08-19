@@ -4,7 +4,6 @@ import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import path from 'path';
 import bodyParser from 'body-parser';
-import multer from 'multer';
 
 
 //custom import
@@ -14,6 +13,10 @@ import hbs from "./config/settings.js"
 import removeTrailingSlash  from './middlewares/normalizer.js';
 import rootRouter from "./routers/rootRouter.js"
 import mediaRouter from "./routers/mediaRouter.js"
+import authRouter from './routers/authRouter.js'
+
+//import crypto from 'crypto';
+//const secretKey = crypto.randomBytes(64).toString('hex');
 
 
 dotenv.config()
@@ -42,6 +45,7 @@ app.use(staticFiles);
 
 // routes
 app.use('/', rootRouter);
+app.use('/auth/', authRouter);
 app.use('/media/', mediaRouter);
 
 //middlewares\
@@ -52,4 +56,7 @@ app.use(internalServerError);
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
+  
+  //console.log(secretKey);
+
 });
