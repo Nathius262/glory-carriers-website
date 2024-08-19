@@ -1,0 +1,43 @@
+<main class="mt-5 py-5 container">
+    <form class="row g-3 needs-validation" action="/auth/register" method="POST" novalidate>
+        <div class="col-md-4">
+          <label for="validationCustom01" class="form-label">Email</label>
+          <input name="email" type="email" class="form-control" id="validationCustom01" placeholder="Enter Email" required>
+          <div class="valid-feedback">
+            Email required
+          </div>
+        </div>
+        
+        <div class="col-md-4">
+            <label for="validationCustomUsername" class="form-label">Username</label>
+            <div class="input-group has-validation">
+              <span class="input-group-text" id="inputGroupPrepend">@</span>
+              <input type="text" class="form-control" id="validationCustomUsername02" aria-describedby="inputGroupPrepend" required>
+              <div class="invalid-feedback">
+                Please choose a username.
+              </div>
+            </div>
+          </div>
+
+
+        <div class="col-md-4">
+            <label for="validationCustom02" class="form-label">Password</label>
+            <input name="password" type="password" class="form-control" id="validationCustom03" placeholder="Password" required>
+            <div class="valid-feedback">
+                Password required
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <label for="validationCustom02" class="form-label">confirm Password</label>
+            <input name="confirmPassword" type="password" class="form-control" id="validationCustom04" placeholder="Confirm Password" required>
+            <div class="valid-feedback">
+                Password required
+            </div>
+        </div>
+
+        <div class="col-12">
+          <button class="btn btn-primary" type="submit">Register</button>
+        </div>
+      </form>
+</main>
