@@ -2,7 +2,7 @@
 // middlewares/removeTrailingSlash.js
 const removeTrailingSlash = (req, res, next) => {
     // Ignore paths that are allowed to have trailing slashes
-    const allowTrailingSlash = ['/media/', '/media/sermon/', '/auth/'];
+    const allowTrailingSlash = ['/media/', '/admin/', '/media/sermon/', '/auth/'];
   
     if (req.path !== '/' && req.path.endsWith('/') && !allowTrailingSlash.includes(req.path)) {
       const query = req.url.slice(req.path.length);
