@@ -1,4 +1,5 @@
 import bcrypt from 'bcryptjs';
+import pool from '../config/databaseConfig.js';
 import { check, validationResult, body } from 'express-validator';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
@@ -48,10 +49,23 @@ export const registerUser = [
 
       const token = jwt.sign(payload, secrete_key, { expiresIn: '1h' });
 
-      res.status(201).json({ token });
+      // Set token as HTTP-only cookie
+      res.cookie('token', token, {
+        httpOnly: true,   // Prevents client-side JavaScript from accessing the cookie
+        secure: process.env.NODE_ENV === 'production', // Ensures the cookie is sent over HTTPS only in production
+        sameSite: 'Strict', // Helps prevent CSRF attacks
+        maxAge: 3600000, // 1 hour
+      });
+
+      res.status(201).json({
+        message: 'User registered in successfully',
+        authorized: true,
+        //token: token,   Include the token in the response
+      });
+
     } catch (err) {
       console.error('Error:', err.message);
-      res.status(500).send('Server error');
+      res.status(500).json(err);
     }
   },
 ];
@@ -64,7 +78,6 @@ export const renderRegisterForm = async (req, res) => {
     
   }
 };
-
 
 export const loginUser = [
   [
@@ -96,10 +109,22 @@ export const loginUser = [
 
       const token = jwt.sign(payload, secrete_key, { expiresIn: '1h' });
 
-      res.status(200).json({ token });
+      // Set token as HTTP-only cookie
+      res.cookie('token', token, {
+        httpOnly: true,   // Prevents client-side JavaScript from accessing the cookie
+        secure: process.env.NODE_ENV === 'production', // Ensures the cookie is sent over HTTPS only in production
+        sameSite: 'Strict', // Helps prevent CSRF attacks
+        maxAge: 3600000, // 1 hour
+      });
+       // Send response with authorization status
+      res.status(201).json({
+        message: 'User Logged in successfully',
+        authorized: true,
+        //token: token,   Include the token in the response
+      });
     } catch (err) {
       console.error('Error:', err.message);
-      res.status(500).send('Server error');
+      res.status(500).json(err);
     }
   },
 ];
@@ -110,5 +135,31 @@ export const renderLoginForm = async (req, res) => {
   } catch (error) {
     res.status(500).render('./errors/500', { message: 'Internal Server Error', error: error });
     
+  }
+};
+
+export const logoutUser = (req, res) => {
+  res.clearCookie('token');
+  res.status(200).json({ message: 'Logged out successfully' });
+};
+
+export const checkAuthStatus = (req, res) => {
+  try {
+    const token = req.cookies.token || null; // Get the JWT token from the HTTP-only cookie
+
+
+    if (!token) {
+      return res.status(200).json({ authenticated: false });
+    }
+
+    try {
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      return res.status(200).json({ authenticated: true, user: decoded });
+    } catch (err) {
+      return res.status(200).json({ authenticated: false });
+    }
+  } catch (error) {
+    console.log(req.cookies)
+    return res.status(200).json({ authenticated: false });
   }
 };
