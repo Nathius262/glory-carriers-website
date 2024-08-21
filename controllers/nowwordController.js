@@ -62,7 +62,8 @@ export const getAllNowword = async (req, res) => {
       currentPage: page,
       totalPages: totalPages,
       itemsPerPage: itemsPerPage,
-      search:true
+      search:true,
+      login:true
     });
   } catch (err) {
     console.error(err);
