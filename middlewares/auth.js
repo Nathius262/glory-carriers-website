@@ -7,7 +7,8 @@ export const verifyToken = async (req, res, next) => {
   const token = req.cookies.token;
 
   if (!token) {
-    return res.status(403).json({ message: 'No token provided' });
+    //res.status(403).json({ message: 'No token provided' });
+    return res.status(403).redirect('/auth/login');
   }
 
   try {
