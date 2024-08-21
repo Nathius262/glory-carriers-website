@@ -1,6 +1,15 @@
 <main class="mt-5 py-5 container">
-    <form class="row g-3 needs-validation" action="/auth/register" method="POST" novalidate>
-        <div class="col-md-4">
+  <div class="row justify-content-center align-items-center mt-3 mb-4">
+    <div class="col-12 justify-content-center container d-flex">
+      <img width="200" src="img/g_logo.png" alt="">
+    </div>
+    <h2 class="h1 col-12 text-center">
+      Register Glory Carriers Ministry Int'l
+    </h2>
+  </div>
+
+    <form id="authenticate" class="row g-3 needs-validation" action="/auth/register" method="POST" novalidate>
+        <div class="col-md-6">
           <label for="validationCustom01" class="form-label">Email</label>
           <input name="email" type="email" class="form-control" id="validationCustom01" placeholder="Enter Email" required>
           <div class="valid-feedback">
@@ -8,11 +17,11 @@
           </div>
         </div>
         
-        <div class="col-md-4">
+        <div class="col-md-6">
             <label for="validationCustomUsername" class="form-label">Username</label>
             <div class="input-group has-validation">
               <span class="input-group-text" id="inputGroupPrepend">@</span>
-              <input type="text" class="form-control" id="validationCustomUsername02" aria-describedby="inputGroupPrepend" required>
+              <input name="username" type="text" class="form-control" id="validationCustomUsername02" aria-describedby="inputGroupPrepend" required>
               <div class="invalid-feedback">
                 Please choose a username.
               </div>
@@ -20,7 +29,7 @@
           </div>
 
 
-        <div class="col-md-4">
+        <div class="col-md-6">
             <label for="validationCustom02" class="form-label">Password</label>
             <input name="password" type="password" class="form-control" id="validationCustom03" placeholder="Password" required>
             <div class="valid-feedback">
@@ -28,7 +37,7 @@
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-6">
             <label for="validationCustom02" class="form-label">confirm Password</label>
             <input name="confirmPassword" type="password" class="form-control" id="validationCustom04" placeholder="Confirm Password" required>
             <div class="valid-feedback">
@@ -36,8 +45,19 @@
             </div>
         </div>
 
+        <div class="col-12 mt-2 d-flex row">
+          <a class="fw-bold fs-6 col-sm-6" style="color: var(--bg-body); text-decoration:underline;" href="/auth/login">Login</a>
+        </div>
+        
+        <ul id="error" class="text-danger col-12"></ul>
+
+        <div class="spinner-border col-12 d-none" id="status" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+
         <div class="col-12">
-          <button class="btn btn-primary" type="submit">Register</button>
+          <button id="btn" class="btn btn-primary" type="submit">Register</button>
         </div>
       </form>
 </main>
+<script src="js/authenticate.js"></script>
