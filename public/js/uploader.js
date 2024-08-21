@@ -54,6 +54,7 @@ async function uploadFile(formData, progressBar, url) {
       };
 
       xhr.open('POST', url, true); // Use the dynamic URL
+      xhr.withCredentials = true;
       xhr.send(formData);
   });
 }
