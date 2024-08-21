@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import path from 'path';
 import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 
 
 //custom import
@@ -36,6 +37,7 @@ app.set('view engine', 'html');
 app.set('views', path.join(__dirname, 'views'));
 
 // Middleware to parse JSON bodies
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 //app.use(multer().array())
