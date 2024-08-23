@@ -11,8 +11,8 @@ const renderIndex= async (req, res) => {
         res.render('index', {
             sermons: result.rows,
         });
-    } catch (error) {
-        res.status(404).send('page not found');
+    } catch (err) {
+        res.status(500).render('./errors/500', { message: 'Internal Server Error', error: err.message });
     }
 };
 
