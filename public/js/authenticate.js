@@ -36,9 +36,15 @@
               const result = await response.json();
         
               if (response.ok) {
-                console.log(result)
-                alert('authentication successful:', result);
-                //window.location.reload();
+                console.log(result.isAdmin)
+                if(result.isAdmin === true){
+                  alert('authentication successful: You are about to loggin as an admin', );
+                  window.location.href = "/admin"
+                }
+                else if (result.isAdmin == undefined || result.isAdmin == false || result.isAdmin == null){
+                  alert('authentication successful!');
+                  window.location.href = "/"
+                }
               } 
               else {
                 try {
