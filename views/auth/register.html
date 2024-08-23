@@ -1,63 +1,92 @@
-<main class="mt-5 py-5 container">
-  <div class="row justify-content-center align-items-center mt-3 mb-4">
-    <div class="col-12 justify-content-center container d-flex">
-      <img width="200" src="img/g_logo.png" alt="">
-    </div>
-    <h2 class="h1 col-12 text-center">
-      Register Glory Carriers Ministry Int'l
-    </h2>
-  </div>
+<link rel="stylesheet" href="css/sb-admin-2.css">
+<link rel="stylesheet" href="css/sb-admin-2.min.css">
 
-    <form id="authenticate" class="row g-3 needs-validation" action="/auth/register" method="POST" novalidate>
-        <div class="col-md-6">
-          <label for="validationCustom01" class="form-label">Email</label>
-          <input name="email" type="email" class="form-control" id="validationCustom01" placeholder="Enter Email" required>
-          <div class="valid-feedback">
-            Email required
-          </div>
-        </div>
-        
-        <div class="col-md-6">
-            <label for="validationCustomUsername" class="form-label">Username</label>
-            <div class="input-group has-validation">
-              <span class="input-group-text" id="inputGroupPrepend">@</span>
-              <input name="username" type="text" class="form-control" id="validationCustomUsername02" aria-describedby="inputGroupPrepend" required>
-              <div class="invalid-feedback">
-                Please choose a username.
+<main class="mt-5 py-5">
+  <div class="container">
+
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+
+      <div class="col-xl-10 col-lg-12 col-md-9">
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+          <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row align-items-center">
+
+              <div class="col-lg-6 mt-md-0 mt-2 d-lg-block bg-login-image">
+                <div class="justify-content-center container d-flex">
+                  <img width="150" src="img/g_logo.png" alt="">
+                </div>
+                <h4 class="h3 text-center">
+                  Glory Carriers Ministry Int'l
+                </h4>
+              </div>
+
+              <div class="col-lg-6">
+                <div class="p-5">
+                  <div class="text-center">
+                    <h1 class="h4 text-gray-900 mb-4">Register</h1>
+                  </div>
+                  <form id="authenticate" class="user needs-validation" action="/auth/register" method="POST"
+                    novalidate>
+                    <div class="form-group">
+                      <input type="email" name="email" class="form-control form-control-user" id="exampleInputEmail"
+                        aria-describedby="emailHelp" placeholder="Enter Email Address..." required>
+                      <div class="invalid-feedback">
+                        Email is required
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <input type="text" name="username" class="form-control form-control-user"
+                        id="exampleInputUsername" aria-describedby="usernameHelp" placeholder="Username..." required>
+                      <div class="invalid-feedback">
+                        Username is required
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <input type="password" name="password" class="form-control form-control-user"
+                        id="exampleInputPassword" placeholder="Password" required>
+                      <div class="invalid-feedback">
+                        password is required
+                      </div>
+
+                      <div class="form-group">
+                        <input type="password" name="confirmPassword" class="form-control form-control-user"
+                          id="exampleInputPasswordConfirm" placeholder="Confirm Password" required>
+                        <div class="invalid-feedback">
+                          password is required
+                        </div>
+                      </div>
+                    </div>
+                    <hr>
+                    <ul id="error" class="text-danger col-12"></ul>
+
+                    <div class="spinner-border col-12 d-none" id="status" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+
+                    <button type="submit" id="btn" class="btn btn-primary btn-user btn-block">
+                      Register
+                    </button>
+                    <hr>
+                  </form>
+                  <hr>
+
+                  <div class="text-center">
+                    <a class="small" href="/auth/login">Login!</a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-
-
-        <div class="col-md-6">
-            <label for="validationCustom02" class="form-label">Password</label>
-            <input name="password" type="password" class="form-control" id="validationCustom03" placeholder="Password" required>
-            <div class="valid-feedback">
-                Password required
-            </div>
         </div>
 
-        <div class="col-md-6">
-            <label for="validationCustom02" class="form-label">confirm Password</label>
-            <input name="confirmPassword" type="password" class="form-control" id="validationCustom04" placeholder="Confirm Password" required>
-            <div class="valid-feedback">
-                Password required
-            </div>
-        </div>
+      </div>
 
-        <div class="col-12 mt-2 d-flex row">
-          <a class="fw-bold fs-6 col-sm-6" style="color: var(--bg-body); text-decoration:underline;" href="/auth/login">Login</a>
-        </div>
-        
-        <ul id="error" class="text-danger col-12"></ul>
+    </div>
 
-        <div class="spinner-border col-12 d-none" id="status" role="status">
-          <span class="sr-only">Loading...</span>
-        </div>
-
-        <div class="col-12">
-          <button id="btn" class="btn btn-primary" type="submit">Register</button>
-        </div>
-      </form>
+  </div>
 </main>
+
 <script src="js/authenticate.js"></script>
