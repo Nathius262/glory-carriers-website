@@ -1,4 +1,5 @@
-import {renderAdminDashboard, renderAdminLoginForm, loginAdmin} from '../controllers/adminController.js';
+import {renderAdminDashboard} from '../controllers/adminController.js';
+import {renderAdminLoginForm, loginAdmin} from '../controllers/admin/login.js';
 import { Router } from 'express';
 
 const router = Router();
