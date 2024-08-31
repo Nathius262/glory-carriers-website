@@ -16,6 +16,7 @@ import rootRouter from "./routers/rootRouter.js"
 import mediaRouter from "./routers/mediaRouter.js"
 import authRouter from './routers/authRouter.js'
 import adminRouter from './routers/adminRouter.js'
+import userAdminRouter from './routers/admin/userRouter.js'
 
 //import crypto from 'crypto';
 //const secretKey = crypto.randomBytes(64).toString('hex');
@@ -49,6 +50,7 @@ app.use(staticFiles);
 // routes
 app.use('/', rootRouter);
 app.use('/admin/', adminRouter);
+app.use('/admin/user/', userAdminRouter);
 app.use('/auth/', authRouter);
 app.use('/media/', mediaRouter);
 

@@ -29,7 +29,10 @@ const hbs = handlebars.create({
     },
     eq: (a, b) => a === b,
     gt: (a, b) => a > b,
-    lt: (a, b) => a < b
+    lt: (a, b) => a < b,
+    hasRole: function (rolesArray, roleId) {
+      return rolesArray.includes(roleId);
+    }
   }
 });
 
