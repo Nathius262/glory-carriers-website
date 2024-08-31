@@ -4,9 +4,11 @@ import { Router } from 'express';
 
 const router = Router();
 
+//admin dashbord route
 router.route('/')
     .get(renderAdminDashboard);
 
+//login route
 router.route('/login')
     .get(renderAdminLoginForm)
     .post(loginAdmin);

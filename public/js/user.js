@@ -28,23 +28,31 @@
 
             const form = event.target;
             const formData = new FormData(form);
-            const url = form.action; 
+            const url = form.action;
             const formDataObj = JSON.stringify(Object.fromEntries(formData))
 
             try {
-              const response = await authenticate(formDataObj, url);
+
+              let method;
+
+              if (form.id == "update-user-form"){
+                method = "PUT";
+                console.log("updating user...")
+              }else{
+                method = "POST";
+                console.log("creating user...")
+              };
+              
+              const response = await authenticate(formDataObj, url, method);
               const result = await response.json();
         
               if (response.ok) {
-                console.log(result.isAdmin)
-                if(result.isAdmin === true){
-                  alert('authentication successful: You are about to loggin as an admin', );
-                  window.location.href = "/admin"
+                alert('SUCCESS');
+                if(result.redirectTo){
+                  window.location.href = result.redirectTo
                 }
-                else if (result.isAdmin == undefined || result.isAdmin == false || result.isAdmin == null){
-                  alert('authentication successful!');
-                  window.location.href = "/"
-                }
+                //window.location.reload()
+                
               } 
               else {
                 try {
@@ -52,12 +60,17 @@
                     displayError.insertAdjacentHTML(
                       'beforeend',
                       `<li>${i.msg}</li>`
+                      
                     )
+                    console.log(i.msg)
                   }
                 } catch {
+                  let errMessage;
+                  if (result.detail) errMessage = result.detail
+                  else if (result.message) errMessage = result.message;
                   displayError.insertAdjacentHTML(
                     'beforeend',
-                    `<li>${result.message}</li>`
+                    `<li>${errMessage}</li>`
                   )
                 }
               }
@@ -78,13 +91,13 @@
 })()
 
 
-async function authenticate(data, url) {
+async function authenticate(data, url, method) {
     return fetch(url, {
-        method: 'POST',
+        method: method,
         headers: {
             'Content-Type': 'application/json',
         },
-        body: data
+        body:data,
     }).then(response => {
         return {
             ok: response.ok,
