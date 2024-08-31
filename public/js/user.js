@@ -1,5 +1,9 @@
 (function () {
     'use strict'
+    //loading status
+    let statusEl = document.getElementById('status')
+    let btn = document.getElementById('btn')
+    let displayError = document.querySelector('#error')
   
     // Fetch all the forms we want to apply custom Bootstrap validation styles to
     var forms = document.querySelectorAll('.needs-validation')
@@ -15,14 +19,9 @@
 
           else{
             event.preventDefault()
-            event.stopPropagation()
+            event.stopPropagation()            
 
-            //loading status
-            let status = document.getElementById('status')
-            let btn = document.getElementById('btn')
-            let displayError = document.querySelector('#error')
-
-            status.classList.remove('d-none')
+            statusEl.classList.remove('d-none')
             btn.classList.add('disabled')
             displayError.innerHTML = ""
 
@@ -51,7 +50,7 @@
                 if(result.redirectTo){
                   window.location.href = result.redirectTo
                 }
-                //window.location.reload()
+                window.location.reload()
                 
               } 
               else {
@@ -81,14 +80,70 @@
             } 
             finally {
             }
-            status.classList.add('d-none')
+            statusEl.classList.add('d-none')
             btn.classList.remove('disabled')
           }
   
           form.classList.add('was-validated')
         }, false)
       })
+
+
+      //DELETE USER
+
+      try{
+        let deleteBtn = document.querySelector('#delete')
+        deleteBtn.addEventListener('click', async ()=>{
+      
+          statusEl.classList.remove('d-none')
+          btn.classList.add('disabled')
+          deleteBtn.classList.add('disabled')
+          displayError.innerHTML = ""
+      
+          let url = deleteBtn.dataset.url
+          let method = "DELETE"
+          let data = JSON.stringify({})
+          const response = await authenticate(data, url, method);
+          const result = await response.json();
+          console.log(result)
+          if (response.ok) {
+            alert('SUCCESS');
+            if(result.redirectTo){
+              window.location.href = result.redirectTo
+            }
+            //window.location.reload()
+            
+          } 
+          else {
+            try {
+              for(let i of result.errors){
+                displayError.insertAdjacentHTML(
+                  'beforeend',
+                  `<li>${i.msg}</li>`
+                  
+                )
+                console.log(i.msg)
+              }
+            } catch {
+              let errMessage;
+              if (result.detail) errMessage = result.detail
+              else if (result.message) errMessage = result.message;
+              displayError.insertAdjacentHTML(
+                'beforeend',
+                `<li>${errMessage}</li>`
+              )
+            }
+          }
+          statusEl.classList.add('d-none')
+          btn.classList.remove('disabled')
+          deleteBtn.classList.remove('disabled')
+        })
+      }catch{
+      
+      }
 })()
+
+
 
 
 async function authenticate(data, url, method) {
