@@ -8,7 +8,7 @@ export const verifyToken = async (req, res, next) => {
 
   if (!token) {
     //res.status(403).json({ message: 'No token provided' });
-    return res.status(403).redirect('/auth/login');
+    return res.status(403).redirect('/admin/login');
   }
 
   try {

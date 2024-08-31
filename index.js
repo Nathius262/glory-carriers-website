@@ -17,6 +17,7 @@ import mediaRouter from "./routers/mediaRouter.js"
 import authRouter from './routers/authRouter.js'
 import adminRouter from './routers/adminRouter.js'
 import userAdminRouter from './routers/admin/userRouter.js'
+import { isAdmin, verifyToken } from './middlewares/auth.js';
 
 //import crypto from 'crypto';
 //const secretKey = crypto.randomBytes(64).toString('hex');
@@ -46,6 +47,22 @@ app.use(bodyParser.json())
 
 //staticfiles
 app.use(staticFiles);
+
+
+app.use('/admin', (req, res, next) => {
+  if (req.path === '/login') {
+    return next(); // Skip token verification for /admin/login
+  }
+  verifyToken(req, res, next);
+});
+
+// Middleware to check if the user is an admin or staff for all /admin routes, except /admin/login
+app.use('/admin', (req, res, next) => {
+  if (req.path === '/login') {
+    return next(); // Skip role check for /admin/login
+  }
+  isAdmin(req, res, next);
+});
 
 // routes
 app.use('/', rootRouter);
