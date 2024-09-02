@@ -7,7 +7,7 @@ dotenv.config()
 
 //render create page
 export const renderCreateUser = async (req, res) => {
-  res.render('./admin/create_user')
+  res.render('./admin/user/create')
 };
 
 //render create page
@@ -22,7 +22,7 @@ export const renderUpdatePage = async (req, res) => {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    res.render('./admin/update_user', {user: user.rows[0]})
+    res.render('./admin/user/update', {user: user.rows[0]})
 
   } catch (err) {
     console.error('Error:', err.message);
@@ -132,7 +132,7 @@ export const getAllUsers = async (req, res) => {
     const totalPages = Math.ceil(totalUsers / limit);
 
     // Return the users with pagination info
-    res.status(200).render('./admin/user', {
+    res.status(200).render('./admin/user/list', {
       success: true,
       page: parseInt(page, 10),
       limit: parseInt(limit, 10),
