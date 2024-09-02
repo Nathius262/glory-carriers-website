@@ -58,6 +58,24 @@
                   }
                 });
             }
+        
+            const handleLogout = async () => {
+                try {
+                    await fetch('/auth/logout', {
+                    method: 'POST',
+                    credentials: 'include', // Ensures cookies are sent with the request
+                });
+            
+                window.location.href = "/admin/login"; // Update the UI after logout
+                } catch (err) {
+                    console.error('Error logging out:', err);
+                }
+            };
+            
+            try{
+                document.getElementById('logout-button').addEventListener('click', handleLogout);
+            }catch{}
+            
         </script>
 
     {{> style}}
@@ -90,6 +108,7 @@
             <!--=========MAIN END===========-->
 
             <!--=========FOOTER BEGIN===========-->
+            {{> logout}}
             {{> notification/success}}
             <footer id="footer" class="pt-5 pb-0 m-0">
                 {{> footer}}

@@ -102,26 +102,6 @@
       <!-- /.container-fluid -->
 
     </div>
-    <!-- End of Main Content -->
-    {{> logout}}
-
-    <Script>
-      const handleLogout = async () => {
-        try {
-          await fetch('/auth/logout', {
-            method: 'POST',
-            credentials: 'include', // Ensures cookies are sent with the request
-          });
-
-          window.location.href = "/admin/login"; // Update the UI after logout
-        } catch (err) {
-          console.error('Error logging out:', err);
-        }
-      };
-
-      document.getElementById('logout-button').addEventListener('click', handleLogout);
-
-    </Script>
 
   </div>
   <!-- End of Content Wrapper -->
