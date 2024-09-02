@@ -15,8 +15,11 @@ import removeTrailingSlash  from './middlewares/normalizer.js';
 import rootRouter from "./routers/rootRouter.js"
 import mediaRouter from "./routers/mediaRouter.js"
 import authRouter from './routers/authRouter.js'
+
+//ADMIN IMPORT
 import adminRouter from './routers/adminRouter.js'
 import userAdminRouter from './routers/admin/userRouter.js'
+import roleAdminRouter from './routers/admin/roleRouter.js'
 import { isAdmin, verifyToken } from './middlewares/auth.js';
 
 //import crypto from 'crypto';
@@ -66,8 +69,13 @@ app.use('/admin', (req, res, next) => {
 
 // routes
 app.use('/', rootRouter);
+
+//admin
 app.use('/admin/', adminRouter);
 app.use('/admin/user/', userAdminRouter);
+app.use('/admin/role/', roleAdminRouter);
+
+
 app.use('/auth/', authRouter);
 app.use('/media/', mediaRouter);
 
