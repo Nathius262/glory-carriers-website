@@ -33,6 +33,33 @@
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+        
+        <script>
+            //global script
+            let title, message, redirectTo, classType, btnType;
+
+            function messageAlert(title, message, redirectTo, classType, btnType){
+                let heading = document.querySelector('#successModalLabel')
+                heading.innerHTML = title
+                heading.classList.add(classType)
+                document.querySelector('#modal-message').innerHTML = message;
+                document.querySelector('#close-modal').classList.add(btnType);
+              
+                $("#successModal").modal('show');
+                $('#successModal').on('hide.bs.modal', function (e) {
+                  // This code will run when the modal is about to be hidden
+              
+                  // Check if redirectTo is defined
+                  if(redirectTo){
+                      window.location.href = redirectTo;
+                  } else {
+                      // Reload the page if there's no redirect
+                      window.location.reload();
+                  }
+                });
+            }
+        </script>
+
     {{> style}}
 
     </head>
@@ -63,7 +90,7 @@
             <!--=========MAIN END===========-->
 
             <!--=========FOOTER BEGIN===========-->
-
+            {{> notification/success}}
             <footer id="footer" class="pt-5 pb-0 m-0">
                 {{> footer}}
             </footer>

@@ -16,15 +16,35 @@ document.getElementById('uploadForm').addEventListener('submit', async function(
 
       if (response.ok) {
           status.innerHTML = 'Upload successful!';
-          alert('Upload successful:', result);
-          window.location.reload();
+          alert('Upload successful:', );
+          messageAlert(
+            title = "Upload Successful",
+            message = result,
+            redirectTo = "/",
+            classType = "text-success",
+            btnType = "btn-success",
+          )
       } else {
           status.innerHTML = `Upload failed: ${result.message}`;
-          alert('Upload failed:', result);
+          messageAlert(
+            title = "Upload failed",
+            message = result,
+            redirectTo = false,
+            classType = "text-success",
+            btnType = "btn-success",
+          )
+          
       }
   } catch (error) {
       status.innerHTML = `Upload failed: ${error.message}`;
-      alert('Upload error:', error);
+        messageAlert(
+            title = "Upload failed",
+            message = result,
+            redirectTo = false,
+            classType = "text-success",
+            btnType = "btn-success",
+        )
+
   } finally {
       progressBar.style.display = 'none';
   }

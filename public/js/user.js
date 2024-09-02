@@ -4,10 +4,12 @@
     let statusEl = document.getElementById('status')
     let btn = document.getElementById('btn')
     let displayError = document.querySelector('#error')
+    
+    //message
   
     // Fetch all the forms we want to apply custom Bootstrap validation styles to
     var forms = document.querySelectorAll('.needs-validation')
-  
+
     // Loop over them and prevent submission
     Array.prototype.slice.call(forms)
       .forEach(function (form) {
@@ -46,11 +48,13 @@
               const result = await response.json();
         
               if (response.ok) {
-                alert('SUCCESS');
-                if(result.redirectTo){
-                  window.location.href = result.redirectTo
-                }
-                window.location.reload()
+                messageAlert(
+                  title = "success",
+                  message = "profile updated succesfuly",
+                  redirectTo = result.redirectTo,
+                  classType = "text-success",
+                  btnType = "btn-success",
+                )             
                 
               } 
               else {
@@ -76,7 +80,13 @@
             } 
             catch (error) {
               console.log(error)
-              alert('authentication error:', error);
+              messageAlert(
+                title = "Error!",
+                message = "Something went wrong: click the button to refresh",
+                redirectTo = false,
+                classType = "text-danger",
+                btnType = "btn-danger",
+              ) 
             } 
             finally {
             }
@@ -107,11 +117,13 @@
           const result = await response.json();
           console.log(result)
           if (response.ok) {
-            alert('SUCCESS');
-            if(result.redirectTo){
-              window.location.href = result.redirectTo
-            }
-            //window.location.reload()
+            messageAlert(
+              title = "Success",
+              message = "User has been deleted",
+              redirectTo = result.redirectTo,
+              classType = "text-danger",
+              btnType = "btn-danger",
+            )
             
           } 
           else {
@@ -122,7 +134,6 @@
                   `<li>${i.msg}</li>`
                   
                 )
-                console.log(i.msg)
               }
             } catch {
               let errMessage;
@@ -141,9 +152,9 @@
       }catch{
       
       }
+
+      
 })()
-
-
 
 
 async function authenticate(data, url, method) {

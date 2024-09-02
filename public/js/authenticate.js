@@ -36,14 +36,25 @@
               const result = await response.json();
         
               if (response.ok) {
-                console.log(result.isAdmin)
+                
+                console.log()
                 if(result.isAdmin === true){
-                  alert('authentication successful: You are about to loggin as an admin', );
-                  window.location.href = "/admin"
+                  messageAlert(
+                    title = "Success",
+                    message = "authentication successful: You are about to loggin as an admin",
+                    redirectTo = "/admin",
+                    classType = "text-warning",
+                    btnType = "btn-warning",
+                  )
                 }
                 else if (result.isAdmin == undefined || result.isAdmin == false || result.isAdmin == null){
-                  alert('authentication successful!');
-                  window.location.href = "/"
+                  messageAlert(
+                    title = "Success",
+                    message = "authentication successful!",
+                    redirectTo = "/",
+                    classType = "text-info",
+                    btnType = "btn-info",
+                  )
                 }
               } 
               else {
@@ -64,7 +75,14 @@
             } 
             catch (error) {
               console.log(error)
-              alert('authentication error:', error);
+              messageAlert(
+                title = "Error",
+                message = `authentication error:, <p class="text-danger">${error}</p>`,
+                redirectTo = "/",
+                classType = "text-danger",
+                btnType = "btn-danger",
+              )
+              
             } 
             finally {
             }
