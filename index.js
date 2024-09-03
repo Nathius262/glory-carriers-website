@@ -20,6 +20,7 @@ import authRouter from './routers/authRouter.js'
 import adminRouter from './routers/adminRouter.js'
 import userAdminRouter from './routers/admin/userRouter.js'
 import roleAdminRouter from './routers/admin/roleRouter.js'
+import sermonAdminRouter from './routers/admin/sermonRouter.js'
 import { isAdmin, verifyToken } from './middlewares/auth.js';
 
 //import crypto from 'crypto';
@@ -74,6 +75,7 @@ app.use('/', rootRouter);
 app.use('/admin/', adminRouter);
 app.use('/admin/user/', userAdminRouter);
 app.use('/admin/role/', roleAdminRouter);
+app.use('/admin/sermon/', sermonAdminRouter);
 
 
 app.use('/auth/', authRouter);
