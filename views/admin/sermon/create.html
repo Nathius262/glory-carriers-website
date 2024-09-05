@@ -1,5 +1,56 @@
 <link rel="stylesheet" href="css/sb-admin-2.css">
 <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+<style>
+    /** 
+    account page 
+    **/
+    .main_img{
+        position: relative;
+        cursor: pointer;
+        width: 300px;
+        height: 300px;
+
+    }
+    .profile_img{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+    }
+
+    .main_overlay{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        top: 0;
+        left: 0;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 1s;
+    }
+    .main_overlay:hover{
+        opacity: 1;
+    }
+
+    .main_overlay_blur {
+        backdrop-filter: blur(5px);
+    }
+
+    .main_overlay > * {
+        transform: translateY(20px);
+        transition: transform 1s;
+    }
+    .main_overlay:hover > * {
+        transform: translateY(0);
+    }
+</style>
 <!-- Page Wrapper -->
 <div id="wrapper">
 
@@ -39,35 +90,60 @@
                                 <h6 class="m-0 font-weight-bold text-primary">Create Sermon</h6>
                                 <div>
                                     <div id="delete" data-url="/admin/sermon/{{sermon.id}}" type="click" class="btn btn-danger"><i class="fas fa-solid fa-trash-can"></i></div>
+                                    <div class="spinner-border d-none status" id="status" role="status">
+                                        <span class="sr-only">Loading... </span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <form action="/admin/sermon/create" method="POST" id="create-media" enctype="multipart/form-data" class="user needs-validation" novalidate>
                                     
 
-                                    
-                                    <div class="form-group">
-                                        <input type="file" id="audio" name="audio" accept="audio/*" class="form-control form-control-user"
-                                            id="exampleInputUsername" aria-describedby="usernameHelp"
-                                            value="{{sermon.audio_url}}" required>
-                                        <div class="invalid-feedback">
-                                            choose an audio file
+                                    <div class="form-group row">
+                                        <div class="container col-12 mt-3 mb-4 d-flex justify-content-start">
+                                            <div class="container d-sm-flex">
+                                                <!-- Audio element with controls -->
+                                                <audio src="" controls style="width: 70%; object-fit: fill;" id="audioPlayer">
+                                                    <!-- If there's an initial URL, it will be loaded here -->
+                                                    <source src="" type="audio/*">
+                                                    Your browser does not support the audio element.
+                                                </audio>
+                                                <div class="mx-3">
+                                                    <label for="id_audio_file" class="text-center btn btn-outline-secondary"><i class="fa fa-edit"></i> Choose Audio</label>
+                                                </div>
+                                                <!-- File input element -->
+                                                <input type="file" name="audio" value="" id="id_audio_file" accept="audio/*" class="form-control" hidden required>
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                You need to select an audio file
+                                            </div>
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
-                                        <input type="file" id="image" name="image" accept="image/*" class="form-control form-control-user"
-                                            id="exampleInputUsername" aria-describedby="usernameHelp"
-                                            value="{{sermon.image_url}}" required>
-                                        <div class="invalid-feedback">
-                                            You need to select an image file
+                                    <div class="form-group row">
+                                        <div class="container col-7 mt-3 mb-4 d-grid justify-content-start">
+                                            <label for="" class="fw-bold fs-6">Image</label>
+                                            <div class="main_img container border" id="id_image_group">
+                                            <img style="width: 100%; object-fit:fill;" src="" alt="choose an Image" class="profile_img" id="id_image_display">
+                                            <div class="main_overlay main_overlay_blur">
+                                                <div class="text-center"><i class="fa fa-edit"></i> Click to Choose an Image</div>
+                                            </div>
+
+                                            <input type="file" name="image" id="id_image_file" onchange="readURL(this)" accept="image/*" class="form-control" value="" hidden="" required>
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                You need to select an image file
+                                            </div>
                                         </div>
                                     </div>
 
+                        
+
                                     <div class="form-group">
+                                        <label for="" class="fw-bold fs-6">video</label>
                                         <input type="url" id="video" name="video_url" class="form-control form-control-user"
                                             id="exampleInputUsername" aria-describedby="usernameHelp"
-                                            value="{{sermon.video_url}}" required>
+                                            value="">
                                         <div class="invalid-feedback">
                                             You need to select an video url
                                         </div>
@@ -76,14 +152,20 @@
                                     <hr>
                                     <ul id="error" class="text-danger col-12"></ul>
 
-                                    <div class="spinner-border col-12 d-none" id="status" role="status">
-                                        <span class="sr-only">Loading...</span>
+                                    <div class="spinner-border col-12 d-none status" id="status" role="status">
+                                        <span class="sr-only">Loading... </span>
                                     </div>
+                                    
+                                    <progress id="progressBar" value="0" max="100" style="width: 100%; display: none;"></progress>
+                                    <hr class="mb-3">
 
                                     <button type="submit" id="btn" class="btn btn-primary btn-user btn-block">
-                                        Upload
+                                        upload
                                     </button>
                                     <hr>
+
+                                    
+                    
                                 </form>
                                
                             </div>
@@ -91,11 +173,7 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <progress id="progressBar" value="0" max="100" style="width: 100%; display: none;"></progress>
-                    <div id="status" class="text-danger"></div>
-                </div>
-
+               
             </div>
             <!-- /.container-fluid -->
 
@@ -105,8 +183,6 @@
     <!-- End of Content Wrapper -->
 
 </div>
-<!-- End of Page Wrapper -->
-
 
 <!-- Core plugin JavaScript-->
 <script src="js/uploader.js"></script>

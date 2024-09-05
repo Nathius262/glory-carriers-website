@@ -90,6 +90,9 @@
                                 <h6 class="m-0 font-weight-bold text-primary">Update Sermon</h6>
                                 <div>
                                     <div id="delete" data-url="/admin/sermon/{{sermon.id}}" type="click" class="btn btn-danger"><i class="fas fa-solid fa-trash-can"></i></div>
+                                    <div class="spinner-border d-none status" id="status" role="status">
+                                        <span class="sr-only">Loading... </span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -158,19 +161,17 @@
                                     <hr>
                                     <ul id="error" class="text-danger col-12"></ul>
 
-                                    <div class="spinner-border col-12 d-none" id="status" role="status">
-                                        <span class="sr-only">Loading...</span>
+                                    <div class="spinner-border col-12 d-none status" id="status" role="status">
+                                        <span class="sr-only">Loading... </span>
                                     </div>
+                                    
+                                    <progress id="progressBar" value="0" max="100" style="width: 100%; display: none;"></progress>
+                                    <hr class="mb-3">
 
                                     <button type="submit" id="btn" class="btn btn-primary btn-user btn-block">
                                         Update
                                     </button>
                                     <hr>
-
-                                    <div class="row">
-                                        <progress id="progressBar" value="0" max="100" style="width: 100%; display: none;"></progress>
-                                        <div id="status" class="text-danger"></div>
-                                    </div>
                     
                                 </form>
                                
@@ -191,35 +192,6 @@
 </div>
 <!-- End of Page Wrapper -->
 
-<script>
-  document.getElementById('id_image_group').onclick = function(event){
-    document.getElementById('id_image_file').click();
-  };
-  
-  function readURL(input){
-    console.log("read")
-    let reader = new FileReader();
-    reader.onload = function(e){
-      $('#id_image_display')
-        .attr('src', e.target.result)
-    };
-    reader.readAsDataURL(input.files[0]);
-  }
-
-    document.getElementById('id_audio_file').addEventListener('change', function(event) {
-        const file = event.target.files[0];
-        if (file) {
-            const audioPlayer = document.getElementById('audioPlayer');
-            const fileURL = URL.createObjectURL(file);
-
-            // Set the audio source to the selected file
-            audioPlayer.src = fileURL;
-            audioPlayer.load(); // Load the new file
-            audioPlayer.play(); // Optionally, auto-play the selected file
-        }
-    });
-
-</script>
 <!-- Core plugin JavaScript-->
 <script src="js/uploader.js"></script>
 <!--<script src="js/user.js"></script>-->

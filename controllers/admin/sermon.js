@@ -1,6 +1,8 @@
 import pool from '../../config/databaseConfig.js';
 import capitalizeWords from '../../utils/utils.js';
-import { verifyToken, isAdmin } from '../../middlewares/auth.js';
+import cloudinary from '../../config/cloudinaryConfig.js';
+import {getPublicIdFromUrl} from '../../utils/utils.js'
+
 
 export const renderSermonPage = async (req, res) => {
   return res.render('./admin/sermon/create')
@@ -86,8 +88,7 @@ export const getSingleSermonAdmin = async (req, res) => {
 };
 
 export const updateSermonAdmin = async (req, res) => {
-  console.log(req.body)
-  console.log(req.files)
+
   const { id } = req.params;
   const { title, video_url } = req.body;
   const audio = req.files?.['audio'] ? req.files['audio'][0].path : null;
@@ -103,15 +104,15 @@ export const updateSermonAdmin = async (req, res) => {
 
       const { audio_url: currentAudioUrl, image_url: currentImageUrl } = currentSermon.rows[0];
 
-      // Check if new audio is uploaded and delete the old one from Cloudinary
       if (audio && currentAudioUrl) {
-          await cloudinary.v2.uploader.destroy(getPublicIdFromUrl(currentAudioUrl), { resource_type: 'video' });
+        await cloudinary.uploader.destroy(getPublicIdFromUrl(currentAudioUrl), { resource_type: 'video' });
       }
 
       // Check if new image is uploaded and delete the old one from Cloudinary
       if (image && currentImageUrl) {
-          await cloudinary.v2.uploader.destroy(getPublicIdFromUrl(currentImageUrl));
+        await cloudinary.uploader.destroy(getPublicIdFromUrl(currentImageUrl, { resource_type: 'image' }));
       }
+
 
       // Update the sermon record in the database
       const result = await pool.query(
@@ -126,7 +127,7 @@ export const updateSermonAdmin = async (req, res) => {
       }
 
       // Redirect to the updated sermon page
-      res.redirect(`/admin/sermon/${id}`);
+      res.json({message:"updated successfully", redirectTo:false});
   } catch (err) {
       console.error(err);
       res.status(500).send('Server Error');
@@ -135,44 +136,41 @@ export const updateSermonAdmin = async (req, res) => {
   
 // Function to handle deleting a sermon by ID
 export const deleteSermonAdmin = async (req, res) => {
-    const { id } = req.params;
-    try {
-      // Retrieve the sermon details before deletion
-      const sermon = await pool.query('SELECT audio_url, image_url FROM sermons WHERE id = $1', [id]);
-  
-      if (sermon.rows.length === 0) {
-        return res.status(404).send('Sermon not found');
-      }
-  
-      const { audio_url: audioUrl, image_url: imageUrl } = sermon.rows[0];
-  
-      // Delete the sermon from the database
-      const result = await pool.query('DELETE FROM sermons WHERE id = $1 RETURNING *', [id]);
-  
-      if (result.rows.length === 0) {
-        return res.status(404).send('Sermon not found');
-      }
-  
-      // Delete the audio and image files from Cloudinary
-      if (audioUrl) {
-        await cloudinary.v2.uploader.destroy(getPublicIdFromUrl(audioUrl), { resource_type: 'video' });
-      }
-      if (imageUrl) {
-        await cloudinary.v2.uploader.destroy(getPublicIdFromUrl(imageUrl));
-      }
-  
-      // Redirect after deletion
-      res.redirect('/admin/sermon');
-    } catch (err) {
-      console.error(err);
-      res.status(500).send('Server Error');
-    }
-};
+  const { id } = req.params;
+  try {
+    // Retrieve the sermon details before deletion
+    const sermon = await pool.query('SELECT audio_url, image_url FROM sermons WHERE id = $1', [id]);
 
-// Helper function to extract the public ID from a Cloudinary URL
-const getPublicIdFromUrl = (url) => {
-    const urlParts = url.split('/');
-    const publicIdWithExtension = urlParts[urlParts.length - 1];
-    const publicId = publicIdWithExtension.split('.')[0];
-    return `${urlParts[urlParts.length - 2]}/${publicId}`;
+    if (sermon.rows.length === 0) {
+      return res.status(404).send('Sermon not found');
+    }
+
+    const { audio_url: audioUrl, image_url: imageUrl } = sermon.rows[0];
+
+
+    // Delete the audio and image files from Cloudinary
+    if (audioUrl) {
+      const audioPublicId = getPublicIdFromUrl(audioUrl);
+      const audio = await cloudinary.uploader.destroy(audioPublicId, { resource_type: 'video' }); // Specify the resource type as 'video' for audio files
+    }
+
+    if (imageUrl) {
+      const imagePublicId = getPublicIdFromUrl(imageUrl);
+      const image = await cloudinary.uploader.destroy(imagePublicId, { resource_type: 'image' }); // Specify the resource type as 'image' for images
+    }
+
+
+    // Delete the sermon from the database
+    const result = await pool.query('DELETE FROM sermons WHERE id = $1 RETURNING *', [id]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).send('Sermon not found');
+    }
+
+    // Redirect after deletion
+    res.json({ message: "Sermon Deleted", redirectTo: "/admin/sermon" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server Error');
+  }
 };

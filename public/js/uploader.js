@@ -1,3 +1,5 @@
+//import { body, header } from "express-validator"
+
 (function () {
     'use strict'
   
@@ -19,15 +21,12 @@
             event.preventDefault()
             event.stopPropagation()
             const form = event.target;
+
+            loadStatus(true)
             
             const formData = new FormData(form);
             
-            const progressBar = document.getElementById('progressBar');
-            const status = document.getElementById('status');
             const url = form.action; // Extract the action attribute from the form
-
-            progressBar.style.display = 'block';
-            status.innerHTML = 'Uploading...';
 
             try {
                 let method;
@@ -44,19 +43,17 @@
                 const result = await response.json();
 
                 if (response.ok) {
-                    status.innerHTML = 'Upload successful!';
                     messageAlert(
                         title = "Upload Successful",
-                        message = result,
-                        redirectTo = "/",
+                        message = result.message,
+                        redirectTo = result.redirectTo,
                         classType = "text-success",
                         btnType = "btn-success",
                     )
                 } else {
-                    status.innerHTML = `Upload failed: ${result.message}`;
                     messageAlert(
                         title = "Upload failed",
-                        message = result,
+                        message = result.message,
                         redirectTo = false,
                         classType = "text-success",
                         btnType = "btn-success",
@@ -64,7 +61,6 @@
                     
                 }
             } catch (error) {
-                status.innerHTML = `Upload failed: ${error.message}`;
                     messageAlert(
                         title = "Upload failed",
                         message = error.message,
@@ -76,6 +72,7 @@
             } finally {
                 progressBar.style.display = 'none';
             }
+            loadStatus(false)
         }
   
           form.classList.add('was-validated')
@@ -83,6 +80,52 @@
       })
       
 })()
+
+
+document.getElementById('id_image_group').onclick = function(event){
+    document.getElementById('id_image_file').click();
+};
+
+document.getElementById('id_audio_file').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const audioPlayer = document.getElementById('audioPlayer');
+        const fileURL = URL.createObjectURL(file);
+
+        // Set the audio source to the selected file
+        audioPlayer.src = fileURL;
+        audioPlayer.load(); // Load the new file
+        audioPlayer.play(); // Optionally, auto-play the selected file
+    }
+});
+  
+
+
+function loadStatus(status){
+    let statusEl = document.getElementsByClassName('status')
+    let btn = document.getElementById('btn')
+    let progressBar = document.getElementById('progressBar')
+    let deleteBtn = document.querySelector('#delete')
+
+    if (status) {
+        progressBar.style.display = 'block';
+        btn.classList.add('disabled')
+        deleteBtn.classList.add('disabled')
+        for (let i of statusEl){
+            i.classList.remove('d-none')
+            console.log("removing")
+        }
+    }
+    else{
+        btn.classList.remove('disabled')
+        deleteBtn.classList.remove('disabled')
+        progressBar.style.display = 'none';
+        for (let i of statusEl){
+            i.classList.add('d-none')
+            console.log("adding")
+        }
+    }
+}
 
 async function uploadFile(formData, progressBar, url, method) {
     const xhr = new XMLHttpRequest();
@@ -111,4 +154,73 @@ async function uploadFile(formData, progressBar, url, method) {
         xhr.withCredentials = true;
         xhr.send(formData);
     });
-  }
+}
+
+deleteMedia()
+
+
+function deleteMedia(){
+    let displayError = document.querySelector('#error')
+    try{
+        let deleteBtn = document.querySelector('#delete')
+        deleteBtn.addEventListener('click', async ()=>{
+    
+            let url = deleteBtn.dataset.url
+            let method = "DELETE"
+            let data = JSON.stringify({})
+    
+            let option = {
+                method: method,
+                credentials: "include",
+                body:data
+            }
+            loadStatus(true)
+            const response = await fetch(url, option)
+            const result = await response.json();
+            console.log(result)
+            if (response.ok) {
+                messageAlert(
+                title = "Success",
+                message = result.message,
+                redirectTo = result.redirectTo,
+                classType = "text-danger",
+                btnType = "btn-danger",
+                )
+                
+            } 
+            else {
+                try {
+                for(let i of result.errors){
+                    displayError.insertAdjacentHTML(
+                    'beforeend',
+                    `<li>${i.msg}</li>`
+                    
+                    )
+                }
+                } catch {
+                let errMessage;
+                if (result.detail) errMessage = result.detail
+                else if (result.message) errMessage = result.message;
+                displayError.insertAdjacentHTML(
+                    'beforeend',
+                    `<li>${errMessage}</li>`
+                )
+                }
+            }
+            loadStatus(false)
+        })
+    }catch{
+    
+    }
+}
+
+
+function readURL(input){
+    let reader = new FileReader();
+    reader.onload = function(e){
+    $('#id_image_display')
+        .attr('src', e.target.result)
+    };
+    reader.readAsDataURL(input.files[0]);
+}
+
