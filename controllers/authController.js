@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 
 dotenv.config()
 
-const secrete_key = process.env.JWT_SECRET
+const secrete_key = process.env.JWT_SECRET || "86d8110f7c96113cd57678c01747a41ace18d2ed190432b71f36132b62b1f0058bee12fd69c5f05211cadbd6a92319a8e19c2a473ff04a186c6349462ce5f7cb"
 
 export const registerUser = [
   // Validate input
