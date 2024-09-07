@@ -82,23 +82,67 @@
 })()
 
 
-document.getElementById('id_image_group').onclick = function(event){
-    document.getElementById('id_image_file').click();
-};
+try {
+    document.getElementById('id_image_group').onclick = function(event){
+        document.getElementById('id_image_file').click();
+    };
+} catch {
+    
+}
 
-document.getElementById('id_audio_file').addEventListener('change', function(event) {
-    const file = event.target.files[0];
-    if (file) {
-        const audioPlayer = document.getElementById('audioPlayer');
-        const fileURL = URL.createObjectURL(file);
-
-        // Set the audio source to the selected file
-        audioPlayer.src = fileURL;
-        audioPlayer.load(); // Load the new file
-        audioPlayer.play(); // Optionally, auto-play the selected file
-    }
-});
+try {
+    document.getElementById('id_audio_file').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const audioPlayer = document.getElementById('audioPlayer');
+            const fileURL = URL.createObjectURL(file);
+    
+            // Set the audio source to the selected file
+            audioPlayer.src = fileURL;
+            audioPlayer.load(); // Load the new file
+            audioPlayer.play(); // Optionally, auto-play the selected file
+        }
+    });
+} catch {
+    
+}
   
+try{
+    const pdfFileInput = document.getElementById('id_pdf_file');
+    const pdfPreview = document.getElementById('pdfPreview');
+
+
+    // If a file URL is already available, show the preview
+    document.addEventListener("DOMContentLoaded", function() {
+        if (pdfPreview.src != "") {
+            pdfPreview.style.display = 'block';  // Make sure the preview is visible
+        }
+    });
+
+    // Event listener for file input change
+    pdfFileInput.addEventListener('change', function(event) {
+        const file = event.target.files[0];
+
+        if (file && file.type === 'application/pdf') {
+            const fileURL = URL.createObjectURL(file); // Create a URL for the selected file
+
+            // Set the preview element to show the PDF
+            pdfPreview.src = fileURL;
+            pdfPreview.style.display = 'block'; // Show the preview
+        } else {
+            // Hide the preview if it's not a valid PDF
+            pdfPreview.style.display = 'none';
+
+            messageAlert(
+                title = "Error",
+                message='Please select a valid PDF file.',
+                redirectTo = false,
+                classType = "text-danger",
+                btnType = "btn-danger",
+            )
+        }
+    });
+} catch{}
 
 
 function loadStatus(status){
