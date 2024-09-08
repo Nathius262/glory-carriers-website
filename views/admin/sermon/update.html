@@ -109,8 +109,8 @@
                                     </div>
 
                                     <div class="form-group row">
-                                        <div class="container col-12 mt-3 mb-4 d-flex justify-content-start">
-                                            <div class="container d-sm-flex">
+                                        <div class="container col-12 mt-3 mb-4 d-block justify-content-start">
+                                            <div class="container d-sm-block">
                                                 <!-- Audio element with controls -->
                                                 <audio src="{{sermon.audio_url}}" controls style="width: 80%; object-fit: fill;" id="audioPlayer">
                                                     <!-- If there's an initial URL, it will be loaded here -->
@@ -129,11 +129,11 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group row">
-                                        <div class="container col-7 mt-3 mb-4 d-grid justify-content-start">
+                                    <div class="form-group row block">
+                                        <div class="container col-7 mt-3 mb-4 d-block justify-content-start">
                                             <label for="" class="fw-bold fs-6">Image</label>
                                             <div class="main_img container" id="id_image_group">
-                                            <img style="width: 100%; object-fit:fill;" src="{{sermon.image_url}}" alt="media Image" class="profile_img" id="id_image_display">
+                                            <img style="width: 100%; object-fit:fill; border: 1px solid #ddd;" src="{{sermon.image_url}}" alt="media Image" class="profile_img" id="id_image_display">
                                             <div class="main_overlay main_overlay_blur">
                                                 <div class="text-center"><i class="fa fa-edit"></i> Change Image</div>
                                             </div>
