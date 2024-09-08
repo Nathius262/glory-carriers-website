@@ -86,9 +86,10 @@ try {
     document.getElementById('id_image_group').onclick = function(event){
         document.getElementById('id_image_file').click();
     };
-} catch {
-    
+}  catch (TypeError) {
+
 }
+  
 
 try {
     document.getElementById('id_audio_file').addEventListener('change', function(event) {
@@ -103,8 +104,8 @@ try {
             audioPlayer.play(); // Optionally, auto-play the selected file
         }
     });
-} catch {
-    
+}  catch (TypeError) {
+
 }
   
 try{
@@ -142,7 +143,9 @@ try{
             )
         }
     });
-} catch{}
+} catch (TypeError) {
+
+}
 
 
 function loadStatus(status){
