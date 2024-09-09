@@ -5,7 +5,7 @@ import {getPublicIdFromUrl} from '../../utils/utils.js'
 
 
 export const renderRecordsPage = async (req, res) => {
-  return res.render('./admin/zoe_record/create')
+  return res.render('./admin/zoe_record/create', {pageTitle:"GCMI Admin"})
 }
 
 export const createRecordsAdmin = async (req, res) => {
@@ -80,7 +80,7 @@ export const getSingleRecordsAdmin = async (req, res) => {
     if (result.rows.length === 0) {
       return res.status(404).send('Records not found');
     }
-    res.render('./admin/zoe_record/update', { zoe_record: result.rows[0] });
+    res.render('./admin/zoe_record/update', { zoe_record: result.rows[0], pageTitle:"GCMI Admin" });
   } catch (err) {
     console.error(err);
     res.status(500).send('Server Error');

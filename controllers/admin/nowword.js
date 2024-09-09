@@ -5,7 +5,7 @@ import {getPublicIdFromUrl} from '../../utils/utils.js'
 
 
 export const renderNowwordPage = async (req, res) => {
-  return res.render('./admin/nowword/create')
+  return res.render('./admin/nowword/create', {pageTitle:"GCMI Admin"})
 }
 
 export const createNowwordAdmin = async (req, res) => {
@@ -61,7 +61,8 @@ export const getAllNowword = async (req, res) => {
         totalPages: totalPages,
         itemsPerPage: itemsPerPage,
         search:true,
-        login:true
+        login:true,
+        pageTitle:"GCMI Admin"
       });
     } catch (err) {
       console.error(err);
@@ -77,7 +78,7 @@ export const getSingleNowwordAdmin = async (req, res) => {
     if (result.rows.length === 0) {
       return res.status(404).send('Nowword not found');
     }
-    res.render('./admin/nowword/update', { nowword: result.rows[0] });
+    res.render('./admin/nowword/update', { nowword: result.rows[0], pageTitle:"GCMI Admin" });
   } catch (err) {
     console.error(err);
     res.status(500).send('Server Error');

@@ -5,7 +5,7 @@ import {getPublicIdFromUrl} from '../../utils/utils.js'
 
 
 export const renderSermonPage = async (req, res) => {
-  return res.render('./admin/sermon/create')
+  return res.render('./admin/sermon/create', {pageTitle:"GCMI Admin"})
 }
 
 export const createSermonAdmin = async (req, res) => {
@@ -64,7 +64,8 @@ export const getAllSermonsAdmin = async (req, res) => {
       totalPages: totalPages,
       itemsPerPage: itemsPerPage,
       search:true,
-      login:true
+      login:true,
+      pageTitle:"GCMI Admin"
     });
   } catch (err) {
     console.error(err);
@@ -80,7 +81,7 @@ export const getSingleSermonAdmin = async (req, res) => {
     if (result.rows.length === 0) {
       return res.status(404).send('Sermon not found');
     }
-    res.render('./admin/sermon/update', { sermon: result.rows[0] });
+    res.render('./admin/sermon/update', { sermon: result.rows[0], pageTitle:"GCMI Admin" });
   } catch (err) {
     console.error(err);
     res.status(500).send('Server Error');

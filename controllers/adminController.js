@@ -6,7 +6,7 @@ export const renderAdminDashboard = [
     isAdmin,
     async (req, res) => {
         try {
-            res.render('./admin/admin');
+            res.render('./admin/admin', {pageTitle: "GCMI Admin"});
         } catch (error) {
             res.status(404).send('page not found');
         }

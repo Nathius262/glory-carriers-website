@@ -72,7 +72,7 @@ export const registerUser = [
 
 export const renderRegisterForm = async (req, res) => {
   try {
-    return res.render('./auth/register', {login:true})
+    return res.render('./auth/register', {login:true, pageTitle: "Register"})
   } catch (error) {
     res.status(500).render('./errors/500', { message: 'Internal Server Error', error: error });
     
@@ -131,7 +131,7 @@ export const loginUser = [
 
 export const renderLoginForm = async (req, res) => {
   try {
-    return res.render('./auth/login', {login:true})
+    return res.render('./auth/login', {login:true, pageTitle: "Login"})
   } catch (error) {
     res.status(500).render('./errors/500', { message: 'Internal Server Error', error: error });
     

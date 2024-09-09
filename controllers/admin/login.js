@@ -67,7 +67,7 @@ export const loginAdmin = [
 
 export const renderAdminLoginForm = async (req, res) => {
   try {
-    return res.render('./admin/login', {login:true})
+    return res.render('./admin/login', {login:true, pageTitle:"GCMI Admin"})
   } catch (error) {
     res.status(500).render('./errors/500', { message: 'Internal Server Error', error: error });
     

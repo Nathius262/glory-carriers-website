@@ -7,7 +7,7 @@ dotenv.config()
 
 //render create page
 export const renderCreateUser = async (req, res) => {
-  res.render('./admin/user/create')
+  res.render('./admin/user/create', {pageTitle:"GCMI Admin"})
 };
 
 //render create page
@@ -22,7 +22,7 @@ export const renderUpdatePage = async (req, res) => {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    res.render('./admin/user/update', {user: user.rows[0]})
+    res.render('./admin/user/update', {user: user.rows[0], pageTitle:"GCMI Admin"})
 
   } catch (err) {
     console.error('Error:', err.message);
@@ -138,6 +138,7 @@ export const getAllUsers = async (req, res) => {
       limit: parseInt(limit, 10),
       totalPages,
       totalUsers,
+      pageTitle:"GCMI Admin",
       users: result.rows,  // This will contain an array of user objects with their ids, emails, usernames, and roles
     });
 
