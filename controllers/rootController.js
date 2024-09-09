@@ -4,7 +4,7 @@ const renderIndex= async (req, res) => {
     try {
         const result = await pool.query(
             'SELECT * FROM sermons ORDER BY date DESC LIMIT $1 OFFSET $2',
-            [2, 2]
+            [2, 0]
         );
 
         //console.log(result.rows)
