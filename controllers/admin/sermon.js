@@ -8,6 +8,59 @@ export const renderSermonPage = async (req, res) => {
   return res.render('./admin/sermon/create', {pageTitle:"GCMI Admin"})
 }
 
+export const renderMultipleForm = async (req, res) => {
+  return res.render('./admin/sermon/uploadmultiple', {pageTitle:"GCMI Admin"})
+}
+
+export const createMultipleSermonsAdmin = async (req, res) => {
+  try {
+    // Check if audio and image files are present
+    if (!req.files['audio'] || !req.files['image']) {
+      return res.status(400).json({
+        success: false,
+        message: 'Missing required files',
+      });
+    }
+
+    // Handle multiple file uploads
+    const audioFiles = req.files['audio']; // An array of audio files
+    const imageFiles = req.files['image']; // An array of image files
+    const videoUrls = req.body.video_url;  // This would be an array if needed
+
+    const queries = [];
+    for (let i = 0; i < audioFiles.length; i++) {
+      const audio = audioFiles[i];
+      const image = imageFiles[i];
+
+      const audioFileName = audio.originalname.split('.')[0];
+      const title = capitalizeWords(audioFileName.replace(/-/g, ' '));
+
+      const query = pool.query(
+        'INSERT INTO sermons (title, audio_url, image_url, video_url) VALUES ($1, $2, $3, $4)',
+        [title, audio.path, image.path, req.body.video_url ? req.body.video_url[i] : null]
+      );
+      queries.push(query);
+    }
+
+    // Execute all queries
+    await Promise.all(queries);
+
+    res.status(200).json({
+      success: true,
+      redirectTo: "/admin/sermon",
+      message: 'Uploaded successfully',
+    });
+  } catch (err) {
+    console.error('Error:', err);
+    res.status(500).json({
+      success: false,
+      message: 'Server Error',
+      data: err,
+    });
+  }
+};
+
+
 export const createSermonAdmin = async (req, res) => {
   try {
     if (!req.files['audio'] || !req.files['image']) {
@@ -63,7 +116,6 @@ export const getAllSermonsAdmin = async (req, res) => {
       currentPage: page,
       totalPages: totalPages,
       itemsPerPage: itemsPerPage,
-      search:true,
       login:true,
       pageTitle:"GCMI Admin"
     });

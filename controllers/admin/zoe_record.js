@@ -63,7 +63,6 @@ export const getAllRecordsAdmin = async (req, res) => {
       currentPage: page,
       totalPages: totalPages,
       itemsPerPage: itemsPerPage,
-      search:true,
       login:true
     });
   } catch (err) {

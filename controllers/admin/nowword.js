@@ -60,7 +60,6 @@ export const getAllNowword = async (req, res) => {
         currentPage: page,
         totalPages: totalPages,
         itemsPerPage: itemsPerPage,
-        search:true,
         login:true,
         pageTitle:"GCMI Admin"
       });
