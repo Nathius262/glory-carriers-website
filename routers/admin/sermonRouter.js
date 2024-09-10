@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import upload from '../../config/multerConfig.js';
-import { createSermonAdmin, renderSermonPage, getAllSermonsAdmin, getSingleSermonAdmin, updateSermonAdmin, deleteSermonAdmin} from '../../controllers/admin/sermon.js';
+import { createSermonAdmin, renderMultipleForm, createMultipleSermonsAdmin, renderSermonPage, getAllSermonsAdmin, getSingleSermonAdmin, updateSermonAdmin, deleteSermonAdmin} from '../../controllers/admin/sermon.js';
 
 const router = Router();
 
@@ -14,6 +14,14 @@ router.route('/create')
         {name: 'audio', maxCount:1},
         {name: 'image', maxCount:1}
     ]), createSermonAdmin);
+
+
+router.route('/create-multiple')
+    .get(renderMultipleForm)
+    .post(upload.fields([
+        {name: 'audio', maxCount:100},
+        {name: 'image', maxCount:100}
+    ]), createMultipleSermonsAdmin);
 
 router.route('/:id')
     .get(getSingleSermonAdmin)

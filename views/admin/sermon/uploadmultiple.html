@@ -1,0 +1,381 @@
+<link rel="stylesheet" href="css/sb-admin-2.css">
+<link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+<style>
+    /** 
+    account page 
+    **/
+    .main_img{
+        position: relative;
+        cursor: pointer;
+        width: 100px;
+        height: 100px;
+
+    }
+    .profile_img{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+    }
+
+    .main_overlay{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        top: 0;
+        left: 0;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 1s;
+    }
+    .main_overlay:hover{
+        opacity: 1;
+    }
+
+    .main_overlay_blur {
+        backdrop-filter: blur(5px);
+    }
+
+    .main_overlay > * {
+        transform: translateY(20px);
+        transition: transform 1s;
+    }
+    .main_overlay:hover > * {
+        transform: translateY(0);
+    }
+</style>
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    {{> admin_sidebar}}
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content mt-5">
+
+            <!-- Topbar -->
+            {{> admin_navbar}}
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">Sermon Upload</h1>
+                </div>
+
+                <!-- Content Row -->
+                <div class="row">
+                    {{> admin/sermonnav}}
+                </div>
+
+                <!-- Content Row -->
+                <div class="row">
+                    <div class="col-12 mb-4">
+                        <!-- Approach -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Upload Multiple Sermon</h6>
+                            </div>
+                            <div class="card-body table-responsive-md">
+                                <form id="create-media" class="needs-validation" action="/admin/sermon/create-multiple" method="POST" enctype="multipart/form-data">
+                                    <table class="table table-hover" id="sermonUploadTable">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Audio File</th>
+                                                <th scope="col">Image Thumbnail</th>
+                                                <th scope="col">Video URL</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="fileInputsContainer">
+                                            <tr class="file-input-row align-items-center">
+                                                <td>
+                                                    <input type="file" name="audio[]" accept="audio/*" class="form-control audio-input" required>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group row block">
+                                                        <div class="container col d-block justify-content-start">
+                                                            <div class="main_img container image-group">
+                                                                <img style="width: 100%; object-fit: fill; border: 1px solid #ddd;" src="" alt="media Image" class="profile_img image-display">
+                                                                <div class="main_overlay main_overlay_blur">
+                                                                    <div class="text-center"><i class="fa fa-edit"></i> Change Image</div>
+                                                                </div>
+                                                                <input type="file" name="image[]" class="form-control image-input" accept="image/*" hidden>
+                                                            </div>
+                                                            <div class="invalid-feedback">You need to select an image file</div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <input type="url" name="video_url[]" class="form-control" placeholder="Enter video URL">
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-danger remove-row-btn">Remove</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <!-- Add More and Submit buttons -->
+                                    <div class="d-flex justify-content-between">
+                                        <button type="button" class="btn btn-secondary" id="addMoreFilesBtn">Add More</button>
+                                        <button type="submit" class="btn btn-primary">Upload All</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Function to add event listeners to image inputs and image preview functionality
+        function attachImageEventListeners(row) {
+            // Attach click event to the overlay for opening the file input dialog
+            row.querySelector('.main_overlay').addEventListener('click', function() {
+                const imageInput = this.parentElement.querySelector('.image-input');
+                if (imageInput) {
+                    imageInput.click();
+                }
+            });
+
+            // Attach change event to the file input for displaying the selected image
+            row.querySelector('.image-input').addEventListener('change', function(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        row.querySelector('.image-display').src = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+
+        // Initial setup for the first row
+        const initialRow = document.querySelector('.file-input-row');
+        attachImageEventListeners(initialRow);
+
+        // Add More button functionality
+        document.getElementById('addMoreFilesBtn').addEventListener('click', function() {
+            const tableBody = document.getElementById('fileInputsContainer');
+            const newRow = initialRow.cloneNode(true);
+
+            // Clear the inputs in the cloned row
+            newRow.querySelector('.audio-input').value = '';
+            newRow.querySelector('.image-input').value = '';
+            newRow.querySelector('.image-display').src = ''; // Reset the image preview
+            newRow.querySelector('input[name="video_url[]"]').value = ''; // Clear video URL
+
+            // Attach event listeners to the new row for image preview functionality
+            attachImageEventListeners(newRow);
+
+            // Append the new row to the table body
+            tableBody.appendChild(newRow);
+        });
+
+        // Function to remove a row
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('remove-row-btn')) {
+                const row = e.target.closest('tr');
+                if (document.querySelectorAll('.file-input-row').length > 1) {
+                    row.remove();
+                } else {
+                    alert('You must have at least one row.');
+                }
+            }
+        });
+    });
+
+</script>
+
+<script>
+    async function uploadFile(formData, progressBar, url, method) {
+        const xhr = new XMLHttpRequest();
+
+        return new Promise((resolve, reject) => {
+            xhr.upload.onprogress = function (event) {
+                if (event.lengthComputable) {
+                    const percentComplete = (event.loaded / event.total) * 100;
+                    progressBar.value = percentComplete; // Update the progress bar value
+                }
+            };
+
+            xhr.onload = function () {
+                resolve({
+                    ok: xhr.status >= 200 && xhr.status < 300,
+                    status: xhr.status,
+                    json: () => Promise.resolve(JSON.parse(xhr.responseText))
+                });
+            };
+
+            xhr.onerror = function () {
+                reject(new Error('Network error'));
+            };
+
+            xhr.open(method, url, true); // Use the dynamic URL
+            xhr.withCredentials = true;
+            xhr.send(formData);
+        });
+    }
+
+    (function () {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation');
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms).forEach(function (form) {
+            form.addEventListener('submit', async function (event) {
+                event.preventDefault(); // Prevent default form submission
+                event.stopPropagation();
+
+                if (!form.checkValidity()) {
+                    console.log("Form validation failed, required fields missing.");
+                    return;
+                }
+
+                const rows = document.querySelectorAll('.file-input-row'); // Get all rows with files
+                const url = form.action; // Extract the action attribute from the form
+                const addMoreBtn = document.getElementById('addMoreFilesBtn');
+                const uploadAllBtn = form.querySelector('button[type="submit"]');
+
+                // Disable the add more and upload buttons
+                addMoreBtn.disabled = true;
+                uploadAllBtn.disabled = true;
+
+                // Hide the remove buttons during upload
+                const removeBtns = document.querySelectorAll('.remove-row-btn');
+                removeBtns.forEach(btn => btn.style.display = 'none');
+
+                let allUploadsSuccessful = true;
+
+                // Perform upload for each row
+                for (let row of rows) {
+                    const formData = new FormData();
+
+                    // Get the individual inputs from each row
+                    const audioInput = row.querySelector('.audio-input').files[0];
+                    const imageInput = row.querySelector('.image-input').files[0];
+                    const videoUrl = row.querySelector('input[name="video_url[]"]').value;
+
+                    if (audioInput) formData.append('audio', audioInput);
+                    if (imageInput) formData.append('image', imageInput);
+                    if (videoUrl) formData.append('video_url', videoUrl);
+
+                    // Dynamically add a progress bar for the current row
+                    const progressBar = addProgressBarToRow(row);
+
+                    try {
+                        let method = form.id === "update-media" ? "PUT" : "POST";
+
+                        const response = await uploadFile(formData, progressBar, url, method);
+                        const result = await response.json();
+
+                        if (response.ok) {
+                            // Mark progress as complete or show success message for that row
+                            row.querySelector('.status-message').innerHTML = "Successful";
+
+                            // Disable the row's inputs after successful upload
+                            disableRow(row);
+                        } else {
+                            allUploadsSuccessful = false;
+                            row.querySelector('.status-message').innerHTML = `Upload failed: ${result.message}`;
+                        }
+                    } catch (error) {
+                        allUploadsSuccessful = false;
+                        row.querySelector('.status-message').innerHTML = `Upload failed: ${error.message}`;
+                    } finally {
+                        progressBar.style.display = 'none'; // Hide the progress bar after completion
+                    }
+                }
+
+                // Re-enable the add more and upload buttons after all uploads complete
+                addMoreBtn.disabled = false;
+                uploadAllBtn.disabled = false;
+
+                // If all uploads were successful, redirect to the result.redirectTo URL
+                if (allUploadsSuccessful) {
+                    const result = await fetch(url).then(response => response.json());
+                    if (result.redirectTo) {
+                        window.location.href = result.redirectTo;
+                        window.location.reload()
+                    }
+                }
+            }, false);
+        });
+
+        // Function to dynamically add a progress bar to a row when needed
+        function addProgressBarToRow(row) {
+            // Check if a progress bar already exists, if yes, remove it
+            const existingProgressBar = row.querySelector('.progress-bar');
+            if (existingProgressBar) {
+                existingProgressBar.parentElement.remove();
+            }
+
+            // Add a new progress bar and status message
+            const progressBarContainer = document.createElement('div');
+            progressBarContainer.className = 'progress';
+            progressBarContainer.style.width = '100%';
+            progressBarContainer.innerHTML = `
+                <progress class="progress-bar" max="100" value="0" style="width: 100%;"></progress>
+                <div class="status-message text-center"></div>
+            `;
+            row.appendChild(progressBarContainer);
+
+            return row.querySelector('.progress-bar');
+        }
+
+        // Function to disable a row after successful upload
+        function disableRow(row) {
+            // Disable all input elements in the row
+            const inputs = row.querySelectorAll('input, button');
+            inputs.forEach(input => {
+                input.disabled = true;
+            });
+
+            // Optionally add a class to indicate the row is disabled
+            row.classList.add('upload-complete');
+        }
+
+    })();
+</script>
+
+    
+<!-- Core plugin JavaScript-->
+
+<!--<script src="js/user.js"></script>-->
+
+
+
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="js/sb-admin-2.min.js"></script>
