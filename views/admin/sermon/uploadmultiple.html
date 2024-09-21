@@ -273,7 +273,7 @@
 
                 // Hide the remove buttons during upload
                 const removeBtns = document.querySelectorAll('.remove-row-btn');
-                removeBtns.forEach(btn => btn.style.display = 'none');
+                removeBtns.forEach(btn => btn.classList.add('d-none'));
 
                 let allUploadsSuccessful = true;
 
@@ -305,6 +305,8 @@
 
                             // Disable the row's inputs after successful upload
                             disableRow(row);
+                            row.querySelector('.remove-row-btn').classList.remove('d-none');
+                            
                         } else {
                             allUploadsSuccessful = false;
                             row.querySelector('.status-message').innerHTML = `Upload failed: ${result.message}`;
@@ -363,6 +365,7 @@
 
             // Optionally add a class to indicate the row is disabled
             row.classList.add('upload-complete');
+            removeBtns.forEach(btn => btn.style.display = 'none');
         }
 
     })();
