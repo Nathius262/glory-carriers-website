@@ -114,7 +114,7 @@ p{
     padding: 9rem 0;
     z-index: 1;    
     overflow: hidden;
-    animation: backgroundTransition 40s infinite;
+    animation: backgroundTransition 50s infinite;
 }
 
 @keyframes backgroundTransition {
@@ -122,9 +122,12 @@ p{
         background: var(--white) url('../img/header.jfif') no-repeat center center/cover;
     }
     45% {
-        background: var(--white) url('../img/wlc.jfif') no-repeat center center/cover;
+        background: var(--white) url('../img/header2.jfif') no-repeat center center/cover;
     }
     55% {
+        background: var(--white) url('../img/wlc.jfif') no-repeat center center/cover;
+    }
+    70% {
         background: var(--white) url('../img/media_bg.jfif') no-repeat center center/cover;
     }
     100% {
@@ -704,15 +707,19 @@ MEDIA QUERY  @ screen size below 438
         font-size: 100px;
         line-height: 160px;
     }
-
-    .media-top{
-        /*top: calc(300px * .99); */
-    }
     
     .latest_media h4{
         font-size: calc(24px * .7);
         letter-spacing: 0.1em;
         line-height: 0px;
+    }
+
+    #event h2 {
+        font-size: 60px;
+        font-weight: bold;
+        line-height: 60px;
+        letter-spacing: 0.0001em;
+        text-align: left;
     }
     
     .latest_media h2{
