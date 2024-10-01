@@ -1,5 +1,12 @@
 import pool from "../config/databaseConfig.js";
 
+// Derive the equivalent of __dirname
+import { fileURLToPath } from 'url';
+import path from 'path';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+
 const renderIndex= async (req, res) => {
     try {
         const result = await pool.query(
@@ -57,4 +64,14 @@ const renderGiving = async (req, res) => {
     }
 };
 
-export {renderIndex, renderAbout, renderContact, renderDepartment, renderEvent, renderGiving}
+const renderSitemap = async (req, res) => {
+    try {
+        res.sendFile(path.join(__dirname, '..', 'views', 'sitemap.xml'));
+    } catch (error) {
+        res.status(404).send('page not found');
+    }
+};
+
+
+
+export {renderIndex, renderSitemap, renderAbout, renderContact, renderDepartment, renderEvent, renderGiving}
