@@ -17,7 +17,7 @@ const renderIndex= async (req, res) => {
         //console.log(result.rows)
         res.render('index', {
             sermons: result.rows,
-            pageTitle: "GCMI"
+            pageTitle: "Home"
         });
     } catch (err) {
         res.status(500).render('./errors/500', { message: 'Internal Server Error', error: err.message });
@@ -26,7 +26,7 @@ const renderIndex= async (req, res) => {
 
 const renderAbout = async (req, res) => {
     try {
-        res.render('about', {pageTitle:"About GCMI"});
+        res.render('about', {pageTitle:"About "});
     } catch (error) {
         res.status(404).send('page not found');
     }
@@ -42,7 +42,7 @@ const renderContact = async (req, res) => {
 
 const renderEvent= async (req, res) => {
     try {
-        res.render('event', {pageTitle: "GCMI Events"});
+        res.render('event', {pageTitle: " Events"});
     } catch (error) {
         res.status(404).send('page not found');
     }
@@ -50,7 +50,7 @@ const renderEvent= async (req, res) => {
 
 const renderDepartment = async (req, res) => {
     try {
-        res.render('department', {pageTitle: "GCMI Department"});
+        res.render('department', {pageTitle: " Department"});
     } catch (error) {
         res.status(404).send('page not found');
     }

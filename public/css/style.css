@@ -113,7 +113,7 @@ p{
     color: var(--white);
     padding: 9rem 0;
     margin-top: 50px;
-    z-index: 1;    
+    z-index: 1;
     overflow: hidden;
     animation: backgroundTransition 50s infinite;
 }
