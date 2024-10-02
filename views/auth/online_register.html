@@ -1,0 +1,91 @@
+<link rel="stylesheet" href="css/sb-admin-2.css">
+<link rel="stylesheet" href="css/sb-admin-2.min.css">
+
+<main class="mt-5 py-5 memeber">
+  <div class="container">
+
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+
+      <div class="col-xl-10 col-lg-12 col-md-9 ">
+
+        <div class="o-hidden border-0 shadow-lg my-5 memeber-content" style="background-color: rgba(white);">
+          <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row align-items-center justify-content-center">
+
+              <div class="col-12 mt-2 d-lg-block bg-login-image">
+                <div class="justify-content-center container d-flex">
+                  <img width="100" src="img/g_logo.png" alt="">
+                </div>
+                <h4 class="h3 text-center ">
+                  Glory Carriers Ministry Int'l
+                </h4>
+                <h1 class="h2 text-center mb-2">Online Member Registration</h1>
+              </div>
+
+              <div class="col-12">
+                <div class="p-5 pt-2">
+                  
+                  <form id="authenticate" class="user needs-validation" action="/auth/register" method="POST"
+                    novalidate>
+                    <div class="form-group">
+                      <input type="text" name="name" class="form-control form-control-user"
+                        id="exampleInputname" aria-describedby="nameHelp" placeholder="name..." required>
+                      <div class="invalid-feedback">
+                        name is required
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <input type="email" name="email" class="form-control form-control-user" id="exampleInputEmail"
+                        aria-describedby="emailHelp" placeholder="Enter Email Address..." required>
+                      <div class="invalid-feedback">
+                        Email is required
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <input type="tel" name="phone" class="form-control form-control-user"
+                        id="exampleInputphone" aria-describedby="phoneHelp" placeholder="phone..." required>
+                      <div class="invalid-feedback">
+                        phone is required
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <input type="text" rows="3" row="5" name="location" class="form-control form-control-user"
+                        id="exampleInputlocation" aria-describedby="locationHelp" placeholder="location..." required>
+                      <div class="invalid-feedback">
+                        location is required
+                      </div>
+                    </div>
+                    
+
+                    <hr>
+                    <ul id="error" class="text-danger col-12"></ul>
+
+                    <div class="spinner-border col-12 d-none" id="status" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+
+                    <button type="submit" id="btn" class="btn btn-primary btn-user btn-block">
+                      Register
+                    </button>
+                    <hr>
+                  </form>
+                  <hr>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</main>
+
+<script src="js/authenticate.js"></script>

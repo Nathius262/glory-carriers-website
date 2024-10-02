@@ -163,3 +163,53 @@ export const checkAuthStatus = (req, res) => {
     return res.status(200).json({ authenticated: false });
   }
 };
+
+export const registerOnlineUser = [
+  // Validate input
+  [
+    check('email', 'Please include a valid email').isEmail(),
+    check('phone', 'phone is required').not().isEmpty(),
+    check('location', 'location is required').not().isEmpty(),
+    check('name', 'name is required').not().isEmpty(),
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { email, name, phone, location } = req.body;
+
+    try {
+      const user = await pool.query('SELECT * FROM online_users WHERE email = $1', [email]);
+
+      if (user.rows.length) {
+        return res.status(400).json({ message: 'User already exists' });
+      }
+
+
+      const newUser = await pool.query(
+        'INSERT INTO users (email, name, phone, location) VALUES ($1, $2, $3, $4) RETURNING *',
+        [email, name, phone, location]
+      );
+
+
+      res.status(201).json({
+        message: 'User registered was successfully',
+      });
+
+    } catch (err) {
+      console.error('Error:', err.message);
+      res.status(500).json(err);
+    }
+  },
+];
+
+export const onlineRegisterForm = async (req, res) => {
+  try {
+    return res.render('./auth/online_register', {pageTitle: "Register"})
+  } catch (error) {
+    res.status(500).render('./errors/500', { message: 'Internal Server Error', error: error });
+    
+  }
+};

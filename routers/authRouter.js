@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { registerUser, renderRegisterForm, loginUser, renderLoginForm, logoutUser, checkAuthStatus } from '../controllers/authController.js';
+import { registerUser, renderRegisterForm, loginUser, renderLoginForm, logoutUser, checkAuthStatus, registerOnlineUser, onlineRegisterForm } from '../controllers/authController.js';
 
 const router = Router()
 
@@ -14,5 +14,9 @@ router.route('/login')
 router.post('/logout', logoutUser);
 
 router.get('/status', checkAuthStatus);
+
+router.route('/online-user-registration')
+    .get(onlineRegisterForm)
+    .post(registerOnlineUser);
 
 export default router
