@@ -155,21 +155,30 @@ function loadStatus(status){
     let deleteBtn = document.querySelector('#delete')
 
     if (status) {
-        progressBar.style.display = 'block';
-        btn.classList.add('disabled')
-        deleteBtn.classList.add('disabled')
-        for (let i of statusEl){
-            i.classList.remove('d-none')
-            console.log("removing")
+        try {
+            progressBar.style.display = 'block';
+            btn.classList.add('disabled')
+            deleteBtn.classList.add('disabled')
+            for (let i of statusEl){
+                i.classList.remove('d-none')
+                console.log("removing")
+            } 
+        } catch (error) {
+            
         }
+        
     }
     else{
-        btn.classList.remove('disabled')
-        deleteBtn.classList.remove('disabled')
-        progressBar.style.display = 'none';
-        for (let i of statusEl){
-            i.classList.add('d-none')
-            console.log("adding")
+        try {
+            btn.classList.remove('disabled')
+            deleteBtn.classList.remove('disabled')
+            progressBar.style.display = 'none';
+            for (let i of statusEl){
+                i.classList.add('d-none')
+                console.log("adding")
+            }
+        } catch (error) {
+            
         }
     }
 }
