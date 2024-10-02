@@ -112,6 +112,7 @@ p{
     position: relative;
     color: var(--white);
     padding: 9rem 0;
+    margin-top: 50px;
     z-index: 1;    
     overflow: hidden;
     animation: backgroundTransition 50s infinite;
@@ -119,19 +120,19 @@ p{
 
 @keyframes backgroundTransition {
     0% {
-        background: var(--white) url('../img/header.jfif') no-repeat center center/cover;
+        background: var(--white) url('../img/header.jfif') no-repeat center top/cover;
     }
     45% {
-        background: var(--white) url('../img/header2.jfif') no-repeat center center/cover;
+        background: var(--white) url('../img/header2.jfif') no-repeat center top/cover;
     }
     55% {
-        background: var(--white) url('../img/wlc.jfif') no-repeat center center/cover;
+        background: var(--white) url('../img/wlc.jfif') no-repeat center top/cover;
     }
     70% {
-        background: var(--white) url('../img/media_bg.jfif') no-repeat center center/cover;
+        background: var(--white) url('../img/media_bg.jfif') no-repeat center top/cover;
     }
     100% {
-        background: var(--blue) url('../img/zz2.jfif') no-repeat center center/cover;
+        background: var(--blue) url('../img/zz2.jfif') no-repeat center top/cover;
     }
 }
 
@@ -496,7 +497,7 @@ p{
     
 }
 
-
+intro
 
 /* GIVING SECTION*/
 
