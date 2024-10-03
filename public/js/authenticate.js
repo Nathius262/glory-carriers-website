@@ -41,16 +41,16 @@
                 if(result.isAdmin === true){
                   messageAlert(
                     title = "Success",
-                    message = "authentication successful: You are about to loggin as an admin",
+                    message = result.message,
                     redirectTo = "/admin",
-                    classType = "text-warning",
-                    btnType = "btn-warning",
+                    classType = "text-success",
+                    btnType = "btn-success",
                   )
                 }
                 else if (result.isAdmin == undefined || result.isAdmin == false || result.isAdmin == null){
                   messageAlert(
                     title = "Success",
-                    message = "authentication successful!",
+                    message = result.message,
                     redirectTo = "/",
                     classType = "text-info",
                     btnType = "btn-info",

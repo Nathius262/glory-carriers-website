@@ -52,7 +52,7 @@ export const loginAdmin = [
     
       // Send response with authorization status
       res.status(201).json({
-        message: 'User Logged in successfully',
+        message: 'Amin User Logged in successfully',
         authorized: true,
         isAdmin:true
         //token: token,   Include the token in the response
