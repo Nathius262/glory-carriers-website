@@ -189,13 +189,13 @@ export const registerOnlineUser = [
 
 
       const newUser = await pool.query(
-        'INSERT INTO users (email, name, phone, location) VALUES ($1, $2, $3, $4) RETURNING *',
+        'INSERT INTO online_users (email, name, phone, location) VALUES ($1, $2, $3, $4) RETURNING *',
         [email, name, phone, location]
       );
 
 
       res.status(201).json({
-        message: 'User registered was successfully',
+        message: 'User registration was successful!',
       });
 
     } catch (err) {
