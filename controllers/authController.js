@@ -164,13 +164,20 @@ export const checkAuthStatus = (req, res) => {
   }
 };
 
+
 export const registerOnlineUser = [
   // Validate input
   [
     check('email', 'Please include a valid email').isEmail(),
-    check('phone', 'phone is required').not().isEmpty(),
-    check('location', 'location is required').not().isEmpty(),
-    check('name', 'name is required').not().isEmpty(),
+    check('phone', 'Phone is required').not().isEmpty(),
+    check('location', 'Location is required').not().isEmpty(),
+    check('name', 'Name is required').not().isEmpty(),
+    check('occupation', 'Occupation is required').not().isEmpty(),
+    check('gender', 'Gender is required').isIn(['male', 'female', 'other']),
+    check('marital_status', 'Marital status is required').isIn(['single', 'married', 'divorced']),
+    check('salvation', 'Salvation status is required').isIn(['yes', 'no', 'not_sure']),
+    check('baptism', 'Baptism status is required').isIn(['yes', 'no', 'not_sure']),
+    check('service_time', 'Service time is required').isIn(['morning', 'afternoon', 'evening']),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -178,7 +185,20 @@ export const registerOnlineUser = [
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { email, name, phone, location } = req.body;
+    const {
+      email,
+      name,
+      phone,
+      location,
+      occupation,
+      gender,
+      marital_status,
+      salvation,
+      baptism,
+      service_time,
+      interests,
+      prayer_request,
+    } = req.body;
 
     try {
       const user = await pool.query('SELECT * FROM online_users WHERE email = $1', [email]);
@@ -187,20 +207,37 @@ export const registerOnlineUser = [
         return res.status(400).json({ message: 'User already exists' });
       }
 
-
       const newUser = await pool.query(
-        'INSERT INTO online_users (email, name, phone, location) VALUES ($1, $2, $3, $4) RETURNING *',
-        [email, name, phone, location]
+        `INSERT INTO online_users (
+          email, name, phone, location, occupation, gender, 
+          marital_status, salvation, baptism, service_time, 
+          interests, prayer_request
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) 
+        RETURNING *`,
+        [
+          email,
+          name,
+          phone,
+          location,
+          occupation,
+          gender,
+          marital_status,
+          salvation,
+          baptism,
+          service_time,
+          interests || [],  // Handle interests as an array
+          prayer_request || null,  // Handle optional prayer_request
+        ]
       );
-
 
       res.status(201).json({
         message: 'User registration was successful!',
+        user: newUser.rows[0],  // Return the newly created user data
       });
 
     } catch (err) {
       console.error('Error:', err.message);
-      res.status(500).json(err);
+      res.status(500).json({ error: 'Server error, please try again later.' });
     }
   },
 ];

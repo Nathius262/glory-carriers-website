@@ -7,7 +7,7 @@
     <!-- Outer Row -->
     <div class="row justify-content-center">
 
-      <div class="col-xl-10 col-lg-12 col-md-9 ">
+      <div class="col-md-10">
 
         <div class="o-hidden border-0 shadow-lg my-5 memeber-content" style="background-color: rgba(white);">
           <div class="card-body p-0">
@@ -18,7 +18,7 @@
                 <div class="justify-content-center container d-flex">
                   <img width="100" src="img/g_logo.png" alt="">
                 </div>
-                <h4 class="h3 text-center ">
+                <h4 class="h3 text-center">
                   Glory Carriers Ministry Int'l
                 </h4>
                 <h1 class="h2 text-center mb-2">Online Member Registration</h1>
@@ -26,41 +26,145 @@
 
               <div class="col-12">
                 <div class="p-5 pt-2">
-                  
-                  <form id="authenticate" class="user needs-validation" action="/auth/online-user-registration" method="POST"
-                    novalidate>
+
+                  <form id="authenticate" class="user needs-validation" action="/members" method="POST" novalidate>
+                    
+                    <h5 class="h2 mb-3">Personal Information</h5>
+                    <!-- Full Name -->
                     <div class="form-group">
-                      <input type="text" name="name" class="form-control form-control-user"
-                        id="exampleInputname" aria-describedby="nameHelp" placeholder="name..." required>
+                      <input type="text" name="name" class="rounded-1 form-control form-control-user" id="exampleInputname"
+                        aria-describedby="nameHelp" placeholder="Full Name..." required>
                       <div class="invalid-feedback">
-                        name is required
+                        Name is required
                       </div>
                     </div>
 
+                    <!-- Email -->
                     <div class="form-group">
-                      <input type="email" name="email" class="form-control form-control-user" id="exampleInputEmail"
+                      <input type="email" name="email" class="rounded-1 form-control form-control-user" id="exampleInputEmail"
                         aria-describedby="emailHelp" placeholder="Enter Email Address..." required>
                       <div class="invalid-feedback">
                         Email is required
                       </div>
                     </div>
 
+                    <!-- Phone -->
                     <div class="form-group">
-                      <input type="tel" name="phone" class="form-control form-control-user"
-                        id="exampleInputphone" aria-describedby="phoneHelp" placeholder="phone..." required>
+                      <input type="tel" name="phone" class="rounded-1 form-control form-control-user" id="exampleInputphone"
+                        aria-describedby="phoneHelp" placeholder="Phone..." required>
                       <div class="invalid-feedback">
-                        phone is required
+                        Phone is required
                       </div>
                     </div>
 
+                    <!-- Occupation -->
                     <div class="form-group">
-                      <input type="text" rows="3" row="5" name="location" class="form-control form-control-user"
-                        id="exampleInputlocation" aria-describedby="locationHelp" placeholder="location..." required>
+                      <input type="text" name="occupation" class="rounded-1 form-control form-control-user" id="exampleInputoccupation"
+                        aria-describedby="occupationHelp" placeholder="Occupation..." required>
                       <div class="invalid-feedback">
-                        location is required
+                        Occupation is required
                       </div>
                     </div>
+
+                    <!-- Gender -->
+                    <div class="form-group">
+                      <label for="gender">Gender</label>
+                      <select class="form-control" name="gender" id="gender" required>
+                        <option value="" disabled selected>Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                      </select>
+                      <div class="invalid-feedback">
+                        Select a gender
+                      </div>
+                    </div>
+
+                    <!-- Marital Status -->
+                    <div class="form-group">
+                      <label for="status">Marital Status</label>
+                      <select class="form-control" name="marital_status" id="status" required>
+                        <option value="" disabled selected>Select Marital Status</option>
+                        <option value="single">Single</option>
+                        <option value="married">Married</option>
+                        <option value="divorced">Divorced</option>
+                      </select>
+                      <div class="invalid-feedback">
+                        Select a marital status
+                      </div>
+                    </div>
+
+                    <!-- Location -->
+                    <div class="form-group">
+                      <textarea name="location" class="form-control rounded-1" id="exampleInputlocation" rows="3"
+                        aria-describedby="locationHelp" placeholder="Location..." required></textarea>
+                      <div class="invalid-feedback">
+                        Location is required
+                      </div>
+                    </div>
+
+                    <!-- Spiritual Information -->
+                    <h5 class="h2 mb-3">Spiritual Information</h5>
                     
+                    <!-- Have you accepted Jesus? -->
+                    <div class="form-group">
+                      <label for="salvation">Have you accepted Jesus Christ as your Lord and Savior?</label>
+                      <select class="form-control" name="salvation" id="salvation" required>
+                        <option value="" disabled selected>Select an Option</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                        <option value="not_sure">Not Sure</option>
+                      </select>
+                      <div class="invalid-feedback">
+                        This information is required
+                      </div>
+                    </div>
+
+                    <!-- Baptism Status -->
+                    <div class="form-group">
+                      <label for="baptism">Are you baptized?</label>
+                      <select class="form-control" name="baptism" id="baptism" required>
+                        <option value="" disabled selected>Select an Option</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                        <option value="not_sure">Not Sure</option>
+                      </select>
+                      <div class="invalid-feedback">
+                        This information is required
+                      </div>
+                    </div>
+
+                    <!-- Additional Information -->
+                    <h5 class="h2 mb-3">Additional Information</h5>
+
+                    <!-- Service Preferences -->
+                    <div class="form-group">
+                      <label for="service_time">Preferred Service Times</label>
+                      <select class="form-control" name="service_time" id="service_time">
+                        <option value="" disabled selected>Select Service Time</option>
+                        <option value="morning">Morning</option>
+                        <option value="afternoon">Afternoon</option>
+                        <option value="evening">Evening</option>
+                      </select>
+                    </div>
+
+                    <!-- Interests -->
+                    <div class="form-group">
+                      <label for="interests">Areas of Interest</label>
+                      <select class="form-control" name="interests[]" id="interests" multiple>
+                        <option value="worship">Worship</option>
+                        <option value="bible_study">Bible Study</option>
+                        <option value="prayer_group">Prayer Group</option>
+                        <option value="volunteering">Volunteering</option>
+                        <option value="community_service">Community Service</option>
+                      </select>
+                    </div>
+
+                    <!-- Prayer Request -->
+                    <div class="form-group">
+                      <label for="prayer_request">Do you have any prayer requests?</label>
+                      <textarea name="prayer_request" class="form-control rounded-1" id="prayer_request" rows="3" placeholder="Share your prayer request..."></textarea>
+                    </div>
 
                     <hr>
                     <ul id="error" class="text-danger col-12"></ul>
