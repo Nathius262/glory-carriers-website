@@ -4,24 +4,16 @@
 <main class="mt-5">
 
     <div id="carouselExample" class="carousel slide mt-5" data-bs-ride="carousel">
-        <!--<div class="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="1" aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        </div>-->
-        <div class="carousel-inner" style="">
+        <div class="carousel-inner">
           <div class="carousel-item active">
             <img src="img/event.jfif" class="d-block w-100" alt="Slide 1">
-            <div class="carousel-caption d-none d-md-block fw-bold" >
+            <div class="carousel-caption d-none d-md-block fw-bold">
                 <h2 class="h1 fw-bold"></h2>
                 <p></p>
             </div>
           </div>
-          
         </div>
-        
       </div>
-
 
     <div class="container">
 
@@ -47,37 +39,75 @@
                 <div class="col-lg-6">
                   <div class="p-5">
                     <div class="text-center">
-                      <h1 class="h4 text-gray-900 mb-4">Register</h1>
+                      <h1 class="h4 text-gray-900 mb-4">Register for Kabod '24</h1>
                     </div>
-                    <form id="authenticate" class="user needs-validation" action="/auth/register" method="POST"
-                      novalidate>
+                    <form id="registerEvent" class="user needs-validation" action="/event" method="POST" novalidate>
+                      <div class="form-group">
+                        <input type="text" name="name" class="form-control form-control-user" id="exampleInputName"
+                          placeholder="Enter Your Full Name..." required>
+                        <div class="invalid-feedback">
+                          Full name is required.
+                        </div>
+                      </div>
                       <div class="form-group">
                         <input type="email" name="email" class="form-control form-control-user" id="exampleInputEmail"
-                          aria-describedby="emailHelp" placeholder="Enter Email Address..." required>
+                          placeholder="Enter Email Address..." required>
                         <div class="invalid-feedback">
-                          Email is required
+                          Email is required.
                         </div>
                       </div>
                       <div class="form-group">
-                        <input type="text" name="username" class="form-control form-control-user"
-                          id="exampleInputUsername" aria-describedby="usernameHelp" placeholder="Username..." required>
+                        <input type="text" name="phone" class="form-control form-control-user" id="exampleInputPhone"
+                          placeholder="Phone Number..." required>
                         <div class="invalid-feedback">
-                          Username is required
+                          Phone number is required.
                         </div>
                       </div>
                       <div class="form-group">
-                        <input type="password" name="password" class="form-control form-control-user"
-                          id="exampleInputPassword" placeholder="Password" required>
+                        <input type="text" name="location" class="form-control form-control-user" id="exampleInputLocation"
+                          placeholder="Location..." required>
                         <div class="invalid-feedback">
-                          password is required
+                          Location is required.
                         </div>
-  
-                        <div class="form-group">
-                          <input type="password" name="confirmPassword" class="form-control form-control-user"
-                            id="exampleInputPasswordConfirm" placeholder="Confirm Password" required>
-                          <div class="invalid-feedback">
-                            password is required
-                          </div>
+                      </div>
+                      <div class="form-group">
+                        <input type="text" name="occupation" class="form-control form-control-user" id="exampleInputOccupation"
+                          placeholder="Occupation..." required>
+                        <div class="invalid-feedback">
+                          Occupation is required.
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <select name="gender" class="form-control form-control-user" required>
+                          <option value="">Select Gender...</option>
+                          <option value="male">Male</option>
+                          <option value="female">Female</option>
+                          <option value="other">Other</option>
+                        </select>
+                        <div class="invalid-feedback">
+                          Gender is required.
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <select name="marital_status" class="form-control form-control-user" required>
+                          <option value="">Select Marital Status...</option>
+                          <option value="single">Single</option>
+                          <option value="married">Married</option>
+                          <option value="divorced">Divorced</option>
+                        </select>
+                        <div class="invalid-feedback">
+                          Marital status is required.
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <select name="salvation" class="form-control form-control-user" required>
+                          <option value="">Salvation Status...</option>
+                          <option value="yes">Yes</option>
+                          <option value="no">No</option>
+                          <option value="not_sure">Not Sure</option>
+                        </select>
+                        <div class="invalid-feedback">
+                          Salvation status is required.
                         </div>
                       </div>
                       <hr>
@@ -95,7 +125,7 @@
                     <hr>
   
                     <div class="text-center">
-                      <a class="small" href="/auth/login">Login!</a>
+                      <a class="small" href="/member">Become a Member</a>
                     </div>
                   </div>
                 </div>
@@ -108,6 +138,5 @@
       </div>
   
     </div>
-
 
 </main>
