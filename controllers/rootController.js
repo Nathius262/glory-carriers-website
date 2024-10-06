@@ -82,14 +82,14 @@ const registerEvent = [
     } = req.body;
 
     try {
-      const user = await pool.query('SELECT * FROM online_users WHERE email = $1', [email]);
+      const user = await pool.query('SELECT * FROM register_event WHERE email = $1', [email]);
 
       if (user.rows.length) {
         return res.status(400).json({ message: 'User already registered for this event' });
       }
 
       const newUser = await pool.query(
-        `INSERT INTO online_users (
+        `INSERT INTO register_event (
           name, email, phone, location, occupation, gender, 
           marital_status, salvation
         ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) 
