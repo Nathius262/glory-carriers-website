@@ -65,16 +65,19 @@
                       </div>
                       <div class="form-group">
                         <textarea type="text" name="location" rows="3" class="form-control rounded-1 form-control-user" id="exampleInputLocation"
-                          placeholder="Location..." required></textarea>
+                          placeholder="Address..." required></textarea>
                         <div class="invalid-feedback">
-                          Location is required.
+                          Address is required.
                         </div>
                       </div>
                       <div class="form-group">
-                        <input type="text" name="occupation" class="form-control rounded-1" id="exampleInputOccupation"
-                          placeholder="Occupation..." required>
+                        <select name="gender" class="form-control rounded-1" required>
+                          <option value="" selected disabled>Are you a minister of the Gospel?</option>
+                          <option value="male">Yes</option>
+                          <option value="female">No</option>
+                        </select>
                         <div class="invalid-feedback">
-                          Occupation is required.
+                          This field is required.
                         </div>
                       </div>
                       <div class="form-group">
@@ -86,28 +89,6 @@
                         </select>
                         <div class="invalid-feedback">
                           Gender is required.
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <select name="marital_status" class="form-control rounded-1" required>
-                          <option value="" selected disabled>Select Marital Status...</option>
-                          <option value="single">Single</option>
-                          <option value="married">Married</option>
-                          <option value="divorced">Divorced</option>
-                        </select>
-                        <div class="invalid-feedback">
-                          Marital status is required.
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <select name="salvation" class="form-control rounded-1" required>
-                          <option value="" selected disabled>Salvation Status...</option>
-                          <option value="yes">Yes</option>
-                          <option value="no">No</option>
-                          <option value="not_sure">Not Sure</option>
-                        </select>
-                        <div class="invalid-feedback">
-                          Salvation status is required.
                         </div>
                       </div>
                       
