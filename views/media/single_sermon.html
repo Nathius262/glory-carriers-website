@@ -1,0 +1,125 @@
+<style>
+    .intro {
+        height: 40vh;
+    }
+
+    @media screen and (max-width:438px) {
+        .intro {
+            height: 40vh;
+        }
+    }
+</style>
+
+<main>
+    <!---=========INTRO BEGIN========-->
+    <section class=" mb-5">
+        <div class="container mt-5">
+
+            <div class="row justify-content-start align-items-center">
+
+                <div class="col-md-6 p-3 mb-4">
+                    <div class="">
+                        <img class="rounded-0" style="object-fit: cover; height: 100%; width: 100%;"
+                            src="{{sermon.image_url}}" alt="{{sermon.title}}">
+                    </div>
+                    
+                </div>
+                <div class="col-md-6">
+                    <div>
+                        <h2 class="h1"><span class="fw-bold">Title: </span> <span>{{sermon.title}}</span></h2>
+                    </div>
+                    <div class="my-3">
+                        <div id="spinner" class="spinner-border " style="display: none;">Downloading... <p>Please wait for at least 2min</p><span class="sr-only">Loading... </span></div>
+                    </div>
+                    <div class="d-flex mt-3 text-secondary text-center ft-upper fs-6">
+                        <div class="fw-bold" style="text-decoration: underline;">Action: </div>
+                        <a href="{{sermon.audio_url}}" class="download-link mx-2" onclick="downloadFile('{{sermon.audio_url}}');" id="downloadLink">
+                            <img class="mx-1" src="img/icon/download1.png" width="25" alt="">Download
+                        </a>
+
+                        <a href="{{sermon.audio_url}}" class="mx-2"><img class="mx-1" src="img/icon/listen1.png" width="25" alt="">Listen</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!---=========INTRO END========-->
+
+
+    <section class=" mb-5">
+        <div class="container mt-5">
+            <div>
+                <h3 class="fw-bold h2">Latest Sermons</h3>
+            </div>
+
+            <div class="row justify-content-start align-items-center">
+
+                {{#each latestSermons}}
+                <div class="col-lg-3 p-3 col-md-4 col-sm-6 col mb-4">
+                    <div class="" style="height: 300px;">
+                        <img class="rounded-4" style="object-fit: cover; height: 100%; width: 100%;"
+                            src="{{this.image_url}}" alt="{{this.title}}">
+                    </div>
+                    <div
+                        class="d-flex justify-content-between mx-3 mx-auto mt-1 px-5 text-secondary container text-center ft-upper fs-6">
+                        <a href="{{this.audio_url}}" class="download-link"><img src="img/icon/download1.png" width="25"
+                                alt=""></a>
+                        <a href="{{this.audio_url}}"><img src="img/icon/listen1.png" width="25" alt=""></a>
+                        <a href="{{this.video_url}}"><img src="img/icon/stream.png" width="25" alt=""></a>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+<script>
+    function downloadFile(url) {
+        event.preventDefault();  // Prevent the default link action
+
+        // Show the spinner
+        const spinner = document.getElementById('spinner');
+        spinner.style.display = 'inline-block';
+
+        // Fetch the file
+        fetch(url)
+            .then(response => response.blob())  // Get the data as a Blob
+            .then(blob => {
+            // Generate a URL for the blob
+            const blobUrl = URL.createObjectURL(blob);
+
+            // Extract the filename from the URL and decode it (removes %% or %20 etc.)
+            let filename = url.split('/').pop();
+            filename = decodeURIComponent(filename);  // Decodes any special characters
+
+            // Create a temporary <a> element to trigger the download
+            const link = document.createElement('a');
+            link.href = blobUrl;
+            link.download = filename;
+
+            // Append, trigger the download, and clean up
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            // Revoke the blob URL to free up memory
+            URL.revokeObjectURL(blobUrl);
+
+            // Hide the spinner after download starts
+            spinner.style.display = 'none';
+            })
+            .catch(error => {
+            console.error('Error downloading the file:', error);
+
+            // Hide the spinner if an error occurs
+            spinner.style.display = 'none';
+        });
+    }
+    
+</script>

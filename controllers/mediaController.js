@@ -32,6 +32,35 @@ export const getAllSermons = async (req, res) => {
   }
 };
 
+// Function to handle retrieving a single sermon by ID and the latest 4 sermons
+export const getSingleSermon = async (req, res) => {
+  const { id } = req.params;
+  try {
+    // Fetch the sermon by ID and the latest 4 sermons in parallel
+    const sermonQuery = pool.query('SELECT * FROM sermons WHERE id = $1', [id]);
+    const latestSermonsQuery = pool.query('SELECT * FROM sermons ORDER BY date DESC LIMIT 4');
+
+    // Await both queries
+    const [sermonResult, latestSermonsResult] = await Promise.all([sermonQuery, latestSermonsQuery]);
+
+    // If the sermon by ID is not found
+    if (sermonResult.rows.length === 0) {
+      return res.status(404).send('Sermon not found');
+    }
+
+    // Render the single sermon page, passing the sermon by ID and the latest 4 sermons
+    res.render('./media/single_sermon.html', {
+      sermon: sermonResult.rows[0],              // The sermon fetched by ID
+      latestSermons: latestSermonsResult.rows,   // The latest 4 sermons
+      pageTitle: sermonResult.rows[0].title      // Set the page title to the sermon title
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server Error');
+  }
+};
+
+
 // Function to handle retrieving all nowword
 export const getAllNowword = async (req, res) => {
   try {

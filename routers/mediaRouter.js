@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getAllSermons, getAllNowword, getAllZoeRecord, renderStream } from "../controllers/mediaController.js"
+import { getAllSermons, getSingleSermon, getAllNowword, getAllZoeRecord, renderStream } from "../controllers/mediaController.js"
 
 const router = Router();
 
@@ -11,6 +11,7 @@ const router = Router();
 
 
 router.get('/sermon', getAllSermons);
+router.get('/sermon/:id', getSingleSermon);
 
 
 ////////////////////////////
