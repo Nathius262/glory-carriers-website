@@ -131,7 +131,6 @@ const registerHealingSchool = [
     check('email', 'Please include a valid email').isEmail(),
     check('phone', 'Phone number is required').not().isEmpty(),
     check('location', 'Location is required').not().isEmpty(),
-    check('occupation', 'Occupation is required').not().isEmpty(),
     check('gender', 'Gender is required').isIn(['male', 'female', 'other']),
     check('salvation', '').isIn(['yes', 'no']),
     check('health_status', "Your health state is required"),
@@ -147,7 +146,6 @@ const registerHealingSchool = [
       email,
       phone,
       location,
-      occupation,
       gender,
       salvation,
       health_status
@@ -162,16 +160,15 @@ const registerHealingSchool = [
 
       const newUser = await pool.query(
         `INSERT INTO healing_school (
-          name, email, phone, location, occupation, gender, 
+          name, email, phone, location, gender, 
           salvation, health_status
-        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) 
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7) 
         RETURNING *`,
         [
           name,
           email,
           phone,
           location,
-          occupation,
           gender,
           salvation,
           health_status,
