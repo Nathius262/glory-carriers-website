@@ -57,10 +57,7 @@ const registerEvent = [
     check('email', 'Please include a valid email').isEmail(),
     check('phone', 'Phone number is required').not().isEmpty(),
     check('location', 'Location is required').not().isEmpty(),
-    check('occupation', 'Occupation is required').not().isEmpty(),
     check('gender', 'Gender is required').isIn(['male', 'female']),
-    check('marital_status', 'Marital status is required').isIn(['single', 'married', 'divorced']),
-    check('salvation', 'Salvation status is required').isIn(['yes', 'no', 'not_sure']),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -73,10 +70,7 @@ const registerEvent = [
       email,
       phone,
       location,
-      occupation,
       gender,
-      marital_status,
-      salvation,
     } = req.body;
 
     try {
@@ -88,19 +82,15 @@ const registerEvent = [
 
       const newUser = await pool.query(
         `INSERT INTO register_event (
-          name, email, phone, location, occupation, gender, 
-          marital_status, salvation
-        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) 
+          name, email, phone, location, gender
+        ) VALUES ($1, $2, $3, $4, $5) 
         RETURNING *`,
         [
           name,
           email,
           phone,
           location,
-          occupation,
           gender,
-          marital_status,
-          salvation,
         ]
       );
 
