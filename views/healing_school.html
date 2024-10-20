@@ -1,0 +1,131 @@
+<link rel="stylesheet" href="css/sb-admin-2.css">
+<link rel="stylesheet" href="css/sb-admin-2.min.css">
+
+<main class="mt-5">
+
+    <div id="carouselExample" class="carousel slide mt-5" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="img/event.jfif" class="d-block w-100" alt="Slide 1">
+            <div class="carousel-caption d-none d-md-block fw-bold">
+                <h2 class="h1 fw-bold"></h2>
+                <p></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <div class="container">
+
+      <!-- Outer Row -->
+      <div class="row justify-content-center">
+  
+        <div class="col-12">
+  
+          <div class="card o-hidden border-0 my-5">
+            <div class="card-body p-0">
+              <!-- Nested Row within Card Body -->
+              <div class="row align-items-center">
+  
+                <div class="col-lg-6 col-12 mt-md-0 mt-2 d-lg-block bg-login-image">
+                  <div class="container">
+                    <h2 style="color: var(--bg-midnight-blue);" class="ft-upper fw-bold fs-1 text-sm-start text-center">About the Healing School</h2>
+                    <p style="color: var(--bg-body);" class="text-center text-sm-start">
+                      Join us for Kabod '24, featuring the Healing School!
+                      Our annual event is dedicated to unveiling the revelation of Christ and includes a special focus on healing and restoration. At the Healing School, you will experience powerful teachings and miraculous encounters that will deepen your understanding of Christ's healing power and its purpose for your life. This is your opportunity to receive spiritual, emotional, and physical healing in His presence. Don't miss this life-changing experience at Kabod '24!
+                    </p> 
+                </div> 
+                </div>
+  
+                <div class="col-lg-6 col-12">
+                  <div class="">
+                    <div class="text-center">
+                      <h1 class="h4 text-gray-900 mb-4">Register for Healing School</h1>
+                    </div>
+                    <form id="registerEvent" class="user needs-validation" action="/healing-school" method="POST" novalidate>
+                      <div class="form-group">
+                        <input type="text" name="name" class="form-control rounded-1 form-control-user" id="exampleInputName"
+                          placeholder="Enter Your Full Name..." required>
+                        <div class="invalid-feedback">
+                          Full name is required.
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <input type="email" name="email" class="form-control rounded-1 form-control-user" id="exampleInputEmail"
+                          placeholder="Enter Email Address..." required>
+                        <div class="invalid-feedback">
+                          Email is required.
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <input type="text" name="phone" class="form-control rounded-1 form-control-user" id="exampleInputPhone"
+                          placeholder="Phone Number..." required>
+                        <div class="invalid-feedback">
+                          Phone number is required.
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <textarea type="text" name="location" rows="3" class="form-control rounded-1 form-control-user" id="exampleInputLocation"
+                          placeholder="Address..." required></textarea>
+                        <div class="invalid-feedback">
+                          Address is required.
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <select name="gender" class="form-control rounded-1" required>
+                          <option value="" selected disabled>Select Gender...</option>
+                          <option value="male">Male</option>
+                          <option value="female">Female</option>
+                        </select>
+                        <div class="invalid-feedback">
+                          Gender is required.
+                        </div>
+                      </div>
+                      
+                      <div class="form-group">
+                        <select name="salvation" class="form-control rounded-1" required>
+                          <option value="" selected disabled>Have you been saved yet?...</option>
+                          <option value="yes">Yes</option>
+                          <option value="no">No</option>
+                        </select>
+                        <div class="invalid-feedback">
+                          savaltion status is required.
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <textarea type="text" name="health_status" rows="3" class="form-control rounded-1 form-control-user" id="exampleInputLocation"
+                          placeholder="Kindly briefly state your health status..." required></textarea>
+                        <div class="invalid-feedback">
+                          Your health status is required.
+                        </div>
+                      </div>
+                      
+                      <hr>
+                      <ul id="error" class="text-danger col-12"></ul>
+  
+                      <div class="spinner-border col-12 d-none" id="status" role="status">
+                        <span class="sr-only">Loading...</span>
+                      </div>
+  
+                      <button type="submit" id="btn" class="btn btn-primary btn-user btn-block">
+                        Register
+                      </button>
+                      <hr>
+                    </form>
+                    <hr>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+        </div>
+  
+      </div>
+  
+    </div>
+
+</main>
