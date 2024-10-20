@@ -154,7 +154,7 @@ const registerHealingSchool = [
     } = req.body;
 
     try {
-      const user = await pool.query('SELECT * FROM register_event WHERE email = $1', [email]);
+      const user = await pool.query('SELECT * FROM healing_school WHERE email = $1', [email]);
 
       if (user.rows.length) {
         return res.status(400).json({ message: 'User already registered for this event' });
@@ -179,7 +179,7 @@ const registerHealingSchool = [
       );
 
       res.status(201).json({
-        message: "Registration for Kabod '24 was successful!",
+        message: "Registration for Healing School was successful!",
         user: newUser.rows[0], // Return the newly created user data
       });
 
