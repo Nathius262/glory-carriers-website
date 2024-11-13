@@ -118,6 +118,18 @@ p{
     animation: backgroundTransition 50s infinite;
 }
 
+/* Add overlay */
+.intro::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
+    z-index: -1; /* Make sure the overlay is behind the text */
+}
+
 @keyframes backgroundTransition {
     0% {
         background: var(--white) url('../img/header.jfif') no-repeat center top/cover;
@@ -135,6 +147,7 @@ p{
         background: var(--blue) url('../img/zz2.jfif') no-repeat center top/cover;
     }
 }
+
 
 .birthing{
     font-size: 80px;
