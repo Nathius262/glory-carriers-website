@@ -179,12 +179,105 @@ const registerHealingSchool = [
 
 
 const renderDepartment = async (req, res) => {
+    
     try {
-        res.render('department', {pageTitle: " Department"});
-    } catch (error) {
-        res.status(404).send('page not found');
-    }
+      
+      // Query to select department name with pagination
+      const result = await pool.query(
+          'SELECT id, name, image_url FROM departments ORDER BY id',
+      );
+
+      // Return the department name with pagination info
+      res.status(200).render('department', {
+          pageTitle: " Department",
+          departments: result.rows,  // This will contain an array of department objects with their ids, emails, usernames, and departments
+      });
+
+  } catch (err) {
+      console.error('Error:', err.message);
+      res.status(500).json({ message: 'Server error' });
+  }
 };
+
+const joinDepartmentForm = async (req, res) => {
+  const departmentId = req.params.id;
+
+    try {
+        // Check if the department exists
+        const department = await pool.query('SELECT * FROM departments WHERE id = $1', [departmentId]);
+
+
+        if (department.rows.length === 0) {
+            return res.status(404).json({ message: 'name not found' });
+        }
+
+        res.render('join_department', { department: department.rows[0], pageTitle: "GCMI Admin" })
+
+    } catch (err) {
+        console.error('Error:', err.message);
+        res.status(500).json({ message: 'Server error' });
+    }
+}
+
+const joinDepartment = [
+  // Validate input
+  [
+    check('name', 'Full name is required').not().isEmpty(),
+    check('email', 'Please include a valid email').isEmail(),
+    check('phone', 'Phone number is required').not().isEmpty(),
+    check('location', 'Location is required').not().isEmpty(),
+    check('gender', 'Gender is required').isIn(['male', 'female']),
+    check('department_id', "department id is required"),
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const {
+      name,
+      email,
+      phone,
+      location,
+      gender,
+      department_id
+    } = req.body;
+
+    try {
+      const user = await pool.query('SELECT * FROM department_members WHERE email = $1', [email]);
+
+      if (user.rows.length) {
+        return res.status(400).json({ message: 'Email already registered for a department' });
+      }
+
+      const newUser = await pool.query(
+        `INSERT INTO department_members (
+          name, email, phone, location, gender, department_id
+        ) VALUES ($1, $2, $3, $4, $5, $6) 
+        RETURNING *`,
+        [
+          name,
+          email,
+          phone,
+          location,
+          gender,
+          department_id
+        ]
+      );
+
+      res.status(201).json({
+        message: "Registration was successful!",
+        redirectTo: `/department/${department_id}`,
+        user: newUser.rows[0], // Return the newly created user data
+      });
+
+    } catch (err) {
+      console.error('Error:', err.message);
+      res.status(500).json({ error: 'Server error, please try again later.' });
+    }
+  },
+];
 
 const renderGiving = async (req, res) => {
     try {
@@ -204,4 +297,4 @@ const renderSitemap = async (req, res) => {
 
 
 
-export {renderIndex, renderSitemap, renderAbout, renderContact, renderDepartment, renderEvent, registerEvent, registerHealingSchool, renderHealingSchool, renderGiving}
+export {renderIndex, renderSitemap, renderAbout, renderContact, renderDepartment, joinDepartmentForm, joinDepartment, renderEvent, registerEvent, registerHealingSchool, renderHealingSchool, renderGiving}
