@@ -23,6 +23,7 @@ import roleAdminRouter from './routers/admin/roleRouter.js'
 import sermonAdminRouter from './routers/admin/sermonRouter.js'
 import nowwordAdminRouter from './routers/admin/nowwordRouter.js'
 import recordsAdminRouter from './routers/admin/zoe_recordRouter.js'
+import departemntAdminRouter from './routers/admin/department.js'
 import { isAdmin, verifyToken } from './middlewares/auth.js';
 
 //import crypto from 'crypto';
@@ -80,6 +81,7 @@ app.use('/admin/role/', roleAdminRouter);
 app.use('/admin/sermon/', sermonAdminRouter);
 app.use('/admin/nowword/', nowwordAdminRouter);
 app.use('/admin/zoe-record/', recordsAdminRouter);
+app.use('/admin/department/', departemntAdminRouter);
 
 
 app.use('/auth/', authRouter);
