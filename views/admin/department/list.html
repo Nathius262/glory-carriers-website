@@ -21,12 +21,12 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Sermon</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Department</h1>
                     </div>
 
                     <!-- Content Row -->
                     <div class="row">
-                        {{> admin/sermonnav}}
+                        {{> admin/departmentnav}}
                     </div>
                     
                     <!-- Content Row -->
@@ -35,24 +35,26 @@
                             <!-- Approach -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">All Sermon</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">All Department</h6>
                                 </div>
                                 <div class="card-body table-responsive-md">
                                     <table class="table table-hover">
                                         <thead>
                                           <tr>
                                             <th scope="col">Id</th>
-                                            <th scope="col">Title</th>
-                                            <th scope="col">Date</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">H.O.D</th>
+                                            <th scope="col">Image Url</th>
                                           </tr>
                                         </thead>
                                         <tbody>
 
-                                            {{#each sermons}}
+                                            {{#each departments}}
                                             <tr>
                                                 <th scope="row">{{this.id}}</th>
-                                                <td><a href="/admin/sermon/{{this.id}}">{{this.title}}</a></td>
-                                                <td>{{this.date}}</td>
+                                                <td><a href="/admin/department/{{this.id}}">{{this.name}}</a></td>
+                                                <td>{{this.department_head}}</td>
+                                                <td><a href="{{this.image_url}}">{{this.image_url}}</a></td>
                                             </tr>
                                             {{/each}}
                                           
