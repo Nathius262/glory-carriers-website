@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { 
-    renderIndex, renderAbout, renderSitemap, renderDepartment, 
+    renderIndex, renderAbout, renderSitemap, 
+    renderDepartment, joinDepartmentForm, joinDepartment,
     renderContact, renderEvent, registerEvent, renderGiving,
     registerHealingSchool, renderHealingSchool
 } from "../controllers/rootController.js";
@@ -13,7 +14,11 @@ const router = Router();
 router.get('/', renderIndex);
 router.get('/about', renderAbout);
 router.get('/contact', renderContact);
-router.get('/department', renderDepartment);
+
+router.route('/department')
+    .get(renderDepartment)
+    .post(joinDepartment);
+router.get('/department/:id', joinDepartmentForm);
 
 router.route('/event')
     .get(renderEvent)
