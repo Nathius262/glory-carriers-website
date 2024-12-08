@@ -1,5 +1,11 @@
 import {searchSermon, searchZoeRecord, searchNowword} from './searchController.js'
 import pool from '../config/databaseConfig.js';
+import dotenv from 'dotenv';
+
+
+dotenv.config();
+
+const page_logo = process.env.PAGELOGO
 
 // Function to handle retrieving all sermons
 export const getAllSermons = async (req, res) => {
@@ -24,7 +30,8 @@ export const getAllSermons = async (req, res) => {
       itemsPerPage: itemsPerPage,
       search:true,
       login:true,
-      pageTitle: "Sermons"
+      pageTitle: "Sermons",
+      pageLogo: page_logo
     });
   } catch (err) {
     console.error(err);
@@ -52,7 +59,8 @@ export const getSingleSermon = async (req, res) => {
     res.render('./media/single_sermon.html', {
       sermon: sermonResult.rows[0],              // The sermon fetched by ID
       latestSermons: latestSermonsResult.rows,   // The latest 4 sermons
-      pageTitle: sermonResult.rows[0].title      // Set the page title to the sermon title
+      pageTitle: sermonResult.rows[0].title,      // Set the page title to the sermon title
+      pageLogo: sermonResult.rows[0].image_url
     });
   } catch (err) {
     console.error(err);
@@ -84,7 +92,8 @@ export const getAllNowword = async (req, res) => {
       itemsPerPage: itemsPerPage,
       search:true,
       login:true,
-      pageTitle: "Now word"
+      pageTitle: "Now word",
+      pageLogo: page_logo
     });
   } catch (err) {
     console.error(err);
@@ -115,7 +124,8 @@ export const getAllZoeRecord = async (req, res) => {
       itemsPerPage: itemsPerPage,
       search:true,
       login:true,
-      pageTitle:"Zoe Record"
+      pageTitle:"Zoe Record",
+      pageLogo: page_logo
     });
   } catch (err) {
     console.error(err);
@@ -125,7 +135,7 @@ export const getAllZoeRecord = async (req, res) => {
 
 export const renderStream = async (req, res) => {
     try {
-        res.render('stream', {pageTitle: "Stream"});
+        res.render('stream', {pageTitle: "Stream", pageLogo: page_logo});
     } catch (error) {
         res.status(404).send('page not found');
     }
@@ -144,7 +154,8 @@ export const renderSearch = async (req, res) => {
         sermonData,
         zoeRecordData,
         nowwordData,
-        pageTitle: "GCMI"
+        pageTitle: "GCMI",
+        pageLogo: page_logo
       });
     } catch (err) {
       console.error(err);
