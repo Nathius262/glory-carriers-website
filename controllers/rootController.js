@@ -1,6 +1,7 @@
 import pool from "../config/databaseConfig.js";
 
 import { check, validationResult } from 'express-validator';
+import dotenv from 'dotenv';
 
 // Derive the equivalent of __dirname
 import { fileURLToPath } from 'url';
@@ -8,6 +9,11 @@ import path from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+
+dotenv.config();
+
+
+const page_logo = process.env.PAGELOGO
 
 const renderIndex= async (req, res) => {
     try {
@@ -19,7 +25,8 @@ const renderIndex= async (req, res) => {
         //console.log(result.rows)
         res.render('index', {
             sermons: result.rows,
-            pageTitle: "Home"
+            pageTitle: "Home",
+            pageLogo: page_logo
         });
     } catch (err) {
         res.status(500).render('./errors/500', { message: 'Internal Server Error', error: err.message });
@@ -28,7 +35,8 @@ const renderIndex= async (req, res) => {
 
 const renderAbout = async (req, res) => {
     try {
-        res.render('about', {pageTitle:"About "});
+        res.render('about', {pageTitle:"About ", pageLogo: page_logo});
+        
     } catch (error) {
         res.status(404).send('page not found');
     }
@@ -36,7 +44,8 @@ const renderAbout = async (req, res) => {
 
 const renderContact = async (req, res) => {
     try {
-        res.render('contact', {pageTitle: "Contact"});
+        res.render('contact', {pageTitle: "Contact", pageLogo: page_logo});
+        
     } catch (error) {
         res.status(404).send('page not found');
     }
@@ -44,7 +53,8 @@ const renderContact = async (req, res) => {
 
 const renderEvent= async (req, res) => {
     try {
-        res.render('event', {pageTitle: " Events"});
+        res.render('event', {pageTitle: " Events", pageLogo: page_logo});
+        
     } catch (error) {
         res.status(404).send('page not found');
     }
@@ -108,7 +118,8 @@ const registerEvent = [
 
 const renderHealingSchool= async (req, res) => {
   try {
-      res.render('healing_school', {pageTitle: " Healing School Registration"});
+      res.render('healing_school', {pageTitle: " Healing School Registration", pageLogo: page_logo});
+      
   } catch (error) {
       res.status(404).send('page not found');
   }
@@ -190,6 +201,7 @@ const renderDepartment = async (req, res) => {
       // Return the department name with pagination info
       res.status(200).render('department', {
           pageTitle: " Department",
+          pageLogo: page_logo,
           departments: result.rows,  // This will contain an array of department objects with their ids, emails, usernames, and departments
       });
 
@@ -211,7 +223,8 @@ const joinDepartmentForm = async (req, res) => {
             return res.status(404).json({ message: 'name not found' });
         }
 
-        res.render('join_department', { department: department.rows[0], pageTitle: "GCMI Admin" })
+        res.render('join_department', { department: department.rows[0], pageTitle: "GCMI Admin", pageLogo: page_logo})
+        
 
     } catch (err) {
         console.error('Error:', err.message);
@@ -281,7 +294,8 @@ const joinDepartment = [
 
 const renderGiving = async (req, res) => {
     try {
-        res.render('giving', {pageTitle: "Giving"});
+        res.render('giving', {pageTitle: "Giving", pageLogo: page_logo});
+        
     } catch (error) {
         res.status(404).send('page not found');
     }
