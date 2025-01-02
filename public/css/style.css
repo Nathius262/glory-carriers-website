@@ -114,11 +114,12 @@ p{
     padding: 9rem 0;
     margin-top: 50px;
     z-index: 1;
+    height: 100vh;
     overflow: hidden;
     animation: backgroundTransition 50s infinite;
 }
 
-/* Add overlay */
+/* Add overlay 
 .intro::before {
     content: "";
     position: absolute;
@@ -127,24 +128,24 @@ p{
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
-    z-index: -1; /* Make sure the overlay is behind the text */
-}
+    /*z-index: -1;  Make sure the overlay is behind the text 
+}*/
 
 @keyframes backgroundTransition {
     0% {
-        background: var(--white) url('../img/header.jfif') no-repeat center top/cover;
+        background: var(--white) url('../img/theme1.jpg') no-repeat center top/cover;
     }
     45% {
-        background: var(--white) url('../img/header2.jfif') no-repeat center top/cover;
+        background: var(--white) url('../img/theme1.jpg') no-repeat center top/cover;
     }
     55% {
-        background: var(--white) url('../img/wlc.jfif') no-repeat center top/cover;
+        background: var(--white) url('../img/theme1.jpg') no-repeat center top/cover;
     }
     70% {
-        background: var(--white) url('../img/media_bg.jfif') no-repeat center top/cover;
+        background: var(--white) url('../img/theme2.jpg') no-repeat center top/cover;
     }
     100% {
-        background: var(--blue) url('../img/zz2.jfif') no-repeat center top/cover;
+        background: var(--blue) url('../img/theme2.jpg') no-repeat center top/cover;
     }
 }
 
@@ -598,6 +599,9 @@ intro
 }
 
 @media screen and (min-width:960px){
+    
+    
+
     .birthing{
         font-size: calc(70px * 1.7);
         font-weight: bold;
@@ -651,6 +655,28 @@ MEDIA QUERY @ screen size below 768px
 @media (max-width: 768px) {
     .relative-container {
         width: 100vw;
+    }
+    .intro {
+        animation: backgroundTransition 50s infinite;
+        height: auto;
+    }
+    
+    @keyframes backgroundTransition {
+        0% {
+            background: var(--white) url('../img/theme1.jpg') no-repeat center top/fit;
+        }
+        45% {
+            background: var(--white) url('../img/theme1.jpg') no-repeat center top/contain;
+        }
+        55% {
+            background: var(--white) url('../img/theme1.jpg') no-repeat center top/contain;
+        }
+        70% {
+            background: var(--white) url('../img/theme2.jpg') no-repeat center top/contain;
+        }
+        100% {
+            background: var(--blue) url('../img/theme2.jpg') no-repeat center top/contain;
+        }
     }
 }
 
