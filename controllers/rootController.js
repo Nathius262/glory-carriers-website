@@ -105,7 +105,7 @@ const registerEvent = [
       );
 
       res.status(201).json({
-        message: "Registration for Kabod '24 was successful!",
+        message: "Registration for Zoe Conference'25 was successful!",
         user: newUser.rows[0], // Return the newly created user data
       });
 
