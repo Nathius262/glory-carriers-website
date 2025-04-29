@@ -27,6 +27,7 @@
     "nodemon": "^3.1.4"
   },
   "dependencies": {
+    "@nathius262/nexusjs": "^0.0.6",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "cloudinary": "^1.41.3",
