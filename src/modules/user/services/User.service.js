@@ -1,22 +1,21 @@
-const { User } = require('../models/user');
+import { User } from '../models/user.js';
 
 
-exports.create = async (data) => {
-  return await User.create(data);
+
+export const findAll = async () => {
+  try {
+    return await User.findAll();
+  } catch (error) {
+    throw new Error('Error fetching records: ' + error.message);
+  }
 };
 
-exports.findById = async (id) => {
-  return await User.findByPk(id);
-};
-
-exports.update = async (id, data) => {
-  const item = await User.findByPk(id);
-  if (!item) throw new Error('Not found');
-  return await item.update(data);
-};
-
-exports.delete = async (id) => {
-  const item = await User.findByPk(id);
-  if (!item) throw new Error('Not found');
-  return await item.destroy();
+export const findById = async (id) => {
+  try {
+    const item = await User.findByPk(id);
+    if (!item) throw new Error('Not found');
+    return item;
+  } catch (error) {
+    throw new Error('Error fetching record: ' + error.message);
+  }
 };

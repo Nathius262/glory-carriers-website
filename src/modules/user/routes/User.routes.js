@@ -1,9 +1,10 @@
-const controller = require('../controllers/User.controller');
-const express = require('express');
+import express from 'express';
+import * as controller from '../controllers/User.controller.js';
+
 const router = express.Router();
 
-router.post('/', controller.create);
+// Public routes
+router.get('/', controller.findAll);
+router.get('/:id', controller.findById);
 
-
-
-module.exports = router;
+export default router;
