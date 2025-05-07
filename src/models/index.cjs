@@ -8,7 +8,6 @@ const config = configFile[env];
 
 
 
-console.log(`Using "${env}" DB config:`, config);
 if (!config) {
   throw new Error(`No Sequelize config found for environment: "${env}"`);
 }
