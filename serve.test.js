@@ -3,7 +3,13 @@ import { engine } from 'express-handlebars';
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
+import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
+
+
 import loadModules from './src/config/load_modules.js';
+import staticFiles from "./src/config/staticFiles.js"
+
 
 // Resolve __dirname for ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -37,16 +43,16 @@ app.set('view engine', 'html');
 app.set('views', globalViewsPath); // main template directory
 
 // Middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.json())
+
+
+//staticfiles
+app.use(staticFiles);
 
 // Load dynamic routes from modules
 await loadModules(app);
-
-// Default home route
-app.get('/', (req, res) => {
-  res.render('index', { title: 'Welcome to Nexus App' });
-});
 
 // 404 handler
 app.use((req, res) => {
