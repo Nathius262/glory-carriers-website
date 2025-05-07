@@ -1,4 +1,3 @@
-import User from '../models/user.cjs';
 import db from '../../../models/index.cjs';
 
 
