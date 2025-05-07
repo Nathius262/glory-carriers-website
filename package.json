@@ -24,7 +24,8 @@
   },
   "homepage": "https://github.com/Nathius262/glory-carriers-website#readme",
   "devDependencies": {
-    "nodemon": "^3.1.4"
+    "nodemon": "^3.1.4",
+    "sqlite3": "^5.1.7"
   },
   "dependencies": {
     "@nathius262/nexusjs": "^0.0.14",
