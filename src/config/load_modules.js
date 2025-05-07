@@ -8,7 +8,9 @@ const __dirname = path.dirname(__filename);
 
 export default async function loadModules(app) {
   const modulesPath = path.join(__dirname, '../modules');
+  const globalRoutesPath = path.join(__dirname, '../routes');
 
+  // ✅ Load module routes
   const modules = fs.readdirSync(modulesPath, { withFileTypes: true })
     .filter(dirent => dirent.isDirectory())
     .map(dirent => dirent.name);
@@ -27,13 +29,33 @@ export default async function loadModules(app) {
         ? `/admin/${moduleName}`
         : `/${moduleName}`;
 
-      const routeFilePath = path.join(routesDir, file);
-      const routeFileUrl = pathToFileURL(routeFilePath); // ✅ convert to file:// URL
+      const routeFileUrl = pathToFileURL(path.join(routesDir, file));
       const routeModule = await import(routeFileUrl.href);
 
       app.use(routePath, routeModule.default);
-
       console.log(`✅ Loaded ${isAdmin ? 'admin' : 'public'} route: ${routePath}`);
     }
+  }
+
+  // ✅ Load global routes from src/routes/
+  if (fs.existsSync(globalRoutesPath)) {
+    const globalRouteFiles = fs.readdirSync(globalRoutesPath)
+      .filter(file => file.endsWith('.routes.js'));
+
+    for (const file of globalRouteFiles) {
+      const routeFileUrl = pathToFileURL(path.join(globalRoutesPath, file));
+      const routeModule = await import(routeFileUrl.href);
+
+      if (file === 'root.routes.js') {
+        app.use('/', routeModule.default);
+        console.log(`✅ Loaded root route: /`);
+      } else {
+        const routeName = file.replace('.routes.js', '');
+        app.use(`/${routeName}`, routeModule.default);
+        console.log(`✅ Loaded global route: /${routeName}`);
+      }
+    }
+  } else {
+    console.warn('⚠️  No global routes directory found at /src/routes/');
   }
 }
