@@ -3,39 +3,71 @@ const fs = require('fs');
 const path = require('path');
 const configFile = require('../core/sequelize.config.cjs'); // Adjust based on your config
 
-const basename = path.basename(__filename);
-const env = process.env.NODE_ENV;
+const env = process.env.NODE_ENV || 'development';
 const config = configFile[env];
+
+
+
+console.log(`Using "${env}" DB config:`, config);
+if (!config) {
+  throw new Error(`No Sequelize config found for environment: "${env}"`);
+}
 
 const db = {};
 
+
 // Initialize Sequelize
-const sequelize = new Sequelize(config.database, config.username, config.password, config,
-  {define: {
-    underscored: false, // Disable automatic snake_case conversion
-  },}
+const sequelize = new Sequelize(
+  config.database,
+  config.username,
+  config.password,
+  {
+    ...config,
+    define: {
+      underscored: false,
+    }
+  }
 );
 
-const modelFiles = fs.readdirSync(__dirname)
-  .filter(file => {
-    return (file.indexOf('.') !== 0) && (file !== basename) && (file.endsWith('.cjs') || file.endsWith('.js'));
-  });
+// Helper: recursively collect all model files in modules/**/models/*.cjs|.js
+function collectModelFiles(dir) {
+  let results = [];
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
 
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name);
+
+    if (entry.isDirectory()) {
+      results = results.concat(collectModelFiles(fullPath));
+    } else if (
+      entry.isFile() &&
+      (entry.name.endsWith('.cjs') || entry.name.endsWith('.js')) &&
+      fullPath.includes(`${path.sep}models${path.sep}`)
+    ) {
+      results.push(fullPath);
+    }
+  }
+
+  return results;
+}
+
+// Start from /src/modules
+const modulesPath = path.join(__dirname, '..', 'modules');
+const modelFiles = collectModelFiles(modulesPath);
 
 // Load models
 modelFiles.forEach(file => {
-  const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
-  db[model.name] = model; // Store the model in the db object
+  const model = require(file)(sequelize, Sequelize.DataTypes);
+  db[model.name] = model;
 });
 
-// Setup associations if any
+// Setup associations
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {
     db[modelName].associate(db);
   }
 });
 
-// Add sequelize and Sequelize to the db object
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
