@@ -28,6 +28,7 @@
     "sqlite3": "^5.1.7"
   },
   "dependencies": {
+    "@handlebars/allow-prototype-access": "^1.0.5",
     "@nathius262/nexusjs": "^0.0.14",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",

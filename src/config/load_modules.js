@@ -62,7 +62,7 @@ export default async function loadModules(app) {
   //GLOBAL DEFAULT PAGE NOT FOUND
   app.use((req, res, next) => {
     res.status(404);
-    res.render('errors/404', { pageTitle: 'Page Not Found' });
+    res.render('errors/404', { pageTitle: 'Page Not Found', url: `${req.protocol}://${req.get('host')}${req.originalUrl}` });
   });
 
   //GLOBAL DEFAULT INTERNAL SERVER ERROR

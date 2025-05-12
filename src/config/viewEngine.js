@@ -1,9 +1,15 @@
 // src/config/viewEngine.js
 
 import { engine } from 'express-handlebars';
+import * as Allow from '@handlebars/allow-prototype-access';
+import Handlebars from 'handlebars';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+
+// Workaround for ES module compatibility
+const allowPrototypeAccess = Allow.allowInsecurePrototypeAccess || Allow.default || Allow;
+
 
 // Resolve __dirname for ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -40,6 +46,7 @@ export default function configureViewEngine(app) {
     defaultLayout: 'main',
     layoutsDir,
     partialsDir: partialsDirs,
+    handlebars: allowPrototypeAccess(Handlebars),
   }));
 
   app.set('view engine', 'html');
