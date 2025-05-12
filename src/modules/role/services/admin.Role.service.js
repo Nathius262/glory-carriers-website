@@ -39,7 +39,7 @@ export const update = async (id, data) => {
   }
 };
 
-export const delete = async (id) => {
+export const destroy = async (id) => {
   try {
     const item = await db.Role.findByPk(id);
     if (!item) throw new Error('Not found');
@@ -47,8 +47,4 @@ export const delete = async (id) => {
   } catch (error) {
     throw new Error('Error deleting record: ' + error.message);
   }
-};
-
-export const adminMethod = async () => {
-  return 'Admin-specific logic here';
 };

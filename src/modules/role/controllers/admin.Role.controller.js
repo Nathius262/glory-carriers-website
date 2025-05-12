@@ -1,18 +1,37 @@
 import * as service from '../services/admin.Role.service.js';
+import { check, validationResult } from 'express-validator';
 
-export const create = async (req, res) => {
-  try {
-    const data = await service.create(req.body);
-    res.status(201).json(data);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+
+export const create =[
+  [
+    check('role_name', 'Name is required').not().isEmpty(),
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+  
+    try {
+      const data = await service.create(req.body);
+      res.status(201).json({
+        message: 'Role created successfully',
+        redirectTo: "/admin/role",
+      });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
   }
-};
+];
 
 export const findAll = async (req, res) => {
   try {
     const data = await service.findAll();
-    res.status(200).json(data);
+    res.status(200).render('./admins/list', {
+      success: true,
+      pageTitle:"GCMI Admin",
+      roles: data,  // This will contain an array of user objects with their ids, emails, usernames, and roles
+    });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -36,7 +55,7 @@ export const update = async (req, res) => {
   }
 };
 
-export const delete = async (req, res) => {
+export const destroy = async (req, res) => {
   try {
     const data = await service.delete(req.params.id);
     res.status(200).json({ message: 'Deleted successfully', data });
@@ -45,11 +64,12 @@ export const delete = async (req, res) => {
   }
 };
 
-export const adminDashboard = async (req, res) => {
+
+//render create page
+export const render_create_view = async (req, res) => {
   try {
-    const data = await service.adminMethod();
-    res.status(200).json({ message: data });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.render('create', {pageTitle:"GCMI Admin"})
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 };

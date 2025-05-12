@@ -4,11 +4,17 @@ import * as controller from '../controllers/admin.Role.controller.js';
 const router = express.Router();
 
 // Admin routes
-router.post('/', controller.create);
 router.get('/', controller.findAll);
-router.get('/:id', controller.findById);
-router.put('/:id', controller.update);
-router.delete('/:id', controller.delete);
-router.get('/dashboard', controller.adminDashboard);
 
+
+router.route('/create')
+    .get(controller.render_create_view)
+    .post(controller.create);
+
+
+router.route('/:id')
+    .get(controller.findById)
+    .put(controller.update)
+    .delete(controller.destroy);
+    
 export default router;
