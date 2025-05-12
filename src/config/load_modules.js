@@ -58,4 +58,17 @@ export default async function loadModules(app) {
   } else {
     console.warn('⚠️  No global routes directory found at /src/routes/');
   }
+
+  //GLOBAL DEFAULT PAGE NOT FOUND
+  app.use((req, res, next) => {
+    res.status(404);
+    res.render('errors/404', { pageTitle: 'Page Not Found' });
+  });
+
+  //GLOBAL DEFAULT INTERNAL SERVER ERROR
+  app.use((err, req, res, next) => {
+    console.error('❌ Server Error:', err.stack);
+    res.status(500);
+    res.render('errors/500', { pageTitle: 'Server Error', error: err });
+  });
 }

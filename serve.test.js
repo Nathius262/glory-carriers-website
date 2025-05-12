@@ -28,10 +28,6 @@ app.use(staticFiles);
 // Load dynamic routes from modules
 await loadModules(app);
 
-// 404 fallback
-app.use((req, res) => {
-  res.status(404).render('404', { title: 'Page Not Found' });
-});
 
 // Start server
 const PORT = process.env.PORT || 3000;
