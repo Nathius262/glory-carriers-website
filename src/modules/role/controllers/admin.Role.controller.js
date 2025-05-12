@@ -58,7 +58,7 @@ export const update = async (req, res) => {
 
 export const destroy = async (req, res) => {
   try {
-    const data = await service.delete(req.params.id);
+    const data = await service.destroy(req.params.id);
     res.status(200).json({ message: 'Deleted successfully', redirectTo: '/admin/role' });
   } catch (err) {
     res.status(500).json({ error: err.message });
