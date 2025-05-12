@@ -40,7 +40,8 @@ export const findAll = async (req, res) => {
 export const findById = async (req, res) => {
   try {
     const data = await service.findById(req.params.id);
-    res.status(200).json(data);
+    res.status(200).render('./admins/update', {pageTitle:"GCMI Admin", role:data} )
+
   } catch (err) {
     res.status(404).json({ error: err.message });
   }
@@ -49,7 +50,7 @@ export const findById = async (req, res) => {
 export const update = async (req, res) => {
   try {
     const data = await service.update(req.params.id, req.body);
-    res.status(200).json(data);
+    res.status(200).json({ message: 'Updated successfully', data });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -58,7 +59,7 @@ export const update = async (req, res) => {
 export const destroy = async (req, res) => {
   try {
     const data = await service.delete(req.params.id);
-    res.status(200).json({ message: 'Deleted successfully', data });
+    res.status(200).json({ message: 'Deleted successfully', redirectTo: '/admin/role' });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -68,7 +69,7 @@ export const destroy = async (req, res) => {
 //render create page
 export const render_create_view = async (req, res) => {
   try {
-    res.render('create', {pageTitle:"GCMI Admin"})
+    res.render('./admins/create', {pageTitle:"GCMI Admin"})
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
