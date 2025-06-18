@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@handlebars/allow-prototype-access": "^1.0.5",
-    "@nathius262/nexusjs": "^0.0.14",
+    "@nathius262/nexusjs": "^0.0.16",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "cloudinary": "^1.41.3",
