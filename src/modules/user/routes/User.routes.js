@@ -1,5 +1,5 @@
 import express from 'express';
-import userModuleViews from '../../../middlewares/moduleViews.js';
+import useModuleViews from '../../../middlewares/moduleViews.js';
 import * as controller from '../controllers/User.controller.js';
 
 const router = express.Router();
