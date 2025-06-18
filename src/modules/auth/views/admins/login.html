@@ -1,0 +1,73 @@
+<link rel="stylesheet" href="/assets/css/sb-admin-2.css">
+<link rel="stylesheet" href="/assets/css/sb-admin-2.min.css">
+
+<main class="py-5" style="background: url(https://www.wearfigs.com/i/contentful/5j6wpslh72e4/5SP5Xx2Ifb3UZJmmlDkJZI/57adb3d89df25063ab05c4ea6001343f/Launch_Modules_CORE_BEST_SELLERS_DESKTOP_U.jpg?fm=webp&w=720) no-repeat center/cover;">
+    <div class="container">
+
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+
+            <div class="col-md-9">
+
+                <div class="card o-hidden border-0 shadow-lg my-5" style="">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row align-items-center">
+
+                            <div class="col-12">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <img src="/assets/img/logo.png" alt="Jades Clothing">
+                                        <h1 class="h4 text-dark-900 mb-4">Welcome Back Admin!</h1>
+                                    </div>
+                                    <form id="authenticate" class="user needs-validation" action="/auth/admin/login"
+                                        method="POST" novalidate>
+                                        <div class="form-group">
+                                            <input type="email" name="email" class="form-control form-control-user"
+                                                id="exampleInputEmail" aria-describedby="emailHelp"
+                                                placeholder="Enter Email Address..." required>
+                                            <div class="invalid-feedback">
+                                                Email is required
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" name="password" class="form-control form-control-user"
+                                                id="exampleInputPassword" placeholder="Password" required>
+                                            <div class="invalid-feedback">
+                                                password is required
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <ul id="error" class="text-danger col-12"></ul>
+
+                                        <div class="spinner-border col-12 d-none" id="status" role="status">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+
+                                        <button type="submit" id="btn" class="btn btn-primary btn-user btn-block">
+                                            Login
+                                        </button>
+                                        <hr>                                       
+                                    </form>
+                                    <hr>
+                                    
+                                    <div class="text-center">
+                                        <a class="small" href="#">Forgot Password?</a>
+                                    </div>
+                                    <div class="text-center">
+                                        <a class="small" href="/auth/register">Create an Account!</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</main>
+
+<script type="module" src="/assets/js/authenticate.js"></script>
