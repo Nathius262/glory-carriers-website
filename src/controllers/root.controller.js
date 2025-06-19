@@ -1,4 +1,3 @@
-import { check, validationResult } from 'express-validator';
 import dotenv from 'dotenv';
 
 // Derive the equivalent of __dirname
@@ -13,9 +12,9 @@ dotenv.config();
 
 const page_logo = process.env.PAGELOGO
 
-const index_view = async (req, res) => {
+const renderIndex= async (req, res) => {
     try {
-        
+
 
         //console.log(result.rows)
         res.render('index', {
@@ -28,4 +27,4 @@ const index_view = async (req, res) => {
 };
 
 
-export {index_view}
+export {renderIndex}
