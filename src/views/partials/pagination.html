@@ -1,0 +1,62 @@
+<style>
+  .page-link {
+    position: relative;
+    display: block;
+    padding: var(--bs-pagination-padding-y) var(--bs-pagination-padding-x);
+    font-size: var(--bs-pagination-font-size);
+    color: var(--bs-pagination-color);
+    text-decoration: none;
+    background-color: var(--white);
+    border: var(--bs-pagination-border-width) solid var(--black);
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.active>.page-link, .page-link.active {
+    z-index: 3;
+    color: var(--white);
+    background-color: var(--black);
+    border-color: var(--black);
+}
+
+.page-item:last-child .page-link {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.page-item:first-child .page-link {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+</style>
+<!-- Pagination Controls-->
+<div class="d-flex mt-5 justify-content-center">
+  <nav aria-label="Page navigation">
+    <ul class="pagination rounded-0">
+      {{#if (gt currentPage 1)}}
+      <li class="page-item rounded-0">
+        <a class="page-link" href="?page={{subtract currentPage 1}}">Previous</a>
+      </li>
+      {{else}}
+      <li class="page-item disabled rounded-0">
+        <a class="page-link">Previous</a>
+      </li>
+      {{/if}}
+
+      {{#each (range 1 totalPages)}}
+      <li class="page-item {{#if (eq this ../currentPage)}}active{{/if}}">
+        <a class="page-link" href="?page={{this}}">{{this}}</a>
+      </li>
+      {{/each}}
+
+      {{#if (lt currentPage totalPages)}}
+      <li class="page-item">
+        <a class="page-link" href="?page={{add currentPage 1}}">Next</a>
+      </li>
+      {{else}}
+      <li class="page-item disabled">
+        <a class="page-link">Next</a>
+      </li>
+      {{/if}}
+    </ul>
+  </nav>
+</div>
