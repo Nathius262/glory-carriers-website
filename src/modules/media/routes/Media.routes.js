@@ -1,6 +1,8 @@
 import express from 'express';
 import useModuleViews from '../../../middlewares/moduleViews.js';
 import * as controller from '../controllers/Media.controller.js';
+import * as nowwordController from '../controllers/Nowword.controller.js';
+import * as zoeRecordController from '../controllers/Zoe_record.controller.js';
 import {withPagination} from '../../../middlewares/paginations.js'
 
 const router = express.Router();
@@ -8,7 +10,11 @@ const router = express.Router();
 router.use(useModuleViews('media'));
 
 // Public view routes
-router.get('/', controller.findAll);
-router.get('/:id', controller.findById);
+router.get('/nowword/', withPagination(10), nowwordController.findAll);
+router.get('/nowword/:id', nowwordController.findById);
+
+
+router.get('/zoe-record/', withPagination(10), zoeRecordController.findAll);
+router.get('/zoe-record/:id', zoeRecordController.findById);
 
 export default router;
