@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     file_url: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'nowword',
+    modelName: 'Nowword',
   });
   return nowword;
 };
