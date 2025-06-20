@@ -5,12 +5,16 @@ import cloudinary from '../../../config/cloudinaryConfig.js';
 
 
 export const findAll = async (req, res) => {
+  const {page, limit, offset} = req.pagination
   try {
-    const data = await service.findAll();
+    const data = await service.findAll({limit, offset});
     res.status(200).render('./admins/sermon_list', {
       success: true,
       pageTitle: "Admin",
-      sermons: data,
+      sermons: data.sermons,
+      totalItems: data.totalItems,
+      totalPages: data.totalPages,
+      currentPage: page
     });
   } catch (err) {
     console.log(err)

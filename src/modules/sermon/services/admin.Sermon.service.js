@@ -2,9 +2,19 @@ import db from '../../../models/index.cjs';
 
 
 
-export const findAll = async () => {
+export const findAll = async ({limit, offset}) => {
   try {
-    return await db.Sermon.findAll();
+    const {rows: sermons, count: totalItems } = await db.Sermon.findAndCountAll({
+      limit,
+      offset,
+      distinct:true,
+      order: [['createdAt', 'DESC'], ['updatedAt', 'DESC']],
+    });
+    return {
+      sermons,
+      totalItems,
+      totalPages: Math.ceil(totalItems / limit)
+    };
   } catch (error) {
     throw new Error('Error fetching records: ' + error.message);
   }
