@@ -16,6 +16,9 @@ module.exports = {
       description: {
         type: Sequelize.TEXT
       },
+      image_url: {
+        type: Sequelize.STRING,
+      },
       start_date: {
         type: Sequelize.DATE,
         allowNull:false

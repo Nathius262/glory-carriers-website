@@ -21,6 +21,9 @@ module.exports = (sequelize, DataTypes) => {
       description: {
         type: DataTypes.TEXT
       },
+      image_url: {
+        type: DataTypes.STRING
+      },
       start_date: {
         type: DataTypes.DATE,
         allowNull:false
