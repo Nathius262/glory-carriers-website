@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Sermon.init({
-    name: DataTypes.STRING,
+    title: DataTypes.STRING,
     audio_url: DataTypes.STRING,
     video_url: DataTypes.STRING,
     image_url: DataTypes.STRING,
