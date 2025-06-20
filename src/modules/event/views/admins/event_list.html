@@ -21,36 +21,46 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Event</h1>
                     </div>
 
                     <!-- Content Row -->
                     <div class="row">
-
-                        {{> admin/usernav}}
-                        {{> admin/rolenav}}
-                        {{> admin/departmentnav}}
-                        {{> admin/sermonnav}}
-                        {{> admin/nowwordnav}}
-                        {{> admin/zoerecord_nav}}
                         {{> admin/eventnav}}
                     </div>
                     
                     <!-- Content Row -->
                     <div class="row">
-                        <div class="col-lg-6 mb-4">
+                        <div class="col-12 mb-4">
                             <!-- Approach -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">All Event</h6>
                                 </div>
-                                <div class="card-body">
-                                    <p>
-                                        
-                                    </p>
-                                    <p class="mb-0">
-                                        
-                                    </p>
+                                <div class="card-body table-responsive-md">
+                                    <table class="table table-hover">
+                                        <thead>
+                                          <tr>
+                                            <th scope="col">Id</th>
+                                            <th scope="col">Title</th>
+                                            <th scope="col">Date</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            {{#each events}}
+                                            <tr>
+                                                <th scope="row">{{this.id}}</th>
+                                                <td><a href="/admin/event/{{this.id}}">{{this.title}}</a></td>
+                                                <td>{{this.createdAt}}</td>
+                                            </tr>
+                                            {{/each}}
+                                          
+                                        </tbody>
+                                    </table>
+                                    
+                                    <!--PAGINATION-->
+                                    {{> pagination}}
                                 </div>
                             </div>
 
@@ -61,6 +71,8 @@
                 <!-- /.container-fluid -->
 
             </div>
+            <!-- End of Main Content -->
+             
 
         </div>
         <!-- End of Content Wrapper -->

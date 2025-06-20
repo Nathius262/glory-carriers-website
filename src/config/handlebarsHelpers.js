@@ -12,6 +12,12 @@ export default function registerHelpers(handlebars) {
     const primary = images.find(img => img.is_primary);
     return primary || images[0];
   });
+  handlebars.registerHelper('formatDateTime', function (date) {
+    if (!date) return '';
+    const d = new Date(date);
+    const pad = num => num.toString().padStart(2, '0');
+    return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+  });
 
   handlebars.registerHelper('findAlternateImage', function (images) {
     const mainImage = images.find(img => img.is_primary) || images[0];

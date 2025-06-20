@@ -16,7 +16,7 @@ export const findAll = async (req, res) => {
       currentPage:page
     });
   } catch (err) {
-    res.status(500).render('error', { error: err.message });
+    res.status(500).render('errors/500', { error: err.message });
   }
 };
 
@@ -26,10 +26,10 @@ export const findById = async (req, res) => {
     res.status(200).render('./admins/event_update', {
       success: true,
       pageTitle: "Update Record",
-      event: [data],
+      event: data,
     });
   } catch (err) {
-    res.status(404).render('error', { error: err.message });
+    res.status(404).render('errors/404', { error: err.message });
   }
 };
 
@@ -189,6 +189,6 @@ export const renderCreate = async (req, res) => {
       pageTitle: "Create Event"
     });
   } catch (err) {
-    res.status(500).render('error', { error: err.message });
+    res.status(500).render('errors/500', { error: err.message });
   }
 };
