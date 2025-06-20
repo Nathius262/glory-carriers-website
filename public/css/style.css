@@ -538,7 +538,7 @@ intro
 .memeber {
     position: relative; /* This allows the overlay to be positioned correctly */
     width: 100%; /* Adjust to fit your needs */
-    background: url('/img/17.jpg') no-repeat center center/cover; /* Background image */
+    background: url('/assets/img/17.jpg') no-repeat center center/cover; /* Background image */
 }
 
 /* Black overlay */
