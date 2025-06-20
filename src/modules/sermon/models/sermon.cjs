@@ -14,10 +14,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Sermon.init({
-    name: DataTypes.STRING
+    name: DataTypes.STRING,
+    audio_url: DataTypes.STRING,
+    video_url: DataTypes.STRING,
+    image_url: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Sermon',
+    tableName: 'sermons',
   });
   return Sermon;
 };

@@ -2,14 +2,23 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Sermons', {
+    await queryInterface.createTable('sermons', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
+      title: {
+        type: Sequelize.STRING
+      },
+      audio_url: {
+        type: Sequelize.STRING
+      },
+      video_url: {
+        type: Sequelize.STRING
+      },
+      image_url: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -23,6 +32,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Sermons');
+    await queryInterface.dropTable('sermons');
   }
 };

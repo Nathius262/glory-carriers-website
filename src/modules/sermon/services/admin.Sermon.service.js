@@ -4,7 +4,7 @@ import db from '../../../models/index.cjs';
 
 export const findAll = async () => {
   try {
-    return await Sermon.findAll();
+    return await db.Sermon.findAll();
   } catch (error) {
     throw new Error('Error fetching records: ' + error.message);
   }
@@ -12,7 +12,7 @@ export const findAll = async () => {
 
 export const findById = async (id) => {
   try {
-    const item = await Sermon.findByPk(id);
+    const item = await db.Sermon.findByPk(id);
     if (!item) throw new Error('Not found');
     return item;
   } catch (error) {
@@ -22,17 +22,24 @@ export const findById = async (id) => {
 
 export const create = async (data) => {
   try {
-    return await Sermon.create(data);
+    return await db.Sermon.create(data);
   } catch (error) {
     throw new Error('Error creating record: ' + error.message);
   }
 };
 
 export const update = async (id, data) => {
+
+  const {
+    title,
+    audio_url,
+    image_url,
+    video_url
+  } = data;
   try {
-    const item = await Sermon.findByPk(id);
+    const item = await db.Sermon.findByPk(id);
     if (!item) throw new Error('Not found');
-    return await item.update(data);
+    return await item.update({ title, audio_url, image_url, video_url });
   } catch (error) {
     throw new Error('Error updating record: ' + error.message);
   }
@@ -40,7 +47,7 @@ export const update = async (id, data) => {
 
 export const destroy = async (id) => {
   try {
-    const item = await Sermon.findByPk(id);
+    const item = await db.Sermon.findByPk(id);
     if (!item) throw new Error('Not found');
     return await item.destroy();
   } catch (error) {

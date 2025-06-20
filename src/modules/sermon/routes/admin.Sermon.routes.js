@@ -1,6 +1,9 @@
 import express from 'express';
-import userModuleViews from '../../../middlewares/moduleViews.js';
+import useModuleViews from '../../../middlewares/moduleViews.js';
 import * as controller from '../controllers/admin.Sermon.controller.js';
+import {withPagination} from '../../../middlewares/paginations.js'
+import upload from '../../../config/multerConfig.js';
+import setSection from "../../../middlewares/uploadLocation.js";
 
 const router = express.Router();
 
@@ -8,14 +11,26 @@ router.use(useModuleViews('sermon'));
 
 // Admin view routes
 router.route('/')
-  .get(controller.findAll)
-  .post(controller.create);
+  .get(withPagination(10), controller.findAll)
+  
 
-router.get('/create', controller.renderCreate);
+router.route('/create') 
+  .get(controller.renderCreate)
+  .post(setSection('sermons'),
+    upload.fields([
+      {name: 'audio', maxCount:1},
+      {name: 'image', maxCount:1}
+    ]), controller.create
+  );
 
 router.route('/:id')
   .get(controller.findById)
-  .put(controller.update)
+  .put(setSection('sermons'),
+    upload.fields([
+      {name: 'audio', maxCount:1},
+      {name: 'image', maxCount:1}
+    ]),controller.update
+  )
   .delete(controller.destroy);
 
 export default router;
