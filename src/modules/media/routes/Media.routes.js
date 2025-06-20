@@ -1,6 +1,7 @@
 import express from 'express';
-import userModuleViews from '../../../middlewares/moduleViews.js';
+import useModuleViews from '../../../middlewares/moduleViews.js';
 import * as controller from '../controllers/Media.controller.js';
+import {withPagination} from '../../../middlewares/paginations.js'
 
 const router = express.Router();
 

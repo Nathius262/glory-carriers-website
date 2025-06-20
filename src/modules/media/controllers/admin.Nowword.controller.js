@@ -8,7 +8,7 @@ export const findAll = async (req, res) => {
   const {page, limit, offset} = req.pagination
   try {
     const data = await service.findAll({limit, offset});
-    res.status(200).render('./admins/nowword_list', {
+    res.status(200).render('./nowword/admins/nowword_list', {
       success: true,
       pageTitle: "Admin",
       nowwords: data.nowwords,
@@ -25,7 +25,7 @@ export const findAll = async (req, res) => {
 export const findById = async (req, res) => {
   try {
     const data = await service.findById(req.params.id);
-    res.status(200).render('./admins/nowword_update', {
+    res.status(200).render('./nowword/admins/nowword_update', {
       success: true,
       pageTitle: "Update Record",
       nowword: data,
@@ -196,7 +196,7 @@ export const destroy = async (req, res) => {
 
 export const renderCreate = async (req, res) => {
   try {
-    res.status(200).render('./admins/nowword_create', {
+    res.status(200).render('./nowword/admins/nowword_create', {
       pageTitle: "Create Sermon"
     });
   } catch (err) {
