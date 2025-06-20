@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="css/sb-admin-2.css">
-<link href="css/sb-admin-2.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/sb-admin-2.css">
+<link href="/assets/css/sb-admin-2.min.css" rel="stylesheet">
 
 <style>
     /** 
@@ -89,14 +89,14 @@
                             <div class="card-header py-3 d-flex justify-content-between">
                                 <h6 class="m-0 font-weight-bold text-primary">Update Zoe Record</h6>
                                 <div>
-                                    <div id="delete" data-url="/admin/zoe-record/{{zoe_record.id}}" type="click" class="btn btn-danger"><i class="fas fa-solid fa-trash-can"></i></div>
+                                    <div id="delete" data-url="/admin/media/zoe-record/{{zoe_record.id}}" type="click" class="btn btn-danger"><i class="fas fa-solid fa-trash-can"></i></div>
                                     <div class="spinner-border d-none status" id="status" role="status">
                                         <span class="sr-only">Loading... </span>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-body">
-                                <form action="/admin/zoe-record/{{zoe_record.id}}" method="POST" id="update-media" enctype="multipart/form-data" class="user needs-validation" novalidate>
+                                <form action="/admin/media/zoe-record/{{zoe_record.id}}" method="POST" id="update-media" enctype="multipart/form-data" class="user needs-validation" novalidate>
                                     
 
                                     <div class="form-group">
@@ -193,12 +193,12 @@
 <!-- End of Page Wrapper -->
 
 <!-- Core plugin JavaScript-->
-<script src="js/uploader.js"></script>
+<script src="/assets/js/uploader.js"></script>
 <!--<script src="js/user.js"></script>-->
 
 
 
-<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
 <!-- Custom scripts for all pages-->
-<script src="js/sb-admin-2.min.js"></script>
+<script src="/assets/js/sb-admin-2.min.js"></script>
