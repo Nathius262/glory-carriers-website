@@ -1,6 +1,5 @@
 import express from 'express';
 import useModuleViews from '../../../middlewares/moduleViews.js';
-import * as controller from '../controllers/admin.Media.controller.js';
 import * as nowwordController from '../controllers/admin.Nowword.controller.js'
 import * as zoeRecordController from '../controllers/admin.Zoe_record.controller.js'
 import {withPagination} from '../../../middlewares/paginations.js'
