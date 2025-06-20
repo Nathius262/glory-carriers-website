@@ -46,7 +46,7 @@ export const create = async (req, res) => {
 
     const pdfFile = req.files['file'][0];
 
-    const allowedPdfTypes = ['file/pdf'];
+    const allowedPdfTypes = ['application/pdf'];
 
     if (!allowedPdfTypes.includes(pdfFile.mimetype)) {
       return res.status(400).json({
@@ -180,7 +180,7 @@ export const destroy = async (req, res) => {
       success: true, 
       message: 'Deleted successfully', 
       data,
-      redirectTo: "/admin/nowword"
+      redirectTo: "/admin/media/nowword"
     });
 
   } catch (err) {
