@@ -17,23 +17,23 @@
 
   @keyframes backgroundTransition {
     0% {
-      background: var(--white) url('../img/header.jfif') no-repeat center top/cover;
+      background: var(--white) url('/assets/img/header.jfif') no-repeat center top/cover;
     }
 
     45% {
-      background: var(--white) url('../img/header.jfif') no-repeat center top/cover;
+      background: var(--white) url('/assets/img/header.jfif') no-repeat center top/cover;
     }
 
     55% {
-      background: var(--white) url('../img/17.jpg') no-repeat center top/cover;
+      background: var(--white) url('/assets/img/17.jpg') no-repeat center top/cover;
     }
 
     70% {
-      background: var(--white) url('../img/17.jpg') no-repeat center top/cover;
+      background: var(--white) url('/assets/img/17.jpg') no-repeat center top/cover;
     }
 
     100% {
-      background: var(--blue) url('../img/17.jpg') no-repeat center top/cover;
+      background: var(--blue) url('/assets/img/17.jpg') no-repeat center top/cover;
     }
   }
 
@@ -57,7 +57,7 @@
             <h4 class="text-center fs-6 fw-bold">Latest Sermon</h4>
             <h2 class="text-center">{{sermons.[0].title}}</h2>
             <div class="d-flex justify-content-center">
-              <a href="{{sermons.[0].audio_url}}"><img src="img/icon/download.png" width="200" alt="download"></a>
+              <a href="{{sermons.[0].audio_url}}"><img src="/assets/img/icon/download.png" width="200" alt="download"></a>
             </div>
           </div>
         </div>
@@ -84,10 +84,10 @@
           </div>
           <div
             class="d-flex justify-content-between mx-3 mx-auto mt-1 px-5 text-secondary container text-center ft-upper fs-6">
-            <a href="{{this.audio_url}}" class="download-link"><img src="img/icon/download1.png" width="25" alt=""></a>
-            <a href="{{this.audio_url}}"><img src="img/icon/listen1.png" width="25" alt=""></a>
-            <!--<a href="{{this.video_url}}"><img src="img/icon/stream.png" width="25" alt=""></a>-->
-            <a href="/media/sermon/{{this.id}}" class="download-link nav-link text-secondary"><i class="fa-solid fa-eye"
+            <a href="{{this.audio_url}}" class="download-link"><img src="/assets/img/icon/download1.png" width="25" alt=""></a>
+            <a href="{{this.audio_url}}"><img src="/assets/img/icon/listen1.png" width="25" alt=""></a>
+            <!--<a href="{{this.video_url}}"><img src="/assets/img/icon/stream.png" width="25" alt=""></a>-->
+            <a href="/sermon/{{this.id}}" class="download-link nav-link text-secondary"><i class="fa-solid fa-eye"
                 style="font-size: 20px;"></i></a>
           </div>
         </div>
