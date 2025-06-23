@@ -3,7 +3,5 @@ __pycache__/
 .pyc
 .env
 node_modules
-db_test.sqlite
-db.sqlite
-databases/
 .env copy
+databases/

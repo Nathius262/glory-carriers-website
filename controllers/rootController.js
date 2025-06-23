@@ -18,7 +18,7 @@ const page_logo = process.env.PAGELOGO
 const renderIndex= async (req, res) => {
     try {
         const result = await pool.query(
-            'SELECT * FROM sermons ORDER BY date DESC LIMIT $1 OFFSET $2',
+            'SELECT * FROM sermons ORDER BY "createdAt" DESC LIMIT $1 OFFSET $2',
             [2, 0]
         );
 
