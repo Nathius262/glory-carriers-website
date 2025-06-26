@@ -20,9 +20,9 @@ module.exports = {
   },
   production: {
     url:process.env.POSTGRES_URL,
-    //username:process.env.POSTGRES_USER, // Replace with your PostgreSQL username
-    //password:process.env.POSTGRES_PASSWORD,   // Replace with your PostgreSQL password
-    //database: process.env.POSTGRES_DATABASE,
+    username:process.env.POSTGRES_USER, // Replace with your PostgreSQL username
+    password:process.env.POSTGRES_PASSWORD,   // Replace with your PostgreSQL password
+    database: process.env.POSTGRES_DATABASE,
     host:process.env.POSTGRES_HOST, // Replace with your PostgreSQL host
     port:process.env.POSTGRES_PORT,  // Make sure the port is correct
     dialect: 'postgres',
