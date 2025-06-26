@@ -1,3 +1,4 @@
+
 const dotenv = require('dotenv');
 dotenv.config()
 module.exports = {
@@ -18,20 +19,22 @@ module.exports = {
     dialect: 'sqlite'
   },
   production: {
-    username:process.env.POSTGRES_USER, // Replace with your PostgreSQL username
-    password:process.env.POSTGRES_PASSWORD,   // Replace with your PostgreSQL password
-    database: process.env.POSTGRES_DATABASE,
+    url:process.env.POSTGRES_URL,
+    //username:process.env.POSTGRES_USER, // Replace with your PostgreSQL username
+    //password:process.env.POSTGRES_PASSWORD,   // Replace with your PostgreSQL password
+    //database: process.env.POSTGRES_DATABASE,
     host:process.env.POSTGRES_HOST, // Replace with your PostgreSQL host
     port:process.env.POSTGRES_PORT,  // Make sure the port is correct
-    dialect:process.env.POSTGRES_DIALECT,
+    dialect: 'postgres',
+    dialectModule: require('pg'),
     protocol: 'postgres',
     dialectOptions: {
-      ssl: {
-        require: false,  // Make sure SSL is required if you're using a production server that needs it
-        rejectUnauthorized: false  // If necessary, skip certificate verification
-      },
-      connectTimeout: 60000,
+    ssl: {
+      require: false,
+      rejectUnauthorized: false
     },
+    connectTimeout: 60000,
+  },
     logging: false //console.log,    // Disable logging in production for performance
   }
 }; 

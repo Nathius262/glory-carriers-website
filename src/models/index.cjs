@@ -1,3 +1,4 @@
+require('pg')
 const Sequelize = require('sequelize');
 const fs = require('fs');
 const path = require('path');
@@ -16,17 +17,8 @@ const db = {};
 
 
 // Initialize Sequelize
-const sequelize = new Sequelize(
-  config.database,
-  config.username,
-  config.password,
-  {
-    ...config,
-    define: {
-      underscored: false,
-    }
-  }
-);
+const sequelize = new Sequelize(config);
+
 
 // Helper: recursively collect all model files in modules/**/models/*.cjs|.js
 function collectModelFiles(dir) {
