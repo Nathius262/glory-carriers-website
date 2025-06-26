@@ -10,8 +10,8 @@ const router = express.Router();
 router.use(useModuleViews('media'));
 
 // Public view routes
-router.get('/nowword/', withPagination(10), nowwordController.findAll);
-router.get('/nowword/:id', nowwordController.findById);
+router.get('/now-word/', withPagination(10), nowwordController.findAll);
+router.get('/now-word/:id', nowwordController.findById);
 
 
 router.get('/zoe-record/', withPagination(10), zoeRecordController.findAll);
