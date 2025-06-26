@@ -13,7 +13,7 @@ dotenv.config();
 
 const page_logo = process.env.PAGELOGO
 
-const renderIndex= async (req, res) => {
+export const index_view = async (req, res) => {
     try {
 
         const sermons = await sermonService.findAll({limit:2, offset:0});
@@ -28,5 +28,21 @@ const renderIndex= async (req, res) => {
     }
 };
 
+export const about_view = async (req, res) => {
+    try {
+        res.render('others/about', {
+            pageTitle: "About",
+            pageLogo: page_logo,
+        });
+    } catch (error) {
+        res.status(500).render('./errors/500', { message: 'Internal Server Error', error: err.message });
+    }
+}
 
-export {renderIndex}
+export const sitemap_view = async (req, res) => {
+    try {
+        res.sendFile(path.join(__dirname, '..', 'views', 'others', 'sitemap.xml'));
+    } catch (error) {
+        res.status(404).send('Not found');
+    }
+};
