@@ -2,6 +2,9 @@
 const {
   Model
 } = require('sequelize');
+
+const generateUniqueSlug = require('../../../utils/slugHelper.cjs'); // Import the slug helper function
+
 module.exports = (sequelize, DataTypes) => {
   class Sermon extends Model {
     /**
@@ -18,10 +21,29 @@ module.exports = (sequelize, DataTypes) => {
     audio_url: DataTypes.STRING,
     video_url: DataTypes.STRING,
     image_url: DataTypes.STRING,
+    slug: {
+      type: DataTypes.STRING,
+      unique: true,
+      allowNull: false
+    }
   }, {
     sequelize,
     modelName: 'Sermon',
     tableName: 'sermons',
   });
+
+  // Use generateUniqueSlug from the helper file in hooks
+  Sermon.beforeValidate(async (sermon) => {
+    if (!sermon.slug) {
+      sermon.slug = await generateUniqueSlug(sermon.title, Sermon);
+    }
+  });
+
+  Sermon.beforeUpdate(async (sermon) => {
+    if (sermon.changed('title')) {
+      sermon.slug = await generateUniqueSlug(sermon.title, Sermon);
+    }
+  });
+
   return Sermon;
 };
