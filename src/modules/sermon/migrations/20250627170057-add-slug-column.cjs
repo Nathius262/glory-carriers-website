@@ -12,7 +12,7 @@ module.exports = {
 
     const transaction = await queryInterface.sequelize.transaction();
     try {
-      await queryInterface.addColumn('sermons', 'slug', {type: Sequelize.DataTypes.INTEGER}, { transaction });
+      await queryInterface.addColumn('sermons', 'slug', {type: Sequelize.DataTypes.STRING}, { transaction });
       await transaction.commit();
       
     } catch (error) {
