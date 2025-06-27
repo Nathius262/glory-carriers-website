@@ -1,0 +1,29 @@
+
+  <h1>Membership List</h1>
+  <a href="/admin/membership/create">Create New</a>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <!-- Add your table headers here -->
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each memberships}}
+        <tr>
+          <td>{{this.id}}></td>
+          <!-- Add your table cells here -->
+          <td>
+            <a href="/admin/membership/{{this.id}}>">Edit</a>
+            <form action="/admin/membership/{{ this.id}}>" method="POST" style="display: inline;">
+              <input type="hidden" name="_method" value="DELETE">
+              <button type="submit">Delete</button>
+            </form>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+    {{> pagination}}
+  </table>
+  
