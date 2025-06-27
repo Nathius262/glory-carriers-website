@@ -51,7 +51,7 @@
                   messageAlert(
                     title = "Success",
                     message = result.message,
-                    redirectTo = "/",
+                    redirectTo = "/auth/admin/login",
                     classType = "text-info",
                     btnType = "btn-info",
                   )
@@ -78,7 +78,7 @@
               messageAlert(
                 title = "Error",
                 message = `authentication error:, <p class="text-danger">${error}</p>`,
-                redirectTo = "/",
+                redirectTo = "/auth/admin/login",
                 classType = "text-danger",
                 btnType = "btn-danger",
               )
