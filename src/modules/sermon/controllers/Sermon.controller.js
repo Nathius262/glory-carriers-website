@@ -30,3 +30,17 @@ export const findById = async (req, res) => {
     res.status(404).render('errors/404', { error: err.message });
   }
 };
+
+
+export const findBySlug = async (req, res) => {
+  try {
+    const data = await service.findBySlug(req.params.slug);
+    res.status(200).render('./sermon_detail', {
+      success: true,
+      pageTitle: "Sermon Detail",
+      sermon: data,
+    });
+  } catch (err) {
+    res.status(404).render('errors/404', { error: err.message });
+  }
+};
