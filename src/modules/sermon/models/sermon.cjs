@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 
-const generateUniqueSlug = require('../../../utils/slugHelper.cjs'); // Import the slug helper function
+const generateUniqueSlug = require('../../../utils/generate_slug.cjs'); // Import the slug helper function
 
 module.exports = (sequelize, DataTypes) => {
   class Sermon extends Model {
