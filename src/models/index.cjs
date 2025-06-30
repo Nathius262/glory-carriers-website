@@ -3,6 +3,7 @@ const Sequelize = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const configFile = require('../core/sequelize.config.cjs'); // Adjust based on your config
+const generateUniqueSlug = require('../utils/generate_slug.cjs'); //reslove cannot find issue in production
 
 const env = process.env.NODE_ENV || 'development';
 const config = configFile[env];

@@ -1,16 +1,10 @@
 'use strict';
-const path = require('path');
-const fs = require('fs');
-
 const {
   Model
 } = require('sequelize');
 
-const slugPath = path.join(__dirname, 'src', '../../../../utils/generate_slug.cjs');
-if(!fs.existsSync(slugPath)){
-  throw new Error (`Missing required odule at: ${slugPath}`);
-};
-const generateUniqueSlug = require(slugPath);
+const path = require('path');
+const generateUniqueSlug = require('../../../utils/generate_slug.cjs'); //reslove cannot find issue in production
 
 module.exports = (sequelize, DataTypes) => {
   class Sermon extends Model {
