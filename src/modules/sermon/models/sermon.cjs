@@ -3,8 +3,8 @@ const {
   Model
 } = require('sequelize');
 
-const generateUniqueSlug = require('../../../utils/generate_slug.cjs'); // Import the slug helper function
-
+const path = require('path');
+const generateUniqueSlug = require(path.resolve(__dirname, '../../../utils/generate_slug.cjs')); //reslove cannot find issue in production
 module.exports = (sequelize, DataTypes) => {
   class Sermon extends Model {
     /**
