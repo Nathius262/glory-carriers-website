@@ -28,3 +28,14 @@ export const findById = async (id) => {
     throw new Error('Error fetching record: ' + error.message);
   }
 };
+
+export const findBySlug = async (slug) => {
+  try {
+    const item = await db.Sermon.findOne({where: {slug: slug}});
+    if (!item) throw new Error('Not found');
+    return item;
+  } catch (error) {
+    throw new Error('Error fetching record: ' + error.message);
+  }
+};
+
