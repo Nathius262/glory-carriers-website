@@ -48,6 +48,15 @@ module.exports = (sequelize, DataTypes) => {
     amount:{
       type: DataTypes.DECIMAL
     },
+    status:{
+      type:DataTypes.STRING
+    },
+    payment_channel:{
+      type:DataTypes.STRING
+    },
+    currency:{
+      type:DataTypes.STRING
+    },
     payment_type:{
       type:DataTypes.STRING
     },
