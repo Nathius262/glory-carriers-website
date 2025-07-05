@@ -2,7 +2,7 @@
 const {
   Model
 } = require('sequelize');
-const { v4: uuidv4 } = require('uuid'); 
+//const { v4: uuidv4 } = require('uuid'); 
 module.exports = (sequelize, DataTypes) => {
   class Giving extends Model {
     /**
@@ -20,7 +20,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull:false,
       primaryKey:true,
       type: DataTypes.STRING(16),
-      defaultValue: () => uuidv4().replace(/-/g, '').substring(0, 16),
+      defaultValue: () => {
+        return Math.random().toString(36).substring(2, 10) + 
+              Math.random().toString(36).substring(2, 10);
+      } 
     },
     reference: {
       unique:true,
