@@ -18,9 +18,6 @@ export const verify_paystack_transaction_view = async (req, res) => {
         });
 
         const paymentData = response.data.data;
-        console.log(paymentData)
-
-        console.log(paymentData.amount / 100) //convert to naira
 
         const data = {
             reference: paymentData.reference,
@@ -30,6 +27,9 @@ export const verify_paystack_transaction_view = async (req, res) => {
             last_name: paymentData.customer.last_name,
             phone: paymentData.customer.phone,
             amount: paymentData.amount / 100, //convert to naira
+            status: paymentData.status,
+            payment_channel: paymentData.channel,
+            currency: paymentData.currency,
             payment_type: getPaymentType(paymentData)
         }
 
@@ -113,7 +113,7 @@ async function sendTrackingEmail(result, baseUrl) {
         });
 
         // Generate tracking link dynamically
-        const trackingLink = `${baseUrl}/order/track-order?ref_id=${result.reference}`;
+        const trackingLink = `${baseUrl}/giving/giving-status?ref_id=${result.id}`;
 
         // Email content
         const mailOptions = {
@@ -139,17 +139,17 @@ async function sendTrackingEmail(result, baseUrl) {
                             <p><strong>Date:</strong> ${new Date().toLocaleDateString()}</p>
                         </div>
                         
-                        <p>You can track your giving status here: 
+                        <!--<p>You can track your giving status here: 
                             <a href="${trackingLink}" style="color: #3498db; text-decoration: none;">
                                 Track My Giving
                             </a>
-                        </p>
+                        </p>-->
                         
                         <h3>Need Help?</h3>
                         <p>If you have any questions about your giving:</p>
                         <ul>
                             <li>For payment issues, contact Paystack support at <a href="mailto:support@paystack.com">support@paystack.com</a> with your transaction ID</li>
-                            <li>For ministry-related questions, contact us at <a href="mailto:support@glorycarriers.org">support@glorycarriers.org</a></li>
+                            <li>For ministry-related questions, contact us at <a href="mailto:support@glorycarriersministryintl.org">support@glorycarriersministryintl.org</a></li>
                         </ul>
                         
                         <p style="font-style: italic;">"Each of you should give what you have decided in your heart to give, not reluctantly or under compulsion, for God loves a cheerful giver."<br>
