@@ -46,7 +46,7 @@ export const verify_paystack_transaction_view = async (req, res) => {
             // Send tracking email
             await sendTrackingEmail(result, baseUrl);
 
-            res.status(200).json({ success: true, message: 'Payment received Successfully' });
+            res.status(200).json({ success: true, message: 'Payment received Successfully! You can also check your e-mail for comfimation' });
         } else {
             res.status(400).json({ success: false, error: result.error.message });
         }

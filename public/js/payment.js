@@ -132,8 +132,8 @@ async function handlePaymentResponse(response) {
         if (data.success) {
             messageAlert(
                 'Payment Successful',
-                'Payment confirmed! Check your email for details.',
-                false,
+                data.message,
+                '/giving',
                 'text-success',
                 'btn-success'
             );
