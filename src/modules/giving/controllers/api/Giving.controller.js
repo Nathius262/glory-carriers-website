@@ -23,9 +23,9 @@ export const verify_paystack_transaction_view = async (req, res) => {
             reference: paymentData.reference,
             paystack_reference: paymentData.id,
             email: paymentData.customer.email,
-            first_name: paymentData.customer.first_name,
-            last_name: paymentData.customer.last_name,
-            phone: paymentData.customer.phone,
+            first_name: paymentData.first_name || paymentData.metadata?.first_name || null,
+            last_name: paymentData.last_name|| paymentData.metadata?.last_name || null,
+            phone: paymentData.customer.phone || paymentData.metadata?.phone || null,
             amount: paymentData.amount / 100, //convert to naira
             status: paymentData.status,
             payment_channel: paymentData.channel,

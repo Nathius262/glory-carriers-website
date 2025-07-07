@@ -48,6 +48,9 @@ async function payWithPaystack() {
     const paymentType = document.getElementById("paymentType").value;
     const amount = document.getElementById("amount").value;
     const email = document.getElementById("email").value;
+    //const phone = document.getElementById("phone").value;
+    const first_name = document.getElementById('first-name').value;
+    const last_name = document.getElementById('last-name').value;
 
     if (!paymentType || !amount || !email) {
 
@@ -74,10 +77,16 @@ async function payWithPaystack() {
     const payload = {
         key: publicKey, // Replace with your Paystack public key
         email: email,
+        first_name:first_name,
+        last_name:last_name,
+        //phone:phone,
         amount: amount * 100, // Convert to kobo
         currency: 'NGN',
         ref: refPrefix + Date.now(),
         metadata: {
+          first_name:first_name,
+          last_name:last_name,
+         // phone:phone,
             custom_fields: [
                 {
                     display_name: "Payment Type",
