@@ -65,7 +65,10 @@
                 // Check if redirectTo is defined
                 if (redirectTo) {
                     window.location.href = redirectTo;
-                } else {
+                }
+                //add logic to prevent reload
+                else if (redirectTo === false){}
+                else {
                     // Reload the page if there's no redirect
                     window.location.reload();
                 }

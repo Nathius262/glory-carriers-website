@@ -1,3 +1,4 @@
+//
 export const render_giving_view = async (req, res) => {
   try {
     res.status(200).render('giving')
