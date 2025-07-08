@@ -8,7 +8,7 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
     // Remove the user-role associations
-    await queryInterface.bulkDelete('uer_role', {
+    await queryInterface.bulkDelete('user_role', {
       userId: {
         [Sequelize.Op.eq]: (await queryInterface.sequelize.query(
           `SELECT id FROM "users" WHERE "email" = '${process.env.USER_ADMIN_EMAIL}'`
