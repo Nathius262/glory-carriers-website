@@ -54,3 +54,14 @@ export const ads_txt_view = async (req, res) => {
         res.status(404).send('Not found');
     }
 }
+
+export const privacy_policy_view = async (req, res) => {
+    try {
+        res.render('others/privacy_policy', {
+            pageTitle: "Privacy Policy",
+            pageLogo: page_logo,
+        });
+    } catch (error) {
+        res.status(500).render('./errors/500', { message: 'Internal Server Error', error: err.message });
+    }
+}
