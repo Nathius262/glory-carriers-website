@@ -8,6 +8,7 @@ const router = Router();
 router.get('/', controller.index_view);
 router.get('/about', controller.about_view);
 router.get('/sitemap', controller.sitemap_view);
+router.get('/ads.txt', controller.ads_txt_view);
 router.get('/admin', dashboard_view)
 
 

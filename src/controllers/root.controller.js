@@ -46,3 +46,11 @@ export const sitemap_view = async (req, res) => {
         res.status(404).send('Not found');
     }
 };
+
+export const ads_txt_view = async (req, res) => {
+    try {
+        res.sendFile(path.join(__dirname, '..', 'views', 'others', 'ads.txt'));
+    } catch (error) {
+        res.status(404).send('Not found');
+    }
+}
