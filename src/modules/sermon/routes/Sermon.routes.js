@@ -8,7 +8,7 @@ const router = express.Router();
 router.use(useModuleViews('sermon'));
 
 // Public view routes
-router.get('/', withPagination(12), controller.findAll);
+router.get('/', withPagination(20), controller.findAll);
 //router.get('/:id', controller.findById);
 router.get('/:slug', controller.findBySlug);
 

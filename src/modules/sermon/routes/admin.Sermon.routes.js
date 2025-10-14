@@ -11,7 +11,7 @@ router.use(useModuleViews('sermon'));
 
 // Admin view routes
 router.route('/')
-  .get(withPagination(10), controller.findAll)
+  .get(withPagination(20), controller.findAll)
   
 
 router.route('/create') 
