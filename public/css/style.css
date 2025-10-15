@@ -109,7 +109,7 @@ p{
     color: var(--grey);
 }
 
-.intro {
+/* .intro {
     position: relative;
     color: var(--white);
     padding: 9rem 0;
@@ -118,7 +118,7 @@ p{
     height: 100vh;
     overflow: hidden;
     animation: backgroundTransition 50s infinite;
-}
+} */
 
 /* Add overlay 
 .intro::before {
@@ -149,6 +149,79 @@ p{
         background: var(--blue) url('../img/theme2.jpg') no-repeat center top/cover;
     }
 }
+
+.hero-fade {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* or whatever height your hero section needs */
+  overflow: hidden;
+  background: var(--white);
+}
+
+/* Create two pseudo layers for smooth fading */
+.hero-fade::before,
+.hero-fade::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  animation: fadeBackground 90s infinite ease-in-out;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+
+/* Base layer starts visible */
+.hero-fade::before {
+  animation-delay: 0s;
+}
+
+/* Secondary layer starts slightly later for overlap */
+.hero-fade::after {
+  animation-delay: 45s;
+}
+
+/* Define all your images here in the keyframes */
+@keyframes fadeBackground {
+  0% {
+    opacity: 1;
+    background-image: url('../img/theme2.jpg');
+  }
+  10% {
+    opacity: 1;
+    background-image: url('../img/theme1.jpg');
+  }
+  20% {
+    background-image: url('../img/welcome-1.jpg');
+  }
+  30% {
+    background-image: url('../img/welcome-2.jpg');
+  }
+  40% {
+    background-image: url('../img/welcome-3.jpg');
+  }
+  50% {
+    background-image: url('../img/welcome-4.jpg');
+  }
+  60% {
+    background-image: url('../img/overflow-1.jpg');
+  }
+  70% {
+    background-image: url('../img/overflow-2.jpg');
+  }
+  80% {
+    background-image: url('../img/prophet-1.jpg');
+  }
+  90% {
+    background-image: url('../img/prayer-1.jpg');
+  }
+  100% {
+    opacity: 1;
+    background-image: url('../img/theme2.jpg');
+  }
+}
+
 
 
 .birthing{
