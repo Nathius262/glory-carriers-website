@@ -26,6 +26,9 @@ module.exports = (sequelize, DataTypes) => {
     address: {
       type: DataTypes.TEXT
     },
+    state: {
+      type: DataTypes.STRING
+    },
     gender: {
       type: DataTypes.STRING
     },
