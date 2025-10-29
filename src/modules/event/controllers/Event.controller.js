@@ -32,7 +32,7 @@ export const rvp_event = async (req, res) => {
 
     res.status(500).json({ 
       success: false, 
-      message: 'RVP to event failed',
+      message: `${err.message? err.message : 'RVP to event failed '}`,
       error: err.message 
     });
   }

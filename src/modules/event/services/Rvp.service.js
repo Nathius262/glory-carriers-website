@@ -34,6 +34,13 @@ export const findById = async (id) => {
 
 export const create_rvp = async (data) => {
   try {
+
+    //vaildate email uniqueness
+    const existingRvp = await db.Rvp.findOne({ where: { email: data.email } });
+    if (existingRvp) {
+      throw new Error('An RSVP with this email already exists.');
+    }
+
     return await db.Rvp.create(data);
   } catch (error) {
     throw new Error('Error creating record: ' + error.message);
