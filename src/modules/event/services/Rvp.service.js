@@ -1,5 +1,5 @@
 import db from '../../../models/index.cjs';
-
+import { sendEmail, kabodRsvpSuccessTemplate } from '../../../utils/email.js';
 
 
 export const findAll = async ({limit, offset}) => {
@@ -33,16 +33,49 @@ export const findById = async (id) => {
 };
 
 export const create_rvp = async (data) => {
-  try {
+  let transaction;
 
-    //vaildate email uniqueness
-    const existingRvp = await db.Rvp.findOne({ where: { email: data.email } });
+  try {
+    // Start transaction
+    transaction = await db.sequelize.transaction();
+
+    // Validate email uniqueness inside transaction
+    const existingRvp = await db.Rvp.findOne({
+      where: { email: data.email },
+      transaction,
+      lock: transaction.LOCK.UPDATE,
+    });
+
     if (existingRvp) {
       throw new Error('An RSVP with this email already exists.');
     }
 
-    return await db.Rvp.create(data);
+    //  Create RSVP record
+    const new_data = await db.Rvp.create(data, { transaction });
+
+    // Commit database changes first
+    await transaction.commit();
+
+    // Attempt to send email after DB commit (non-blocking)
+    const emailResult = await sendEmail({
+      to: new_data.email,
+      subject: "✅ Your RSVP for KABOD’25 is Confirmed!",
+      html: kabodRsvpSuccessTemplate(new_data.name),
+    });
+
+    if (emailResult?.error) {
+      console.warn("⚠️ Email not sent but RSVP succeeded:", emailResult.message);
+    }
+
+    return new_data;
+
   } catch (error) {
+    // Rollback only if transaction is active
+    if (transaction) await transaction.rollback();
     throw new Error('Error creating record: ' + error.message);
+  } finally {
+    if (transaction && !transaction.finished) {
+      await transaction.rollback().catch(() => {});
+    }
   }
 };

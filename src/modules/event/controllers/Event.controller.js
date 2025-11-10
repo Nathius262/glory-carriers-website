@@ -1,5 +1,4 @@
 import * as rvpService from '../services/Rvp.service.js';
-import { sendEmail, kabodRsvpSuccessTemplate } from '../../../utils/email.js';
 
 export const render_event_view = async (req, res) =>{
   try {
@@ -14,12 +13,6 @@ export const rvp_event = async (req, res) => {
   try {
     
     const data = await rvpService.create_rvp(req.body);
-
-    await sendEmail({
-      to: data.email,
-      subject: "✅ Your RSVP for KABOD’25 is Confirmed!",
-      html: kabodRsvpSuccessTemplate(data.name),
-    });
 
     res.status(201).json({ 
       success: true, 

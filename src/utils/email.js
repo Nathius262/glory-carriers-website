@@ -37,8 +37,16 @@ export const sendEmail = async ({ to, subject, html }) => {
     subject,
     html,
   };
-  return transporter.sendMail(mailOptions);
+
+  try {
+    return await transporter.sendMail(mailOptions);
+  } catch (error) {
+    console.error("⚠️ Email send failed:", error.message);
+    // Don’t throw – just log it and move on
+    return { error: true, message: error.message };
+  }
 };
+
 
 // --- Templates ---
 export const kabodRsvpSuccessTemplate = (name) => `
