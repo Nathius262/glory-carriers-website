@@ -32,6 +32,11 @@ module.exports = (sequelize, DataTypes) => {
     gender: {
       type: DataTypes.STRING
     },
+    attendance_mode: {
+      type: DataTypes.STRING,
+      defaultValue: "on_site",
+      allowNull:true
+    },
   }, {
     sequelize,
     modelName: 'Rvp',

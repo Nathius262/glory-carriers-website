@@ -12,7 +12,7 @@ module.exports = {
 
     const transaction = await queryInterface.sequelize.transaction();
     try {
-      await queryInterface.addColumn('event_rvps', 'state', {type: Sequelize.STRING}, { transaction });
+      await queryInterface.addColumn('event_rvps', 'attendance_mode', {type: Sequelize.STRING, defaultValue: "on_site"}, { transaction });
       await transaction.commit();
       
     } catch (error) {
@@ -31,7 +31,7 @@ module.exports = {
 
     const transaction = await queryInterface.sequelize.transaction();
     try {
-      await queryInterface.removeColumn('event_rvps', 'state', { transaction });
+      await queryInterface.removeColumn('event_rvps', 'attendance_mode', { transaction });
       await transaction.commit();
       
     } catch (error) {
