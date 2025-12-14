@@ -192,3 +192,20 @@ export const renderCreate = async (req, res) => {
     res.status(500).render('errors/500', { error: err.message });
   }
 };
+
+export const findAllRvps =  async (req, res) => {
+  const {page, limit, offset} = req.pagination;
+  try {
+    const rvps = await service.findAllRvps({limit, offset});
+    res.status(200).render('./admins/event_rsvp_list', {
+      success: true,
+      pageTitle: "Admin - Event RSVPs",
+      rvps: rvps.rvps,
+      totalItems: rvps.totalItems,
+      totalPages: rvps.totalPages,
+      currentPage: page
+    });
+  } catch (error) {
+    
+  }
+}

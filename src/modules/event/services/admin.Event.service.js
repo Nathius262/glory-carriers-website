@@ -58,3 +58,23 @@ export const destroy = async (id) => {
     throw new Error('Error deleting record: ' + error.message);
   }
 };
+
+
+//RVPS
+export const findAllRvps = async ({limit, offset}) => {
+  try {
+    const {rows:rvps, count:totalItems} = await db.Rsvp.findAndCountAll({
+      limit,
+      offset,
+      distinct:true,
+      order: [['createdAt', 'DESC']]
+    });
+    return {
+      rvps,
+      totalItems,
+      totalPages: Math.ceil(totalItems / limit)
+    }
+  } catch (error) {
+    throw new Error('Error fetching RSVP records: ' + error.message);
+  }
+}

@@ -5,6 +5,8 @@ dotenv.config();
 // --- Transporter Setup ---
 let transporter;
 
+
+
 // If in development, fake transporter (console log only)
 if (process.env.NODE_ENV === 'development') {
   transporter = {
@@ -21,11 +23,19 @@ if (process.env.NODE_ENV === 'development') {
   transporter = nodemailer.createTransport({
     host: process.env.ZOHO_HOST,
     port: process.env.ZOHO_PORT,
-    secure: true, // true for 465
+    secure: false, // true for 465
     auth: {
       user: process.env.ZOHO_USER,
       pass: process.env.ZOHO_PASS,
     },
+    tls: {
+      ciphers: "SSLv3", // optional; STARTTLS will upgrade automatically
+    },
+  });
+
+  transporter.verify((err, success) => {
+    if (err) console.error("❌ SMTP failed:", err);
+    else console.log("✅ SMTP connection OK");
   });
 }
 

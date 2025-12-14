@@ -34,4 +34,9 @@ router.route('/:id')
   )
   .delete(controller.destroy);
 
+
+  //rvps
+  router.route('/rvp')
+  .get(withPagination(12), controller.findAllRvps);
+  
 export default router;
