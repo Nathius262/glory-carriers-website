@@ -1,0 +1,34 @@
+<div class="modal fade" id="eventModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content" style="border: none; border-radius: 0;">
+
+            <div class="modal-header border-0">
+                <h5 class="modal-title ft-upper text-color-blue" id="eventModalTitle"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body p-0">
+                <img id="eventModalImage" src="" alt="Event Details" style="width: 100%; display: block;">
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const eventModal = document.getElementById('eventModal');
+
+        eventModal.addEventListener('show.bs.modal', function (event) {
+            const trigger = event.relatedTarget;
+
+            const title = trigger.getAttribute('data-title');
+            const image = trigger.getAttribute('data-image');
+
+            document.getElementById('eventModalTitle').textContent = title;
+            document.getElementById('eventModalImage').src = image;
+            document.getElementById('eventModalImage').alt = title;
+        });
+    });
+</script>
