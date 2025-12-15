@@ -1,12 +1,12 @@
-:root{
+:root {
     --bg-midnight-blue: #1c253c;
-    --bg-purplish: #94259D73; 
+    --bg-purplish: #94259D73;
     --bg-red: #EB1B1B;
     --white: white;
-    --grey:rgb(177, 174, 174);
+    --grey: rgb(177, 174, 174);
     --black: black;
     --blue: #71D4FF;
-    --blue-sec:#0AB9F0;
+    --blue-sec: #0AB9F0;
     --gold: #CD8E4F;
     --bg-body: #020325;
     --bg-blue-transparent: #141668;
@@ -50,16 +50,17 @@
 }
 
 /* Ellipse 1 */
-.bg-secondary{
+.bg-secondary {
     background: #D9D9D9 !important;
 }
+
 .bg-gradient-primary {
     background-color: var(--bg-blue-transparent);
     background-image: linear-gradient(180deg, var(--bg-blue-transparent) 10%, var(--bg-midnight-blue) 100%);
     background-size: cover;
 }
 
-body{
+body {
     color: var(--black);
     /* background: url('../img/bg.jfif');*/
     background-repeat: no-repeat;
@@ -68,44 +69,49 @@ body{
     font-family: Nexa;
 }
 
-.scroll-y-top-el, .scroll-y-down-el, .scroll-x-top-el, .scroll-x-down-el{
+.scroll-y-top-el,
+.scroll-y-down-el,
+.scroll-x-top-el,
+.scroll-x-down-el {
     transition: transform 2s ease;
 }
 
-#navbarsExample04 a:hover{
+#navbarsExample04 a:hover {
     background-color: var(--blue);
     color: var(--bg-body) !important;
     border-radius: 5px;
     transition: background-color .5s linear;
 }
 
-a{
+a {
     font-weight: bold;
     text-decoration: none;
 }
-p{
+
+p {
     font-family: Nexa;
     font-size: 20px;
 }
-.ft-upper{
+
+.ft-upper {
     text-transform: uppercase;
 }
 
-.text-color-blue{
+.text-color-blue {
     color: var(--blue);
 }
 
-#header{
+#header {
     background: var(--bg-midnight-blue);
     color: var(--white);
 }
 
-#header a{
+#header a {
     color: var(--white);
     font-weight: bold;
 }
 
-#header a:hover{
+#header a:hover {
     color: var(--grey);
 }
 
@@ -129,108 +135,124 @@ p{
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
-    /*z-index: -1;  Make sure the overlay is behind the text 
+/*z-index: -1;  Make sure the overlay is behind the text 
 }*/
 
 @keyframes backgroundTransition {
     0% {
         background: var(--white) url('../img/theme1.jpg') no-repeat center top/cover;
     }
+
     45% {
         background: var(--white) url('../img/theme1.jpg') no-repeat center top/cover;
     }
+
     55% {
         background: var(--white) url('../img/theme1.jpg') no-repeat center top/cover;
     }
+
     70% {
         background: var(--white) url('../img/theme2.jpg') no-repeat center top/cover;
     }
+
     100% {
         background: var(--blue) url('../img/theme2.jpg') no-repeat center top/cover;
     }
 }
 
 .hero-fade {
-  position: relative;
-  width: 100%;
-  height: 100vh; /* or whatever height your hero section needs */
-  overflow: hidden;
-  background: var(--white);
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    /* or whatever height your hero section needs */
+    overflow: hidden;
+    background: var(--white);
 }
 
 /* Create two pseudo layers for smooth fading */
 .hero-fade::before,
 .hero-fade::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center top;
-  background-repeat: no-repeat;
-  animation: fadeBackground 90s infinite ease-in-out;
-  opacity: 0;
-  transition: opacity 1.5s ease-in-out;
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    animation: fadeBackground 90s infinite ease-in-out;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
 }
 
 /* Base layer starts visible */
 .hero-fade::before {
-  animation-delay: 0s;
+    animation-delay: 0s;
 }
 
 /* Secondary layer starts slightly later for overlap */
 .hero-fade::after {
-  animation-delay: 45s;
+    animation-delay: 45s;
 }
 
 /* Define all your images here in the keyframes */
 @keyframes fadeBackground {
-  0% {
-    opacity: 1;
-    background-image: url('../img/theme2.jpg');
-  }
-  10% {
-    opacity: 1;
-    background-image: url('../img/theme1.jpg');
-  }
-  20% {
-    background-image: url('../img/welcome-1.jpg');
-  }
-  30% {
-    background-image: url('../img/welcome-2.jpg');
-  }
-  40% {
-    background-image: url('../img/welcome-3.jpg');
-  }
-  50% {
-    background-image: url('../img/welcome-4.jpg');
-  }
-  60% {
-    background-image: url('../img/overflow-1.jpg');
-  }
-  70% {
-    background-image: url('../img/overflow-2.jpg');
-  }
-  80% {
-    background-image: url('../img/prophet-1.jpg');
-  }
-  90% {
-    background-image: url('../img/prayer-1.jpg');
-  }
-  100% {
-    opacity: 1;
-    background-image: url('../img/theme2.jpg');
-  }
+    0% {
+        opacity: 1;
+        background-image: url('../img/theme2.jpg');
+    }
+
+    10% {
+        opacity: 1;
+        background-image: url('../img/theme1.jpg');
+    }
+
+    20% {
+        background-image: url('../img/welcome-1.jpg');
+    }
+
+    30% {
+        background-image: url('../img/welcome-2.jpg');
+    }
+
+    40% {
+        background-image: url('../img/welcome-3.jpg');
+    }
+
+    50% {
+        background-image: url('../img/welcome-4.jpg');
+    }
+
+    60% {
+        background-image: url('../img/overflow-1.jpg');
+    }
+
+    70% {
+        background-image: url('../img/overflow-2.jpg');
+    }
+
+    80% {
+        background-image: url('../img/prophet-1.jpg');
+    }
+
+    90% {
+        background-image: url('../img/prayer-1.jpg');
+    }
+
+    100% {
+        opacity: 1;
+        background-image: url('../img/theme2.jpg');
+    }
 }
 
 
 
-.birthing{
+.birthing {
     font-size: 80px;
     font-weight: bold;
     text-align: left;
 
 }
-.glory{
+
+.glory {
     font-size: 30px;
     font-weight: bold;
     letter-spacing: 0.35em;
@@ -238,13 +260,14 @@ p{
     line-height: 0%;
 }
 
-.year{
+.year {
     font-size: 16px;
     font-weight: 400;
     letter-spacing: 0.35em;
     text-align: left;
     position: relative;
 }
+
 .text_year {
     font-family: Nexa;
     font-size: 40px;
@@ -255,7 +278,7 @@ p{
     top: -18px;
 }
 
-.the{
+.the {
     font-size: 24px;
     font-weight: 400;
     text-align: left;
@@ -263,7 +286,8 @@ p{
     border-radius: 10pc;
     padding: 10px;
 }
-.ellipse{
+
+.ellipse {
     position: absolute;
     width: 576px;
     height: 576px;
@@ -280,20 +304,21 @@ p{
     height: 576px;
     left: 0px;
     top: 300px;
-    background:rgba(15, 19, 116, 0.45);
+    background: rgba(15, 19, 116, 0.45);
     filter: blur(51.05px);
     z-index: -3;
 }
 
 
 /*LIVE STREAM */
-#live-stream{
+#live-stream {
     position: absolute;
     bottom: 95%;
     left: 60vw;
     z-index: 1000;
 }
-.live-stream{
+
+.live-stream {
     font-size: 20px;
     letter-spacing: 0.08em;
     text-align: left;
@@ -302,12 +327,14 @@ p{
     border-radius: 10px;
     font-weight: bold;
 }
-.live-stream:hover{
+
+.live-stream:hover {
     background-color: var(--blue);
     transition: background-color .5s ease-in-out;
-    
+
 }
-.live-stream a{
+
+.live-stream a {
     background: none;
     text-decoration: none;
     color: var(--white);
@@ -316,7 +343,7 @@ p{
 
 /* Year Theme */
 
-.theme_year{
+.theme_year {
     position: absolute;
     width: 619px;
     height: 217px;
@@ -326,7 +353,7 @@ p{
 
 
 /* Inside auto layout */
-.layout{
+.layout {
     flex: none;
     order: 3;
     flex-grow: 0;
@@ -335,21 +362,22 @@ p{
 
 
 /* homepage about */
-.about{
+.about {
     position: relative;
     background: linear-gradient(-270deg, var(--white), var(--white));
 
 }
-.about h2{
+
+.about h2 {
     font-size: 30px;
     font-weight: bold;
     line-height: 38.46px;
     letter-spacing: 0.46em;
     text-align: left;
-    
+
 }
 
-.about a{
+.about a {
     font-size: 16px;
     line-height: 22px;
     letter-spacing: 0.46em;
@@ -360,17 +388,19 @@ p{
     color: var(--white);
     border-radius: 10px;
 }
-.about a:hover{
+
+.about a:hover {
     background-color: var(--white);
     border: 1px solid var(--black);
     transition: background-color .5s ease;
     color: var(--black);
 }
-.about img{
+
+.about img {
     border-radius: 2pc;
 }
 
-.about .about-bg-text{
+.about .about-bg-text {
     position: absolute;
     color: var(--blue-transparent);
     margin: auto;
@@ -379,14 +409,14 @@ p{
     padding: 0;
     font-size: 237px;
     font-weight: 400;
-    text-align: left;    
+    text-align: left;
     align-self: flex-start;
     opacity: .2;
     line-height: 95%;
 }
 
 /* EVENT SECTION*/
-#event{
+#event {
     background-color: #020325;
     text-align: end !important;
 }
@@ -400,20 +430,20 @@ p{
     text-align: left;
 }
 
-#event h4{
+#event h4 {
     font-size: 32px;
     font-weight: bold;
     letter-spacing: 0.46em;
     text-align: left;
-    
+
 }
 
 /* MEDIA SECTION*/
-#media{
+#media {
     background-color: #020325;
 }
 
-#media h4{
+#media h4 {
     font-size: 35px;
     font-weight: bold;
     line-height: 51.28px;
@@ -421,7 +451,8 @@ p{
     text-align: left;
 
 }
-#media .icon{
+
+#media .icon {
     text-align: center;
     display: grid;
     border: 1px solid var(--blue);
@@ -433,7 +464,7 @@ p{
     margin: 8px 5px;
 }
 
-#media .icon img{
+#media .icon img {
     width: 55px;
     border-radius: 0% !important;
     justify-content: center;
@@ -443,13 +474,13 @@ p{
 }
 
 
-.media-top{
+.media-top {
     position: absolute;
-    width: 100%; 
+    width: 100%;
     bottom: 50px;
 }
 
-.latest_media h4{
+.latest_media h4 {
     font-family: Nexa-Bold;
     font-size: 30px;
     font-weight: 500;
@@ -459,7 +490,7 @@ p{
     color: var(--yellow);
 }
 
-.latest_media h2{
+.latest_media h2 {
     font-family: 'Trajan Pro 3' !important;
     font-size: 60px;
     font-weight: 500;
@@ -482,7 +513,7 @@ p{
     background: linear-gradient(180deg, rgba(225, 43, 255, 0.15) 0%, rgba(197, 123, 255, 0.15) 100%);
 }
 
-.ellipse_circle{
+.ellipse_circle {
     position: absolute;
     z-index: -34;
     width: 606px;
@@ -531,7 +562,8 @@ p{
     background-image: url(../img/zz3.jfif);
     background-size: cover;
     background-repeat: no-repeat;
-    filter: blur(2px); /* Adjust the blur radius as needed */
+    filter: blur(2px);
+    /* Adjust the blur radius as needed */
     z-index: -1;
 }
 
@@ -542,7 +574,8 @@ p{
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.327); /* Black overlay with 50% opacity */
+    background-color: rgba(0, 0, 0, 0.327);
+    /* Black overlay with 50% opacity */
     z-index: -1;
 }
 
@@ -554,7 +587,7 @@ p{
 }
 
 
-.department-bg-bottom{
+.department-bg-bottom {
     position: absolute;
     z-index: -3;
     width: 30%;
@@ -579,17 +612,17 @@ p{
     justify-content: center;
 
 }
-.now-word img{
+
+.now-word img {
     width: 500px;
     position: absolute;
-    
+
 }
 
 intro
-
 /* GIVING SECTION*/
 
-#pay-now{
+#pay-now {
     text-align: center;
     display: grid;
     border: 1px solid var(--blue);
@@ -600,7 +633,7 @@ intro
     color: var(--white);
 }
 
-#pay-now:hover{
+#pay-now:hover {
     background-color: var(--blue) !important;
     color: var(--black) !important;
     transition: background-color .6s linear;
@@ -610,9 +643,12 @@ intro
 
 /* Container holding the background image and overlay */
 .memeber {
-    position: relative; /* This allows the overlay to be positioned correctly */
-    width: 100%; /* Adjust to fit your needs */
-    background: url('/assets/img/17.jpg') no-repeat center center/cover; /* Background image */
+    position: relative;
+    /* This allows the overlay to be positioned correctly */
+    width: 100%;
+    /* Adjust to fit your needs */
+    background: url('/assets/img/17.jpg') no-repeat center center/cover;
+    /* Background image */
 }
 
 /* Black overlay */
@@ -623,35 +659,40 @@ intro
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Black color with 50% opacity */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Black color with 50% opacity */
     z-index: 1;
 }
 
 /* Content inside the memeber */
 .memeber-content {
     position: relative;
-    z-index: 2; /* Ensures content is above the overlay */
-    color: white; /* Ensures text is readable on the black overlay */
+    z-index: 2;
+    /* Ensures content is above the overlay */
+    color: white;
+    /* Ensures text is readable on the black overlay */
 }
 
 /* FOOTER SECTION*/
-#footer{
+#footer {
     background: url('../img/footer.jfif');
     color: var(--white);
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-#footer .fw-light{
+#footer .fw-light {
     font-weight: 100 !important;
 }
 
-#footer ul{
+#footer ul {
     color: #FCFF71;
-; list-style-type: none; padding: 0;
+    ;
+    list-style-type: none;
+    padding: 0;
 }
 
-#footer ul a{
+#footer ul a {
     color: #FCFF71;
     text-decoration: none;
     font-size: 20px;
@@ -662,7 +703,7 @@ intro
 
 }
 
-#footer ul a:hover{
+#footer ul a:hover {
     background-color: var(--yellow);
     padding: 5px 7px;
     color: var(--black);
@@ -672,31 +713,33 @@ intro
     transition: .5s transform linear ease-in-out;
 }
 
-@media screen and (min-width:960px){
-    
-    
+@media screen and (min-width:960px) {
 
-    .birthing{
+
+
+    .birthing {
         font-size: calc(70px * 1.7);
         font-weight: bold;
         text-align: left;
-    
+
     }
-    .glory{
+
+    .glory {
         font-size: calc(30px * 1.7);
         font-weight: bold;
         letter-spacing: 0.3em;
         text-align: left;
         line-height: 0%;
     }
-    
-    .year{
+
+    .year {
         font-size: calc(16px * 1.7);
         font-weight: 400;
         letter-spacing: 0.35em;
         text-align: left;
         position: relative;
     }
+
     .text_year {
         font-family: Nexa;
         font-size: calc(40px * 1.7);
@@ -707,8 +750,8 @@ intro
         left: 70px;
         top: -30px;
     }
-    
-    .the{
+
+    .the {
         font-size: calc(24px * 1.7);
         font-weight: 400;
         text-align: left;
@@ -730,24 +773,29 @@ MEDIA QUERY @ screen size below 768px
     .relative-container {
         width: 100vw;
     }
+
     .intro {
         animation: backgroundTransition 50s infinite;
         height: auto;
     }
-    
+
     @keyframes backgroundTransition {
         0% {
             background: var(--white) url('../img/theme1.jpg') no-repeat center top/fit;
         }
+
         45% {
             background: var(--white) url('../img/theme1.jpg') no-repeat center top/contain;
         }
+
         55% {
             background: var(--white) url('../img/theme1.jpg') no-repeat center top/contain;
         }
+
         70% {
             background: var(--white) url('../img/theme2.jpg') no-repeat center top/contain;
         }
+
         100% {
             background: var(--blue) url('../img/theme2.jpg') no-repeat center top/contain;
         }
@@ -763,13 +811,14 @@ MEDIA QUERY @ screen size below 632
 **********/
 
 @media screen and (max-width:632px) {
-    #live-stream{
+    #live-stream {
         position: absolute;
         bottom: 95%;
         left: 40%;
         z-index: 1000;
     }
-    .live-stream{
+
+    .live-stream {
         font-size: 20px;
         letter-spacing: 0.08em;
         text-align: left;
@@ -778,11 +827,11 @@ MEDIA QUERY @ screen size below 632
         border-radius: 10px;
     }
 
-    .about .about-bg-text{       
+    .about .about-bg-text {
         font-size: 180px;
     }
 
-    
+
 }
 
 
@@ -799,27 +848,29 @@ MEDIA QUERY  @ screen size below 438
 @media screen and (max-width:438px) {
 
 
-    .birthing{
+    .birthing {
         font-size: calc(70px * .8);
         font-weight: bold;
         text-align: left;
-    
+
     }
-    .glory{
+
+    .glory {
         font-size: calc(30px * .8);
         font-weight: bold;
         letter-spacing: 0.2em;
         text-align: left;
         line-height: 0%;
     }
-    
-    .year{
+
+    .year {
         font-size: calc(16px * .8);
         font-weight: 400;
         letter-spacing: 0.35em;
         text-align: left;
         position: relative;
     }
+
     .text_year {
         font-family: Nexa;
         font-size: calc(40px * .8);
@@ -830,8 +881,8 @@ MEDIA QUERY  @ screen size below 438
         left: 33px;
         top: -15px;
     }
-    
-    .the{
+
+    .the {
         font-size: calc(24px * .8);
         font-weight: 400;
         text-align: left;
@@ -840,13 +891,14 @@ MEDIA QUERY  @ screen size below 438
         padding: 10px;
     }
 
-    #live-stream{
+    #live-stream {
         position: absolute;
         bottom: 97%;
         left: 2%;
         z-index: 1000;
     }
-    .live-stream{
+
+    .live-stream {
         font-size: 25px;
         letter-spacing: 0.08em;
         text-align: left;
@@ -854,12 +906,13 @@ MEDIA QUERY  @ screen size below 438
         padding: 2px 4px;
         border-radius: 10px;
     }
-    .about .about-bg-text{       
+
+    .about .about-bg-text {
         font-size: 100px;
         line-height: 160px;
     }
-    
-    .latest_media h4{
+
+    .latest_media h4 {
         font-size: calc(24px * .7);
         letter-spacing: 0.1em;
         line-height: 0px;
@@ -872,24 +925,151 @@ MEDIA QUERY  @ screen size below 438
         letter-spacing: 0.0001em;
         text-align: left;
     }
-    
-    .latest_media h2{
+
+    .latest_media h2 {
         font-size: calc(50px * .7);
         line-height: 35px;
     }
 
-    .latest_media img{
+    .latest_media img {
         width: calc(200px * .8);
     }
 
-    .tithe-text div{
+    .tithe-text div {
         font-size: 14px;
     }
-    .tithe-text .h2, .tithe-text .h1{
+
+    .tithe-text .h2,
+    .tithe-text .h1 {
         font-size: 16px;
     }
-    .tithe-text img{
+
+    .tithe-text img {
         width: 70;
     }
 
+}
+
+/* =========================================
+   FLOATING CHRISTMAS ICON (ENHANCED)
+   ========================================= */
+
+#christmas-float {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, #7a0c0c, #caa24d);
+    border-radius: 999px;
+    cursor: grab;
+    user-select: none;
+    z-index: 9999;
+    overflow: hidden;
+
+    box-shadow:
+        0 0 15px rgba(202, 162, 77, 0.6),
+        0 0 35px rgba(122, 12, 12, 0.4);
+
+    animation: christmasGlow 3s ease-in-out infinite;
+}
+
+#christmas-float:active {
+    cursor: grabbing;
+}
+
+/* Icon */
+.christmas-icon {
+    font-size: 1.6rem;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+#christmas-float:hover .christmas-icon {
+    animation: christmasShake 0.6s ease-in-out;
+    transform-origin: center;
+}
+
+/* Text unwrap effect */
+.christmas-text {
+    color: #fff;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    white-space: nowrap;
+
+    max-width: 200px;
+    opacity: 1;
+    transition:
+        max-width 0.6s ease,
+        opacity 0.4s ease;
+}
+
+/* Collapsed state */
+#christmas-float.collapsed .christmas-text {
+    max-width: 0;
+    opacity: 0;
+}
+
+/* Hover reveals text */
+#christmas-float:hover .christmas-text {
+    max-width: 200px;
+    opacity: 1;
+}
+
+/* Glow animation */
+@keyframes christmasGlow {
+
+    0%,
+    100% {
+        box-shadow:
+            0 0 15px rgba(202, 162, 77, 0.6),
+            0 0 35px rgba(122, 12, 12, 0.4);
+    }
+
+    50% {
+        box-shadow:
+            0 0 25px rgba(255, 215, 140, 0.9),
+            0 0 50px rgba(122, 12, 12, 0.6);
+    }
+}
+
+@keyframes christmasShake {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    15% {
+        transform: rotate(8deg);
+    }
+
+    30% {
+        transform: rotate(-8deg);
+    }
+
+    45% {
+        transform: rotate(6deg);
+    }
+
+    60% {
+        transform: rotate(-6deg);
+    }
+
+    75% {
+        transform: rotate(3deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+
+/* Mobile scale */
+@media (max-width: 768px) {
+    #christmas-float {
+        transform: scale(0.9);
+    }
 }
