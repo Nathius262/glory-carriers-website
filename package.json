@@ -1,6 +1,6 @@
 {
   "name": "glory-carriers-website",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Welcome to the Glory Carriers Ministry Int'l Website repository! This repository contains all the code and resources for building and maintaining the official website of Glory Carriers Ministry Int'l.",
   "main": "index.js",
   "type": "module",
