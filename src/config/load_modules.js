@@ -27,7 +27,7 @@ export default async function loadModules(app) {
       const isAdmin = file.startsWith('admin.');
       const isApi = file.startsWith('api.');
       const moduleName = file.split('.')[isAdmin ? 1 : (isApi ? 1 : 0)];
-      
+
       // Determine route path based on file type
       let routePath;
       if (isAdmin) {
@@ -42,13 +42,13 @@ export default async function loadModules(app) {
       const routeModule = await import(routeFileUrl.href);
 
       app.use(routePath, routeModule.default);
-      
+
       // Log the loaded route with appropriate type
       let routeType;
       if (isAdmin) routeType = 'admin';
       else if (isApi) routeType = 'API';
       else routeType = 'public';
-      
+
       console.log(`✅ Loaded ${routeType} route: ${routePath}`);
     }
   }
@@ -83,7 +83,7 @@ export default async function loadModules(app) {
 
   //GLOBAL DEFAULT INTERNAL SERVER ERROR
   app.use((err, req, res, next) => {
-    console.error('❌ Server Error:', err.stack);
+    console.error('❌ Server Error:', err.message);
     res.status(500);
     res.render('errors/500', { pageTitle: 'Server Error', error: err });
   });

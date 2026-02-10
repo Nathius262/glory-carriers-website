@@ -2,12 +2,12 @@ import db from '../../../models/index.cjs';
 
 
 
-export const findAll = async ({limit, offset}) => {
+export const findAll = async ({ limit, offset }) => {
   try {
-    const {rows: sermons, count: totalItems } = await db.Sermon.findAndCountAll({
+    const { rows: sermons, count: totalItems } = await db.Sermon.findAndCountAll({
       limit,
       offset,
-      distinct:true,
+      distinct: true,
       order: [['createdAt', 'DESC'], ['updatedAt', 'DESC']],
     });
     return {
@@ -34,6 +34,7 @@ export const create = async (data) => {
   try {
     return await db.Sermon.create(data);
   } catch (error) {
+    console.log(error.message);
     throw new Error('Error creating record: ' + error.message);
   }
 };
