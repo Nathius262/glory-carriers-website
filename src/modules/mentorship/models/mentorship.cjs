@@ -28,6 +28,18 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
+    born_again_date: {
+      type: DataTypes.DATEONLY,
+      allowNull: true
+    },
+    born_again_place: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    service_history: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
     address: {
       type: DataTypes.STRING
     },
