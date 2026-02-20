@@ -36,6 +36,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true
     },
+    program_type: {
+      type: DataTypes.ENUM('FATHERHOOD', 'MENTORSHIP', 'DISCIPLESHIP'),
+      allowNull: false
+    },
     service_history: {
       type: DataTypes.TEXT,
       allowNull: true

@@ -13,6 +13,19 @@
 
       <form action="/mentorship" class="user needs-validation" method="POST" class="p-4 shadow-sm rounded-4 bg-light">
 
+        <!-- Program Type -->
+        <div class="mb-4">
+          <label for="program_type" class="form-label fw-bold">
+            Which program are you applying for? *
+          </label>
+          <select class="form-select form-select-lg" id="program_type" name="program_type" required>
+            <option value="">-- Select Program --</option>
+            <option value="FATHERHOOD">Fatherhood</option>
+            <option value="MENTORSHIP">Mentorship</option>
+            <option value="DISCIPLESHIP">Discipleship</option>
+          </select>
+        </div>
+
         <!-- Full Name -->
         <div class="mb-4">
           <label for="full_name" class="form-label fw-bold">Full Name *</label>
