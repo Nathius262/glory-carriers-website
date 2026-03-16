@@ -1,3 +1,12 @@
+function readURL(input) {
+    let reader = new FileReader();
+    reader.onload = function (e) {
+        $('#id_image_display')
+            .attr('src', e.target.result)
+    };
+    reader.readAsDataURL(input.files[0]);
+}
+
 let y_top_objectEl = document.querySelectorAll('.scroll-y-top-el')
 let y_down_objectEl = document.querySelectorAll('.scroll-y-down-el')
 let x_top_objectEl = document.querySelectorAll('.scroll-x-top-el')

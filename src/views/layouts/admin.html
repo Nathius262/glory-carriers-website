@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description"
+        content="A lightweight **Express.js framework** with **Sequelize**, **automatic module generation**, **authentication**, and a **CLI** for easy development.">
+    <meta name="keywords" content="nexus, nexusjs, framework">
+    <meta name="author" content="nathius262">
+    <meta property="og:title" content="NexusJs - Admin | {{pageTitle}}">
+    <meta property="og:description"
+        content="A lightweight **Express.js framework** with **Sequelize**, **automatic module generation**, **authentication**, and a **CLI** for easy development.">
+    <meta property="og:image" content={{pageLogo}}>
+    <meta property="og:url" content="https://github.com/Nathius262/nexusjs">
+
+    <!--twitter social share-->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{pageTitle}}" id="twitterTitle">
+    <meta name="twitter:description"
+        content="A lightweight **Express.js framework** with **Sequelize**, **automatic module generation**, **authentication**, and a **CLI** for easy development."
+        id="twitterDescription">
+    <meta name="twitter:image" content={{pageLogo}} id="twitterImage">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>NexusJs - Admin | {{pageTitle}}</title>
+
+    <link rel="icon" href="/assets/img/logo.jpg">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600&amp;display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css"
+        integrity="sha512-siarrzI1u3pCqFG2LEzi87McrBmq6Tp7juVsdmGY1Dr8Saw+ZBAzDzrGwX3vgxX1NkioYNCFOVC0GpDPss10zQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/solid.min.css"
+        integrity="sha512-Hp+WwK4QdKZk9/W0ViDvLunYjFrGJmNDt6sCflZNkjgvNq9mY+0tMbd6tWMiAlcf1OQyqL4gn2rYp7UsfssZPA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css"
+        integrity="sha512-W/zrbCncQnky/EzL+/AYwTtosvrM+YG/V6piQLSe2HuKS6cmbw89kjYkp3tWFn1dkWV7L1ruvJyKbLz73Vlgfg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+
+
+    <link href="/assets/css/style.css" rel="stylesheet">
+    <link href="/assets/css/admin.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+</head>
+
+<body>
+
+
+    <!--============ROOT SECTION==============-->
+    <section id="root" class=" position-relative overflow-x-hidden">
+        <!-- SIDEBAR -->
+        <div class="sidebar bg-dark text-white">
+            <div class="sidebar-header p-3 border-bottom border-secondary">
+                <h4 class="mb-0">
+                    <i class="fas fa-project-diagram me-2"></i>
+                    NexusJs
+                </h4>
+            </div>
+            <div class="sidebar-menu p-3">
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2">
+                        <a class="nav-link text-white d-flex align-items-center" href="/admin">
+                            <i class="fas fa-tachometer-alt me-2"></i>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link text-white d-flex align-items-center" href="/admin/sermon">
+                            <i class="fas fa-video me-2"></i>
+                            Sermons
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link text-white d-flex align-items-center" href="/admin/media/zoe-record">
+                            <i class="fas fa-compact-disc me-2"></i>
+                            Zoe Reords
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link text-white d-flex align-items-center" href="/admin/media/nowword">
+                            <i class="fas fa-file-word me-2"></i>
+                            Nowwords
+                        </a>
+                    </li>
+
+                    <li class="nav-item mb-2">
+                        <a class="nav-link text-white d-flex align-items-center" href="/admin/giving">
+                            <i class="fas fa-donate me-2"></i>
+                            Giving
+                        </a>
+                    </li>
+
+                    <li class="nav-item mb-2">
+                        <a class="nav-link text-white d-flex align-items-center" href="/admin/mentorship">
+                            <i class="fas fa-chalkboard-teacher me-2"></i>
+                            Mentorship
+                        </a>
+                    </li>
+
+                    <li class="nav-item mb-2">
+                        <a class="nav-link text-white d-flex align-items-center" href="/admin/event">
+                            <i class="fas fa-calendar-alt me-2"></i>
+                            Events
+                        </a>
+                    </li>
+
+                    <li class="nav-item mb-2">
+                        <a class="nav-link text-white d-flex align-items-center" href="/admin/membership">
+                            <i class="fas fa-users me-2"></i>
+                            Memqbership
+                        </a>
+                    </li>
+
+                    <li class="nav-item mb-2">
+                        <a class="nav-link text-white d-flex align-items-center" href="/admin/user">
+                            <i class="fas fa-user me-2"></i>
+                            Users
+                        </a>
+                    </li>
+
+                    <li class="nav-item mb-2">
+                        <a class="nav-link text-white d-flex align-items-center" href="/admin/role">
+                            <i class="fas fa-users me-2"></i>
+                            Roles
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MAIN CONTENT WRAPPER -->
+        <div class="main-content">
+            <!-- NAVBAR -->
+            <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+                <div class="container-fluid">
+                    <button class="btn btn-sm" id="sidebarToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+
+                    <div class="d-flex align-items-center ms-auto">
+                        <div class="dropdown me-3">
+                            <button class="btn btn-light dropdown-toggle" type="button" id="notificationsDropdown"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-bell"></i>
+                                <span class="badge bg-danger rounded-pill">3</span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationsDropdown">
+                                <li><a class="dropdown-item" href="#">New user registered</a></li>
+                                <li><a class="dropdown-item" href="#">Server update completed</a></li>
+                                <li><a class="dropdown-item" href="#">Payment received</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="dropdown">
+                            <button class="btn btn-light dropdown-toggle d-flex align-items-center" type="button"
+                                id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                <div class="rounded-circle bg-primary d-flex align-items-center justify-content-center me-2"
+                                    style="width: 32px; height: 32px;">
+                                    <span class="text-white">A</span>
+                                </div>
+                                <span>Admin</span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                <li><a class="dropdown-item" href="/admin/user/{{user.id}}"><i
+                                            class="fas fa-user me-2"></i>Profile</a></li>
+                                <li><a class="dropdown-item" href="/"><i class="fas fa-globe me-2"></i>View Site</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="/auth/logout" id="logout-button"><i
+                                            class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <!--=========MAIN BEGIN===========-->
+
+            {{{body}}}
+
+            <!--=========MAIN END===========-->
+
+            <!--=========FOOTER BEGIN===========-->
+            {{> notification/success}}
+            {{> modals/message}}
+            {{> modals/delete}}
+            <!--=========FOOTER END===========-->
+        </div>
+    </section>
+    <!--============ROOT SECTION END==============-->
+
+
+    <script type="module" src="/assets/js/app.js"></script>
+    <script src="/assets/js/delete.js"></script>
+
+    <script>
+        //global script
+        let title, message, redirectTo, classType, btnType;
+
+        function readURL(input) {
+            let reader = new FileReader();
+            reader.onload = function (e) {
+                $('#id_image_display')
+                    .attr('src', e.target.result)
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+
+
+        function messageAlert(title, message, redirectTo, classType, btnType) {
+            let heading = document.querySelector('#successModalLabel')
+            heading.innerHTML = title
+            heading.classList.add(classType)
+            document.querySelector('#modal-message').innerHTML = message;
+            document.querySelector('#close-modal').classList.add(btnType);
+
+            $("#successModal").modal('show');
+            $('#successModal').on('hide.bs.modal', function (e) {
+                // This code will run when the modal is about to be hidden
+
+                // Check if redirectTo is defined
+                if (redirectTo) {
+                    window.location.href = redirectTo;
+                }
+                //add logic to prevent reload
+                else if (redirectTo === false) { }
+                else {
+                    // Reload the page if there's no redirect
+                    window.location.reload();
+                }
+            });
+        }
+
+        const handleLogout = async () => {
+            try {
+                await fetch('/auth/logout', {
+                    method: 'POST',
+                    credentials: 'include', // Ensures cookies are sent with the request
+                });
+
+                window.location.href = "/admin/login"; // Update the UI after logout
+            } catch (err) {
+                console.error('Error logging out:', err);
+            }
+        };
+
+        try {
+            document.getElementById('logout-button').addEventListener('click', handleLogout);
+        } catch { }
+
+        // Sidebar toggle functionality
+        document.getElementById('sidebarToggle').addEventListener('click', function () {
+            document.querySelector('.sidebar').classList.toggle('collapsed');
+            document.querySelector('.main-content').classList.toggle('expanded');
+        });
+    </script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+        integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+        crossorigin="anonymous"></script>
+    <!--=====<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>======== -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!--========JavaScript END===-->
+</body>
+
+</html>

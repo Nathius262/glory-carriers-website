@@ -1,12 +1,12 @@
 import db from '../../../models/index.cjs';
 
 
-export const findAll = async ({limit, offset}) => {
+export const findAll = async ({ limit, offset }) => {
   try {
-    const {rows: sermons, count: totalItems } = await db.Sermon.findAndCountAll({
+    const { rows: sermons, count: totalItems } = await db.Sermon.findAndCountAll({
       limit,
       offset,
-      distinct:true,
+      distinct: true,
       order: [['createdAt', 'DESC'], ['updatedAt', 'DESC']],
     });
     return {
@@ -31,7 +31,7 @@ export const findById = async (id) => {
 
 export const findBySlug = async (slug) => {
   try {
-    const item = await db.Sermon.findOne({where: {slug: slug}});
+    const item = await db.Sermon.findOne({ where: { slug: slug } });
     if (!item) throw new Error('Not found');
     return item;
   } catch (error) {

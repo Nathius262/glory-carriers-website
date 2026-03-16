@@ -1,0 +1,47 @@
+<main class="py-5 my-5">
+  <div class="container" style="max-width:500px; margin:auto; padding:2rem;">
+    <!-- Logo -->
+    <div class="text-center mb-4">
+      <img width="150" src="/assets/img/logo.png" alt="Nexusjs">
+    </div>
+
+    <!-- Role Toggle -->
+    <div class="btn-group mb-4 w-100 d-flex justify-content-center" role="group" aria-label="Role toggle">
+      <button type="button" class="btn btn-outline-primary role-btn active" data-role="admin">Admin</button>
+      <button type="button" class="btn btn-outline-primary role-btn" data-role="user">User</button>
+      <button type="button" class="btn btn-outline-primary role-btn" data-role="staff">Staff</button>
+    </div>
+
+    <!-- Heading -->
+    <h2 class="text-center text-primary">Welcome Back <span id="roleHeading">Admin</span>!</h2>
+
+    <!-- Form -->
+    <form id="authForm" class="needs-validation" action="/auth/admin/login" method="POST" novalidate>
+      <input type="email" name="email" placeholder="Email Address" required>
+      <div class="invalid-feedback">Email is required</div>
+
+      <div class="form-group mb-3" style="position: relative;">
+        <input type="password" name="password" class="form-control-user" placeholder="Password" required>
+        <i class="fa-regular fa-eye"></i>
+        <div class="invalid-feedback">Password is required</div>
+      </div>
+
+      <ul id="error" class="text-danger col-12 mb-3"></ul>
+
+      <div class="spinner-border col-12 d-none" id="status" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+
+      <button type="submit" id="btn">Login</button>
+    </form>
+
+    <div class="text-center mt-3">
+      <a class="small" href="/auth/forgot-password">Forgot Password?</a>
+    </div>
+    <div class="text-center">
+      <a class="small" id="registerLink" href="/auth/register">Create an Account!</a>
+    </div>
+  </div>
+
+  <script type="module" src="/assets/js/authenticate.js"></script>
+</main>

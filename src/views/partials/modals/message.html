@@ -1,0 +1,111 @@
+{{#if messages.error.length}}
+  <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content border-0 bg-white">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold text-danger d-flex align-items-center" id="messageModalLabel">
+            <i class="bi bi-x-circle-fill me-2"></i> Error
+          </h5>
+          <button class="close btn btn-outline-dark" type="button" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          {{#each messages.error}}
+            <p class="mb-2 text-danger">{{this}}</p>
+          {{/each}}
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-danger" id="close-modal" type="button" data-bs-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{{else if messages.success.length}}
+  <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content border-0 bg-white">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold text-success d-flex align-items-center" id="messageModalLabel">
+            <i class="bi bi-check-circle-fill me-2"></i> Success
+          </h5>
+          <button class="close btn btn-outline-dark" type="button" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          {{#each messages.success}}
+            <p class="mb-2 text-success">{{this}}</p>
+          {{/each}}
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-success" id="close-modal" type="button" data-bs-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{{else if messages.warning.length}}
+  <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content border-0 bg-white">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold text-warning d-flex align-items-center" id="messageModalLabel">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i> Warning
+          </h5>
+          <button class="close btn btn-outline-dark" type="button" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          {{#each messages.warning}}
+            <p class="mb-2 text-warning">{{this}}</p>
+          {{/each}}
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-warning text-dark" id="close-modal" type="button" data-bs-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{{else if messages.info.length}}
+  <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content border-0 bg-white">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold text-info d-flex align-items-center" id="messageModalLabel">
+            <i class="bi bi-info-circle-fill me-2"></i> Info
+          </h5>
+          <button class="close btn btn-outline-dark" type="button" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          {{#each messages.info}}
+            <p class="mb-2 text-info">{{this}}</p>
+          {{/each}}
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-info text-white" id="close-modal" type="button" data-bs-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{{/if}}
+
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const modalEl = document.getElementById("messageModal");
+    if (modalEl) {
+      const modal = new bootstrap.Modal(modalEl);
+      modal.show();
+
+      // Auto close for non-critical messages
+      if (modalEl.querySelector(".text-success") || modalEl.querySelector(".text-info")) {
+        setTimeout(() => modal.hide(), 5000);
+      }
+    }
+  });
+</script>
+

@@ -1,4 +1,3 @@
-
 import { Router } from "express";
 import { dashboard_view } from "../controllers/admin.controller.js";
 import * as controller from '../controllers/root.controller.js'

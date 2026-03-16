@@ -1,9 +1,9 @@
 import * as service from '../services/Sermon.service.js';
 
 export const findAll = async (req, res) => {
-  const {page, limit, offset} = req.pagination
+  const { page, limit, offset } = req.pagination
   try {
-    const data = await service.findAll({limit, offset});
+    const data = await service.findAll({ limit, offset });
     res.status(200).render('./sermon_list', {
       success: true,
       pageTitle: "Sermon List",
@@ -14,7 +14,7 @@ export const findAll = async (req, res) => {
     });
   } catch (err) {
     console.log(err)
-    res.status(500).render('errors/500', { error: err.message });
+    res.status(500).render('errors/500', { error: err });
   }
 };
 
@@ -27,20 +27,7 @@ export const findById = async (req, res) => {
       sermon: data,
     });
   } catch (err) {
-    res.status(404).render('errors/404', { error: err.message });
-  }
-};
-
-
-export const findBySlug = async (req, res) => {
-  try {
-    const data = await service.findBySlug(req.params.slug);
-    res.status(200).render('./sermon_detail', {
-      success: true,
-      pageTitle: "Sermon Detail",
-      sermon: data,
-    });
-  } catch (err) {
-    res.status(404).render('errors/404', { error: err.message });
+    console.log(err)
+    res.status(404).render('errors/404', { error: err });
   }
 };

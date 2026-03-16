@@ -1,5 +1,5 @@
 import express from 'express';
-import useModuleViews from '../../../middlewares/moduleViews.js';
+import useModuleViews from '../../../../v1/src/middlewares/moduleViews.js';
 import * as controller from '../controllers/Event.controller.js';
 
 const router = express.Router();

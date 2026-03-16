@@ -1,291 +1,45 @@
-<link rel="stylesheet" href="/assets/css/sb-admin-2.css">
-<link href="/assets/css/sb-admin-2.min.css" rel="stylesheet">
 
-<style>
-    /** 
-    account page 
-    **/
-    .main_img {
-        position: relative;
-        cursor: pointer;
-        width: 300px;
-        height: 300px;
-
-    }
-
-    .profile_img {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-    }
-
-    .main_overlay {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.6);
-        top: 0;
-        left: 0;
-        color: white;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        transition: opacity 1s;
-    }
-
-    .main_overlay:hover {
-        opacity: 1;
-    }
-
-    .main_overlay_blur {
-        backdrop-filter: blur(5px);
-    }
-
-    .main_overlay>* {
-        transform: translateY(20px);
-        transition: transform 1s;
-    }
-
-    .main_overlay:hover>* {
-        transform: translateY(0);
-    }
-</style>
-<!-- Page Wrapper -->
-<div id="wrapper">
-
-    <!-- Sidebar -->
-    {{> admin_sidebar}}
-    <!-- End of Sidebar -->
-
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
-
-        <!-- Main Content -->
-        <div id="content mt-5">
-
-            <!-- Topbar -->
-            {{> admin_navbar}}
-            <!-- End of Topbar -->
-
-            <!-- Begin Page Content -->
-            <div class="container-fluid">
-
-                <!-- Page Heading -->
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Event</h1>
-                </div>
-
-                <!-- Content Row -->
-                <div class="row">
-                    {{> admin/eventnav}}
-                </div>
-
-                <!-- Content Row -->
-                <div class="row">
-                    <div class="col-12 mb-4">
-                        <!-- Approach -->
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3 d-flex justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">Create Event</h6>
-                                <div>
-                                    <div id="delete" data-url="/admin/event/{{event.id}}" type="click"
-                                        class="btn btn-danger"><i class="fas fa-solid fa-trash-can"></i></div>
-                                    <div class="spinner-border d-none status" id="status" role="status">
-                                        <span class="sr-only">Loading... </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <!-- Previous code remains the same until the form -->
-                                <form action="/admin/event/{{event.id}}" method="POST" id="update-media"
-                                    enctype="multipart/form-data" class="user needs-validation" novalidate>
-
-                                    <div class="form-group">
-                                        <input type="text" name="title" class="rounded-1 form-control form-control-user"
-                                            id="exampleInputtitle" aria-describedby="titleHelp"
-                                            placeholder="Event Title..." value="{{event.title}}" required>
-                                        <div class="invalid-feedback">
-                                            Title is required
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <textarea name="description" class="rounded-1 form-control form-control-user"
-                                            id="exampleInputDescription" placeholder="Event Description..."
-                                            rows="3">{{event.description}}</textarea>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <div class="col-sm-6 mb-3 mb-sm-0">
-                                            <label for="start_date">Start Date</label>
-                                            <input type="datetime-local" name="start_date"
-                                                class="rounded-1 form-control form-control-user" id="start_date"
-                                                value="{{formatDateTime event.start_date}}" required>
-                                            <div class="invalid-feedback">
-                                                Start date is required
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label for="end_date">End Date</label>
-                                            <input type="datetime-local" name="end_date"
-                                                class="rounded-1 form-control form-control-user" id="end_date"
-                                                value="{{formatDateTime event.end_date}}">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <div class="col-sm-6 mb-3 mb-sm-0">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="is_recurring"
-                                                    id="is_recurring" value="true" {{#if
-                                                    event.is_recurring}}checked{{/if}}>
-                                                <label class="form-check-label" for="is_recurring">
-                                                    Recurring Event
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="is_headline"
-                                                    id="is_headline" value="true" {{#if
-                                                    event.is_headline}}checked{{/if}}>
-                                                <label class="form-check-label" for="is_headline">
-                                                    Headline Event
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row block">
-                                        <div class="container col-7 mt-3 mb-4 d-block justify-content-start">
-                                            <label for="" class="fw-bold fs-6">Image</label>
-                                            <div class="main_img container" id="id_image_group">
-                                                <img style="width: 100%; object-fit:fill; border: 1px solid #ddd;"
-                                                    src="{{event.image_url}}" alt="Event Image" class="profile_img"
-                                                    id="id_image_display">
-                                                <div class="main_overlay main_overlay_blur">
-                                                    <div class="text-center"><i class="fa fa-edit"></i> Change Image
-                                                    </div>
-                                                </div>
-
-                                                <input type="file" name="image" id="id_image_file"
-                                                    onchange="readURL(this)" accept="image/*" class="form-control"
-                                                    value="{{event.image_url}}" hidden="">
-                                            </div>
-                                            <div class="invalid-feedback">
-                                                You need to select an image file
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <hr>
-                                    <ul id="error" class="text-danger col-12"></ul>
-
-                                    <div class="spinner-border col-12 d-none status" id="status" role="status">
-                                        <span class="sr-only">Loading... </span>
-                                    </div>
-
-                                    <progress id="progressBar" value="0" max="100"
-                                        style="width: 100%; display: none;"></progress>
-                                    <hr class="mb-3">
-
-                                    <button type="submit" id="btn" class="btn btn-primary btn-user btn-block">
-                                        Update Event
-                                    </button>
-                                    <hr>
-                                </form>
-                                <!-- Rest of the code remains the same -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- /.container-fluid -->
-        </div>
+  <div class="container-fluid py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h1 class="h3 mb-0">Update Event</h1>
+      <a href="/admin/event" class="btn btn-secondary">
+        <i class="fas fa-arrow-left me-2"></i>Back to List
+      </a>
     </div>
-    <!-- End of Content Wrapper -->
-</div>
 
-<!-- Core plugin JavaScript-->
-<script src="/assets/js/uploader.js"></script>
-<!--<script src="/assets/js/user.js"></script>-->
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <form action="/admin/event/{{event.id}}" id="update-form" class="needs-validation" method="POST" novalidate>
+          <input type="hidden" name="_method" value="PUT">
+          
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" name="name" class="form-control" id="name" value="{{event.name}}" required>
+                <div class="invalid-feedback">
+                  Please provide a valid name.
+                </div>
+              </div>
+            </div>
+            <!-- Add more form fields in columns as needed -->
+          </div>
 
-<script src="/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+          <div class="d-flex gap-2 mt-4">
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-save me-2"></i>Update Event
+            </button>
+            <a href="/admin/event" class="btn btn-outline-secondary">Cancel</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
-<!-- Custom scripts for all pages-->
-<script src="/assets/js/sb-admin-2.min.js"></script>
+  <script src="/assets/js/form-handler.js"></script>
 
-<script>
-    // Function to handle image preview
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $('#id_image_display').attr('src', e.target.result);
-            }
-
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-
-    // Enable image selection when clicking on the image container
-    $('#id_image_group').click(function () {
-        $('#id_image_file').click();
-    });
-
-    // Form validation
-    (function () {
-        'use strict';
-        window.addEventListener('load', function () {
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.getElementsByClassName('needs-validation');
-            // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-    })();
-
-    // Ensure end date is after start date
-    document.getElementById('start_date').addEventListener('change', function () {
-        const startDate = new Date(this.value);
-        const endDateInput = document.getElementById('end_date');
-
-        if (endDateInput.value) {
-            const endDate = new Date(endDateInput.value);
-            if (endDate < startDate) {
-                endDateInput.setCustomValidity('End date must be after start date');
-            } else {
-                endDateInput.setCustomValidity('');
-            }
-        }
-
-        // Set min attribute for end date
-        endDateInput.min = this.value;
-    });
-
-    document.getElementById('end_date').addEventListener('change', function () {
-        const startDateInput = document.getElementById('start_date');
-        if (startDateInput.value) {
-            const startDate = new Date(startDateInput.value);
-            const endDate = new Date(this.value);
-
-            if (endDate < startDate) {
-                this.setCustomValidity('End date must be after start date');
-            } else {
-                this.setCustomValidity('');
-            }
-        }
-    });
-</script>
+  <!-- 
+    always use this when you intend on uploading images or files and comment the above script 
+  -->
+  <!-- <script type="module" src="/assets/js/uploader.js"></script> -->
+  

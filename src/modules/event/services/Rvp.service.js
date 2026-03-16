@@ -2,12 +2,12 @@ import db from '../../../models/index.cjs';
 import { sendEmail, kabodRsvpSuccessTemplate } from '../../../utils/email.js';
 
 
-export const findAll = async ({limit, offset}) => {
+export const findAll = async ({ limit, offset }) => {
   try {
-    const {rows: rvps, count: totalItems } = await db.Rvp.findAndCountAll({
+    const { rows: rvps, count: totalItems } = await db.Rvp.findAndCountAll({
       limit,
       offset,
-      distinct:true,
+      distinct: true,
       order: [['createdAt', 'DESC'], ['updatedAt', 'DESC']],
     })
     return {
@@ -16,7 +16,7 @@ export const findAll = async ({limit, offset}) => {
       totalPages: Math.ceil(totalItems / limit)
     };
   } catch (error) {
-   console.log(error)
+    console.log(error)
     throw new Error('Error fetching records: ' + error.message);
   }
 };
@@ -27,7 +27,7 @@ export const findById = async (id) => {
     if (!item) throw new Error('Not found');
     return item;
   } catch (error) {
-   console.log(error)
+    console.log(error)
     throw new Error('Error fetching record: ' + error.message);
   }
 };
@@ -75,7 +75,7 @@ export const create_rvp = async (data) => {
     throw new Error('Error creating record: ' + error.message);
   } finally {
     if (transaction && !transaction.finished) {
-      await transaction.rollback().catch(() => {});
+      await transaction.rollback().catch(() => { });
     }
   }
 };
