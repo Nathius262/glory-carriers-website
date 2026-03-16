@@ -25,31 +25,15 @@ export default async function loadModules(app) {
 
     for (const file of routeFiles) {
       const isAdmin = file.startsWith('admin.');
-      const isApi = file.startsWith('api.');
-      const moduleName = file.split('.')[isAdmin ? 1 : (isApi ? 1 : 0)];
-
-      // Determine route path based on file type
-      let routePath;
-      if (isAdmin) {
-        routePath = `/admin/${moduleName}`;
-      } else if (isApi) {
-        routePath = `/api/${moduleName}`;
-      } else {
-        routePath = `/${moduleName}`;
-      }
+      const routePath = isAdmin
+        ? `/admin/${moduleName}`
+        : `/${moduleName}`;
 
       const routeFileUrl = pathToFileURL(path.join(routesDir, file));
       const routeModule = await import(routeFileUrl.href);
 
       app.use(routePath, routeModule.default);
-
-      // Log the loaded route with appropriate type
-      let routeType;
-      if (isAdmin) routeType = 'admin';
-      else if (isApi) routeType = 'API';
-      else routeType = 'public';
-
-      console.log(`✅ Loaded ${routeType} route: ${routePath}`);
+      console.log(`✅ Loaded ${isAdmin ? 'admin' : 'public'} route: ${routePath}`);
     }
   }
 
@@ -83,7 +67,7 @@ export default async function loadModules(app) {
 
   //GLOBAL DEFAULT INTERNAL SERVER ERROR
   app.use((err, req, res, next) => {
-    console.error('❌ Server Error:', err.message);
+    console.error('❌ Server Error:', err.stack);
     res.status(500);
     res.render('errors/500', { pageTitle: 'Server Error', error: err });
   });

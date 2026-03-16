@@ -16,7 +16,7 @@ const page_logo = process.env.PAGELOGO
 export const index_view = async (req, res) => {
     try {
 
-        const sermons = await sermonService.findAll({limit:2, offset:0});
+        const sermons = await sermonService.findAll({ limit: 2, offset: 0 });
         //console.log(result.rows)
         res.render('index', {
             pageTitle: "Home",

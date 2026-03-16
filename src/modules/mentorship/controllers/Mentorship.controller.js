@@ -3,10 +3,10 @@ import * as service from '../services/Mentorship.service.js';
 export const create = async (req, res) => {
   try {
     const data = await service.create(req.body);
-    res.status(201).json({ success: true, data });
+    res.status(201).json({ success: true, redirectTo: "/mentorship" });
   } catch (err) {
     console.log(err)
-    res.status(500).json({ error: err });
+    res.status(500).json({ error: err, success: false, message: err.message });
   }
 };
 

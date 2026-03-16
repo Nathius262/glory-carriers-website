@@ -1,19 +1,20 @@
 import * as service from '../services/admin.Event.service.js';
-import {getPublicIdFromUrl} from '../../../utils/utils.js'
+import { getPublicIdFromUrl } from '../../../utils/utils.js'
 import cloudinary from '../../../config/cloudinaryConfig.js';
 
 export const findAll = async (req, res) => {
 
-  const {page, limit, offset} = req.pagination;
+  const { page, limit, offset } = req.pagination;
   try {
-    const data = await service.findAll({limit, offset});
+    const data = await service.findAll({ limit, offset });
     res.status(200).render('./admins/event_list', {
       success: true,
+      layout: 'admin',
       pageTitle: "Admin",
       events: data.events,
       totalItems: data.totalItems,
       totalPages: data.totalPages,
-      currentPage:page
+      currentPage: page
     });
   } catch (err) {
     res.status(500).render('errors/500', { error: err.message });
@@ -25,6 +26,7 @@ export const findById = async (req, res) => {
     const data = await service.findById(req.params.id);
     res.status(200).render('./admins/event_update', {
       success: true,
+      layout: 'admin',
       pageTitle: "Update Record",
       event: data,
     });
@@ -35,7 +37,7 @@ export const findById = async (req, res) => {
 
 export const create = async (req, res) => {
   try {
-    if (!req.files ||  !req.files['image']) {
+    if (!req.files || !req.files['image']) {
       return res.status(400).json({
         success: false,
         message: 'Missing required files (image)',
@@ -58,18 +60,18 @@ export const create = async (req, res) => {
 
     const data = await service.create(req_data);
 
-    res.status(201).json({ 
-      success: true, 
-      data 
+    res.status(201).json({
+      success: true,
+      data
     });
 
   } catch (err) {
     console.error('Create error:', err); // Log for debugging
 
-    res.status(500).json({ 
-      success: false, 
+    res.status(500).json({
+      success: false,
       message: 'Failed to create event',
-      error: err.message 
+      error: err.message
     });
   }
 };
@@ -96,24 +98,24 @@ export const update = async (req, res) => {
         updates.image_url = imageFile.path;
         if (currentImageUrl) {
           await cloudinary.uploader.destroy(
-            getPublicIdFromUrl(currentImageUrl), 
+            getPublicIdFromUrl(currentImageUrl),
             { resource_type: 'image' }
           );
         }
       }
     } catch (cloudinaryErr) {
       console.error('Cloudinary error:', cloudinaryErr);
-      return res.status(500).json({ 
-        success: false, 
-        message: "Error updating media files" 
+      return res.status(500).json({
+        success: false,
+        message: "Error updating media files"
       });
     }
 
     // Check if any updates are being made
     if (!Object.values(updates).some(val => val !== undefined)) {
-      return res.status(400).json({ 
-        success: false, 
-        message: "No valid fields provided for update" 
+      return res.status(400).json({
+        success: false,
+        message: "No valid fields provided for update"
       });
     }
 
@@ -123,9 +125,9 @@ export const update = async (req, res) => {
 
   } catch (err) {
     console.error('Update error:', err);
-    res.status(500).json({ 
-      success: false, 
-      error: err.message || "Internal server error" 
+    res.status(500).json({
+      success: false,
+      error: err.message || "Internal server error"
     });
   }
 };
@@ -133,70 +135,71 @@ export const update = async (req, res) => {
 
 export const destroy = async (req, res) => {
   try {
-      const { id } = req.params; // Extract id from params
-  
-      const event = await service.findById(id);
-      if (!event) {
-        return res.status(404).json({ 
-          success: false, 
-          message: "Event not found" 
-        });
-      }
-  
-      const { image_url: imageUrl } = event;
-  
-      
-  
-      try {
+    const { id } = req.params; // Extract id from params
 
-        if (imageUrl) {
-          const imagePublicId = getPublicIdFromUrl(imageUrl);
-          await cloudinary.uploader.destroy(imagePublicId, { 
-            resource_type: 'image' 
-          });
-        }
-      } catch (cloudinaryErr) {
-        console.error("Cloudinary deletion failed (orphaned files may exist):", cloudinaryErr);
-        res.status(500).json({ 
-          success: false, 
-          message: "Cloudinary deletion failed (orphaned files may exist): "+ cloudinaryErr,
-          error: err.message 
-        });
-      }
-  
-      const data = await service.destroy(id);
-  
-      res.status(200).json({ 
-        success: true, 
-        message: 'Deleted successfully', 
-        data,
-        redirectTo: "/admin/event"
-      });
-  
-    } catch (err) {
-      console.error("Delete error:", err); // Log for debugging
-      res.status(500).json({ 
-        success: false, 
-        message: "Failed to delete event",
-        error: err.message 
+    const event = await service.findById(id);
+    if (!event) {
+      return res.status(404).json({
+        success: false,
+        message: "Event not found"
       });
     }
+
+    const { image_url: imageUrl } = event;
+
+
+
+    try {
+
+      if (imageUrl) {
+        const imagePublicId = getPublicIdFromUrl(imageUrl);
+        await cloudinary.uploader.destroy(imagePublicId, {
+          resource_type: 'image'
+        });
+      }
+    } catch (cloudinaryErr) {
+      console.error("Cloudinary deletion failed (orphaned files may exist):", cloudinaryErr);
+      res.status(500).json({
+        success: false,
+        message: "Cloudinary deletion failed (orphaned files may exist): " + cloudinaryErr,
+        error: err.message
+      });
+    }
+
+    const data = await service.destroy(id);
+
+    res.status(200).json({
+      success: true,
+      message: 'Deleted successfully',
+      data,
+      redirectTo: "/admin/event"
+    });
+
+  } catch (err) {
+    console.error("Delete error:", err); // Log for debugging
+    res.status(500).json({
+      success: false,
+      message: "Failed to delete event",
+      error: err.message
+    });
+  }
 };
 
 export const renderCreate = async (req, res) => {
   try {
     res.status(200).render('./admins/event_create', {
-      pageTitle: "Create Event"
+      pageTitle: "Create Event",
+      layout: 'admin'
     });
   } catch (err) {
     res.status(500).render('errors/500', { error: err.message });
   }
 };
 
-export const findAllRvps =  async (req, res) => {
-  const {page, limit, offset} = req.pagination;
+export const findAllRvps = async (req, res) => {
+  const { page, limit, offset } = req.pagination;
   try {
-    const rvps = await service.findAllRvps({limit, offset});
+    const rvps = await service.findAllRvps({ limit, offset });
     res.status(200).render('./admins/event_rsvp_list', {
       success: true,
       pageTitle: "Admin - Event RSVPs",
@@ -206,6 +209,6 @@ export const findAllRvps =  async (req, res) => {
       currentPage: page
     });
   } catch (error) {
-    
+    res.status(500).render('errors/500', { error: error.message });
   }
 }

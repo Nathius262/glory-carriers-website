@@ -3,14 +3,14 @@ import capitalizeWords from '../../../utils/utils.js';
 import { getPublicIdFromUrl } from '../../../utils/utils.js'
 import cloudinary from '../../../config/cloudinaryConfig.js';
 
-
 export const findAll = async (req, res) => {
   const { page, limit, offset } = req.pagination
   try {
     const data = await service.findAll({ limit, offset });
     res.status(200).render('./admins/sermon_list', {
       success: true,
-      pageTitle: "Admin",
+      layout: "admin",
+      PageTitle: "Admin - Sermons",
       sermons: data.sermons,
       totalItems: data.totalItems,
       totalPages: data.totalPages,
@@ -18,7 +18,7 @@ export const findAll = async (req, res) => {
     });
   } catch (err) {
     console.log(err)
-    res.status(500).render('errors/500', { error: err.message });
+    res.status(500).render('errors/500', { error: err });
   }
 };
 
@@ -27,16 +27,19 @@ export const findById = async (req, res) => {
     const data = await service.findById(req.params.id);
     res.status(200).render('./admins/sermon_update', {
       success: true,
-      pageTitle: "Update Record",
+      pageTitle: "Admin - Update Record",
+      layout: "admin",
       sermon: data,
     });
   } catch (err) {
-    res.status(404).render('errors/404', { error: err.message });
+    console.log(err)
+    res.status(404).render('errors/404', { error: err });
   }
 };
 
 export const create = async (req, res) => {
   try {
+
     if (!req.files || !req.files['audio'] || !req.files['image']) {
       return res.status(400).json({
         success: false,
@@ -76,20 +79,10 @@ export const create = async (req, res) => {
     };
 
     const data = await service.create(req_data);
-
-    res.status(201).json({
-      success: true,
-      data
-    });
-
+    res.status(201).json({ success: true, redirectTo: "/admin/sermon", message: "Created successfully" });
   } catch (err) {
-    console.error('Create error:', err.message); // Log for debugging
-
-    res.status(500).json({
-      success: false,
-      message: 'Failed to create sermon',
-      error: err.message
-    });
+    console.log(err)
+    res.status(500).json({ error: err });
   }
 };
 
@@ -149,14 +142,10 @@ export const update = async (req, res) => {
 
     // Update the sermon
     const data = await service.update(id, updates);
-    res.status(200).json({ success: true, data });
-
+    res.status(200).json({ success: true, data, redirectTo: `/admin/sermon/${req.params.id}`, message: "Updated successfully" });
   } catch (err) {
-    console.error('Update error:', err);
-    res.status(500).json({
-      success: false,
-      error: err.message || "Internal server error"
-    });
+    console.log(err)
+    res.status(500).json({ error: err });
   }
 };
 
@@ -200,31 +189,21 @@ export const destroy = async (req, res) => {
     }
 
     const data = await service.destroy(id);
-
-    res.status(200).json({
-      success: true,
-      message: 'Deleted successfully',
-      data,
-      redirectTo: "/admin/sermon"
-    });
-
+    res.status(200).json({ success: true, message: 'Deleted successfully', redirectTo: "/admin/sermon" });
   } catch (err) {
-    console.error("Delete error:", err); // Log for debugging
-    res.status(500).json({
-      success: false,
-      message: "Failed to delete sermon",
-      error: err.message
-    });
+    console.log(err)
+    res.status(500).json({ error: err });
   }
 };
-
 
 export const renderCreate = async (req, res) => {
   try {
     res.status(200).render('./admins/sermon_create', {
-      pageTitle: "Create Sermon"
+      pageTitle: "Admin - Create Sermon",
+      layout: "admin",
     });
   } catch (err) {
-    res.status(500).render('errors/500', { error: err.message });
+    console.log(err)
+    res.status(500).render('errors/500', { error: err });
   }
 };

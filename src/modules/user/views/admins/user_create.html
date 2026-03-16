@@ -1,121 +1,126 @@
-<link rel="stylesheet" href="/assets/css/sb-admin-2.css">
-<link href="/assets/css/sb-admin-2.min.css" rel="stylesheet">
-<!-- Page Wrapper -->
-<div id="wrapper">
-
-  <!-- Sidebar -->
-  {{> admin_sidebar}}
-  <!-- End of Sidebar -->
-
-  <!-- Content Wrapper -->
-  <div id="content-wrapper" class="d-flex flex-column">
-
-    <!-- Main Content -->
-    <div id="content mt-5">
-
-      <!-- Topbar -->
-      {{> admin_navbar}}
-      <!-- End of Topbar -->
-
-      <!-- Begin Page Content -->
-      <div class="container-fluid">
-
-        <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-          <h1 class="h3 mb-0 text-gray-800">Users</h1>
+<div class="container-fluid py-4">
+    <!-- Page Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h3 mb-0 text-gray-800">Users</h1>
+            <p class="text-muted mb-0">Create new user accounts</p>
         </div>
-
-        <!-- Content Row -->
-        <div class="row">
-          {{> admin/usernav}}
-        
-        </div>
-
-        <!-- Content Row -->
-        <div class="row">
-          <div class="col-12 mb-4">
-            <!-- Approach -->
-            <div class="card shadow mb-4">
-              <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Create User</h6>
-              </div>
-              <div class="card-body">
-                <form id="create-new-user" class="user needs-validation" action="/admin/user/create" method="POST"
-                  novalidate>
-                  <div class="form-group">
-                    <input type="email" name="email" class="form-control form-control-user" id="exampleInputEmail"
-                      aria-describedby="emailHelp" placeholder="Enter Email Address..." required>
-                    <div class="invalid-feedback">
-                      Email is required
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <input type="text" name="username" class="form-control form-control-user" id="exampleInputUsername"
-                      aria-describedby="usernameHelp" placeholder="Username..." required>
-                    <div class="invalid-feedback">
-                      Username is required
-                    </div>
-                  </div>
-
-                  <div class="form-check form-check-inline my-3">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="is_staff" value="true">
-                    <label class="form-check-label" for="inlineCheckbox1">is staff?</label>
-                  </div>
-                  <div class="form-check form-check-inline my-3">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="is_admin" value="true">
-                    <label class="form-check-label" for="inlineCheckbox2">is Admin?</label>
-                  </div>
-
-                  <div class="form-group">
-                    <input type="password" name="password" class="form-control form-control-user"
-                      id="exampleInputPassword" placeholder="Password" required>
-                    <div class="invalid-feedback">
-                      password is required
-                    </div>
-
-                    <div class="form-group">
-                      <input type="password" name="confirmPassword" class="form-control form-control-user"
-                        id="exampleInputPasswordConfirm" placeholder="Confirm Password" required>
-                      <div class="invalid-feedback">
-                        password is required
-                      </div>
-                    </div>
-                  </div>
-                  <hr>
-                  <ul id="error" class="text-danger col-12"></ul>
-
-                  <div class="spinner-border col-12 d-none" id="status" role="status">
-                    <span class="sr-only">Loading...</span>
-                  </div>
-
-                  <button type="submit" id="btn" class="btn btn-primary btn-user btn-block">
-                    Register
-                  </button>
-                  <hr>
-                </form>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-      <!-- /.container-fluid -->
-
+        <a href="/admin/user" class="btn btn-secondary">
+            <i class="fas fa-arrow-left me-2"></i>Back to Users
+        </a>
     </div>
 
-  </div>
-  <!-- End of Content Wrapper -->
 
+    <!-- Create User Card -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-header bg-white py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        <i class="fas fa-user-plus me-2"></i>Create User
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <form id="create-new-user" class="needs-validation" action="/admin/user/create" method="POST"
+                        novalidate>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail" class="form-label">Email Address</label>
+                                    <input type="email" name="email" class="form-control" id="exampleInputEmail"
+                                        aria-describedby="emailHelp" placeholder="Enter Email Address..." required>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid email address.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="exampleInputUsername" class="form-label">Username</label>
+                                    <input type="text" name="username" class="form-control" id="exampleInputUsername"
+                                        aria-describedby="usernameHelp" placeholder="Enter username..." required>
+                                    <div class="invalid-feedback">
+                                        Please provide a username.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- User Role Checkboxes -->
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <label class="form-label">User Roles</label>
+                                <div class="d-flex gap-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                                            name="is_staff" value="true">
+                                        <label class="form-check-label" for="inlineCheckbox1">
+                                            <i class="fas fa-user-tie me-1"></i>Staff Member
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2"
+                                            name="is_admin" value="true">
+                                        <label class="form-check-label" for="inlineCheckbox2">
+                                            <i class="fas fa-crown me-1"></i>Administrator
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Password Fields -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword" class="form-label">Password</label>
+                                    <input type="password" name="password" class="form-control"
+                                        id="exampleInputPassword" placeholder="Enter password" required>
+                                    <div class="invalid-feedback">
+                                        Please provide a password.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="exampleInputPasswordConfirm" class="form-label">Confirm Password</label>
+                                    <input type="password" name="confirmPassword" class="form-control"
+                                        id="exampleInputPasswordConfirm" placeholder="Confirm password" required>
+                                    <div class="invalid-feedback">
+                                        Please confirm your password.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Error Messages -->
+                        <div class="row">
+                            <div class="col-12">
+                                <ul id="error" class="text-danger list-unstyled"></ul>
+                            </div>
+                        </div>
+
+                        <!-- Loading Spinner -->
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <div class="spinner-border text-primary d-none" id="status" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Form Actions -->
+                        <div class="d-flex gap-2 mt-4 w-100">
+                            <button type="submit" id="btn" class="btn btn-primary w-100">
+                                <i class="fas fa-user-plus me-2"></i>Create User
+                            </button>
+                            <a href="/admin/user" class="btn btn-outline-secondary">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<!-- End of Page Wrapper -->
 
-
-<!-- Core plugin JavaScript-->
-<script type="module" src="/assets/js/user.js"></script>
-
-
-<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-<!-- Custom scripts for all pages-->
-<script src="/assets/js/sb-admin-2.min.js"></script>
+<script type="module" src="/assets/js/form-handler.js"></script>

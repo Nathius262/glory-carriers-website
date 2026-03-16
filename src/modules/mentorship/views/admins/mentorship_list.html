@@ -1,29 +1,53 @@
+<div class="container-fluid py-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h3 mb-0">Mentorship Management</h1>
+    <a href="#" class="btn btn-primary">
+      <i class="fas fa-plus me-2"></i>Create New
+    </a>
+  </div>
 
-  <h1>Mentorship List</h1>
-  <a href="/admin/mentorship/create">Create New</a>
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <!-- Add your table headers here -->
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      {{#each mentorships}}
-        <tr>
-          <td>{{this.id}}></td>
-          <!-- Add your table cells here -->
-          <td>
-            <a href="/admin/mentorship/{{this.id}}>">Edit</a>
-            <form action="/admin/mentorship/{{ this.id}}>" method="POST" style="display: inline;">
-              <input type="hidden" name="_method" value="DELETE">
-              <button type="submit">Delete</button>
-            </form>
-          </td>
-        </tr>
-      {{/each}}
-    </tbody>
-    {{> pagination}}
-  </table>
-  
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead class="table-light">
+            <tr>
+              <th>ID</th>
+              <!-- Add your table headers here -->
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Created</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each mentorships}}
+            <tr>
+              <td>{{this.id}}</td>
+              <!-- Add your table cells here -->
+              <td>{{this.full_name}}</td>
+              <td><a href="mailto:{{this.email}}">{{this.email}}</a></td>
+              <td><a href="tel:{{this.phone_number}}">{{this.phone_number}}</a></td>
+              <td>{{formatDate this.createdAt}}</td>
+              <td>
+                <div class="btn-group btn-group-sm">
+                  <a href="/admin/mentorship/{{this.id}}" class="btn btn-outline-primary">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                  <button data-delete="mentorship-{{this.id}}" data-name="{{this.id}}"
+                    data-url="/admin/mentorship/{{this.id}}" class="btn btn-danger btn-sm">
+                    <i class="fas fa-trash me-1"></i>Delete
+                  </button>
+                </div>
+              </td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+
+      {{> pagination}}
+    </div>
+  </div>
+</div>

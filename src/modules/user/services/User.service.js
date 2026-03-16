@@ -4,7 +4,7 @@ import db from '../../../models/index.cjs';
 
 export const findAll = async () => {
   try {
-    return await User.findAll();
+    return await db.User.findAll();
   } catch (error) {
     throw new Error('Error fetching records: ' + error.message);
   }
@@ -12,7 +12,7 @@ export const findAll = async () => {
 
 export const findById = async (id) => {
   try {
-    const item = await User.findByPk(id);
+    const item = await db.User.findByPk(id);
     if (!item) throw new Error('Not found');
     return item;
   } catch (error) {

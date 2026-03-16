@@ -1,0 +1,37 @@
+/* AUTHENTICATION SECTION */
+main input {
+    width: 100%;
+    padding: 0.6rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+main form button {
+    background: #2834e2;
+    color: white;
+    padding: 0.7rem;
+    border: none;
+    border-radius: 6px;
+    width: 100%;
+    transition: all .4s linear;
+}
+
+main form button:hover {
+    background: #2834e2;
+}
+
+.fa-eye,
+.fa-eye-slash {
+    position: absolute;
+    right: 8px;
+    top: 40%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.role-btn.active {
+    background: #2834e2;
+    color: white;
+    border-color: #2834e2;
+}

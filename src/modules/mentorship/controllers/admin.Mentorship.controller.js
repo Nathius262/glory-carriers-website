@@ -7,6 +7,8 @@ export const findAll = async (req, res) => {
     res.status(200).render('./admins/mentorship_list', {
       success: true,
       pageTitle: "Admin",
+      layout: "admin", 
+      PageTitle: "Admin",
       mentorships: data.mentorships,
       totalItems: data.totalItems,
       totalPages: data.totalPages,
@@ -24,6 +26,8 @@ export const findById = async (req, res) => {
     res.status(200).render('./admins/mentorship_update', {
       success: true,
       pageTitle: "Update Record",
+      layout: "admin", 
+      PageTitle: "Admin",
       mentorship: data,
     });
   } catch (err) {
@@ -35,7 +39,7 @@ export const findById = async (req, res) => {
 export const create = async (req, res) => {
   try {
     const data = await service.create(req.body);
-    res.status(201).json({ success: true, data });
+    res.status(201).json({ success: true, redirectTo: "/admin/mentorship", message: "Created successfully" });
   } catch (err) {
     console.log(err)
     res.status(500).json({ error: err });
@@ -45,7 +49,7 @@ export const create = async (req, res) => {
 export const update = async (req, res) => {
   try {
     const data = await service.update(req.params.id, req.body);
-    res.status(200).json({ success: true, data });
+    res.status(200).json({ success: true, data, redirectTo: `/admin/mentorship/${req.params.id}`, message: "Updated successfully" });
   } catch (err) {
     console.log(err)
     res.status(500).json({ error: err });
@@ -55,7 +59,7 @@ export const update = async (req, res) => {
 export const destroy = async (req, res) => {
   try {
     const data = await service.destroy(req.params.id);
-    res.status(200).json({ success: true, message: 'Deleted successfully', data });
+    res.status(200).json({ success: true, message: 'Deleted successfully', redirectTo: "/admin/mentorship" });
   } catch (err) {
     console.log(err)
     res.status(500).json({ error: err });
@@ -65,7 +69,9 @@ export const destroy = async (req, res) => {
 export const renderCreate = async (req, res) => {
   try {
     res.status(200).render('./admins/mentorship_create', {
-      pageTitle: "Create Mentorship"
+      pageTitle: "Create Mentorship", 
+      layout: "admin", 
+      PageTitle: "Admin"
     });
   } catch (err) {
     console.log(err)

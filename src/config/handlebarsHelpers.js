@@ -1,4 +1,5 @@
 // src/config/handlebarsHelpers.js
+import truncate from 'truncate-html';
 
 export default function registerHelpers(handlebars) {
   handlebars.registerHelper('gt', (a, b) => a > b);
@@ -11,12 +12,6 @@ export default function registerHelpers(handlebars) {
   handlebars.registerHelper('findPrimaryOrFirst', function (images) {
     const primary = images.find(img => img.is_primary);
     return primary || images[0];
-  });
-  handlebars.registerHelper('formatDateTime', function (date) {
-    if (!date) return '';
-    const d = new Date(date);
-    const pad = num => num.toString().padStart(2, '0');
-    return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
   });
 
   handlebars.registerHelper('findAlternateImage', function (images) {
@@ -33,6 +28,24 @@ export default function registerHelpers(handlebars) {
     const words = text.split(' ');
     return words.slice(0, wordCount).join(' ') + (words.length > wordCount ? '...' : '');
   });
+  handlebars.registerHelper('truncateHTML', (html, wordCount) => {
+    if (typeof html !== 'string') return '';
+
+    // Strip HTML tags to count words correctly
+    const textOnly = html.replace(/<[^>]+>/g, '');
+    const words = textOnly.split(/\s+/);
+
+    if (words.length <= wordCount) {
+      return html; // no need to truncate
+    }
+
+    // Take first N words and rebuild safe HTML around them
+    const truncatedText = words.slice(0, wordCount).join(' ');
+
+    // Truncate the original HTML at the word boundary
+    return truncate(html, truncatedText.length, { ellipsis: '...' });
+  });
+
   handlebars.registerHelper('has', (set, value) => set.has(value));
   handlebars.registerHelper('anyImageIsPrimary', images => images.some(image => image.is_primary));
   handlebars.registerHelper('hasRoleByName', function (roles, roleName, options) {
@@ -42,5 +55,21 @@ export default function registerHelpers(handlebars) {
   handlebars.registerHelper('set', function (varName, varValue, options) {
     if (!options.data.root) options.data.root = {};
     options.data.root[varName] = varValue;
+  });
+  handlebars.registerHelper('contains', function(categoryId, categoryArray) {
+    if (!categoryArray || !Array.isArray(categoryArray)) return false;
+    
+    return categoryArray.some(function(category) {
+        return category.id === categoryId;
+    });
+  });
+  handlebars.registerHelper('stripTags', function(html) {
+    return html.replace(/<[^>]*>/g, '').substring(0, 100) + '...';
+  });
+  handlebars.registerHelper('formatDate', function(date) {
+    return new Date(date).toLocaleDateString();
+  });
+  handlebars.registerHelper('json', function(context) {
+    return JSON.stringify(context);
   });
 }
