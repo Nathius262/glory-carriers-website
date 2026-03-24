@@ -152,3 +152,58 @@ export const passwordChangedTemplate = (name) => `
     </div>
   </div>
 `;
+
+export const mentorshipUserConfirmationTemplate = (name) => `
+  <div style="font-family:Segoe UI, Arial; background:#f8f9fa; padding:20px;">
+    <div style="max-width:600px; margin:auto; background:#fff; padding:25px; border-radius:8px; border:1px solid #eee;">
+      
+      <h2 style="color:#2e3192;">Mentorship Request Received</h2>
+
+      <p>Hello <strong>${name}</strong>,</p>
+
+      <p>
+        We’ve successfully received your mentorship request. 
+        Thank you for reaching out to us.
+      </p>
+
+      <p>
+        Our team will carefully review your submission and the Senior Pastor Prophet Simon Thomas 
+        will be notified. You’ll be contacted shortly.
+      </p>
+
+      <p style="margin-top:20px;">
+        Stay blessed,<br/>
+        <strong>Glory Carriers Ministry</strong>
+      </p>
+    </div>
+  </div>
+`;
+
+export const mentorshipPastorNotificationTemplate = (data) => `
+  <div style="font-family:Segoe UI, Arial; background:#f8f9fa; padding:20px;">
+    <div style="max-width:600px; margin:auto; background:#fff; padding:25px; border-radius:8px; border:1px solid #eee;">
+      
+      <h2 style="color:#2e3192;">New Mentorship Request</h2>
+
+      <p>A new mentorship request has been submitted.</p>
+
+      <hr/>
+
+      <p><strong>Name:</strong> ${data.name}</p>
+      <p><strong>Email:</strong> ${data.email}</p>
+      <p><strong>Phone:</strong> ${data.phone_number || 'N/A'}</p>
+      <p><strong>Message:</strong></p>
+      <p style="background:#f1f1f1; padding:10px; border-radius:6px;">
+        ${data.description || 'No message provided'}
+      </p>
+
+      <hr/>
+
+      <p>Please follow up accordingly.</p>
+
+      <p style="margin-top:20px;">
+        – System Notification
+      </p>
+    </div>
+  </div>
+`;
