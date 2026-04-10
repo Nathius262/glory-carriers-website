@@ -1,0 +1,76 @@
+<div class="container-fluid py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3 mb-0">Update Member Role</h1>
+        <a href="/admin/department/{{member.department_id}}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left me-2"></i>Back to Department
+        </a>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+
+            <form action="/admin/department/members/role" id="update-form" class="needs-validation" method="POST"
+                novalidate>
+
+                <!-- Hidden Department -->
+                <input type="hidden" name="department_id" value="{{member.department_id}}" />
+
+                <div class="row">
+
+                    <!-- MEMBER SELECT -->
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="user_id" class="form-label">Select Member</label>
+                            <select name="user_id" id="user_id" class="form-select" required>
+                                <option value="">-- Select Member --</option>
+
+                                <option value="{{member.user.id}}" selected>
+                                    {{member.user.email}} ({{member.role.name}})
+                                </option>
+
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select a member.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ROLE SELECT -->
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="role_id" class="form-label">New Role</label>
+                            <select name="role_id" id="role_id" class="form-select" required>
+                                <option value="">-- Select Role --</option>
+
+                                {{#each member.department.roles}}
+                                <option value="{{this.id}}" {{#if (eq this.id ../member.role.id)}}selected{{/if}}>
+                                    {{this.name}}
+                                </option>
+                                {{/each}}
+
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select a role.
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="d-flex gap-2 mt-4">
+                    <button type="submit" class="btn btn-warning">
+                        <i class="fas fa-user-edit me-2"></i>Update Role
+                    </button>
+
+                    <a href="/admin/department/{{department.id}}" class="btn btn-outline-secondary">
+                        Cancel
+                    </a>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<script type="module" src="/assets/js/form-handler.js"></script>

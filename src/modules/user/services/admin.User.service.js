@@ -48,23 +48,50 @@ export const findById = async (id) => {
   }
 };
 
-export const create = async ({ email, password, role_ids = [] }) => {
+export const create = async ({
+  email,
+  password,
+  role_ids = [],
+  profile = {},
+  transaction
+}) => {
   try {
-
     const hashed_password = await bcrypt.hash(password, 10);
-    const user_role = await db.Role.findOne({ where: { name: 'user' } });
+
+    const user_role = await db.Role.findOne({
+      where: { name: 'user' },
+      transaction
+    });
+
     if (!user_role) throw new Error("default role 'user' not found");
 
-    const new_user = await db.User.create({ email, password: hashed_password });
+    const new_user = await db.User.create({
+      email,
+      password: hashed_password
+    }, { transaction });
 
-    const user_assigned_roles = role_ids.length > 0 ? [user_role.id, ...role_ids] : [user_role.id];
-    await new_user.setRoles(user_assigned_roles);
-    const created_user = await findById(new_user.id);
+    const user_assigned_roles =
+      role_ids.length > 0
+        ? [user_role.id, ...role_ids]
+        : [user_role.id];
 
-    return created_user;
+    await new_user.setRoles(user_assigned_roles, { transaction });
+
+    await db.Profile.create({
+      user_id: new_user.id,
+      first_name: profile.first_name,
+      last_name: profile.last_name,
+      phone_number: profile.phone_number,
+      address: profile.address,
+      occupation: profile.occupation,
+      gender: profile.gender,
+      date_of_birth: profile.date_of_birth
+    }, { transaction });
+
+    return new_user;
 
   } catch (error) {
-    throw new Error('Error creating record: ' + error.message);
+    throw new Error('Error creating user: ' + error.message);
   }
 };
 
