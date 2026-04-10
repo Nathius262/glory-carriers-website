@@ -26,7 +26,6 @@
                             <thead class="table-light">
                                 <tr>
                                     <th scope="col">ID</th>
-                                    <th scope="col">Username</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Roles</th>
                                     <th scope="col">Status</th>
@@ -37,12 +36,7 @@
                                 {{#each users}}
                                 <tr>
                                     <th scope="row" class="fw-normal">{{this.id}}</th>
-                                    <td>
-                                        <a href="/admin/user/{{this.id}}"
-                                            class="text-primary text-decoration-none fw-bold">
-                                            {{this.username}}
-                                        </a>
-                                    </td>
+
                                     <td>{{this.email}}</td>
                                     <td>
                                         {{#each this.roles}}

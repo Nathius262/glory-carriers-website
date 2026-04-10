@@ -17,14 +17,13 @@ module.exports = (sequelize, DataTypes) => {
         otherKey: 'roleId',
         as: 'roles'
       });
+      User.hasOne(models.Profile, {
+        foreignKey: 'user_id',
+        as: 'profile'
+      });
     }
   }
   User.init({
-    username: {
-      type: DataTypes.STRING,
-      unique: true,
-      allowNull: false
-    },
     email: {
       type: DataTypes.STRING,
       unique: true,

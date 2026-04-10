@@ -30,12 +30,16 @@ export const findById = async (id) => {
     const item = await db.User.findByPk(id,
       {
         attributes: { exclude: ['password'] }, // Exclude sensitive fields
-        include: {
+        include: [{
           model: db.Role,
           as: 'roles',
           attributes: ['id', 'name'],
           through: { attributes: [] }
-        }
+        }, {
+          model: db.Profile,
+          as: 'profile',
+          attributes: ['first_name', 'last_name', 'phone_number']
+        }]
       });
     if (!item) throw new Error('Not found');
     return item;
@@ -44,14 +48,14 @@ export const findById = async (id) => {
   }
 };
 
-export const create = async ({ username, email, password, role_ids = [] }) => {
+export const create = async ({ email, password, role_ids = [] }) => {
   try {
 
     const hashed_password = await bcrypt.hash(password, 10);
     const user_role = await db.Role.findOne({ where: { name: 'user' } });
     if (!user_role) throw new Error("default role 'user' not found");
 
-    const new_user = await db.User.create({ username, email, password: hashed_password });
+    const new_user = await db.User.create({ email, password: hashed_password });
 
     const user_assigned_roles = role_ids.length > 0 ? [user_role.id, ...role_ids] : [user_role.id];
     await new_user.setRoles(user_assigned_roles);

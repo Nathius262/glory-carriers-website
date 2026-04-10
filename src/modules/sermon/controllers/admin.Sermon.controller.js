@@ -82,6 +82,7 @@ export const create = async (req, res) => {
     res.status(201).json({ success: true, redirectTo: "/admin/sermon", message: "Created successfully" });
   } catch (err) {
     console.log(err)
+    console.log(err.message)
     res.status(500).json({ error: err });
   }
 };

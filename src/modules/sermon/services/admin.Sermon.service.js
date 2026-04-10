@@ -2,12 +2,12 @@ import db from '../../../models/index.cjs';
 
 
 
-export const findAll = async ({limit, offset}) => {
+export const findAll = async ({ limit, offset }) => {
   try {
-    const {rows: sermons, count: totalItems } = await db.Sermon.findAndCountAll({
+    const { rows: sermons, count: totalItems } = await db.Sermon.findAndCountAll({
       limit,
       offset,
-      distinct:true,
+      distinct: true,
       order: [['createdAt', 'DESC'], ['updatedAt', 'DESC']],
     })
     return {
@@ -16,7 +16,7 @@ export const findAll = async ({limit, offset}) => {
       totalPages: Math.ceil(totalItems / limit)
     };
   } catch (error) {
-   console.log(error)
+    console.log(error)
     throw new Error('Error fetching records: ' + error.message);
   }
 };
@@ -27,7 +27,7 @@ export const findById = async (id) => {
     if (!item) throw new Error('Not found');
     return item;
   } catch (error) {
-   console.log(error)
+    console.log(error)
     throw new Error('Error fetching record: ' + error.message);
   }
 };
@@ -36,7 +36,8 @@ export const create = async (data) => {
   try {
     return await db.Sermon.create(data);
   } catch (error) {
-   console.log(error)
+    console.log(error)
+    console.log(error.message)
     throw new Error('Error creating record: ' + error.message);
   }
 };
@@ -47,7 +48,7 @@ export const update = async (id, data) => {
     if (!item) throw new Error('Not found');
     return await item.update(data);
   } catch (error) {
-   console.log(error)
+    console.log(error)
     throw new Error('Error updating record: ' + error.message);
   }
 };
@@ -58,7 +59,7 @@ export const destroy = async (id) => {
     if (!item) throw new Error('Not found');
     return await item.destroy();
   } catch (error) {
-   console.log(error)
+    console.log(error)
     throw new Error('Error deleting record: ' + error.message);
   }
 };

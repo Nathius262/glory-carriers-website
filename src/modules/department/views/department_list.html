@@ -1,0 +1,31 @@
+<style>
+    .department-name:hover{
+        transform: translateY(-10%); 
+        transition: 1s transform linear;
+    }
+</style>
+
+<main>
+    <section class="mt-5 pt-5 mb-5">
+     <div class="container mt-5">
+         <div class="mt-5 py-5 ft-upper fw-bold text-center fs-5" style="color:var(--fire-red)">Join a Department</div>
+     
+         <div class="row justify-content-center align-items-center">
+            {{#each departments}}
+             <a href="/department/{{this.id}}" class="col-sm-4 mb-4 department-name">
+                 <div class="">
+                     <img width="100%" src="{{this.image_url}}" alt="{{this.name}}">
+                 </div>
+                 <div class="text-secondary text-center ft-upper fs-6">
+                     {{this.name}}
+                 </div>
+             </a>
+             {{/each}}
+         </div>
+     </div>
+
+    </section>
+ </main>
+
+ <div class="ellipse_circle"></div>
+<div class="ellipse_circle_blue" ></div>

@@ -1,8 +1,8 @@
 
   <div class="container-fluid py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-      <h1 class="h3 mb-0">Membership Management</h1>
-      <a href="/admin/membership/create" class="btn btn-primary">
+      <h1 class="h3 mb-0">Department Management</h1>
+      <a href="/admin/department/create" class="btn btn-primary">
         <i class="fas fa-plus me-2"></i>Create New
       </a>
     </div>
@@ -21,7 +21,7 @@
               </tr>
             </thead>
             <tbody>
-              {{#each memberships}}
+              {{#each departments}}
                 <tr>
                   <td>{{this.id}}</td>
                   <!-- Add your table cells here -->
@@ -29,11 +29,11 @@
                   <td>{{formatDate this.createdAt}}</td>
                   <td>
                     <div class="btn-group btn-group-sm">
-                      <a href="/admin/membership/{{this.id}}" class="btn btn-outline-primary">
+                      <a href="/admin/department/{{this.id}}" class="btn btn-outline-primary">
                         <i class="fas fa-edit"></i>
                       </a>
-                      <button data-delete="membership-{{this.id}}" data-name="{{this.id}}" 
-                          data-url="/admin/membership/{{this.id}}" class="btn btn-danger btn-sm"
+                      <button data-delete="department-{{this.id}}" data-name="{{this.id}}" 
+                          data-url="/admin/department/{{this.id}}" class="btn btn-danger btn-sm"
                       >
                           <i class="fas fa-trash me-1"></i>Delete
                       </button>

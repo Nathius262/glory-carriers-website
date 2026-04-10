@@ -1,11 +1,11 @@
 import express from 'express';
 import useModuleViews from '../../../middlewares/moduleViews.js';
 import {withPagination} from '../../../middlewares/paginations.js';
-import * as controller from '../controllers/admin.Membership.controller.js';
+import * as controller from '../controllers/admin.Department.controller.js';
 
 const router = express.Router();
 
-router.use(useModuleViews('membership'));
+router.use(useModuleViews('department'));
 
 // Admin view routes
 router.route('/')
