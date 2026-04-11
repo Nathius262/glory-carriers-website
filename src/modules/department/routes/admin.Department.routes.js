@@ -16,7 +16,9 @@ router.route('/')
   .get(withPagination(10), controller.findAll)
   .post(controller.create);
 
-router.get('/create', controller.renderCreate);
+router.route('/create')
+  .get(controller.renderCreate)
+  .post(controller.create);
 
 router.route('/:id')
   .get(controller.findById)

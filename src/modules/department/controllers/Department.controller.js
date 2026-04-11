@@ -2,6 +2,7 @@ import * as service from '../services/Department.service.js';
 import db from '../../../models/index.cjs';
 import * as userService from '../../user/services/admin.User.service.js';
 import * as memberService from '../services/Department.service.js';
+import { sendEmail, newMemberWelcomeTemplate } from '../../../utils/email.js';
 
 export const register = async (req, res) => {
   const transaction = await db.sequelize.transaction();
@@ -46,9 +47,21 @@ export const register = async (req, res) => {
     // ✅ Commit everything
     await transaction.commit();
 
+    const department = await service.findById(department_id);
+
+    await sendEmail({
+      to: user.email,
+      subject: "Welcome to Your Department",
+      html: newMemberWelcomeTemplate({
+        first_name,
+        department_name: department.name
+      })
+    });
+
     res.status(201).json({
       success: true,
-      message: "Registration successful"
+      message: "Registration successful",
+      redirectTo: `/department/${department_id}`
     });
 
   } catch (error) {

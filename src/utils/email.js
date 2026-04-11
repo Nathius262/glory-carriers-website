@@ -207,3 +207,52 @@ export const mentorshipPastorNotificationTemplate = (data) => `
     </div>
   </div>
 `;
+
+
+export const newMemberWelcomeTemplate = ({
+  first_name,
+  department_name
+}) => {
+  return `
+    <div style="font-family: Arial, sans-serif; background-color: #f8f9fa; padding: 20px;">
+      
+      <div style="max-width: 600px; margin: auto; background: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+        
+        <!-- Header -->
+        <div style="background-color: #1a3a5f; color: #ffffff; padding: 20px; text-align: center;">
+          <h2 style="margin: 0;">Welcome to GCMI</h2>
+        </div>
+
+        <!-- Body -->
+        <div style="padding: 30px;">
+          <h3 style="margin-top: 0;">Hello ${first_name},</h3>
+
+          <p style="line-height: 1.6; color: #333;">
+            Your registration was successful, and you have been added as a member of the 
+            <strong>${department_name}</strong> department.
+          </p>
+
+          <p style="line-height: 1.6; color: #333;">
+            We are glad to have you onboard. Stay committed, remain faithful, and be ready to serve diligently.
+          </p>
+
+          <p style="line-height: 1.6; color: #333;">
+            If you have any questions or need guidance, feel free to reach out to your department leader.
+          </p>
+
+          <div style="margin-top: 30px;">
+            <p style="margin: 0;">Blessings,</p>
+            <p style="margin: 0;"><strong>GCMI Team</strong></p>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div style="background-color: #f1f1f1; padding: 15px; text-align: center; font-size: 12px; color: #777;">
+          © ${new Date().getFullYear()} GCMI. All rights reserved.
+        </div>
+
+      </div>
+
+    </div>
+  `;
+};
