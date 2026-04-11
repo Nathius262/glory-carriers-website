@@ -48,7 +48,7 @@ async function seedAdmin(queryInterface, Sequelize) {
 
     const rolesToInsert = ['admin', 'staff', 'user']
       .filter(name => !existingRoleNames.includes(name))
-      .map(name => ({ name, created_at: new Date(), updated_at: new Date() }));
+      .map(name => ({ name, createdAt: new Date(), updatedAt: new Date() }));
 
     if (rolesToInsert.length > 0) {
       await queryInterface.bulkInsert('roles', rolesToInsert);
@@ -73,11 +73,11 @@ async function seedAdmin(queryInterface, Sequelize) {
       // Insert admin user
       await queryInterface.bulkInsert('users', [
         {
-          username: process.env.USER_ADMIN_USERNAME,
+          //username: process.env.USER_ADMIN_USERNAME,
           email: process.env.USER_ADMIN_EMAIL,
           password: hashedPassword,
-          created_at: new Date(),
-          updated_at: new Date(),
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
       ]);
 
@@ -87,10 +87,10 @@ async function seedAdmin(queryInterface, Sequelize) {
 
       // Associate admin with all roles
       const userRoles = roles.map(role => ({
-        user_id: adminUser[0].id,
-        role_id: role.id,
-        created_at: new Date(),
-        updated_at: new Date(),
+        userId: adminUser[0].id,
+        roleId: role.id,
+        createdAt: new Date(),
+        updatedAt: new Date(),
       }));
 
       await queryInterface.bulkInsert('user_roles', userRoles);
@@ -120,8 +120,8 @@ module.exports = {
 
       // Delete only user_roles associated with this admin
       await queryInterface.bulkDelete('user_roles', {
-        user_id: adminUserId,
-        role_id: {
+        userId: adminUserId,
+        roleId: {
           [Sequelize.Op.in]: Sequelize.literal(
             `(SELECT id FROM roles WHERE name IN ('admin','staff','user'))`
           ),
@@ -138,10 +138,10 @@ module.exports = {
     const [roles] = await queryInterface.sequelize.query(
       `SELECT r.id, r.name
        FROM roles r
-       LEFT JOIN user_roles ur ON r.id = ur.role_id
+       LEFT JOIN user_roles ur ON r.id = ur.roleId
        WHERE r.name IN ('admin','staff','user')
        GROUP BY r.id, r.name
-       HAVING COUNT(ur.user_id) = 0;`
+       HAVING COUNT(ur.userId) = 0;`
     );
 
     if (roles.length > 0) {
