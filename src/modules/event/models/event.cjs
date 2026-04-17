@@ -15,30 +15,30 @@ module.exports = (sequelize, DataTypes) => {
   }
   Event.init({
     title: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      description: {
-        type: DataTypes.TEXT
-      },
-      image_url: {
-        type: DataTypes.STRING
-      },
-      start_date: {
-        type: DataTypes.DATE,
-        allowNull:false
-      },
-      end_date: {
-        type: DataTypes.DATE
-      },
-      is_recurring:{
-        type:DataTypes.BOOLEAN,
-        defaultValue: false
-      },
-      is_headline:{
-        type:DataTypes.BOOLEAN,
-        defaultValue: false
-      }
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    description: {
+      type: DataTypes.TEXT
+    },
+    image_url: {
+      type: DataTypes.STRING
+    },
+    start_date: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    end_date: {
+      type: DataTypes.DATE
+    },
+    is_recurring: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
+    is_headline: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    }
   }, {
     sequelize,
     modelName: 'Event',

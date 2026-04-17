@@ -9,7 +9,7 @@ export const findAll = async ({ limit, offset }) => {
       limit,
       offset,
       distinct: true,
-      order: [['createdAT', 'DESC'], ['updatedAt', 'DESC']]
+      order: [['createdAt', 'DESC'], ['updatedAt', 'DESC']]
     });
     return {
       events,

@@ -17,6 +17,7 @@ export const findAll = async (req, res) => {
       currentPage: page
     });
   } catch (err) {
+    console.log(err)
     res.status(500).render('errors/500', { error: err.message });
   }
 };
