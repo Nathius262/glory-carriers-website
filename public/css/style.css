@@ -1073,3 +1073,69 @@ MEDIA QUERY  @ screen size below 438
         transform: scale(0.9);
     }
 }
+
+.count-box {
+    background: linear-gradient(135deg, #ffffff, #f1f3f5);
+    padding: 12px 14px;
+    border-radius: 12px;
+    text-align: center;
+    min-width: 65px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease;
+}
+
+.countdown-pill {
+    display: inline-block;
+    background: linear-gradient(135deg, #dc3545, #b02a37);
+    color: #fff;
+    padding: 12px 22px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 35px;
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+}
+
+.count-box:hover {
+    transform: translateY(-2px);
+}
+
+.count-box span {
+    display: block;
+    font-size: 22px;
+    /* increased */
+    font-weight: 700;
+    color: #dc3545;
+    line-height: 1;
+}
+
+.count-box small {
+    font-size: 11px;
+    font-weight: 500;
+    color: #6c757d;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.event-countdown .fw-bold {
+    font-size: 20px;
+    font-weight: 800;
+    color: #dc3545;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.count-box span {
+    animation: pulse 2s infinite;
+}

@@ -1,0 +1,53 @@
+<script>
+    (function () {
+        const id = "{{e.id}}";
+
+        const startDate = new Date("{{formatDate e.start_date 'YYYY-MM-DDTHH:mm:ss'}}");
+        const endDate = "{{e.end_date}}"
+            ? new Date("{{formatDate e.end_date 'YYYY-MM-DDTHH:mm:ss'}}")
+            : null;
+
+        const label = document.getElementById(`countdown-label-${id}`);
+        const boxes = document.getElementById(`countdown-boxes-${id}`);
+
+        function updateCountdown() {
+            const now = new Date();
+
+            // Event Ended
+            if (endDate && now > endDate) {
+                label.innerText = "Event Ended";
+                boxes.style.display = "none";
+                return;
+            }
+
+            // Live
+            if (now >= startDate && (!endDate || now <= endDate)) {
+                label.innerText = "Live Now";
+                boxes.style.display = "none";
+                return;
+            }
+
+            // Countdown
+            const diff = startDate - now;
+
+            if (diff <= 0) return;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / (1000 * 60)) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
+
+            label.innerText = days > 0
+                ? `${days} day${days > 1 ? 's' : ''} to go`
+                : "Starting Today";
+
+            document.getElementById(`days-${id}`).innerText = days;
+            document.getElementById(`hours-${id}`).innerText = hours;
+            document.getElementById(`minutes-${id}`).innerText = minutes;
+            document.getElementById(`seconds-${id}`).innerText = seconds;
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    })();
+</script>

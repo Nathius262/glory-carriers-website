@@ -82,34 +82,55 @@
         </div>
     </section>
 
-    <section class="about pt-5 mt-0" id="event-newyear">
+    {{#if event}}
+    <section class="about pt-5 mt-0" id="event-{{event.id}}">
         <div class="container" style="overflow-x: hidden;">
             <div class="row align-items-center">
+
+                <!-- Image -->
                 <div class="col-lg-8 col-md-7 mb-4">
+                    <div class="mb-4">
+                        {{> event-countdown-label e=event}}
+                        {{> event-countdown-boxes e=event}}
+                        {{> event-countdown-js e=event}}
+                    </div>
                     <div>
-                        <img width="100%" src="/assets/img/theme1.jpg" alt="Happy New Year 2026">
+                        <img width="100%" src="{{event.image_url}}" alt="{{event.title}}">
                     </div>
                 </div>
 
-                <div
-                    class="col-lg-4 col-md-5 mb-4 justify-content-md-end justify-content-center text-md-end text-center align-items-center scroll-x-down-el">
-                    <h4 class="text-color-blue ft-upper">Welcome</h4>
-                    <h2 class="text-color-blue ft-upper" style="letter-spacing: 10px;">
-                        Happy New Year
+                <!-- Content -->
+                <div class="col-lg-4 col-md-5 mb-4 text-md-end text-center">
+                    <h4 class="text-color-blue ft-upper">Upcoming Event</h4>
+
+                    <h2 class="text-color-blue ft-upper" style="letter-spacing: 5px;">
+                        {{event.title}}
                     </h2>
-                    <p>
-                        Welcome to <strong>2026</strong> — a year of fresh beginnings, renewed hope,
-                        and endless possibilities. May this new year bring peace, growth,
-                        and joy to you and your loved ones.
+
+                    <!-- Date -->
+                    <p class="text-muted mb-2">
+                        {{formatDate event.start_date "MMMM D, YYYY"}}
+                        {{#if event.end_date}}
+                        - {{formatDate event.end_date "MMMM D, YYYY"}}
+                        {{/if}}
                     </p>
-                    <a style="letter-spacing: 0.1rem" href="#" data-bs-toggle="modal" data-bs-target="#eventModal"
-                        data-title="Happy New Year 2026" data-image="/assets/img/theme1.jpg">
-                        celebrate with us
+
+
+                    <!-- Truncated Description -->
+                    <p>
+                        {{{truncateHTML event.description 40}}}
+                    </p>
+
+                    <!-- CTA -->
+                    <a style="letter-spacing: 0.1rem" href="/event">
+                        See Details
                     </a>
                 </div>
+
             </div>
         </div>
     </section>
+    {{/if}}
 
 
     <!-- <section class="about pt-5 mt-0" id="event-carol">

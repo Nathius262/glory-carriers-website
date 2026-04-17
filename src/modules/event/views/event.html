@@ -1,185 +1,117 @@
-<link rel="stylesheet" href="/assets/css/sb-admin-2.css">
-<link rel="stylesheet" href="/assets/css/sb-admin-2.min.css">
-
 <main class="mt-5">
 
-  <div id="carouselExample" class="carousel slide mt-5" data-bs-ride="carousel">
-  <!-- Indicators -->
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="1" aria-label="Slide 2"></button>
-  </div>
-
-  <div class="carousel-inner">
-    <!-- Slide 1 -->
-    <div class="carousel-item active">
-      <img src="/assets/img/event-1.jpg" class="d-block w-100" alt="Kabod’25 Conference Worship">
-      <div class="carousel-caption d-none d-md-block fw-bold">
-        <!-- <h2 class="h1 fw-bold text-uppercase">Kabod’25</h2>
-        <p style="color: var(--bg-body);" class="lead">“The Manifestation of His Glory” — 27–30 November 2025</p> -->
-      </div>
-    </div>
-
-    <!-- Slide 2 -->
-    <div class="carousel-item">
-      <img src="/assets/img/event-2.jpg" class="d-block w-100" alt="Kabod’25 Banner">
-      <div class="carousel-caption d-none d-md-block fw-bold">
-        <!-- <h2 class="h1 fw-bold text-uppercase">Join the Move of Glory</h2>
-        <p style="color: var(--bg-body);" class="lead">Sheraton Hotel, Makurdi — Experience the Presence Like Never Before</p> -->
-      </div>
-    </div>
-  </div>
-
-  <!-- Controls -->
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-
-
-  <div class="container">
-
-    <!-- Outer Row -->
-    <div class="row justify-content-center">
-
+  <!-- Event Banner -->
+  <div class="container mt-5">
+    <div class="row">
       <div class="col-12">
+        <img src="{{event.image_url}}" class="w-100 rounded-3 shadow-sm" alt="{{event.title}}">
+      </div>
+    </div>
+  </div>
 
-        <div class="card o-hidden border-0 my-5">
-          <div class="card-body p-0">
-            <!-- Nested Row within Card Body -->
-            <div class="row align-items-center">
+  <div class="container mt-5">
 
-              <div class="col-lg-6 col-12 mt-md-0 mt-2 d-lg-block bg-login-image">
-                <div class="container">
-                  <h2 style="color: var(--bg-midnight-blue);" class="ft-upper fw-bold fs-1 text-sm-start text-center">
-                    Kabod’25: <span>“Anticipation”</span>
-                  </h2>
+    <div class="row">
 
-                  <p style="color: var(--bg-body);" class="text-start">
-                    Join us for <strong>Kabod’25</strong>, a divine gathering designed to ignite revival and awaken the
-                    consciousness of God's glory across the nations. This global conference brings believers together in
-                    unity, revelation, and transformation — a time of outpouring and deep encounters with the Holy Spirit.
-                  </p>
+      <!-- LEFT: EVENT DETAILS -->
+      <div class="col-lg-7 col-12">
 
-                  <h2 class="fw-bold">About the Conference</h2>
-                  <hr>
-                  <h4>Kabod’25 aims to:</h4>
+        <h1 class="fw-bold text-uppercase mb-3">
+          {{event.title}}
+        </h1>
 
-                  <ul style="color: var(--bg-body);" class="text-start">
-                    <li><p>Deepen spiritual understanding — unveiling the dimensions of God’s glory and power.</p></li>
-                    <li><p>Foster revival and growth — empowering believers to live as true carriers of divine presence.</p></li>
-                    <li><p>Inspire transformation — equipping attendees to impact their world with the reality of Christ.</p></li>
-                  </ul>
+        <!-- Date -->
+        <p class="text-muted fs-5 mb-3">
+          {{formatDate event.start_date "MMMM D, YYYY"}}
+          {{#if event.end_date}}
+          - {{formatDate event.end_date "MMMM D, YYYY"}}
+          {{/if}}
+        </p>
 
-                  <h4>Who Should Attend?</h4>
-                  <p style="color: var(--bg-body);" class="text-start">
-                    Kabod’25 is open to everyone hungry for more of God — ministers, believers, leaders, and seekers
-                    desiring a deeper walk with the Spirit. Whether you’re new in faith or seasoned in ministry, this
-                    conference will be a defining moment in your spiritual journey.
-                  </p>
+        <!-- 🔥 COUNTDOWN (Reusable Partial) -->
+        <div class="mb-4">
+          {{> event-countdown-label e=event}}
+          {{> event-countdown-boxes e=event}}
+          {{> event-countdown-js e=event}}
+        </div>
 
-                  <h4>Date and Location</h4>
+        <hr>
 
-                  <ul style="color: var(--bg-body);" class="text-start">
-                    <li><p><strong>Date:</strong> 27–29 November, 2025</p></li>
-                    <li><p><strong>Location:</strong> Sheraton Hotel, Makurdi, Benue State</p></li>
-                  </ul>
+        <!-- Description -->
+        <div class="event-description mt-4">
+          {{{event.description}}}
+        </div>
 
-                  <p style="color: var(--bg-body);" class="text-start">
-                    We look forward to welcoming you to <strong>Kabod’25</strong> — where His glory shall be revealed.
-                  </p>
-                </div>
+      </div>
+
+      <!-- RIGHT: REGISTRATION -->
+      <div class="col-lg-5 col-12">
+
+        <div class="card shadow-sm border-0 sticky-top" style="top: 100px;">
+          <div class="card-body">
+
+            <h4 class="text-center mb-4">Register for {{event.title}}</h4>
+
+            <form id="registerEvent" class="user needs-validation" action="/event/rvp" method="POST" novalidate>
+
+              <!-- IMPORTANT: Pass event ID -->
+              <input type="hidden" name="event_id" value="{{event.id}}">
+
+              <div class="form-group">
+                <input type="text" name="name" class="form-control rounded-1" placeholder="Full Name..." required>
+                <div class="invalid-feedback">Full name is required.</div>
               </div>
 
-              <div class="col-lg-6 col-12">
-                <div class="">
-                  <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">Register for Kabod’25</h1>
-                  </div>
-                  <form id="registerEvent" class="user needs-validation" action="/event/rvp" method="POST" novalidate>
-                    <div class="form-group">
-                      <input type="text" name="name" class="form-control rounded-1 form-control-user" id="exampleInputName"
-                        placeholder="Enter Your Full Name..." required>
-                      <div class="invalid-feedback">
-                        Full name is required.
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <input type="email" name="email" class="form-control rounded-1 form-control-user" id="exampleInputEmail"
-                        placeholder="Enter Email Address..." required>
-                      <div class="invalid-feedback">
-                        Email is required.
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <input type="text" name="phone" class="form-control rounded-1 form-control-user" id="exampleInputPhone"
-                        placeholder="Phone Number..." required>
-                      <div class="invalid-feedback">
-                        Phone number is required.
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <textarea name="address" rows="3" class="form-control rounded-1 form-control-user" id="exampleInputLocation"
-                        placeholder="Address..." required></textarea>
-                      <div class="invalid-feedback">
-                        Address is required.
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <input type="text" name="state" class="form-control rounded-1 form-control-user" id="exampleInputState"
-                        placeholder="State..." required>
-                      <div class="invalid-feedback">
-                        State is required.
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <select name="attendance_mode" class="form-control rounded-1" required>
-                        <option value="on_site" selected>On Site</option>
-                        <option value="online">Online</option>
-                      </select>
-                      <div class="invalid-feedback">Please select your mode of attendance.</div>
-                    </div>
-                    <div class="form-group">
-                      <select name="gender" class="form-control rounded-1" required>
-                        <option value="" selected disabled>Select Gender...</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                      </select>
-                      <div class="invalid-feedback">
-                        Gender is required.
-                      </div>
-                    </div>
-
-                    <hr>
-                    <ul id="error" class="text-danger col-12"></ul>
-
-                    <div class="spinner-border col-12 d-none" id="status" role="status">
-                      <span class="sr-only">Loading...</span>
-                    </div>
-
-                    <button type="submit" id="btn" class="btn btn-primary btn-user btn-block">
-                      Register
-                    </button>
-                    <hr>
-                  </form>
-                  <div class="text-center">
-                    <a class="small" href="#">Enroll in our Healing School</a>
-                  </div>
-
-                  <hr>
-
-                  <div class="text-center">
-                    <a class="small" href="#">Become a Member</a>
-                  </div>
-                </div>
+              <div class="form-group">
+                <input type="email" name="email" class="form-control rounded-1" placeholder="Email Address..." required>
+                <div class="invalid-feedback">Email is required.</div>
               </div>
 
-            </div>
+              <div class="form-group">
+                <input type="text" name="phone" class="form-control rounded-1" placeholder="Phone Number..." required>
+                <div class="invalid-feedback">Phone number is required.</div>
+              </div>
+
+              <div class="form-group">
+                <textarea name="address" rows="3" class="form-control rounded-1" placeholder="Address..."
+                  required></textarea>
+                <div class="invalid-feedback">Address is required.</div>
+              </div>
+
+              <div class="form-group">
+                <input type="text" name="state" class="form-control rounded-1" placeholder="State..." required>
+                <div class="invalid-feedback">State is required.</div>
+              </div>
+
+              <div class="form-group">
+                <select name="attendance_mode" class="form-control rounded-1" required>
+                  <option value="on_site">On Site</option>
+                  <option value="online">Online</option>
+                </select>
+                <div class="invalid-feedback">Select attendance mode.</div>
+              </div>
+
+              <div class="form-group">
+                <select name="gender" class="form-control rounded-1" required>
+                  <option value="" disabled selected>Select Gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+                <div class="invalid-feedback">Gender is required.</div>
+              </div>
+
+              <hr>
+
+              <ul id="error" class="text-danger"></ul>
+
+              <div class="spinner-border d-none" id="status" role="status"></div>
+
+              <button type="submit" id="btn" class="btn btn-primary w-100">
+                Register Now
+              </button>
+
+            </form>
+
           </div>
         </div>
 
@@ -190,5 +122,3 @@
   </div>
 
 </main>
-
-<script src="/assets/js/form-handler.js"></script>

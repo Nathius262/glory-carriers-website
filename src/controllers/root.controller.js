@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import * as sermonService from '../modules/sermon/services/Sermon.service.js';
+import { findAll as eventService } from '../modules/event/services/admin.Event.service.js';
 
 // Derive the equivalent of __dirname
 import { fileURLToPath } from 'url';
@@ -17,11 +18,12 @@ export const index_view = async (req, res) => {
     try {
 
         const sermons = await sermonService.findAll({ limit: 6, offset: 0 });
-        //console.log(result.rows)
+        const events = await eventService({ limit: 1, offset: 0 });
         res.render('index', {
             pageTitle: "Home",
             pageLogo: page_logo,
-            sermons: sermons.sermons
+            sermons: sermons.sermons,
+            event: events.events[0]
         });
     } catch (err) {
         res.status(500).render('./errors/500', { message: 'Internal Server Error', error: err.message });

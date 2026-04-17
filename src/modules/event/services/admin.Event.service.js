@@ -2,13 +2,13 @@ import db from '../../../models/index.cjs';
 
 
 
-export const findAll = async ({limit, offset}) => {
+export const findAll = async ({ limit, offset }) => {
   try {
 
-    const {rows:events, count:totalItems} = await db.Event.findAndCountAll({
+    const { rows: events, count: totalItems } = await db.Event.findAndCountAll({
       limit,
       offset,
-      distinct:true,
+      distinct: true,
       order: [['createdAT', 'DESC'], ['updatedAt', 'DESC']]
     });
     return {
@@ -33,9 +33,10 @@ export const findById = async (id) => {
 
 export const create = async (data) => {
   try {
-    return await db.Event.create(data);
+    const event = await db.Event.create(data);
+    return event;
   } catch (error) {
-    throw new Error('Error creating record: ' + error.message);
+    throw new Error(`Event creation failed: ${error.message}`);
   }
 };
 
@@ -61,12 +62,12 @@ export const destroy = async (id) => {
 
 
 //RVPS
-export const findAllRvps = async ({limit, offset}) => {
+export const findAllRvps = async ({ limit, offset }) => {
   try {
-    const {rows:rvps, count:totalItems} = await db.Rsvp.findAndCountAll({
+    const { rows: rvps, count: totalItems } = await db.Rsvp.findAndCountAll({
       limit,
       offset,
-      distinct:true,
+      distinct: true,
       order: [['createdAt', 'DESC']]
     });
     return {

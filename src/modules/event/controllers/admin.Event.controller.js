@@ -37,41 +37,78 @@ export const findById = async (req, res) => {
 
 export const create = async (req, res) => {
   try {
-    if (!req.files || !req.files['image']) {
+    let imageUrl = null;
+
+    // ✅ Case 1: Using uploader.js (preferred)
+    if (req.body.image_url) {
+      imageUrl = req.body.image_url;
+    }
+
+    // ✅ Case 2: Direct file upload fallback
+    else if (req.files && req.files['image_url']) {
+      const imageFile = req.files['image_url'][0];
+
+      const allowedImageTypes = ['image/jpeg', 'image/png'];
+
+      if (!allowedImageTypes.includes(imageFile.mimetype)) {
+        return res.status(400).json({
+          success: false,
+          message: 'Invalid image file type (only JPEG/PNG allowed)',
+        });
+      }
+
+      imageUrl = imageFile.path;
+    }
+
+    // ❌ No image at all
+    else {
       return res.status(400).json({
         success: false,
-        message: 'Missing required files (image)',
+        message: 'Event image is required',
       });
     }
 
-    const imageFile = req.files['image'][0];
+    // ✅ Normalize booleans (VERY IMPORTANT)
+    const payload = {
+      title: req.body.title,
+      description: req.body.description,
+      image_url: imageUrl,
+      start_date: req.body.start_date,
+      end_date: req.body.end_date || null,
+      is_recurring: !!req.body.is_recurring,
+      is_headline: !!req.body.is_headline,
+    };
 
-    const allowedImageTypes = ['image/jpeg', 'image/png'];
-
-    if (!allowedImageTypes.includes(imageFile.mimetype)) {
+    // ✅ Validate required fields
+    if (!payload.title || !payload.start_date) {
       return res.status(400).json({
         success: false,
-        message: 'Invalid image file type (only JPEG/PNG allowed)',
+        message: 'Title and Start Date are required',
       });
     }
 
-    let req_data = req.body;
-    req_data.image_url = imageFile.path;
+    // ✅ Date sanity check
+    if (payload.end_date && new Date(payload.end_date) < new Date(payload.start_date)) {
+      return res.status(400).json({
+        success: false,
+        message: 'End date cannot be before start date',
+      });
+    }
 
-    const data = await service.create(req_data);
+    const data = await service.create(payload);
 
-    res.status(201).json({
+    return res.status(201).json({
       success: true,
-      data
+      data,
     });
 
   } catch (err) {
-    console.error('Create error:', err); // Log for debugging
+    console.error('Create error:', err);
 
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: 'Failed to create event',
-      error: err.message
+      error: err.message,
     });
   }
 };
