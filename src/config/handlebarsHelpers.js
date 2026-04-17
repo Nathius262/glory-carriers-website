@@ -45,7 +45,20 @@ export default function registerHelpers(handlebars) {
     // Truncate the original HTML at the word boundary
     return truncate(html, truncatedText.length, { ellipsis: '...' });
   });
+  handlebars.registerHelper('formatDateTime', function (date) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+    return new Date(date).toLocaleDateString(undefined, options);
+  });
+  handlebars.registerHelper('formatDateForInput', function (date) {
+    if (!date) return "";
+    const d = new Date(date);
 
+    // Adjust for timezone offset to get local time ISO string
+    const tzOffset = d.getTimezoneOffset() * 60000;
+    const localISOTime = new Date(d.getTime() - tzOffset).toISOString().slice(0, 16);
+
+    return localISOTime;
+  });
   handlebars.registerHelper('has', (set, value) => set.has(value));
   handlebars.registerHelper('anyImageIsPrimary', images => images.some(image => image.is_primary));
   handlebars.registerHelper('hasRoleByName', function (roles, roleName, options) {
@@ -56,20 +69,20 @@ export default function registerHelpers(handlebars) {
     if (!options.data.root) options.data.root = {};
     options.data.root[varName] = varValue;
   });
-  handlebars.registerHelper('contains', function(categoryId, categoryArray) {
+  handlebars.registerHelper('contains', function (categoryId, categoryArray) {
     if (!categoryArray || !Array.isArray(categoryArray)) return false;
-    
-    return categoryArray.some(function(category) {
-        return category.id === categoryId;
+
+    return categoryArray.some(function (category) {
+      return category.id === categoryId;
     });
   });
-  handlebars.registerHelper('stripTags', function(html) {
+  handlebars.registerHelper('stripTags', function (html) {
     return html.replace(/<[^>]*>/g, '').substring(0, 100) + '...';
   });
-  handlebars.registerHelper('formatDate', function(date) {
+  handlebars.registerHelper('formatDate', function (date) {
     return new Date(date).toLocaleDateString();
   });
-  handlebars.registerHelper('json', function(context) {
+  handlebars.registerHelper('json', function (context) {
     return JSON.stringify(context);
   });
 }

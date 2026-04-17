@@ -99,6 +99,8 @@ export const create = async (req, res) => {
 
     return res.status(201).json({
       success: true,
+      message: 'Event created successfully',
+      redirectTo: "/admin/event",
       data,
     });
 
@@ -117,7 +119,7 @@ export const update = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const imageFile = req.files?.['image']?.[0];
+    const imageFile = req.files?.['image_url']?.[0];
 
     // Find the existing event
     const event = await service.findById(id);
@@ -158,7 +160,7 @@ export const update = async (req, res) => {
 
     // Update the event
     const data = await service.update(id, updates);
-    res.status(200).json({ success: true, data });
+    res.status(200).json({ success: true, message: "Event updated successfully", data, redirectTo: "/admin/event/" + id });
 
   } catch (err) {
     console.error('Update error:', err);

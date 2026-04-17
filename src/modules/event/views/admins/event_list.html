@@ -1,52 +1,49 @@
+<div class="container-fluid py-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h3 mb-0">Event Management</h1>
+    <a href="/admin/event/create" class="btn btn-primary">
+      <i class="fas fa-plus me-2"></i>Create New
+    </a>
+  </div>
 
-  <div class="container-fluid py-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-      <h1 class="h3 mb-0">Event Management</h1>
-      <a href="/admin/event/create" class="btn btn-primary">
-        <i class="fas fa-plus me-2"></i>Create New
-      </a>
-    </div>
-
-    <div class="card shadow-sm">
-      <div class="card-body">
-        <div class="table-responsive">
-          <table class="table table-hover">
-            <thead class="table-light">
-              <tr>
-                <th>ID</th>
-                <!-- Add your table headers here -->
-                <th>Name</th>
-                <th>Created</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {{#each events}}
-                <tr>
-                  <td>{{this.id}}</td>
-                  <!-- Add your table cells here -->
-                  <td>{{this.name}}</td>
-                  <td>{{formatDate this.createdAt}}</td>
-                  <td>
-                    <div class="btn-group btn-group-sm">
-                      <a href="/admin/event/{{this.id}}" class="btn btn-outline-primary">
-                        <i class="fas fa-edit"></i>
-                      </a>
-                      <button data-delete="event-{{this.id}}" data-name="{{this.id}}" 
-                          data-url="/admin/event/{{this.id}}" class="btn btn-danger btn-sm"
-                      >
-                          <i class="fas fa-trash me-1"></i>Delete
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              {{/each}}
-            </tbody>
-          </table>
-        </div>
-        
-        {{> pagination}}
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead class="table-light">
+            <tr>
+              <th>ID</th>
+              <!-- Add your table headers here -->
+              <th>Title</th>
+              <th>Created</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each events}}
+            <tr>
+              <td>{{this.id}}</td>
+              <!-- Add your table cells here -->
+              <td>{{this.title}}</td>
+              <td>{{formatDate this.createdAt}}</td>
+              <td>
+                <div class="btn-group btn-group-sm">
+                  <a href="/admin/event/{{this.id}}" class="btn btn-outline-primary">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                  <button data-delete="event-{{this.id}}" data-name="{{this.id}}" data-url="/admin/event/{{this.id}}"
+                    class="btn btn-danger btn-sm">
+                    <i class="fas fa-trash me-1"></i>Delete
+                  </button>
+                </div>
+              </td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
       </div>
+
+      {{> pagination}}
     </div>
   </div>
-  
+</div>
