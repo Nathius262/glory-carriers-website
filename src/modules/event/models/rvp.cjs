@@ -11,13 +11,17 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Rvp.belongsTo(models.Event, {
+        foreignKey: 'event_id',
+        as: 'event'
+      });
     }
   }
   Rvp.init({
     name: {
       type: DataTypes.STRING
     },
-    email:{
+    email: {
       type: DataTypes.STRING
     },
     phone: {
@@ -35,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
     attendance_mode: {
       type: DataTypes.STRING,
       defaultValue: "on_site",
-      allowNull:true
+      allowNull: true
     },
   }, {
     sequelize,

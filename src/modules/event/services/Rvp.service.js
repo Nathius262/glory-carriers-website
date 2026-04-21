@@ -1,5 +1,5 @@
 import db from '../../../models/index.cjs';
-import { sendEmail, kabodRsvpSuccessTemplate } from '../../../utils/email.js';
+import { sendEmail, zoeRsvpSuccessTemplate } from '../../../utils/email.js';
 
 
 export const findAll = async ({ limit, offset }) => {
@@ -41,7 +41,7 @@ export const create_rvp = async (data) => {
 
     // Validate email uniqueness inside transaction
     const existingRvp = await db.Rvp.findOne({
-      where: { email: data.email },
+      where: { email: data.email, event_id: data.event_id },
       transaction,
       lock: transaction.LOCK.UPDATE,
     });
@@ -59,8 +59,8 @@ export const create_rvp = async (data) => {
     // Attempt to send email after DB commit (non-blocking)
     const emailResult = await sendEmail({
       to: new_data.email,
-      subject: "✅ Your RSVP for KABOD’25 is Confirmed!",
-      html: kabodRsvpSuccessTemplate(new_data.name),
+      subject: "✅ Your RSVP for ZOE CONFERENCE'26 is Confirmed!",
+      html: zoeRsvpSuccessTemplate(new_data.name),
     });
 
     if (emailResult?.error) {

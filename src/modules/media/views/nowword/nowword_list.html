@@ -1,69 +1,77 @@
 <style>
-    .nw-link:hover {
-        background-color:var(--bg-blue-transparent) !important;
-        color: var(--white) !important;
-        transition: background-color .6s ease-in-out;
-    }
-    .spinner-overlay {
-      background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-      z-index: 10; /* Ensure the spinner is above other elements */
-      border-radius: 0.5rem; /* Match the button’s border radius */
-    }
+  .nw-link:hover {
+    background-color: var(--bg-blue-transparent) !important;
+    color: var(--white) !important;
+    transition: background-color .6s ease-in-out;
+  }
 
+  .spinner-overlay {
+    background: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent background */
+    z-index: 10;
+    /* Ensure the spinner is above other elements */
+    border-radius: 0.5rem;
+    /* Match the button’s border radius */
+  }
 </style>
 
 <main style="overflow: hidden;">
-    <!---=========INTRO BEGIN========-->
-    <section class="mt-5 pt-5 mb-0 ft-upper">
-        <div class="container mt-5">
-            <div class="row justify-content-center align-items-end container">
-                <div class="col-md-8 justify-content-center container rounded-4 now-word">
-                    <img src="/assets/img/now_word.png" alt="">
-                </div>
-            </div>
-            
+  <!---=========INTRO BEGIN========-->
+  <section class="mt-5 pt-5 mb-0 ft-upper">
+    <div class="container mt-5">
+      <div class="row justify-content-center align-items-end container">
+        <div class="col-md-8 justify-content-center container rounded-4 now-word">
+          <img src="/assets/img/now_word.png" alt="">
         </div>
+      </div>
 
-        <div class=""></div>
-        
-    </section>
-    
-    <!---=========INTRO END========-->
+    </div>
+
+    <div class=""></div>
+
+  </section>
+
+  <!---=========INTRO END========-->
 
 
-    <section class=" mb-5">
-        <div class="container mt-5">
-            <div class="mt-5 pt-5 ft-upper fw-bold text-center fs-4" style="color:var(--fire-red)">About Now Word</div>
-            <p class="mb-3 text-dark container">
-              NowWord is our special monthly devotional focused on delivering the life-changing message of the Kingdom. Through deep and practical teachings, we equip believers to understand their identity in Christ, live out kingdom principles, and walk in their God-given authority. This devotional is designed to inspire spiritual growth and empower every believer for kingdom impact.
-            </p>
-            <div class="container row justify-content-center align-items-center">
+  <section class=" mb-5">
+    <div class="container mt-5">
+      <div class="mt-5 pt-5 ft-upper fw-bold text-center fs-4" style="color:var(--fire-red)">About Now Word</div>
+      <p class="mb-3 text-dark container">
+        NowWord is our special monthly devotional focused on delivering the life-changing message of the Kingdom.
+        Through deep and practical teachings, we equip believers to understand their identity in Christ, live out
+        kingdom principles, and walk in their God-given authority. This devotional is designed to inspire spiritual
+        growth and empower every believer for kingdom impact.
+      </p>
+      <div class="container row justify-content-center align-items-center">
 
-                {{#each nowwords}}
-                <button id="download-btn" data-url="{{this.file_url}}" data-title="{{this.title}}" class="border-0 col-sm-3 mb-4 m-3 p-3 nw-link d-flex justify-content-center align-items-center bg-secondary text-dark position-relative">
-                  <div class="">
-                      <img width="20" class="me-1" src="/assets/img/icon/now_word.png" alt="now-word">
-                  </div>
-                  <div class="text-center fw-normal ft-upper fs-6">
-                      {{this.title}}
-                  </div>
-                  
-                  <!-- Spinner Overlay -->
-                  <div class="spinner-overlay d-none position-absolute top-0 bottom-0 start-0 end-0 d-flex justify-content-center align-items-center">
-                      <div class="spinner-border text-light" role="status">
-                          <span class="visually-hidden">Loading...</span>
-                      </div>
-                  </div>
-              </button>
-              
-                {{/each}}
+        {{#each nowwords}}
+        <button id="download-btn" data-url="{{this.file_url}}" data-title="{{this.title}}"
+          class="border-0 col-sm-3 mb-4 m-3 p-3 nw-link d-flex justify-content-center align-items-center bg-secondary text-dark position-relative">
+          <div class="">
+            <img width="20" class="me-1" src="/assets/img/icon/now_word.png" alt="now-word">
+          </div>
+          <div class="text-center fw-normal ft-upper fs-6">
+            {{this.title}}
+          </div>
 
+          <!-- Spinner Overlay -->
+          <div
+            class="spinner-overlay d-none position-absolute top-0 bottom-0 start-0 end-0 d-flex justify-content-center align-items-center">
+            <div class="spinner-border text-light" role="status">
+              <span class="visually-hidden">Loading...</span>
             </div>
+          </div>
+        </button>
 
-            {{> pagination}}
-        </div>
-       </section>
-    
+        {{/each}}
+
+      </div>
+
+      {{> pagination}}
+    </div>
+  </section>
+
 </main>
 
 <div class="ellipse_circle"></div>
@@ -75,12 +83,12 @@
     download.addEventListener('click', function (event) {
       // Prevent default action
       event.preventDefault();
-  
+
       // Show the spinner overlay and disable the button
       const spinnerOverlay = this.querySelector('.spinner-overlay');
       spinnerOverlay.classList.remove('d-none');
       this.disabled = true;
-  
+
       // Fetch the file from the remote URL
       fetch(this.dataset.url)
         .then(response => {
@@ -93,37 +101,37 @@
         .then(blob => {
           // Create a URL for the blob object
           const url = window.URL.createObjectURL(blob);
-  
+
           // Create a hidden anchor element for the download
           const a = document.createElement('a');
           a.href = url;
-  
+
           // Set the desired file name with the correct .pdf extension
           a.download = `${this.dataset.title}.pdf`;
-  
+
           // Append to the body and trigger the download
           document.body.appendChild(a);
           a.click();
-  
+
           // Clean up: remove the anchor and revoke the object URL
           document.body.removeChild(a);
           window.URL.revokeObjectURL(url);
-  
+
           // Hide the spinner and enable the button
           spinnerOverlay.classList.add('d-none');
           this.disabled = false;
         })
         .catch(error => {
           console.error('Error downloading the file:', error);
-  
+
           // Hide the spinner and re-enable the button if there's an error
           spinnerOverlay.classList.add('d-none');
           this.disabled = false;
-  
+
           // Optionally, alert the user about the error
           alert('Failed to download the file. Please try again later.');
         });
     });
   });
-  
+
 </script>

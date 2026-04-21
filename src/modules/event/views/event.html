@@ -57,42 +57,44 @@
               <!-- IMPORTANT: Pass event ID -->
               <input type="hidden" name="event_id" value="{{event.id}}">
 
-              <div class="form-group">
-                <input type="text" name="name" class="form-control rounded-1" placeholder="Full Name..." required>
+              <div class="form-group mb-3">
+                <input type="text" name="name" class="form-control p-3 rounded-1" placeholder="Full Name..." required>
                 <div class="invalid-feedback">Full name is required.</div>
               </div>
 
-              <div class="form-group">
-                <input type="email" name="email" class="form-control rounded-1" placeholder="Email Address..." required>
+              <div class="form-group mb-3">
+                <input type="email" name="email" class="form-control p-3 rounded-1" placeholder="Email Address..."
+                  required>
                 <div class="invalid-feedback">Email is required.</div>
               </div>
 
-              <div class="form-group">
-                <input type="text" name="phone" class="form-control rounded-1" placeholder="Phone Number..." required>
+              <div class="form-group mb-3">
+                <input type="text" name="phone" class="form-control p-3 rounded-1" placeholder="Phone Number..."
+                  required>
                 <div class="invalid-feedback">Phone number is required.</div>
               </div>
 
-              <div class="form-group">
-                <textarea name="address" rows="3" class="form-control rounded-1" placeholder="Address..."
+              <div class="form-group mb-3">
+                <textarea name="address" rows="3" class="form-control p-3 rounded-1" placeholder="Address..."
                   required></textarea>
                 <div class="invalid-feedback">Address is required.</div>
               </div>
 
-              <div class="form-group">
-                <input type="text" name="state" class="form-control rounded-1" placeholder="State..." required>
+              <div class="form-group mb-3">
+                <input type="text" name="state" class="form-control p-3 rounded-1" placeholder="State..." required>
                 <div class="invalid-feedback">State is required.</div>
               </div>
 
-              <div class="form-group">
-                <select name="attendance_mode" class="form-control rounded-1" required>
+              <div class="form-group mb-3">
+                <select name="attendance_mode" class="form-control p-3 rounded-1" required>
                   <option value="on_site">On Site</option>
                   <option value="online">Online</option>
                 </select>
                 <div class="invalid-feedback">Select attendance mode.</div>
               </div>
 
-              <div class="form-group">
-                <select name="gender" class="form-control rounded-1" required>
+              <div class="form-group mb-3">
+                <select name="gender" class="form-control p-3 rounded-1" required>
                   <option value="" disabled selected>Select Gender</option>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
@@ -122,3 +124,5 @@
   </div>
 
 </main>
+
+<script type="module" src="/assets/js/form-handler.js"></script>
