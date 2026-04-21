@@ -3,129 +3,131 @@
 
 <main class="mt-5">
 
-    <div id="carouselExample" class="carousel slide mt-5" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="{{department.image_url}}" class="d-block w-100" alt="Slide 1">
-            <div class="carousel-caption d-none d-md-block fw-bold">
-                <h2 class="h1 fw-bold"></h2>
-                <p></p>
-            </div>
-          </div>
+  <div id="carouselExample" class="carousel slide mt-5" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="{{department.image_url}}" class="d-block w-100" alt="Slide 1">
+        <div class="carousel-caption d-none d-md-block fw-bold">
+          <h2 class="h1 fw-bold"></h2>
+          <p></p>
         </div>
       </div>
+    </div>
+  </div>
 
-    <div class="container">
+  <div class="container">
 
-      <!-- Outer Row -->
-      <div class="row justify-content-center">
-  
-        <div class="col-12">
-  
-          <div class="card o-hidden border-0 my-5">
-            <div class="card-body p-0">
-              <!-- Nested Row within Card Body -->
-              <div class="row align-items-start">
-  
-                <div class="col-lg-6 col-12 mt-md-0 mt-2 d-lg-block bg-login-image">
-                  <div class="container">
-                    <div class="fs-4">
-                        Hi there! I am <strong>{{department.department_head}}</strong> Head of Department for the <strong>{{department.name}}</strong> team.
-                    </div>
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
 
-                    <hr>
-                    
-                    <p style="color: var(--bg-body);" class="text-start fs-4">
-                      {{department.department_briefing}}
-                    </p> 
-                </div> 
+      <div class="col-12">
+
+        <div class="card o-hidden border-0 my-5">
+          <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row align-items-start">
+
+              <div class="col-lg-6 col-12 mt-md-0 mt-2 d-lg-block bg-login-image">
+                <div class="container">
+                  <div class="fs-4">
+                    Hi there!
+                    <!--  I am <strong>{{department.department_head}}</strong> Head of Department for the <strong>{{department.name}}</strong> team. -->
+                  </div>
+
+                  <hr>
+
+                  <p style="color: var(--bg-body);" class="text-start fs-4">
+                    {{department.department_briefing}}
+                  </p>
                 </div>
-  
-                <div class="col-lg-6 col-12">
-                  <div class="">
-                    <div class="text-md-center text-start">
-                      <h1 class="h4 text-gray-900 mb-4">Become a Member of the <span style="text-transform: capitalize;">{{department.name}}</span></h1>
-                    </div>
-                    <form id="registerEvent" class="user needs-validation" action="/department" method="POST" novalidate>
-                      <div class="form-group">
-                        <input type="text" name="name" class="form-control rounded-1 form-control-user" id="exampleInputName"
-                          placeholder="Enter Your Full Name..." required>
-                        <div class="invalid-feedback">
-                          Full name is required.
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <input type="email" name="email" class="form-control rounded-1 form-control-user" id="exampleInputEmail"
-                          placeholder="Enter Email Address..." required>
-                        <div class="invalid-feedback">
-                          Email is required.
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <input type="text" name="phone" class="form-control rounded-1 form-control-user" id="exampleInputPhone"
-                          placeholder="Phone Number..." required>
-                        <div class="invalid-feedback">
-                          Phone number is required.
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <textarea type="text" name="location" rows="3" class="form-control rounded-1 form-control-user" id="exampleInputLocation"
-                          placeholder="Address..." required></textarea>
-                        <div class="invalid-feedback">
-                          Address is required.
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <select name="gender" class="form-control rounded-1" required>
-                          <option value="" selected disabled>Select Gender...</option>
-                          <option value="male">Male</option>
-                          <option value="female">Female</option>
-                        </select>
-                        <div class="invalid-feedback">
-                          Gender is required.
-                        </div>
-                      </div>
+              </div>
 
-                      <div class="form-group">
-                        <input hidden type="text" name="department_id" class="form-control rounded-1 form-control-user"
-                          value="{{department.id}}" readonly required>
-                        <div class="invalid-feedback">
-                          department id
-                        </div>
+              <div class="col-lg-6 col-12">
+                <div class="">
+                  <div class="text-md-center text-start">
+                    <h1 class="h4 text-gray-900 mb-4">Become a Member of the <span
+                        style="text-transform: capitalize;">{{department.name}}</span></h1>
+                  </div>
+                  <form id="registerEvent" class="user needs-validation" action="/department" method="POST" novalidate>
+                    <div class="form-group">
+                      <input type="text" name="name" class="form-control rounded-1 form-control-user"
+                        id="exampleInputName" placeholder="Enter Your Full Name..." required>
+                      <div class="invalid-feedback">
+                        Full name is required.
                       </div>
-                      
-                      <hr>
-                      <ul id="error" class="text-danger col-12"></ul>
-  
-                      <div class="spinner-border col-12 d-none" id="status" role="status">
-                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="form-group">
+                      <input type="email" name="email" class="form-control rounded-1 form-control-user"
+                        id="exampleInputEmail" placeholder="Enter Email Address..." required>
+                      <div class="invalid-feedback">
+                        Email is required.
                       </div>
-  
-                      <button type="submit" id="btn" class="btn btn-primary btn-user btn-block">
-                        Register
-                      </button>
-                      <hr>
-                    </form>
-                    <div class="text-center">
-                      <a class="small" href="/department">Checkout Other Departments</a>
+                    </div>
+                    <div class="form-group">
+                      <input type="text" name="phone" class="form-control rounded-1 form-control-user"
+                        id="exampleInputPhone" placeholder="Phone Number..." required>
+                      <div class="invalid-feedback">
+                        Phone number is required.
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <textarea type="text" name="location" rows="3" class="form-control rounded-1 form-control-user"
+                        id="exampleInputLocation" placeholder="Address..." required></textarea>
+                      <div class="invalid-feedback">
+                        Address is required.
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <select name="gender" class="form-control rounded-1" required>
+                        <option value="" selected disabled>Select Gender...</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                      </select>
+                      <div class="invalid-feedback">
+                        Gender is required.
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <input hidden type="text" name="department_id" class="form-control rounded-1 form-control-user"
+                        value="{{department.id}}" readonly required>
+                      <div class="invalid-feedback">
+                        department id
+                      </div>
                     </div>
 
                     <hr>
-  
-                    <div class="text-center">                      
-                      <a class="small" href="/members">Become a Member</a>
+                    <ul id="error" class="text-danger col-12"></ul>
+
+                    <div class="spinner-border col-12 d-none" id="status" role="status">
+                      <span class="sr-only">Loading...</span>
                     </div>
+
+                    <button type="submit" id="btn" class="btn btn-primary btn-user btn-block">
+                      Register
+                    </button>
+                    <hr>
+                  </form>
+                  <div class="text-center">
+                    <a class="small" href="/department">Checkout Other Departments</a>
+                  </div>
+
+                  <hr>
+
+                  <div class="text-center">
+                    <a class="small" href="/#">Become a Member</a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-  
         </div>
-  
+
       </div>
-  
+
     </div>
+
+  </div>
 
 </main>
 
