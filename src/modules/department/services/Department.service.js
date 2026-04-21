@@ -32,41 +32,37 @@ export const findById = async (id) => {
   }
 };
 
-export const createMember = async ({
-  user_id,
-  department_id,
-  transaction
-}) => {
+export const createMember = async ({ user_id, department_id, transaction }) => {
   try {
     const memberRole = await db.DepartmentRole.findOne({
-      where: {
+      where: { department_id, name: 'MEMBER' },
+      transaction
+    });
+
+    if (!memberRole) throw new Error('Default MEMBER role not found');
+
+    // SEARCH BY USER_ID ONLY to avoid unique constraint collisions
+    const [member, created] = await db.DepartmentMember.findOrCreate({
+      where: { user_id },
+      defaults: {
         department_id,
-        name: 'MEMBER'
+        role_id: memberRole.id,
+        joined_at: new Date()
       },
       transaction
     });
 
-    if (!memberRole) {
-      throw new Error('Default MEMBER role not found for this department');
+    // If it wasn't created, check if it's the SAME department or a different one
+    if (!created && member.department_id !== department_id) {
+      throw new Error('User is already a member of another department');
     }
 
-    const existing = await db.DepartmentMember.findOne({
-      where: { user_id },
-      transaction
-    });
-
-    if (existing) {
-      throw new Error('User already assigned to a department');
-    }
-
-    return await db.DepartmentMember.create({
-      user_id,
-      department_id,
-      role_id: memberRole.id,
-      joined_at: new Date()
-    }, { transaction });
-
+    return member;
   } catch (error) {
-    throw new Error('Error creating membership: ' + error.message);
+    // Check if it's a Sequelize Validation Error to get a better message
+    if (error.name === 'SequelizeUniqueConstraintError') {
+      throw new Error(`Error: ${error.errors[0].message}`);
+    }
+    throw error;
   }
 };

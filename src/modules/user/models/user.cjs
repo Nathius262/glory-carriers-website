@@ -19,7 +19,15 @@ module.exports = (sequelize, DataTypes) => {
       });
       User.hasOne(models.Profile, {
         foreignKey: 'user_id',
-        as: 'profile'
+        as: 'profile',
+        onDelete: 'CASCADE',
+        hooks: true
+      });
+      User.hasMany(models.DepartmentMember, {
+        foreignKey: 'user_id',
+        as: 'memberships', // or 'memberships'
+        onDelete: 'CASCADE',
+        hooks: true // Required to trigger the deletion at the model level
       });
     }
   }

@@ -13,7 +13,9 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Department.hasMany(models.DepartmentMember, {
         foreignKey: 'department_id',
-        as: 'members'
+        as: 'members',
+        onDelete: 'CASCADE',
+        hooks: true
       });
 
       Department.hasMany(models.DepartmentRole, {

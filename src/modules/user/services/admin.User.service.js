@@ -91,7 +91,11 @@ export const create = async ({
     return new_user;
 
   } catch (error) {
-    throw new Error('Error creating user: ' + error.message);
+    // Check if it's a Sequelize Validation Error to get a better message
+    if (error.name === 'SequelizeUniqueConstraintError') {
+      throw new Error(`Error: ${error.errors[0].message}`);
+    }
+    throw error;
   }
 };
 
