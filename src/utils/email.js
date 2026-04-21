@@ -131,7 +131,7 @@ export const zoeRsvpSuccessTemplate = (name) => `
       overflow: hidden;
     ">
       <div style="background-color: #2e3192; padding: 25px; text-align: center;">
-        <h1 style="color: #fff; margin: 0; font-size: 24px;">🎉 KABOD’25 RSVP Confirmed!</h1>
+        <h1 style="color: #fff; margin: 0; font-size: 24px;">🎉 ZOE CONFERENCE'26 RSVP Confirmed!</h1>
       </div>
 
       <div style="padding: 30px;">
@@ -152,7 +152,7 @@ export const zoeRsvpSuccessTemplate = (name) => `
 
         <p style="font-size: 15px; line-height: 1.6;">
           Get ready for three days of worship, word, and divine encounter.
-          Come expectant — it’s your set time for glory!
+          Come expectant it’s your set time for glory!
         </p>
 
         <div style="text-align: center; margin-top: 25px;">
@@ -169,7 +169,7 @@ export const zoeRsvpSuccessTemplate = (name) => `
           glorycarriersministry@gmail.com</a>.
         </p>
 
-        <p style="font-size: 14px; color: #555;">See you at <strong>KABOD’25</strong>!</p>
+        <p style="font-size: 14px; color: #555;">See you at <strong>ZOE CONFERENCE'26</strong>!</p>
       </div>
 
       <div style="background-color: #f5f5f5; padding: 15px; text-align: center; font-size: 13px; color: #999;">
