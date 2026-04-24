@@ -24,6 +24,9 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 
+// ✅ SET THIS IMMEDIATELY
+app.set("trust proxy", 1);
+
 // Setup Handlebars view engine
 configureViewEngine(app);
 
@@ -62,6 +65,8 @@ app.use(staticFiles);
 app.use(authorizeByPrefix);
 app.use(conditionalRendering);
 app.use(active_page);
+
+app.set("trust proxy", 1);
 
 // Load dynamic routes
 await loadModules(app);
