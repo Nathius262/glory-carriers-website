@@ -13,7 +13,7 @@
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: -1;
-}
+  }
 
   @keyframes backgroundTransition {
     0% {
@@ -48,53 +48,83 @@
 
 <main>
   <!---=========INTRO BEGIN========-->
-  <section class="intro mb-0 ft-upper position-relative"
-    style="background: url({{sermons.[0].image_url}}); background-size: cover; background-repeat: no-repeat; display: flex; align-items: flex-end;">
-    <div class="media-top">
-      <div class="row justify-content-center">
-        <div class="col-md-8 justify-content-center">
-          <div class="d-grid justify-content-center latest_media">
-            <h4 class="text-center fs-6 fw-bold">Latest Sermon</h4>
-            <h2 class="text-center text-light">{{sermons.[0].title}}</h2>
-            <div class="d-flex justify-content-center">
-              <a href="{{sermons.[0].audio_url}}"><img src="/assets/img/icon/download.png" width="200" alt="download"></a>
-            </div>
-          </div>
-        </div>
+  <section class="vh-100 w-100 position-relative overflow-hidden">
+
+    {{!-- DESKTOP / TABLET: VIDEO --}}
+    <div class="h-100 w-100 d-none d-md-block">
+      {{> live-video sermon=sermons.[0] fullscreen=true}}
+    </div>
+
+    {{!-- MOBILE: IMAGE --}}
+    <div class="h-100 w-100 d-block d-md-none">
+      <img src="{{sermons.[0].image_url}}" alt="{{sermons.[0].title}}" class="w-100 h-100"
+        style="object-fit: fill; transform: scale(1);">
+    </div>
+
+    {{!-- DARK OVERLAY (works for both) --}}
+    <div class="position-absolute top-0 start-0 w-100 h-100"
+      style="background: linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0.2), transparent);">
+    </div>
+
+    {{!-- TEXT OVERLAY --}}
+    <div class="position-absolute bottom-0 start-0 w-100 p-4 text-white">
+
+      <div class="container">
+
+        <h6 class="text-uppercase opacity-75 mb-1">
+          Latest Sermon
+        </h6>
+
+        <h2 class="fw-bold mb-2">
+          {{sermons.[0].title}}
+        </h2>
+
+        <a href="{{sermons.[0].audio_url}}" class="btn btn-light btn-sm fw-bold">
+          Download Audio
+        </a>
+
       </div>
 
     </div>
-    <!-- <div class="ellipse_media"></div> -->
+
   </section>
 
 
   <!---=========INTRO END========-->
 
+  <!-- LATEST SERMONS -->
+  <section class="py-5 bg-light">
+    <div class="container">
 
-  <section class=" mb-5">
-    <div class="container mt-5">
+      <div class="mb-4 text-center">
+        <h2 class="fw-bold">All Sermons</h2>
+        <p class="text-muted">Explore recent messages and teachings</p>
+      </div>
 
-      <div class="row justify-content-start align-items-center">
+      <div class="row g-4">
 
         {{#each sermons}}
-        <div class="col-lg-3 p-3 col-md-4 col-sm-6 col mb-4">
+        <div class="col-xl-3 col-lg-4 col-md-6 p-3 mb-4 scroll-y-top-el">
           <div class="" style="height: 300px;">
-            <img class="rounded-4" style="object-fit: cover; height: 100%; width: 100%;" src="{{this.image_url}}"
+            <img class="rounded-4" style="object-fit: fill; height: 100%; width: 100%;" src="{{this.image_url}}"
               alt="{{this.title}}">
           </div>
           <div
             class="d-flex justify-content-between mx-3 mx-auto mt-1 px-5 text-secondary container text-center ft-upper fs-6">
-            <a href="{{this.audio_url}}" class="download-link"><img src="/assets/img/icon/download1.png" width="25" alt=""></a>
+            <a href="{{this.audio_url}}" class="download-link"><img src="/assets/img/icon/download1.png" width="25"
+                alt=""></a>
             <a href="{{this.audio_url}}"><img src="/assets/img/icon/listen1.png" width="25" alt=""></a>
-            <!--<a href="{{this.video_url}}"><img src="/assets/img/icon/stream.png" width="25" alt=""></a>-->
             <a href="/sermon/{{this.slug}}" class="download-link nav-link text-secondary"><i class="fa-solid fa-eye"
                 style="font-size: 20px;"></i></a>
           </div>
         </div>
         {{/each}}
+
       </div>
 
       {{> pagination}}
+
+
     </div>
   </section>
 

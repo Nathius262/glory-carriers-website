@@ -85,4 +85,71 @@ export default function registerHelpers(handlebars) {
   handlebars.registerHelper('json', function (context) {
     return JSON.stringify(context);
   });
+
+  /**
+     * -----------------------------
+     * YOUTUBE DETECTION
+     * -----------------------------
+     */
+  handlebars.registerHelper("isYoutube", function (url = "") {
+    return /youtu\.be|youtube\.com/.test(url);
+  });
+
+  handlebars.registerHelper("youtubeEmbedUrl", function (url = "") {
+    let videoId = "";
+
+    // youtu.be/{id}
+    if (url.includes("youtu.be")) {
+      videoId = url.split("/").pop().split("?")[0];
+    }
+
+    // youtube.com/watch?v={id}
+    else if (url.includes("watch?v=")) {
+      videoId = url.split("v=")[1].split("&")[0];
+    }
+
+    // youtube.com/live/{id}
+    else if (url.includes("/live/")) {
+      videoId = url.split("/live/")[1].split("?")[0];
+    }
+
+    return `https://www.youtube.com/embed/${videoId}`;
+  });
+
+
+  /**
+   * -----------------------------
+   * FACEBOOK DETECTION
+   * -----------------------------
+   */
+  handlebars.registerHelper("isFacebook", function (url = "") {
+    return /facebook\.com/.test(url);
+  });
+
+
+  /**
+   * -----------------------------
+   * FACEBOOK EMBED BUILDER
+   * -----------------------------
+   */
+  handlebars.registerHelper("facebookEmbedUrl", function (url = "") {
+
+    if (!url) return "";
+
+    const cleanUrl = url.replace("web.facebook.com", "www.facebook.com");
+
+    // extract ID
+    const match =
+      cleanUrl.match(/\/videos\/(\d+)/) ||
+      cleanUrl.match(/[?&]v=(\d+)/);
+
+    if (!match) return "";
+
+    const videoId = match[1];
+
+    // 🔥 IMPORTANT: use watch URL (most stable for embed)
+    const watchUrl = `https://www.facebook.com/watch/?v=${videoId}`;
+
+    return `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(watchUrl)}&show_text=false&width=560`;
+  });
 }

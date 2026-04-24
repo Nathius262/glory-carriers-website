@@ -8,6 +8,7 @@ const router = express.Router();
 router.use(useModuleViews('media'));
 
 // Public view routes
+router.get('/live/videos', withPagination(20), controller.findAllSermons);
 router.get('/nowword', withPagination(20), controller.findAllNowwords);
 router.get('/zoe-record', withPagination(20), controller.findAllZoeRecord);
 

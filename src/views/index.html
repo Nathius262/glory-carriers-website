@@ -44,7 +44,7 @@
                 <img width="35" src="/assets/img/icon/live_stream.png" alt="live stream">
                 <div class="mx-1">
                     <a class="fs-3" style="background: none; border:none; color:var(--white); letter-spacing:2.5px;"
-                        href="/media/stream">Live Streaming</a>
+                        href="/media/live/videos">Live Streaming</a>
                 </div>
             </div>
         </div>
@@ -199,17 +199,49 @@
         </div>
     </section>
 
-    <section class=" mb-5">
-        <div class="container mt-5">
+    <section class="mb-5 mt-4">
+        <div class="container">
             <div>
-                <h4 class="col-12 text-center ft-upper fs-4 fw-bold"
-                    style="color: var(--bg-body); text-decoration:underline;">Recent Sermons</h4>
+                <div class="mb-4 text-center">
+                    <h2 class="fw-bold">Live / Featured Videos</h2>
+                    <p class="text-muted">Watch our latest sermons and featured videos</p>
+                </div>
+            </div>
+            <div class="row">
+                {{#each sermons}}
+                <div class="col-md-4 mb-2 scroll-y-top-el">
+                    {{> live-video sermon=this}}
+                    <div class="text-center mb-4">
+                        <h4 class="ft-upper fs-6 fw-bold mt-2">
+                            {{this.title}}
+                        </h4>
+                    </div>
+                </div>
+                {{/each}}
             </div>
 
-            <div class="row justify-content-start align-items-center">
+            <div class="text-center">
+                <a href="/media/live/videos" class="btn btn-outline-dark">
+                    View More
+                </a>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- LATEST SERMONS -->
+    <section class="py-5 bg-light">
+        <div class="container">
+
+            <div class="mb-4 text-center">
+                <h2 class="fw-bold">Latest Sermons</h2>
+                <p class="text-muted">Stay updated with recent messages</p>
+            </div>
+
+            <div class="row g-4">
 
                 {{#each sermons}}
-                <div class="col-md-4 p-3 mb-4 scroll-y-top-el">
+                <div class="col-md-4 col-sm-6 p-3 mb-4 scroll-y-top-el">
                     <div class="" style="height: 300px;">
                         <img class="rounded-4" style="object-fit: fill; height: 100%; width: 100%;"
                             src="{{this.image_url}}" alt="{{this.title}}">
@@ -226,6 +258,7 @@
                 {{/each}}
 
             </div>
+
         </div>
     </section>
 

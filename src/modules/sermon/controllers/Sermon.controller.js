@@ -31,3 +31,20 @@ export const findById = async (req, res) => {
     res.status(404).render('errors/404', { error: err });
   }
 };
+
+
+export const findBySlug = async (req, res) => {
+  try {
+    const data = await service.findBySlug(req.params.slug);
+    const latestSermons = await service.findAll({ limit: 8, offset: 0 });
+    res.status(200).render('./sermon_detail', {
+      success: true,
+      pageTitle: "Sermon Detail",
+      sermon: data,
+      latestSermons: latestSermons.sermons,
+    });
+  } catch (err) {
+    console.log(err)
+    res.status(404).render('errors/404', { error: err });
+  }
+};

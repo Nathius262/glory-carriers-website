@@ -1,0 +1,21 @@
+<section class="{{#if fullscreen}}h-100 w-100{{/if}}" id="live-video">
+
+    <div class="ratio ratio-16x9 {{#if fullscreen}}h-100{{/if}}">
+
+        {{#if (isYoutube sermon.video_url)}}
+        <iframe src="{{youtubeEmbedUrl sermon.video_url}}" allowfullscreen>
+        </iframe>
+
+        {{else if (isFacebook sermon.video_url)}}
+        <iframe src="{{facebookEmbedUrl sermon.video_url}}" allowfullscreen>
+        </iframe>
+
+        {{else}}
+        <div class="d-flex justify-content-center align-items-center w-100 h-100 bg-dark text-white">
+            No video available
+        </div>
+        {{/if}}
+
+    </div>
+
+</section>
