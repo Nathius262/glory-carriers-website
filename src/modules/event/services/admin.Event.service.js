@@ -64,7 +64,7 @@ export const destroy = async (id) => {
 //RVPS
 export const findAllRvps = async ({ limit, offset }) => {
   try {
-    const { rows: rvps, count: totalItems } = await db.Rsvp.findAndCountAll({
+    const { rows: rvps, count: totalItems } = await db.Rvp.findAndCountAll({
       limit,
       offset,
       distinct: true,

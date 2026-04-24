@@ -14,13 +14,19 @@ export const render_event_view = async (req, res) => {
 export const rvp_event = async (req, res) => {
   try {
 
-    const data = await rvpService.create_rvp(req.body);
-
-    res.status(201).json({
-      success: true,
+    res.status(500).json({
+      success: false,
       redirectTo: "/event",
-      message: 'RVP to event created Successfully',
+      message: 'We are currently not accepting RVPs for this event. Please check back later.',
     });
+
+    // const data = await rvpService.create_rvp(req.body);
+
+    // res.status(201).json({
+    //   success: true,
+    //   redirectTo: "/event",
+    //   message: 'RVP to event created Successfully',
+    // });
 
   } catch (err) {
     console.error('Create error:', err); // Log for debugging

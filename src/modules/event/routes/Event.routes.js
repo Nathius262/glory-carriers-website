@@ -8,6 +8,6 @@ router.use(useModuleViews('event'));
 
 // Public view routes
 router.get('/', controller.render_event_view);
-router.post('/rvp', controller.rvp_event);
+router.post('/rsvp', controller.rvp_event);
 
 export default router;

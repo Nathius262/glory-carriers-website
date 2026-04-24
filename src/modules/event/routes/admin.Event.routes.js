@@ -23,7 +23,9 @@ router.route('/create')
     ]), controller.create
   );
 
-
+//rvps
+router.route('/rsvp')
+  .get(withPagination(50), controller.findAllRvps);
 
 router.route('/:id')
   .get(controller.findById)
@@ -33,10 +35,5 @@ router.route('/:id')
     ]), controller.update
   )
   .delete(controller.destroy);
-
-
-//rvps
-router.route('/rvp')
-  .get(withPagination(12), controller.findAllRvps);
 
 export default router;

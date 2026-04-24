@@ -243,7 +243,8 @@ export const findAllRvps = async (req, res) => {
     res.status(200).render('./admins/event_rsvp_list', {
       success: true,
       pageTitle: "Admin - Event RSVPs",
-      rvps: rvps.rvps,
+      rsvps: rvps.rvps,
+      layout: 'admin',
       totalItems: rvps.totalItems,
       totalPages: rvps.totalPages,
       currentPage: page
