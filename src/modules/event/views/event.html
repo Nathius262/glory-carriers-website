@@ -1,10 +1,15 @@
 <main class="mt-5">
 
   <!-- Event Banner -->
-  <div class="container mt-5">
+  <div class="mt-5">
     <div class="row">
       <div class="col-12">
-        <img src="{{event.image_url}}" class="w-100 rounded-3 shadow-sm" alt="{{event.title}}">
+        <picture>
+          <!-- Mobile -->
+          <source srcset="/assets/img/event-mobile.jpeg" media="(max-width: 767px)">
+          <img src="{{event.image_url}}" class="w-100 rounded-3 shadow-sm" alt="{{event.title}}">
+
+        </picture>
       </div>
     </div>
   </div>

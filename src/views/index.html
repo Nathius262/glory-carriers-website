@@ -95,15 +95,21 @@
                         {{> event-countdown-js e=event}}
                     </div>
                     <div>
-                        <img width="100%" src="{{event.image_url}}" alt="{{event.title}}">
+                        <picture>
+                            <!-- Mobile -->
+                            <source srcset="/assets/img/event-mobile.jpeg" media="(max-width: 767px)">
+
+                            <!-- Default (tablet & desktop) -->
+                            <img width="100%" src="{{event.image_url}}" alt="{{event.title}}">
+                        </picture>
                     </div>
                 </div>
 
                 <!-- Content -->
                 <div class="col-lg-4 col-md-5 mb-4 text-md-end text-center">
-                    <h4 class="text-color-blue ft-upper">Upcoming Event</h4>
+                    <h4 class="text-color-blue ft-upper text-center text-md-end">Upcoming Event</h4>
 
-                    <h2 class="text-color-blue ft-upper" style="letter-spacing: 5px;">
+                    <h2 class="text-color-blue ft-upper text-center text-md-end fw-bold" style="letter-spacing: -1px;">
                         {{event.title}}
                     </h2>
 
