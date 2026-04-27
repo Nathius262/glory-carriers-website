@@ -155,7 +155,7 @@
             <!-- NAVBAR -->
             <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
                 <div class="container-fluid">
-                    <button class="btn btn-sm" id="sidebarToggle">
+                    <button class="btn btn-lg" id="sidebarToggle">
                         <i class="fas fa-bars"></i>
                     </button>
 
@@ -272,11 +272,72 @@
             document.getElementById('logout-button').addEventListener('click', handleLogout);
         } catch { }
 
-        // Sidebar toggle functionality
-        document.getElementById('sidebarToggle').addEventListener('click', function () {
-            document.querySelector('.sidebar').classList.toggle('collapsed');
-            document.querySelector('.main-content').classList.toggle('expanded');
-        });
+        // Sidebar Controller
+        (() => {
+            const sidebar = document.querySelector('.sidebar');
+            const mainContent = document.querySelector('.main-content');
+            const toggleBtn = document.getElementById('sidebarToggle');
+
+            const MOBILE_BREAKPOINT = 768;
+
+            // Utility: check if mobile
+            const isMobile = () => window.innerWidth <= MOBILE_BREAKPOINT;
+
+            // Open / Close Handlers
+            const openSidebarMobile = () => {
+                sidebar.classList.add('active');
+            };
+
+            const closeSidebarMobile = () => {
+                sidebar.classList.remove('active');
+            };
+
+            const toggleSidebarDesktop = () => {
+                sidebar.classList.toggle('collapsed');
+                mainContent.classList.toggle('expanded');
+            };
+
+            // Toggle Button Click
+            toggleBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+
+                if (isMobile()) {
+                    sidebar.classList.toggle('active');
+                } else {
+                    toggleSidebarDesktop();
+                }
+            });
+
+            // Outside Click (Mobile Only)
+            document.addEventListener('click', (e) => {
+                if (!isMobile()) return;
+
+                const clickedInsideSidebar = sidebar.contains(e.target);
+                const clickedToggleBtn = toggleBtn.contains(e.target);
+
+                if (!clickedInsideSidebar && !clickedToggleBtn) {
+                    closeSidebarMobile();
+                }
+            });
+
+            // Close sidebar when a menu link is clicked (Mobile UX)
+            document.querySelectorAll('.sidebar a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (isMobile()) {
+                        closeSidebarMobile();
+                    }
+                });
+            });
+
+            // Optional: Reset state on resize (prevents broken states)
+            window.addEventListener('resize', () => {
+                if (!isMobile()) {
+                    // Ensure mobile-only classes are removed
+                    sidebar.classList.remove('active');
+                }
+            });
+
+        })();
     </script>
 
 
