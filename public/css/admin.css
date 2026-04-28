@@ -58,7 +58,6 @@
     background-color: #0d6efd;
 }
 
-
 /* Enhanced Admin Styles */
 .card {
     border: none;
@@ -254,4 +253,228 @@
 
 .main_overlay:hover>* {
     transform: translateY(0);
+}
+
+/* refined container spacing */
+.dashboard-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 1.8rem 2rem 2.5rem;
+}
+
+/* modernized card base: softer radius, subtle shadows, crisp borders (or borderless) */
+.dashboard-card {
+    border: none;
+    border-radius: 24px;
+    background: #ffffff;
+    transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.02), 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.12);
+}
+
+/* top accent line: more elegant */
+.dashboard-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 5px;
+    width: 100%;
+    border-radius: 24px 24px 0 0;
+}
+
+/* card body typography refinement */
+.dashboard-card .card-body {
+    padding: 1.5rem 1.2rem 1.4rem 1.5rem;
+}
+
+.dashboard-card h6 {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #5b6e8c;
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.dashboard-card h3 {
+    font-weight: 700;
+    font-size: 2rem;
+    margin: 0;
+    letter-spacing: -0.01em;
+    color: #0b2b3b;
+}
+
+/* stat icons (added inline via pseudo or dedicated micro style) */
+.stat-icon {
+    font-size: 1rem;
+    color: inherit;
+    opacity: 0.8;
+}
+
+/* colorful top accents */
+.card-users::before {
+    background: #2a6df4;
+}
+
+.card-events::before {
+    background: #1e9c50;
+}
+
+.card-sermons::before {
+    background: #f39c12;
+}
+
+.card-rsvps::before {
+    background: #e53e3e;
+}
+
+.card-departments::before {
+    background: #8b5cf6;
+}
+
+.card-nowwords::before {
+    background: #14b8a6;
+}
+
+.card-zoe::before {
+    background: #334155;
+}
+
+/* Table cards - global card improvements */
+.data-card {
+    border-radius: 28px;
+    border: none;
+    background: #ffffff;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.02), 0 2px 6px rgba(0, 0, 0, 0.03);
+    transition: box-shadow 0.2s;
+    overflow: hidden;
+}
+
+.data-card .card-header {
+    background: transparent;
+    border-bottom: 1px solid #edf2f7;
+    padding: 1rem 1.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: -0.2px;
+    color: #1e2f3f;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.data-card .card-header i {
+    color: #4f7ea5;
+    font-size: 1.2rem;
+}
+
+/* modern tables: minimal, clean */
+.modern-table {
+    margin-bottom: 0;
+    font-size: 0.85rem;
+}
+
+.modern-table thead th {
+    background-color: #f9fafc;
+    color: #2c3f55;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-bottom: 1px solid #e6edf4;
+    padding: 0.9rem 1rem;
+}
+
+.modern-table tbody td {
+    padding: 0.9rem 1rem;
+    vertical-align: middle;
+    border-color: #f0f2f8;
+    color: #2b3e55;
+    font-weight: 450;
+}
+
+.modern-table tbody tr:hover td {
+    background-color: #fafcff;
+    transition: 0.1s;
+}
+
+/* badges refined */
+.badge-modern {
+    font-size: 0.7rem;
+    font-weight: 500;
+    padding: 0.3rem 0.7rem;
+    border-radius: 40px;
+    letter-spacing: -0.2px;
+}
+
+.badge-success-light {
+    background-color: #e0f7ea;
+    color: #1e6f3f;
+}
+
+.badge-secondary-light {
+    background-color: #eef2f6;
+    color: #4a627a;
+}
+
+.badge-info-light {
+    background-color: #e1f0fe;
+    color: #1c6fb0;
+}
+
+/* profile fallback style */
+.text-muted-soft {
+    color: #7f8eaa;
+    font-size: 0.75rem;
+}
+
+/* header area modern */
+.dashboard-header {
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.dashboard-header h4 {
+    font-weight: 700;
+    font-size: 1.7rem;
+    background: linear-gradient(135deg, #1e3a5f, #2c5282);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: -0.3px;
+}
+
+.greeting-badge {
+    background: #eef3fc;
+    padding: 5px 14px;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #2c6b9e;
+}
+
+/* responsive gap tweaks */
+@media (max-width: 768px) {
+    .dashboard-container {
+        padding: 1rem 1rem 1.5rem;
+    }
+
+    .dashboard-card h3 {
+        font-size: 1.6rem;
+    }
+}
+
+/* additional hover effect for table rows */
+.badge {
+    transition: all 0.1s;
 }

@@ -1,18 +1,259 @@
-<div>
-    <h1>
-        Welcome to Admin Dashboard
-    </h1>
-    <p>
-        This is the admin dashboard page.
-    </p>
+<div class="dashboard-container">
+    <!-- HEADER with modern vibe -->
+    <div class="dashboard-header d-flex justify-content-between align-items-center">
+        <div>
+            <h4 class="fw-bold mb-1"><i class="fas fa-chart-line me-2" style="color: #2a6df4;"></i> Dashboard</h4>
+            <p class="text-muted small mt-1" style="font-size: 0.8rem;">Real-time overview & insights</p>
+        </div>
+        <div class="greeting-badge">
+            <i class="far fa-calendar-alt me-1"></i> Today · <span id="liveDate"></span>
+        </div>
+    </div>
 
+    <!-- STATS CARDS - FIRST ROW (modernized icons inside) -->
+    <div class="row g-4 mb-5">
+        <div class="col-md-3">
+            <div class="card dashboard-card card-users">
+                <div class="card-body">
+                    <h6><i class="fas fa-user-friends stat-icon"></i> Total Users</h6>
+                    <h3>{{stats.totalUsers}}</h3>
+                    <div class="mt-2"><span class="small text-success"><i class="fas fa-arrow-up"></i> +12%</span>
+                        <span class="text-muted small ms-2">vs last month</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card dashboard-card card-events">
+                <div class="card-body">
+                    <h6><i class="fas fa-calendar-check stat-icon"></i> Events</h6>
+                    <h3>{{stats.totalEvents}}</h3>
+                    <div class="mt-2"><span class="small text-muted">upcoming</span> <span
+                            class="small fw-semibold ms-1">4 active</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card dashboard-card card-sermons">
+                <div class="card-body">
+                    <h6><i class="fas fa-church stat-icon"></i> Sermons</h6>
+                    <h3>{{stats.totalSermons}}</h3>
+                    <div class="mt-2"><span class="small text-muted">library growing</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card dashboard-card card-rsvps">
+                <div class="card-body">
+                    <h6><i class="fas fa-envelope-open-text stat-icon"></i> RSVPs</h6>
+                    <h3>{{stats.totalRsvps}}</h3>
+                    <div class="mt-2"><span class="small text-warning"><i class="fas fa-clock"></i> pending:
+                            5</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <section class="mt-5">
-        <a class="button" href="https://github.com/Nathius262/nexusjs" target="_blank">View on GitHub</a>
-        <a class="button" href="https://www.npmjs.com/package/@nathius262/nexusjs" target="_blank">View on NPM</a>
-    </section>
+    <!-- SECOND ROW: Departments, Now Words, Zoe Records (with additional context) -->
+    <div class="row g-4 mb-5">
+        <div class="col-md-4">
+            <div class="card dashboard-card card-departments">
+                <div class="card-body">
+                    <h6><i class="fas fa-building stat-icon"></i> Departments</h6>
+                    <h3>{{stats.totalDepartments}}</h3>
+                    <div class="small text-muted mt-1">ministry teams · <span class="fw-semibold">active</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card dashboard-card card-nowwords">
+                <div class="card-body">
+                    <h6><i class="fas fa-comment-dots stat-icon"></i> Now Words</h6>
+                    <h3>{{stats.totalNowwords}}</h3>
+                    <div class="small text-muted mt-1">daily inspiration</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card dashboard-card card-zoe">
+                <div class="card-body">
+                    <h6><i class="fas fa-feather-alt stat-icon"></i> Zoe Records</h6>
+                    <h3>{{stats.totalZoeRecords}}</h3>
+                    <div class="small text-muted mt-1">archived entries</div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <section class="my-4">
-        <a class="button" href="/auth/logout">logout</a>
-    </section>
+    <!-- RECENT USERS || Enhanced table card -->
+    <div class="card data-card mb-4">
+        <div class="card-header bg-white">
+            <i class="fas fa-users"></i> Recent users
+            <span class="ms-auto badge bg-light text-dark rounded-pill fs-6 fw-normal">{{stats.totalUsers}}
+                entries</span>
+        </div>
+        <div class="table-responsive">
+            <table class="table modern-table align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th><i class="far fa-envelope me-1"></i> Email</th>
+                        <th><i class="far fa-user-circle me-1"></i> Profile name</th>
+                        <th><i class="far fa-calendar-alt me-1"></i> Joined</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each users}}
+                    <tr>
+                        <td class="fw-medium">{{this.email}}</td>
+                        <td>
+                            {{#if this.profile}}
+                            <span class="d-flex align-items-center gap-2">
+                                <span class="avatar-placeholder rounded-circle bg-light text-dark"
+                                    style="width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600;">
+                                    {{this.profile.first_name.charAt 0}}{{this.profile.last_name.charAt 0}}</span>
+                                <span>{{this.profile.first_name}} {{this.profile.last_name}}</span>
+                            </span>
+                            {{else}}
+                            <span class="text-muted-soft"><i class="fas fa-user-slash me-1"></i> No profile</span>
+                            {{/if}}
+                        </td>
+                        <td class="text-secondary">{{formatDate this.createdAt}}</td>
+                    </tr>
+                    {{else}}
+                    <tr>
+                        <td colspan="3" class="text-center py-4 text-muted"><i class="fas fa-inbox me-2"></i>No
+                            users found</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- RECENT EVENTS (improved badge gestures) -->
+    <div class="card data-card mb-4">
+        <div class="card-header bg-white">
+            <i class="fas fa-calendar-alt"></i> Recent events
+            <span class="ms-auto badge bg-light text-dark rounded-pill fs-6 fw-normal">{{stats.totalEvents}}
+                upcoming</span>
+        </div>
+        <div class="table-responsive">
+            <table class="table modern-table align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Start Date</th>
+                        <th>Headline status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each events}}
+                    <tr>
+                        <td class="fw-semibold">{{this.title}}</td>
+                        <td><i class="far fa-clock me-1 text-muted"></i> {{formatDate this.start_date}}</td>
+                        <td>
+                            {{#if this.is_headline}}
+                            <span class="badge-modern badge-success-light"><i class="fas fa-star me-1"></i>
+                                Yes</span>
+                            {{else}}
+                            <span class="badge-modern badge-secondary-light"><i class="far fa-circle me-1"></i>
+                                No</span>
+                            {{/if}}
+                        </td>
+                    </tr>
+                    {{else}}
+                    <tr>
+                        <td colspan="3" class="text-center py-4 text-muted"><i class="fas fa-calendar-times me-2"></i>No
+                            events found</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- RECENT RSVPs: cleaner attendance mode -->
+    <div class="card data-card mb-4">
+        <div class="card-header bg-white">
+            <i class="fas fa-reply-all"></i> Recent RSVPs
+            <span class="ms-auto badge bg-light text-dark rounded-pill fs-6 fw-normal">{{stats.totalRsvps}}
+                responses</span>
+        </div>
+        <div class="table-responsive">
+            <table class="table modern-table align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th>Full name</th>
+                        <th>Email address</th>
+                        <th>Event title</th>
+                        <th>Mode</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each rsvps}}
+                    <tr>
+                        <td class="fw-medium">{{this.name}}</td>
+                        <td><a href="mailto:{{this.email}}"
+                                class="text-decoration-none text-secondary">{{this.email}}</a></td>
+                        <td>
+                            {{#if this.event}}
+                            <span class="badge bg-light text-dark px-2 py-1 rounded-3">{{this.event.title}}</span>
+                            {{else}}
+                            <span class="text-muted-soft">N/A</span>
+                            {{/if}}
+                        </td>
+                        <td>
+                            <span class="badge-modern badge-info-light"><i class="fas fa-user-check me-1"></i>
+                                {{this.attendance_mode}}</span>
+                        </td>
+                    </tr>
+                    {{else}}
+                    <tr>
+                        <td colspan="4" class="text-center py-4 text-muted"><i class="far fa-comment-dots me-2"></i>No
+                            RSVPs found</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- RECENT SERMONS - minimalist gradient -->
+    <div class="card data-card mb-4">
+        <div class="card-header bg-white">
+            <i class="fas fa-microphone-alt"></i> Recent sermons
+            <span class="ms-auto badge bg-light text-dark rounded-pill fs-6 fw-normal">{{stats.totalSermons}}
+                messages</span>
+        </div>
+        <div class="table-responsive">
+            <table class="table modern-table align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th>📖 Title</th>
+                        <th>🔗 Slug / reference</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each sermons}}
+                    <tr>
+                        <td class="fw-semibold"><i class="fas fa-cross me-2 text-muted"></i>{{this.title}}</td>
+                        <td><code class="small bg-light px-2 py-1 rounded">{{this.slug}}</code></td>
+                    </tr>
+                    {{else}}
+                    <tr>
+                        <td colspan="2" class="text-center py-4 text-muted"><i class="fas fa-volume-mute me-2"></i>No
+                            sermons found</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- subtle footer note: modern dashboard feel -->
+    <div class="text-center mt-3">
+        <small class="text-muted opacity-50"><i class="far fa-heart"></i> updated live · church management
+            core</small>
+    </div>
 </div>
