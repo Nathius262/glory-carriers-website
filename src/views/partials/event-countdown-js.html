@@ -2,9 +2,9 @@
     (function () {
         const id = "{{e.id}}";
 
-        const startDate = new Date("{{formatDate e.start_date 'YYYY-MM-DDTHH:mm:ss'}}");
+        const startDate = new Date("{{e.start_date}}");
         const endDate = "{{e.end_date}}"
-            ? new Date("{{formatDate e.end_date 'YYYY-MM-DDTHH:mm:ss'}}")
+            ? new Date("{{e.end_date}}")
             : null;
 
         const label = document.getElementById(`countdown-label-${id}`);
