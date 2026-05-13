@@ -1,21 +1,31 @@
 import db from '../../../models/index.cjs';
 
-
-
-export const findAll = async ({ limit, offset }) => {
+export const findAll = async ({
+  limit,
+  offset,
+  order = null
+}) => {
   try {
 
-    const { rows: events, count: totalItems } = await db.Event.findAndCountAll({
-      limit,
-      offset,
-      distinct: true,
-      order: [['createdAt', 'DESC'], ['updatedAt', 'DESC']]
-    });
+    const defaultOrder = [
+      ['createdAt', 'DESC'],
+      ['updatedAt', 'DESC']
+    ];
+
+    const { rows: events, count: totalItems } =
+      await db.Event.findAndCountAll({
+        limit,
+        offset,
+        distinct: true,
+        order: order || defaultOrder
+      });
+
     return {
       events,
       totalItems,
       totalPages: Math.ceil(totalItems / limit)
-    }
+    };
+
   } catch (error) {
     throw new Error('Error fetching records: ' + error.message);
   }

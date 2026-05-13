@@ -1,16 +1,30 @@
 import * as rvpService from '../services/Rvp.service.js';
-import { findAll as eventService } from '../services/admin.Event.service.js';
+import { findAll as eventService, findById as eventServiceId } from '../services/admin.Event.service.js';
 import { rsvpSchema } from '../validators/rsvp.schema.js';
 import { validate } from '../../../utils/validate.js';
 
 export const render_event_view = async (req, res) => {
   try {
-    const events = await eventService({ limit: 1, offset: 0 });
+    const events = await eventService({ limit: 1, offset: 0, order: [['is_headline', 'DESC'], ['createdAt', 'DESC']] });
     res.status(200).render('event', { event: events.events[0] });
   } catch (error) {
     res.status(500).render('errors/500', { error: error.message })
   }
 }
+
+export const findById = async (req, res) => {
+  try {
+    const data = await eventServiceId(req.params.id);
+    res.status(200).render('./event_single', {
+      success: true,
+      pageTitle: data.title,
+      event: data,
+    });
+  } catch (err) {
+    res.status(404).render('errors/404', { error: err.message });
+  }
+};
+
 
 export const rvp_event = async (req, res) => {
   try {

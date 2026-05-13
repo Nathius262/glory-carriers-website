@@ -10,5 +10,6 @@ router.use(useModuleViews('event'));
 // Public view routes
 router.get('/', controller.render_event_view);
 router.post('/rsvp', strictLimiter, controller.rvp_event);
+router.get('/:id', controller.findById);
 
 export default router;

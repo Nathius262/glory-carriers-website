@@ -1,0 +1,73 @@
+<main class="mt-5">
+
+    <!-- Event Banner -->
+    <div class="mt-5">
+        <div class="row">
+            <div class="col-12">
+                <picture>
+                    <!-- Mobile -->
+                    <source srcset="/assets/img/event-mobile.jpeg" media="(max-width: 767px)">
+                    <img src="{{event.image_url}}" class="w-100 rounded-3 shadow-sm" alt="{{event.title}}">
+
+                </picture>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+
+        <div class="row align-items-start">
+
+            <!-- LEFT: EVENT DETAILS -->
+            <div class="col-lg-7 col-12">
+
+                <h1 class="fw-bold text-uppercase mb-3">
+                    {{event.title}}
+                </h1>
+
+                <!-- Date -->
+                <p class="text-muted fs-5 mb-3">
+                    {{formatDate event.start_date "MMMM D, YYYY"}}
+                    {{#if event.end_date}}
+                    - {{formatDate event.end_date "MMMM D, YYYY"}}
+                    {{/if}}
+                </p>
+
+                <!-- 🔥 COUNTDOWN (Reusable Partial) -->
+                <div class="mb-4">
+                    {{> event-countdown-label e=event}}
+                    {{> event-countdown-boxes e=event}}
+                    {{> event-countdown-js e=event}}
+                </div>
+
+                <hr>
+
+                <!-- Description -->
+                <div class="event-description mt-4">
+                    {{{event.description}}}
+                </div>
+
+            </div>
+
+            <!-- RIGHT: REGISTRATION -->
+            <div class="col-lg-5 col-12">
+
+                <div class="card shadow-sm border-0 sticky-top" style="top: 100px;">
+                    <div class="card-body">
+
+                        <h4 class="text-center mb-4">Register for the main event</h4>
+
+                        <a href="/event" class="btn btn-primary w-100">
+                            Register Now
+                        </a>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>

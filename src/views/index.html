@@ -83,24 +83,23 @@
     </section>
 
     {{#if event}}
-    <section class="about pt-5 mt-0" id="event-{{event.id}}">
+    {{#each event}}
+    <section class="about pt-5 mt-0 " id="event-{{this.id}}">
         <div class="container" style="overflow-x: hidden;">
             <div class="row align-items-center">
-
                 <!-- Image -->
                 <div class="col-lg-8 col-md-7 mb-4">
                     <div class="mb-4">
-                        {{> event-countdown-label e=event}}
-                        {{> event-countdown-boxes e=event}}
-                        {{> event-countdown-js e=event}}
+                        {{> event-countdown-label e=this}}
+                        {{> event-countdown-boxes e=this}}
+                        {{> event-countdown-js e=this}}
                     </div>
                     <div>
                         <picture>
                             <!-- Mobile -->
                             <source srcset="/assets/img/event-mobile.jpeg" media="(max-width: 767px)">
-
                             <!-- Default (tablet & desktop) -->
-                            <img width="100%" src="{{event.image_url}}" alt="{{event.title}}">
+                            <img width="100%" src="{{this.image_url}}" alt="{{this.title}}">
                         </picture>
                     </div>
                 </div>
@@ -108,34 +107,35 @@
                 <!-- Content -->
                 <div class="col-lg-4 col-md-5 mb-4 text-md-end text-center">
                     <h4 class="text-color-blue ft-upper text-center text-md-end">Upcoming Event</h4>
-
                     <h2 class="text-color-blue ft-upper text-center text-md-end fw-bold" style="letter-spacing: -1px;">
-                        {{event.title}}
+                        {{this.title}}
                     </h2>
-
                     <!-- Date -->
                     <p class="text-muted mb-2">
-                        {{formatDate event.start_date "MMMM D, YYYY"}}
-                        {{#if event.end_date}}
-                        - {{formatDate event.end_date "MMMM D, YYYY"}}
+                        {{formatDate this.start_date "MMMM D, YYYY"}}
+                        {{#if this.end_date}}
+                        - {{formatDate this.end_date "MMMM D, YYYY"}}
                         {{/if}}
                     </p>
-
-
                     <!-- Truncated Description -->
                     <p>
-                        {{{truncateHTML event.description 40}}}
+                        {{{truncateHTML this.description 40}}}
                     </p>
-
                     <!-- CTA -->
+                    {{#if this.is_headline}}
                     <a style="letter-spacing: 0.1rem" href="/event">
                         See Details
                     </a>
+                    {{else}}
+                    <a style="letter-spacing: 0.1rem" href="/event/{{this.id}}">
+                        See Details
+                    </a>
+                    {{/if}}
                 </div>
-
             </div>
         </div>
     </section>
+    {{/each}}
     {{/if}}
 
 
