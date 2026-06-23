@@ -2,6 +2,7 @@ import * as service from '../services/admin.Sermon.service.js';
 import capitalizeWords from '../../../utils/utils.js';
 import { getPublicIdFromUrl } from '../../../utils/utils.js'
 import cloudinary from '../../../config/cloudinaryConfig.js';
+import { success } from 'zod';
 
 export const findAll = async (req, res) => {
   const { page, limit, offset } = req.pagination
@@ -83,7 +84,7 @@ export const create = async (req, res) => {
   } catch (err) {
     console.log(err)
     console.log(err.message)
-    res.status(500).json({ error: err });
+    res.status(500).json({ success: false, message: err.message });
   }
 };
 
@@ -146,7 +147,7 @@ export const update = async (req, res) => {
     res.status(200).json({ success: true, data, redirectTo: `/admin/sermon/${req.params.id}`, message: "Updated successfully" });
   } catch (err) {
     console.log(err)
-    res.status(500).json({ error: err });
+    res.status(500).json({ success: false, message: err.message });
   }
 };
 
