@@ -62,13 +62,16 @@ export default async function loadModules(app) {
   //GLOBAL DEFAULT PAGE NOT FOUND
   app.use((req, res, next) => {
     res.status(404);
+    res.json({ success: false, message: 'Page Not Found', url: `${req.protocol}://${req.get('host')}${req.originalUrl}` });
     res.render('errors/404', { pageTitle: 'Page Not Found', url: `${req.protocol}://${req.get('host')}${req.originalUrl}` });
   });
 
   //GLOBAL DEFAULT INTERNAL SERVER ERROR
   app.use((err, req, res, next) => {
+    console.log('❌ Server Error:', err);
     console.error('❌ Server Error:', err.stack);
     res.status(500);
+    res.json({ success: false, message: 'Internal Server Error', error: err.message });
     res.render('errors/500', { pageTitle: 'Server Error', error: err });
   });
 }

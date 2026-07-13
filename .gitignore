@@ -6,3 +6,5 @@ node_modules
 .env copy
 databases/
 v1/
+.vercel
+.env*
