@@ -1,23 +1,45 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Project extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
+      Project.hasMany(models.ProjectImage, {
+        foreignKey: 'project_id',
+        as: 'images',
+        onDelete: 'CASCADE',
+      });
     }
   }
-  Project.init({
-    name: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'Project',
-  });
+
+  Project.init(
+    {
+      title: DataTypes.STRING,
+
+      slug: DataTypes.STRING,
+
+      description: DataTypes.TEXT('long'),
+
+      goal_amount: DataTypes.DECIMAL(15, 2),
+
+      location: DataTypes.STRING,
+
+      start_date: DataTypes.DATEONLY,
+
+      end_date: DataTypes.DATEONLY,
+
+      is_featured: DataTypes.BOOLEAN,
+
+      is_active: DataTypes.BOOLEAN,
+    },
+    {
+      sequelize,
+      modelName: 'Project',
+      tableName: 'projects',
+      underscored: true,
+    }
+  );
+
   return Project;
 };
