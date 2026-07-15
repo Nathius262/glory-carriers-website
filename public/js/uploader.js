@@ -84,7 +84,7 @@ import { messageAlert } from './utils.js'
 
 })()
 
-function loadStatus(status) {
+export function loadStatus(status) {
     let statusEl = document.getElementsByClassName('status')
     let btn = document.getElementById('btn')
     let progressBar = document.getElementById('progressBar')
@@ -132,7 +132,7 @@ function loadStatus(status) {
     }
 }
 
-async function uploadFile(formData, progressBar, url, method) {
+export async function uploadFile(formData, progressBar, url, method) {
     const xhr = new XMLHttpRequest();
 
     return new Promise((resolve, reject) => {

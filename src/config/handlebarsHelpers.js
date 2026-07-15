@@ -152,4 +152,30 @@ export default function registerHelpers(handlebars) {
 
     return `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(watchUrl)}&show_text=false&width=560`;
   });
+
+  handlebars.registerHelper( "formatNumber",  function(value) {
+    if (value === null || value === undefined || value === "") {
+        return "";
+    }
+
+    return new Intl.NumberFormat("en-NG").format(Number(value));
+  });
+
+  handlebars.registerHelper( "formatCurrency",  function(value) {
+    if (value === null || value === undefined || value === "") {
+        return "";
+    }
+
+    return new Intl.NumberFormat("en-NG", {
+        style: "currency",
+        currency: "NGN",
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+    }).format(Number(value));
+  });
+
+  handlebars.registerHelper("inc", function(value) {
+    return Number(value) + 1;
+  });
+
 }
