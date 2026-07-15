@@ -1,52 +1,213 @@
+<div class="container-fluid py-4">
 
-  <div class="container-fluid py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-      <h1 class="h3 mb-0">Project Management</h1>
-      <a href="/admin/project/create" class="btn btn-primary">
-        <i class="fas fa-plus me-2"></i>Create New
-      </a>
+        <h1 class="h3 mb-0">
+            Project Management
+        </h1>
+
+        <a href="/admin/project/create" class="btn btn-primary">
+            <i class="fas fa-plus me-2"></i>
+            Create Project
+        </a>
     </div>
 
     <div class="card shadow-sm">
-      <div class="card-body">
-        <div class="table-responsive">
-          <table class="table table-hover">
-            <thead class="table-light">
-              <tr>
-                <th>ID</th>
-                <!-- Add your table headers here -->
-                <th>Name</th>
-                <th>Created</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {{#each projects}}
-                <tr>
-                  <td>{{this.id}}</td>
-                  <!-- Add your table cells here -->
-                  <td>{{this.name}}</td>
-                  <td>{{formatDate this.createdAt}}</td>
-                  <td>
-                    <div class="btn-group btn-group-sm">
-                      <a href="/admin/project/{{this.id}}" class="btn btn-outline-primary">
-                        <i class="fas fa-edit"></i>
-                      </a>
-                      <button data-delete="project-{{this.id}}" data-name="{{this.id}}" 
-                          data-url="/admin/project/{{this.id}}" class="btn btn-danger btn-sm"
-                      >
-                          <i class="fas fa-trash me-1"></i>Delete
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              {{/each}}
-            </tbody>
-          </table>
+
+        <div class="card-body">
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle">
+
+                    <thead class="table-light">
+
+                        <tr>
+
+                            <th>#</th>
+
+                            <th>Project</th>
+
+                            <th>Gallery</th>
+
+                            <th>Goal Amount</th>
+
+                            <th>Featured</th>
+
+                            <th>Status</th>
+
+                            <th>Created</th>
+
+                            <th class="text-end">
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {{#each projects}}
+
+                        <tr>
+
+                            <td>
+                                {{this.id}}
+                            </td>
+
+                            <td>
+
+                                <div class="fw-semibold">
+                                    {{this.title}}
+                                </div>
+
+                                {{#if this.location}}
+                                    <small class="text-muted">
+                                        <i class="fas fa-location-dot"></i>
+                                        {{this.location}}
+                                    </small>
+                                {{/if}}
+
+                            </td>
+
+                            <td>
+
+                                <span class="badge bg-secondary">
+
+                                    {{this.images.length}}
+
+                                    Images
+
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                {{#if this.goal_amount}}
+
+                                    ₦{{formatNumber this.goal_amount}}
+
+                                {{else}}
+
+                                    —
+
+                                {{/if}}
+
+                            </td>
+
+                            <td>
+
+                                {{#if this.is_featured}}
+
+                                    <span class="badge bg-primary">
+
+                                        Featured
+
+                                    </span>
+
+                                {{else}}
+
+                                    <span class="badge bg-light text-dark">
+
+                                        No
+
+                                    </span>
+
+                                {{/if}}
+
+                            </td>
+
+                            <td>
+
+                                {{#if this.is_active}}
+
+                                    <span class="badge bg-success">
+
+                                        Active
+
+                                    </span>
+
+                                {{else}}
+
+                                    <span class="badge bg-danger">
+
+                                        Inactive
+
+                                    </span>
+
+                                {{/if}}
+
+                            </td>
+
+                            <td>
+
+                                {{formatDate this.createdAt}}
+
+                            </td>
+
+                            <td>
+
+                                <div class="btn-group btn-group-sm float-end">
+
+                                    <a
+                                        href="/admin/project/{{this.id}}"
+                                        class="btn btn-outline-primary">
+
+                                        <i class="fas fa-edit"></i>
+
+                                    </a>
+
+                                    <button
+                                        data-delete="project-{{this.id}}"
+                                        data-name="{{this.title}}"
+                                        data-url="/admin/project/{{this.id}}"
+                                        class="btn btn-outline-danger">
+
+                                        <i class="fas fa-trash"></i>
+
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                        {{else}}
+
+                        <tr>
+
+                            <td colspan="8" class="text-center py-5">
+
+                                <div class="text-muted">
+
+                                    <i class="fas fa-folder-open fa-2x mb-3"></i>
+
+                                    <p class="mb-0">
+
+                                        No projects found.
+
+                                    </p>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                        {{/each}}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            {{> pagination}}
+
         </div>
-        
-        {{> pagination}}
-      </div>
+
     </div>
-  </div>
-  
+
+</div>

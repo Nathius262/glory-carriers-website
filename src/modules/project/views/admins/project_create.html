@@ -1,43 +1,236 @@
+<div class="container-fluid py-4">
 
-  <div class="container-fluid py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-      <h1 class="h3 mb-0">Create Project</h1>
-      <a href="/admin/project" class="btn btn-secondary">
-        <i class="fas fa-arrow-left me-2"></i>Back to List
-      </a>
+
+        <h1 class="h3 mb-0">
+            Create Project
+        </h1>
+
+        <a href="/admin/project" class="btn btn-secondary">
+            <i class="fas fa-arrow-left me-2"></i>
+            Back to List
+        </a>
+
     </div>
 
     <div class="card shadow-sm">
-      <div class="card-body">
-        <form action="/admin/project/create" id="create-form" class="needs-validation" method="POST" novalidate>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="mb-3">
-                <label for="name" class="form-label">Name</label>
-                <input type="text" name="name" class="form-control" id="name" placeholder="Enter name" required>
-                <div class="invalid-feedback">
-                  Please provide a valid name.
+
+        <div class="card-body">
+
+            <form
+                action="/admin/project/create"
+                method="POST"
+                id="create-form"
+                class="needs-validation"
+                novalidate>
+
+                <div class="row">
+
+                    <!-- Project Title -->
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+                            Project Title
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="title"
+                            placeholder="Church Building Project"
+                            required>
+
+                        <div class="invalid-feedback">
+                            Project title is required.
+                        </div>
+
+                    </div>
+
+                    <!-- Slug -->
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+                            Slug
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="slug"
+                            placeholder="church-building-project"
+                            required>
+
+                        <div class="form-text">
+                            Used in the project URL.
+                        </div>
+
+                    </div>
+
+                    <!-- Goal Amount -->
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+                            Goal Amount (₦)
+                        </label>
+
+                        <input
+                            type="number"
+                            class="form-control"
+                            name="goal_amount"
+                            min="0">
+
+                    </div>
+
+                    <!-- Location -->
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+                            Location
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="location"
+                            placeholder="Makurdi, Benue State">
+
+                    </div>
+
+                    <!-- Start Date -->
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+                            Start Date
+                        </label>
+
+                        <input
+                            type="date"
+                            class="form-control"
+                            name="start_date">
+
+                    </div>
+
+                    <!-- End Date -->
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+                            End Date
+                        </label>
+
+                        <input
+                            type="date"
+                            class="form-control"
+                            name="end_date">
+
+                    </div>
+
+                    <!-- Featured -->
+                    <div class="col-md-6 mb-3">
+
+                        <div class="form-check mt-4">
+
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                name="is_featured"
+                                value="true"
+                                id="featured">
+
+                            <label
+                                class="form-check-label"
+                                for="featured">
+
+                                Feature this project on the homepage
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Active -->
+                    <div class="col-md-6 mb-3">
+
+                        <div class="form-check mt-4">
+
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                checked
+                                name="is_active"
+                                value="true"
+                                id="active">
+
+                            <label
+                                class="form-check-label"
+                                for="active">
+
+                                Project is Active
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Description -->
+                    <div class="col-12 mb-3">
+
+                        <label class="form-label">
+                            Description
+                        </label>
+
+                        <textarea
+                            class="form-control"
+                            rows="8"
+                            name="description"
+                            required></textarea>
+
+                    </div>
+
                 </div>
-              </div>
-            </div>
-            <!-- Add more form fields in columns as needed -->
-          </div>
 
-          <div class="d-flex gap-2 mt-4">
-            <button type="submit" class="btn btn-primary">
-              <i class="fas fa-plus me-2"></i>Create Project
-            </button>
-            <a href="/admin/project" class="btn btn-outline-secondary">Cancel</a>
-          </div>
-        </form>
-      </div>
+                <div class="mt-4 d-flex gap-2">
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary">
+
+                        <i class="fas fa-plus me-2"></i>
+
+                        Create Project
+
+                    </button>
+
+                    <a
+                        href="/admin/project"
+                        class="btn btn-outline-secondary">
+
+                        Cancel
+
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
     </div>
-  </div>
 
-  <script src="/assets/js/form-handler.js"></script>
+</div>
 
-  <!-- 
-    always use this when you intend on uploading images or files and comment the above script 
-  -->
-  <!-- <script type="module" src="/assets/js/uploader.js"></script> -->
-  
+<script>
+  const title = document.querySelector('[name="title"]');
+  const slug = document.querySelector('[name="slug"]');
+
+  title.addEventListener("input", () => {
+      slug.value = title.value
+          .toLowerCase()
+          .trim()
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/^-|-$/g, "");
+  });
+</script>
+
+<script type="module" src="/assets/js/form-handler.js"></script>

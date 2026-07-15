@@ -1,45 +1,494 @@
+<div class="container-fluid py-4">
 
-  <div class="container-fluid py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-      <h1 class="h3 mb-0">Update Project</h1>
-      <a href="/admin/project" class="btn btn-secondary">
-        <i class="fas fa-arrow-left me-2"></i>Back to List
-      </a>
+
+        <h1 class="h3 mb-0">
+            Update Project
+        </h1>
+
+        <a
+            href="/admin/project"
+            class="btn btn-secondary">
+
+            <i class="fas fa-arrow-left me-2"></i>
+
+            Back to List
+
+        </a>
+
     </div>
+
+    <!-- ===========================================================
+        PROJECT INFORMATION
+    ============================================================ -->
+
+    <div class="card shadow-sm mb-4">
+
+        <div class="card-header">
+
+            <h5 class="mb-0">
+
+                Project Information
+
+            </h5>
+
+        </div>
+
+        <div class="card-body">
+
+            <form
+                action="/admin/project/{{project.id}}"
+                method="POST"
+                id="update-form"
+                class="needs-validation"
+                novalidate>
+
+                <input
+                    type="hidden"
+                    name="_method"
+                    value="PUT">
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+
+                            Project Title
+
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="title"
+                            value="{{project.title}}"
+                            required>
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+
+                            Slug
+
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="slug"
+                            value="{{project.slug}}"
+                            required>
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+
+                            Goal Amount
+
+                        </label>
+
+                        <input
+                            type="number"
+                            class="form-control"
+                            name="goal_amount"
+                            value="{{project.goal_amount}}">
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+
+                            Location
+
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="location"
+                            value="{{project.location}}">
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+
+                            Start Date
+
+                        </label>
+
+                        <input
+                            type="date"
+                            class="form-control"
+                            name="start_date"
+                            value="{{formatDateForInput project.start_date}}" type="datetime-local">
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+
+                            End Date
+
+                        </label>
+
+                        <input
+                            type="date"
+                            class="form-control"
+                            name="end_date"
+                            value="{{formatDateForInput project.end_date}}">
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <div class="form-check mt-4">
+
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                id="featured"
+                                name="is_featured"
+                                value="true"
+
+                                {{#if project.is_featured}}
+
+                                checked
+
+                                {{/if}}>
+
+                            <label
+                                class="form-check-label"
+                                for="featured">
+
+                                Featured Project
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <div class="form-check mt-4">
+
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                id="active"
+                                name="is_active"
+                                value="true"
+
+                                {{#if project.is_active}}
+
+                                checked
+
+                                {{/if}}>
+
+                            <label
+                                class="form-check-label"
+                                for="active">
+
+                                Active
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-12 mt-3">
+
+                        <label class="form-label">
+
+                            Description
+
+                        </label>
+
+                        <textarea
+                            class="form-control"
+                            rows="8"
+                            name="description">{{project.description}}</textarea>
+
+                    </div>
+
+                </div>
+
+                <div class="mt-4">
+
+                    <button
+                        class="btn btn-primary"
+                        id="btn">
+
+                        <span
+                            class="spinner-border spinner-border-sm status d-none"></span>
+
+                        Save Changes
+
+                    </button>
+
+                    <button
+                        id="delete"
+                        type="button"
+                        data-url="/admin/project/{{project.id}}"
+                        class="btn btn-danger float-end">
+
+                        Delete Project
+
+                    </button>
+
+                </div>
+
+                <progress
+                    id="progressBar"
+                    value="0"
+                    max="100"
+                    style="width:100%;display:none"
+                    class="mt-3">
+
+                </progress>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- ===========================================================
+        PROJECT GALLERY
+    ============================================================ -->
 
     <div class="card shadow-sm">
-      <div class="card-body">
-        <form action="/admin/project/{{project.id}}" id="update-form" class="needs-validation" method="POST" novalidate>
-          <input type="hidden" name="_method" value="PUT">
-          
-          <div class="row">
-            <div class="col-md-6">
-              <div class="mb-3">
-                <label for="name" class="form-label">Name</label>
-                <input type="text" name="name" class="form-control" id="name" value="{{project.name}}" required>
-                <div class="invalid-feedback">
-                  Please provide a valid name.
-                </div>
-              </div>
+
+        <div class="card-header d-flex justify-content-between align-items-center">
+
+            <div>
+
+                <h5 class="mb-0">
+
+                    Project Gallery
+
+                </h5>
+
+                <small class="text-muted">
+
+                    Upload multiple images for this project.
+
+                </small>
+
             </div>
-            <!-- Add more form fields in columns as needed -->
+
+            <span class="badge bg-primary">
+
+                {{project.images.length}}
+
+                Images
+
+            </span>
+
+        </div>
+
+        <div class="card-body">
+
+            <!-- ===========================================================
+              Upload Images
+          =========================================================== -->
+
+          <form
+              id="gallery-upload-form"
+              action="/admin/project/{{project.id}}/images"
+              method="POST"
+              enctype="multipart/form-data"
+              class="mb-5">
+
+              <div class="row align-items-end">
+
+                  <div class="col-lg-9">
+
+                      <label class="form-label fw-semibold">
+
+                          Upload Project Images
+
+                      </label>
+
+                      <input
+                          class="form-control"
+                          type="file"
+                          id="galleryImages"
+                          name="images"
+                          accept="image/*"
+                          multiple>
+
+                      <small class="text-muted">
+
+                          You can select multiple images at once.
+
+                      </small>
+
+                  </div>
+
+                  <div class="col-lg-3 mt-3 mt-lg-0">
+
+                      <button
+                          class="btn btn-primary w-100"
+                          id="uploadGalleryBtn">
+
+                          <i class="fas fa-upload me-2"></i>
+
+                          Upload Images
+
+                      </button>
+
+                  </div>
+
+              </div>
+
+          </form>
+
+          <hr class="mb-4">
+
+          <!-- ===========================================================
+              Gallery
+          =========================================================== -->
+
+          <div class="row" id="galleryContainer">
+
+          {{#if project.images.length}}
+
+              {{#each project.images}}
+
+              <div
+                  class="col-xl-3 col-lg-4 col-md-6 mb-4 gallery-item"
+                  id="gallery-image-{{this.id}}">
+
+                  <div class="card shadow-sm border-0 h-100">
+
+                      <div
+                          class="position-relative">
+
+                          <img
+
+                              src="{{this.image_url}}"
+
+                              class="card-img-top"
+
+                              style="
+                                  height:240px;
+                                  object-fit:cover;
+                              ">
+
+                          <span
+                              class="badge bg-dark position-absolute top-0 start-0 m-2">
+
+                              Image {{inc @index}}
+
+                          </span>
+
+                      </div>
+
+                      <div class="card-body">
+
+                          <div
+                              class="d-grid gap-2">
+
+                              <!-- Replace -->
+
+                              <button
+
+                                  class="btn btn-outline-primary btn-sm replaceImage"
+
+                                  data-id="{{this.id}}">
+
+                                  <i class="fas fa-camera me-2"></i>
+
+                                  Replace Image
+
+                              </button>
+
+                              <!-- Hidden Input -->
+
+                              <input
+
+                                  type="file"
+
+                                  accept="image/*"
+
+                                  class="d-none replaceInput"
+
+                                  id="replace-{{this.id}}"
+
+                                  data-id="{{this.id}}">
+
+                              <!-- Delete -->
+
+                              <button
+
+                                  class="btn btn-outline-danger btn-sm deleteImage"
+
+                                  data-id="{{this.id}}">
+
+                                  <i class="fas fa-trash me-2"></i>
+
+                                  Delete Image
+
+                              </button>
+
+                          </div>
+
+                      </div>
+
+                  </div>
+
+              </div>
+
+              {{/each}}
+
+          {{else}}
+
+          <div class="col-12">
+
+              <div
+                  class="border rounded-3 p-5 text-center">
+
+                  <i
+                      class="fas fa-images fa-4x text-secondary mb-3">
+
+                  </i>
+
+                  <h5>
+
+                      No Images Uploaded
+
+                  </h5>
+
+                  <p class="text-muted">
+
+                      Upload some images to showcase this project.
+
+                  </p>
+
+              </div>
+
           </div>
 
-          <div class="d-flex gap-2 mt-4">
-            <button type="submit" class="btn btn-primary">
-              <i class="fas fa-save me-2"></i>Update Project
-            </button>
-            <a href="/admin/project" class="btn btn-outline-secondary">Cancel</a>
+          {{/if}}
+
           </div>
-        </form>
-      </div>
+        </div>
+
     </div>
-  </div>
 
-  <script src="/assets/js/form-handler.js"></script>
+</div>
 
-  <!-- 
-    always use this when you intend on uploading images or files and comment the above script 
-  -->
-  <!-- <script type="module" src="/assets/js/uploader.js"></script> -->
-  
+<script type="module" src="/assets/js/uploader.js"></script>
+
+<script type="module" src="/assets/js/project-gallery.js"></script>
