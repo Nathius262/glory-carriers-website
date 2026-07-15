@@ -1,23 +1,72 @@
 'use strict';
+
 const {
   Model
 } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
+
   class Article extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+
     static associate(models) {
-      // define association here
     }
+
   }
+
   Article.init({
-    name: DataTypes.STRING
+
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+
+    slug: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true
+    },
+
+    summary: {
+      type: DataTypes.TEXT
+    },
+
+    content: {
+      type: DataTypes.TEXT('long'),
+      allowNull: false
+    },
+
+    image_url: {
+      type: DataTypes.STRING
+    },
+
+    author: {
+      type: DataTypes.STRING,
+      defaultValue: "Glory Carriers Ministry Int'l"
+    },
+
+    is_featured: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
+
+    is_published: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
+    },
+
+    published_at: {
+      type: DataTypes.DATE
+    }
+
   }, {
+
     sequelize,
     modelName: 'Article',
+    tableName: 'articles',
+    underscored: true,
+
   });
+
   return Article;
+
 };

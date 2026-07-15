@@ -1,64 +1,228 @@
+import { Op } from 'sequelize';
 import db from '../../../models/index.cjs';
 
-
-
-export const findAll = async ({limit, offset}) => {
+/**
+ * Fetch all articles
+ */
+export const findAll = async ({ limit, offset, search = "" }) => {
   try {
-    const {rows: articles, count: totalItems } = await db.Article.findAndCountAll({
-      limit,
-      offset,
-      distinct:true,
-      order: [['createdAt', 'DESC'], ['updatedAt', 'DESC']],
-    })
+
+    const where = {};
+    const searchOperator =
+        db.sequelize.getDialect() === "postgres"
+            ? Op.iLike
+            : Op.like;
+            
+    if (search) {
+      where[Op.or] = [
+        {
+            title: {
+                [searchOperator]: `%${search}%`
+            }
+        },
+        {
+            summary: {
+                [searchOperator]: `%${search}%`
+            }
+        },
+        {
+            author: {
+                [searchOperator]: `%${search}%`
+            }
+        }
+    ];
+    }
+
+    const { rows: articles, count: totalItems } =
+      await db.Article.findAndCountAll({
+
+        where,
+
+        limit,
+
+        offset,
+
+        distinct: true,
+
+        order: [
+          ['published_at', 'DESC'],
+          ['created_at', 'DESC']
+        ]
+
+      });
+
     return {
+
       articles,
+
       totalItems,
+
       totalPages: Math.ceil(totalItems / limit)
+
     };
+
   } catch (error) {
-   console.log(error)
-    throw new Error('Error fetching records: ' + error.message);
+
+    console.error(error);
+
+    throw new Error("Error fetching records: " + error.message);
+
   }
 };
 
+
+
+/**
+ * Find by ID
+ */
 export const findById = async (id) => {
+
   try {
-    const item = await db.Article.findByPk(id);
-    if (!item) throw new Error('Not found');
-    return item;
-  } catch (error) {
-   console.log(error)
-    throw new Error('Error fetching record: ' + error.message);
+
+    const article = await db.Article.findByPk(id);
+
+    if (!article) {
+
+      throw new Error("Article not found");
+
+    }
+
+    return article;
+
   }
+
+  catch (error) {
+
+    console.error(error);
+
+    throw new Error("Error fetching record: " + error.message);
+
+  }
+
 };
 
+
+
+/**
+ * Find by slug
+ */
+export const findBySlug = async (slug) => {
+
+  try {
+
+    const article = await db.Article.findOne({
+
+      where: {
+
+        slug
+
+      }
+
+    });
+
+    if (!article) {
+
+      throw new Error("Article not found");
+
+    }
+
+    return article;
+
+  }
+
+  catch (error) {
+
+    console.error(error);
+
+    throw new Error("Error fetching record: " + error.message);
+
+  }
+
+};
+
+
+
+/**
+ * Create
+ */
 export const create = async (data) => {
+
   try {
+
     return await db.Article.create(data);
-  } catch (error) {
-   console.log(error)
-    throw new Error('Error creating record: ' + error.message);
+
   }
+
+  catch (error) {
+
+    console.error(error);
+
+    throw new Error("Error creating record: " + error.message);
+
+  }
+
 };
 
+
+
+/**
+ * Update
+ */
 export const update = async (id, data) => {
+
   try {
-    const item = await db.Article.findByPk(id);
-    if (!item) throw new Error('Not found');
-    return await item.update(data);
-  } catch (error) {
-   console.log(error)
-    throw new Error('Error updating record: ' + error.message);
+
+    const article = await db.Article.findByPk(id);
+
+    if (!article) {
+
+      throw new Error("Article not found");
+
+    }
+
+    return await article.update(data);
+
   }
+
+  catch (error) {
+
+    console.error(error);
+
+    throw new Error("Error updating record: " + error.message);
+
+  }
+
 };
 
+
+
+/**
+ * Delete
+ */
 export const destroy = async (id) => {
+
   try {
-    const item = await db.Article.findByPk(id);
-    if (!item) throw new Error('Not found');
-    return await item.destroy();
-  } catch (error) {
-   console.log(error)
-    throw new Error('Error deleting record: ' + error.message);
+
+    const article = await db.Article.findByPk(id);
+
+    if (!article) {
+
+      throw new Error("Article not found");
+
+    }
+
+    await article.destroy();
+
+    return true;
+
   }
+
+  catch (error) {
+
+    console.error(error);
+
+    throw new Error("Error deleting record: " + error.message);
+
+  }
+
 };
