@@ -2,74 +2,43 @@ import { Op } from 'sequelize';
 import db from '../../../models/index.cjs';
 
 /**
- * Fetch all articles
+ * Fetch all articles with pagination and search
  */
-export const findAll = async ({ limit, offset, search = "" }) => {
+export const findAll = async ({ limit = 10, offset = 0, search = "" } = {}) => {
   try {
-
     const where = {};
-    const searchOperator =
-        db.sequelize.getDialect() === "postgres"
-            ? Op.iLike
-            : Op.like;
+    const searchOperator = db.sequelize.getDialect() === "postgres" ? Op.iLike : Op.like;
             
     if (search) {
       where[Op.or] = [
-        {
-            title: {
-                [searchOperator]: `%${search}%`
-            }
-        },
-        {
-            summary: {
-                [searchOperator]: `%${search}%`
-            }
-        },
-        {
-            author: {
-                [searchOperator]: `%${search}%`
-            }
-        }
-    ];
+        { title: { [searchOperator]: `%${search}%` } },
+        { summary: { [searchOperator]: `%${search}%` } },
+        { author: { [searchOperator]: `%${search}%` } }
+      ];
     }
 
-    const { rows: articles, count: totalItems } =
-      await db.Article.findAndCountAll({
-
-        where,
-
-        limit,
-
-        offset,
-
-        distinct: true,
-
-        order: [
-          ['published_at', 'DESC'],
-          ['created_at', 'DESC']
-        ]
-
-      });
+    const { rows: articles, count: totalItems } = await db.Article.findAndCountAll({
+      where,
+      limit,
+      offset,
+      order: [
+        ['published_at', 'DESC'],
+        ['created_at', 'DESC'],
+        ['id', 'DESC'] // Guarantees strict, deterministic pagination ordering
+      ]
+    });
 
     return {
-
       articles,
-
       totalItems,
-
-      totalPages: Math.ceil(totalItems / limit)
-
+      totalPages: limit > 0 ? Math.ceil(totalItems / limit) : 1
     };
 
   } catch (error) {
-
-    console.error(error);
-
+    console.error("Database error in findAll:", error);
     throw new Error("Error fetching records: " + error.message);
-
   }
 };
-
 
 
 /**
