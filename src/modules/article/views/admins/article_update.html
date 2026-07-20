@@ -1,45 +1,344 @@
+<div class="container-fluid py-4">
 
-  <div class="container-fluid py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-      <h1 class="h3 mb-0">Update Article</h1>
-      <a href="/admin/article" class="btn btn-secondary">
-        <i class="fas fa-arrow-left me-2"></i>Back to List
-      </a>
+        <h1 class="h3 mb-0">Update Article</h1>
+
+        <a href="/admin/article" class="btn btn-secondary">
+            <i class="fas fa-arrow-left me-2"></i>
+            Back to List
+        </a>
     </div>
 
     <div class="card shadow-sm">
-      <div class="card-body">
-        <form action="/admin/article/{{article.id}}" id="update-form" class="needs-validation" method="POST" novalidate>
-          <input type="hidden" name="_method" value="PUT">
-          
-          <div class="row">
-            <div class="col-md-6">
-              <div class="mb-3">
-                <label for="name" class="form-label">Name</label>
-                <input type="text" name="name" class="form-control" id="name" value="{{article.name}}" required>
-                <div class="invalid-feedback">
-                  Please provide a valid name.
+
+        <div class="card-body">
+
+            <form
+                action="/admin/article/{{article.id}}"
+                method="POST"
+                id="update-form"
+                class="needs-validation"
+                enctype="multipart/form-data"
+                novalidate>
+
+                <input type="hidden" name="_method" value="PUT">
+
+                <div class="row">
+
+                    <!-- ============================= -->
+                    <!-- LEFT COLUMN -->
+                    <!-- ============================= -->
+
+                    <div class="col-lg-8">
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+
+                                Title
+
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="title"
+                                name="title"
+                                value="{{article.title}}"
+                                required>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+
+                                Slug
+
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="slug"
+                                name="slug"
+                                value="{{article.slug}}"
+                                required>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+
+                                Summary
+
+                            </label>
+
+                            <textarea
+                                class="form-control"
+                                rows="4"
+                                name="summary">{{article.summary}}</textarea>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+
+                                Content
+
+                            </label>
+
+                            <textarea
+                                id="content"
+                                name="content"
+                                required>{{{article.content}}}</textarea>
+
+                        </div>
+
+                    </div>
+
+                    <!-- ============================= -->
+                    <!-- RIGHT COLUMN -->
+                    <!-- ============================= -->
+
+                    <div class="col-lg-4">
+
+                        <div class="card">
+
+                            <div class="card-header">
+
+                                Article Settings
+
+                            </div>
+
+                            <div class="card-body">
+
+                                <div class="mb-3">
+
+                                    <label class="form-label">
+
+                                        Replace Featured Image
+
+                                    </label>
+
+                                    <input
+                                        type="file"
+                                        class="form-control"
+                                        id="id_image_file"
+                                        name="image"
+                                        accept=".jpg,.jpeg,.png,.webp">
+
+                                    <small class="text-muted">
+
+                                        Leave empty to keep the current image.
+
+                                    </small>
+
+                                </div>
+
+
+                                <div class="text-center mb-4">
+
+                                    <img
+                                        id="id_image_display"
+                                        src="{{article.image_url}}"
+                                        class="img-fluid rounded border"
+                                        style="max-height:220px;object-fit:cover;">
+
+                                </div>
+
+
+                                <div class="mb-3">
+
+                                    <label class="form-label">
+
+                                        Author
+
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        name="author"
+                                        value="{{article.author}}">
+
+                                </div>
+
+
+                                <div class="form-check form-switch mb-3">
+
+                                    <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        name="is_featured"
+                                        value="true"
+                                        {{#if article.is_featured}}checked{{/if}}>
+
+                                    <label class="form-check-label">
+
+                                        Featured Article
+
+                                    </label>
+
+                                </div>
+
+
+                                <div class="form-check form-switch mb-3">
+
+                                    <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        name="is_published"
+                                        value="true"
+                                        {{#if article.is_published}}checked{{/if}}>
+
+                                    <label class="form-check-label">
+
+                                        Published
+
+                                    </label>
+
+                                </div>
+
+
+                                <div class="mb-3">
+
+                                    <label class="form-label">
+
+                                        Publish Date
+
+                                    </label>
+
+                                    <input
+                                        type="datetime-local"
+                                        class="form-control"
+                                        name="published_at"
+                                        value="{{formatDateInput article.published_at}}">
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
                 </div>
-              </div>
-            </div>
-            <!-- Add more form fields in columns as needed -->
-          </div>
 
-          <div class="d-flex gap-2 mt-4">
-            <button type="submit" class="btn btn-primary">
-              <i class="fas fa-save me-2"></i>Update Article
-            </button>
-            <a href="/admin/article" class="btn btn-outline-secondary">Cancel</a>
-          </div>
-        </form>
-      </div>
+
+                <div class="d-flex justify-content-between mt-4">
+
+                    <button
+                        id="delete"
+                        type="button"
+                        class="btn btn-danger"
+                        data-url="/admin/article/{{article.id}}">
+
+                        <i class="fas fa-trash me-2"></i>
+
+                        Delete
+
+                    </button>
+
+
+                    <div>
+
+                        <button
+                            id="btn"
+                            class="btn btn-primary"
+                            type="submit">
+
+                            <i class="fas fa-save me-2"></i>
+
+                            Update Article
+
+                        </button>
+
+                        <a
+                            href="/admin/article"
+                            class="btn btn-outline-secondary">
+
+                            Cancel
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <progress
+                    id="progressBar"
+                    value="0"
+                    max="100"
+                    style="display:none;width:100%;"
+                    class="mt-3">
+                </progress>
+
+            </form>
+
+        </div>
+
     </div>
-  </div>
 
-  <script src="/assets/js/form-handler.js"></script>
+</div>
+<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
 
-  <!-- 
-    always use this when you intend on uploading images or files and comment the above script 
-  -->
-  <!-- <script type="module" src="/assets/js/uploader.js"></script> -->
-  
+
+<script>
+
+document.getElementById('title').addEventListener('keyup', function () {
+
+    const slug = this.value
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-|-$/g, '');
+
+    document.getElementById('slug').value = slug;
+
+});
+
+document.getElementById('id_image_file').addEventListener('change', function () {
+
+    if (this.files.length) {
+
+        readURL(this);
+
+    }
+
+});
+
+ClassicEditor
+    .create(document.querySelector('#content'), {
+
+        toolbar: [
+            'heading',
+            '|',
+            'bold',
+            'italic',
+            'underline',
+            'link',
+            '|',
+            'bulletedList',
+            'numberedList',
+            '|',
+            'outdent',
+            'indent',
+            '|',
+            'insertTable',
+            'blockQuote',
+            '|',
+            'undo',
+            'redo'
+        ]
+
+    })
+    .catch(error => console.error(error));
+
+</script>
+
+<!-- <script src="/assets/js/form-handler.js"></script> -->
+<script type="module" src="/assets/js/uploader.js"></script>

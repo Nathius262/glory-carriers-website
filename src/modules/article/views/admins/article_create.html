@@ -1,43 +1,329 @@
+<div class="container-fluid py-4">
 
-  <div class="container-fluid py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-      <h1 class="h3 mb-0">Create Article</h1>
-      <a href="/admin/article" class="btn btn-secondary">
-        <i class="fas fa-arrow-left me-2"></i>Back to List
-      </a>
+        <h1 class="h3 mb-0">Create Article</h1>
+
+        <a href="/admin/article" class="btn btn-secondary">
+            <i class="fas fa-arrow-left me-2"></i>
+            Back to List
+        </a>
     </div>
 
     <div class="card shadow-sm">
-      <div class="card-body">
-        <form action="/admin/article/create" id="create-form" class="needs-validation" method="POST" novalidate>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="mb-3">
-                <label for="name" class="form-label">Name</label>
-                <input type="text" name="name" class="form-control" id="name" placeholder="Enter name" required>
-                <div class="invalid-feedback">
-                  Please provide a valid name.
+
+        <div class="card-body">
+
+            <form
+                action="/admin/article/create"
+                method="POST"
+                id="create-form"
+                class="needs-validation"
+                enctype="multipart/form-data"
+                novalidate>
+
+                <div class="row">
+
+                    <!-- ====================================== -->
+                    <!-- LEFT COLUMN -->
+                    <!-- ====================================== -->
+
+                    <div class="col-lg-8">
+
+                        <div class="mb-3">
+                            <label class="form-label">Title</label>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                name="title"
+                                id="title"
+                                placeholder="Article title"
+                                required>
+
+                            <div class="invalid-feedback">
+                                Title is required.
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Slug
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                name="slug"
+                                id="slug"
+                                placeholder="article-slug"
+                                required>
+
+                            <small class="text-muted">
+
+                                Example:
+                                the-power-of-prayer
+
+                            </small>
+
+                        </div>
+
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+
+                                Summary
+
+                            </label>
+
+                            <textarea
+                                class="form-control"
+                                rows="4"
+                                name="summary"
+                                placeholder="Short description of the article"></textarea>
+
+                        </div>
+
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+
+                                Content
+
+                            </label>
+
+                            <textarea
+                                class="form-control"
+                                id="content"
+                                name="content"
+                                rows="16"
+                                required></textarea>
+
+                            <div class="invalid-feedback">
+
+                                Article content is required.
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- ====================================== -->
+                    <!-- RIGHT COLUMN -->
+                    <!-- ====================================== -->
+
+                    <div class="col-lg-4">
+
+                        <div class="card">
+
+                            <div class="card-header">
+
+                                Article Settings
+
+                            </div>
+
+                            <div class="card-body">
+
+                                <div class="mb-4">
+
+                                    <label class="form-label">
+
+                                        Featured Image
+
+                                    </label>
+
+                                    <input
+                                        type="file"
+                                        class="form-control"
+                                        id="id_image_file"
+                                        name="image"
+                                        accept=".jpg,.jpeg,.png,.webp"
+                                        required>
+
+                                </div>
+
+                                <div class="mb-4 text-center">
+
+                                    <img
+                                        id="id_image_display"
+                                        src="/assets/img/no-image.png"
+                                        class="img-fluid rounded border"
+                                        style="max-height:220px; object-fit:cover;">
+
+                                </div>
+
+
+                                <div class="mb-3">
+
+                                    <label class="form-label">
+
+                                        Author
+
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        name="author"
+                                        value="Glory Carriers Ministry Int'l">
+
+                                </div>
+
+
+                                <div class="form-check form-switch mb-3">
+
+                                    <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        name="is_featured"
+                                        value="true">
+
+                                    <label class="form-check-label">
+
+                                        Featured Article
+
+                                    </label>
+
+                                </div>
+
+
+                                <div class="form-check form-switch mb-3">
+
+                                    <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        name="is_published"
+                                        checked
+                                        value="true">
+
+                                    <label class="form-check-label">
+
+                                        Publish Immediately
+
+                                    </label>
+
+                                </div>
+
+
+                                <div class="mb-3">
+
+                                    <label class="form-label">
+
+                                        Publish Date
+
+                                    </label>
+
+                                    <input
+                                        type="datetime-local"
+                                        class="form-control"
+                                        name="published_at">
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
                 </div>
-              </div>
-            </div>
-            <!-- Add more form fields in columns as needed -->
-          </div>
 
-          <div class="d-flex gap-2 mt-4">
-            <button type="submit" class="btn btn-primary">
-              <i class="fas fa-plus me-2"></i>Create Article
-            </button>
-            <a href="/admin/article" class="btn btn-outline-secondary">Cancel</a>
-          </div>
-        </form>
-      </div>
+                <div class="d-flex gap-2 mt-4">
+
+                    <button
+                        id="btn"
+                        type="submit"
+                        class="btn btn-primary">
+
+                        <i class="fas fa-plus me-2"></i>
+
+                        Create Article
+
+                    </button>
+
+                    <a
+                        href="/admin/article"
+                        class="btn btn-outline-secondary">
+
+                        Cancel
+
+                    </a>
+
+                </div>
+
+                <progress
+                    id="progressBar"
+                    value="0"
+                    max="100"
+                    style="width:100%;display:none;"
+                    class="mt-3">
+                </progress>
+
+            </form>
+
+        </div>
+
     </div>
-  </div>
 
-  <script src="/assets/js/form-handler.js"></script>
+</div>
 
-  <!-- 
-    always use this when you intend on uploading images or files and comment the above script 
-  -->
-  <!-- <script type="module" src="/assets/js/uploader.js"></script> -->
-  
+<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+
+<script>
+  document.getElementById('title').addEventListener('keyup', function () {
+
+      const slug = this.value
+          .toLowerCase()
+          .trim()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-|-$/g, '');
+
+      document.getElementById('slug').value = slug;
+
+  });
+
+  document.getElementById('id_image_file').addEventListener('change', function () {
+
+      if (this.files.length) {
+
+          readURL(this);
+
+      }
+
+  });
+
+  ClassicEditor
+      .create(document.querySelector('#content'), {
+
+          toolbar: [
+              'heading',
+              '|',
+              'bold',
+              'italic',
+              'underline',
+              'link',
+              '|',
+              'bulletedList',
+              'numberedList',
+              '|',
+              'outdent',
+              'indent',
+              '|',
+              'insertTable',
+              'blockQuote',
+              '|',
+              'undo',
+              'redo'
+          ]
+
+      })
+      .catch(error => console.error(error));
+</script>
+
+<!-- <script src="/assets/js/form-handler.js"></script> -->
+
+<!-- Use uploader.js for image uploads -->
+<script type="module" src="/assets/js/uploader.js"></script>

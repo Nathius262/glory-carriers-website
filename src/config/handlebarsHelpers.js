@@ -178,4 +178,18 @@ export default function registerHelpers(handlebars) {
     return Number(value) + 1;
   });
 
+  handlebars.registerHelper("dec", function(value) {
+    return Number(value) - 1;
+  });
+
+  handlebars.registerHelper("formatDateInput", function(date) {
+      if (!date) return "";
+
+      const d = new Date(date);
+
+      const pad = n => String(n).padStart(2, "0");
+
+      return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+  });
+
 }
