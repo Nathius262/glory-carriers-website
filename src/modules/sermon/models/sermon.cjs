@@ -34,17 +34,17 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   // Use generateUniqueSlug from the helper file in hooks
-  Sermon.beforeValidate(async (sermon) => {
-    if (!sermon.slug) {
-      sermon.slug = await generateUniqueSlug(sermon.title, Sermon);
-    }
-  });
+  // Sermon.beforeValidate(async (sermon) => {
+  //   if (!sermon.slug) {
+  //     sermon.slug = await generateUniqueSlug(sermon.title, Sermon);
+  //   }
+  // });
 
-  Sermon.beforeUpdate(async (sermon) => {
-    if (sermon.changed('title')) {
-      sermon.slug = await generateUniqueSlug(sermon.title, Sermon);
-    }
-  });
+  // Sermon.beforeUpdate(async (sermon) => {
+  //   if (sermon.changed('title')) {
+  //     sermon.slug = await generateUniqueSlug(sermon.title, Sermon);
+  //   }
+  // });
 
   return Sermon;
 };

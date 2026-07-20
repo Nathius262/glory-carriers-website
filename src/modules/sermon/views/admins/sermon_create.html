@@ -1,110 +1,239 @@
 <div class="container-fluid py-4">
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <h1 class="h3 mb-0">Create Sermon</h1>
-    <a href="/admin/sermon" class="btn btn-secondary">
-      <i class="fas fa-arrow-left me-2"></i>Back to List
-    </a>
-  </div>
 
-  <div class="card shadow-sm">
-    <div class="card-body">
-      <form action="/admin/sermon/create" id="create-form" enctype="multipart/form-data" class="needs-validation"
-        method="POST" novalidate>
-        <div class="row">
-          <!-- title  -->
-          <!-- <div class="col-md-6">
-            <div class="mb-3">
-              <label for="title" class="form-label">Title</label>
-              <input type="text" name="title" class="form-control" id="title" placeholder="Enter title" required>
-              <div class="invalid-feedback">
-                Please provide a valid title.
-              </div>
-            </div>
-          </div> -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
 
-          <!-- video url  -->
-          <div class="col-md-6">
-            <div class="mb-3">
-              <label for="video_url" class="form-label">Video URL</label>
-              <input type="url" name="video_url" class="form-control" id="video_url" placeholder="Enter video URL">
-              <div class="invalid-feedback">
-                Please provide a valid video URL.
-              </div>
-            </div>
-          </div>
+        <h1 class="h3 mb-0">
+            Create Sermon
+        </h1>
 
-          <!-- audio  -->
-          <div class="col-md-6">
-            <div class="mb-3">
-              <div class="">
-                <!-- Audio element with controls -->
-                <audio src="" controls style="width: 70%; object-fit: fill;" id="audioPlayer">
-                  <!-- If there's an initial URL, it will be loaded here -->
-                  <source src="" type="audio/*">
-                  Your browser does not support the audio element.
-                </audio>
-                <div class="mx-3">
-                  <label for="id_audio_file" class="text-center btn btn-outline-secondary"><i class="fa fa-edit"></i>
-                    Choose Audio</label>
-                </div>
-                <!-- File input element -->
-                <input type="file" name="audio" value="" id="id_audio_file" accept="audio/*" class="form-control" hidden
-                  required>
-              </div>
-              <div class="invalid-feedback">
-                You need to select an audio file
-              </div>
-            </div>
-          </div>
+        <a href="/admin/sermon" class="btn btn-secondary">
 
-          <!-- image  -->
-          <div class="col-md-6">
-            <div class="mb-3">
-              <label for="" class="fw-bold fs-6">Image</label>
-              <div class="main_img container border" id="id_image_group">
-                <img style="width: 100%; object-fit:fill; border: 1px solid #ddd;" src="" alt="choose an Image"
-                  class="profile_img" id="id_image_display">
-                <div class="main_overlay main_overlay_blur">
-                  <div class="text-center"><i class="fa fa-edit"></i> Click to Choose an Image</div>
-                </div>
+            <i class="fas fa-arrow-left me-2"></i>
 
-                <input type="file" name="image" id="id_image_file" onchange="readURL(this)" accept="image/*"
-                  class="form-control" value="" hidden="" required>
-              </div>
-              <div class="invalid-feedback">
-                You need to select an image file
-              </div>
-            </div>
-          </div>
+            Back to List
 
+        </a>
 
-          <!-- Add more form fields in columns as needed -->
-        </div>
-
-        <ul id="error" class="text-danger col-12"></ul>
-
-        <progress class="w-100" id="progressBar" style="display: none;"></progress>
-
-        <div class="spinner-border col-12 d-none" id="status" role="status">
-          <span class="sr-only">Loading...</span>
-        </div>
-
-        <div class="d-flex gap-2 mt-4 w-100">
-          <button type="submit" class="btn btn-primary w-100">
-            <i class="fas fa-plus me-2"></i>Create Sermon
-          </button>
-          <a href="/admin/sermon" class="btn btn-outline-secondary w-100">
-            <i class="fas fa-times me-2"></i>Cancel
-          </a>
-        </div>
-      </form>
     </div>
-  </div>
+
+    <div class="card shadow-sm">
+
+        <div class="card-body">
+
+            <form
+                action="/admin/sermon/create"
+                method="POST"
+                enctype="multipart/form-data"
+                id="create-form"
+                class="needs-validation"
+                novalidate>
+
+                <div class="row">
+
+                    <!-- LEFT -->
+
+                    <div class="col-lg-8">
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Title
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="title"
+                                name="title"
+                                placeholder="Enter sermon title"
+                                required>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Slug
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="slug"
+                                name="slug"
+                                required>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Summary
+                            </label>
+
+                            <textarea
+                                class="form-control"
+                                rows="5"
+                                name="summary"
+                                placeholder="Short description of this sermon"></textarea>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Video URL
+                            </label>
+
+                            <input
+                                type="url"
+                                class="form-control"
+                                name="video_url"
+                                placeholder="https://youtube.com/...">
+
+                        </div>
+
+                    </div>
+
+                    <!-- RIGHT -->
+
+                    <div class="col-lg-4">
+
+                        <div class="card">
+
+                            <div class="card-header">
+
+                                Sermon Media
+
+                            </div>
+
+                            <div class="card-body">
+
+                                <!-- IMAGE -->
+
+                                <div class="mb-3">
+
+                                    <label class="form-label">
+                                        Featured Image
+                                    </label>
+
+                                    <input
+                                        type="file"
+                                        class="form-control"
+                                        id="id_image_file"
+                                        name="image"
+                                        accept=".jpg,.jpeg,.png,.webp"
+                                        required>
+
+                                </div>
+
+                                <div class="text-center mb-4">
+
+                                    <img
+                                        src="/assets/img/no-image.png"
+                                        id="id_image_display"
+                                        class="img-fluid rounded border"
+                                        style="max-height:220px;object-fit:cover;">
+
+                                </div>
+
+                                <!-- AUDIO -->
+
+                                <div class="mb-3">
+
+                                    <label class="form-label">
+
+                                        Audio File
+
+                                    </label>
+
+                                    <input
+                                        type="file"
+                                        class="form-control"
+                                        id="id_audio_file"
+                                        name="audio"
+                                        accept="audio/*"
+                                        required>
+
+                                </div>
+
+                                <audio
+                                    controls
+                                    id="audioPlayer"
+                                    style="width:100%;">
+
+                                </audio>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="d-flex gap-2 mt-4">
+
+                    <button
+                        id="btn"
+                        class="btn btn-primary">
+
+                        <i class="fas fa-plus me-2"></i>
+
+                        Create Sermon
+
+                    </button>
+
+                    <a
+                        href="/admin/sermon"
+                        class="btn btn-outline-secondary">
+
+                        Cancel
+
+                    </a>
+
+                </div>
+
+                <progress
+                    id="progressBar"
+                    max="100"
+                    value="0"
+                    style="display:none;width:100%;"
+                    class="mt-3">
+                </progress>
+
+            </form>
+
+        </div>
+
+    </div>
+
 </div>
 
-<!-- <script src="/assets/js/form-handler.js"></script> -->
+<script>
 
-<!-- 
-    always use this when you intend on uploading images or files and comment the above script 
-  -->
+document.getElementById('title').addEventListener('keyup', function () {
+
+    const slug = this.value
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-|-$/g, '');
+
+    document.getElementById('slug').value = slug;
+
+});
+
+document.getElementById('id_image_file').addEventListener('change', function () {
+
+    if (this.files.length) {
+
+        readURL(this);
+
+    }
+
+});
+
+</script>
+
 <script type="module" src="/assets/js/uploader.js"></script>

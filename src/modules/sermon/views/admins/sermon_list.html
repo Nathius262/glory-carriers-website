@@ -1,49 +1,215 @@
 <div class="container-fluid py-4">
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <h1 class="h3 mb-0">Sermon Management</h1>
-    <a href="/admin/sermon/create" class="btn btn-primary">
-      <i class="fas fa-plus me-2"></i>Create New
-    </a>
-  </div>
 
-  <div class="card shadow-sm">
-    <div class="card-body">
-      <div class="table-responsive">
-        <table class="table table-hover">
-          <thead class="table-light">
-            <tr>
-              <th>ID</th>
-              <!-- Add your table headers here -->
-              <th>Title</th>
-              <th>Created</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {{#each sermons}}
-            <tr>
-              <td>{{this.id}}</td>
-              <!-- Add your table cells here -->
-              <td>{{this.title}}</td>
-              <td>{{formatDate this.createdAt}}</td>
-              <td>
-                <div class="btn-group btn-group-sm">
-                  <a href="/admin/sermon/{{this.id}}" class="btn btn-outline-primary">
-                    <i class="fas fa-edit"></i>
-                  </a>
-                  <button data-delete="sermon-{{this.id}}" data-name="{{this.id}}" data-url="/admin/sermon/{{this.id}}"
-                    class="btn btn-danger btn-sm">
-                    <i class="fas fa-trash me-1"></i>Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
-            {{/each}}
-          </tbody>
-        </table>
-      </div>
+    <div class="d-flex justify-content-between align-items-center mb-4">
 
-      {{> pagination}}
+        <h1 class="h3 mb-0">
+
+            Sermon Management
+
+        </h1>
+
+        <a
+            href="/admin/sermon/create"
+            class="btn btn-primary">
+
+            <i class="fas fa-plus me-2"></i>
+
+            Create Sermon
+
+        </a>
+
     </div>
-  </div>
+
+    <div class="card shadow-sm">
+
+        <div class="card-body">
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle">
+
+                    <thead class="table-light">
+
+                        <tr>
+
+                            <th width="70">
+                                #
+                            </th>
+
+                            <th width="90">
+                                Image
+                            </th>
+
+                            <th>
+                                Title
+                            </th>
+
+                            <th>
+                                Slug
+                            </th>
+
+                            <th width="160">
+                                Published
+                            </th>
+
+                            <th width="170">
+                                Created
+                            </th>
+
+                            <th width="120" class="text-center">
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {{#each sermons}}
+
+                        <tr>
+
+                            <td>
+
+                                {{this.id}}
+
+                            </td>
+
+                            <td>
+
+                                <img
+                                    src="{{this.image_url}}"
+                                    alt="{{this.title}}"
+                                    class="rounded border"
+                                    style="width:60px;height:60px;object-fit:cover;">
+
+                            </td>
+
+                            <td>
+
+                                <div class="fw-semibold">
+
+                                    {{this.title}}
+
+                                </div>
+
+                                {{#if this.summary}}
+
+                                <small class="text-muted">
+
+                                    {{truncate this.summary 70}}
+
+                                </small>
+
+                                {{/if}}
+
+                            </td>
+
+                            <td>
+
+                                <code>
+
+                                    {{this.slug}}
+
+                                </code>
+
+                            </td>
+
+                            <td>
+
+                                {{#if this.published_at}}
+
+                                    {{formatDate this.published_at}}
+
+                                {{else}}
+
+                                    <span class="badge bg-secondary">
+
+                                        Draft
+
+                                    </span>
+
+                                {{/if}}
+
+                            </td>
+
+                            <td>
+
+                                {{formatDate this.createdAt}}
+
+                            </td>
+
+                            <td>
+
+                                <div class="btn-group btn-group-sm">
+
+                                    <a
+                                        href="/admin/sermon/{{this.id}}"
+                                        class="btn btn-outline-primary"
+                                        title="Edit">
+
+                                        <i class="fas fa-edit"></i>
+
+                                    </a>
+
+                                    <button
+                                        class="btn btn-outline-danger"
+                                        data-delete="sermon-{{this.id}}"
+                                        data-name="{{this.title}}"
+                                        data-url="/admin/sermon/{{this.id}}"
+                                        title="Delete">
+
+                                        <i class="fas fa-trash"></i>
+
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                        {{else}}
+
+                        <tr>
+
+                            <td colspan="7">
+
+                                <div class="text-center py-5">
+
+                                    <i class="fas fa-microphone fa-3x text-muted mb-3"></i>
+
+                                    <h5>
+
+                                        No Sermons Found
+
+                                    </h5>
+
+                                    <p class="text-muted">
+
+                                        Click "Create Sermon" to add your first sermon.
+
+                                    </p>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                        {{/each}}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            {{> pagination}}
+
+        </div>
+
+    </div>
+
 </div>

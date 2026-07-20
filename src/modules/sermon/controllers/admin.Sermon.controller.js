@@ -1,211 +1,355 @@
 import * as service from '../services/admin.Sermon.service.js';
-import capitalizeWords from '../../../utils/utils.js';
 import { getPublicIdFromUrl } from '../../../utils/utils.js'
 import cloudinary from '../../../config/cloudinaryConfig.js';
 import { success } from 'zod';
 
 export const findAll = async (req, res) => {
-  const { page, limit, offset } = req.pagination
-  try {
-    const data = await service.findAll({ limit, offset });
-    res.status(200).render('./admins/sermon_list', {
-      success: true,
-      layout: "admin",
-      PageTitle: "Admin - Sermons",
-      sermons: data.sermons,
-      totalItems: data.totalItems,
-      totalPages: data.totalPages,
-      currentPage: page
-    });
-  } catch (err) {
-    console.log(err)
-    res.status(500).render('errors/500', { error: err });
-  }
+
+    try {
+
+        const { page, limit, offset } = req.pagination;
+
+        const data = await service.findAll({ limit, offset });
+
+        res.render("./admins/sermon_list", {
+
+            layout: "admin",
+
+            pageTitle: "Sermon Management",
+
+            sermons: data.sermons,
+
+            totalItems: data.totalItems,
+
+            totalPages: data.totalPages,
+
+            currentPage: page
+
+        });
+
+    }
+
+    catch (err) {
+
+        console.log(err);
+
+        res.status(500).render("errors/500", {
+
+            error: err
+
+        });
+
+    }
+
 };
 
 export const findById = async (req, res) => {
-  try {
-    const data = await service.findById(req.params.id);
-    res.status(200).render('./admins/sermon_update', {
-      success: true,
-      pageTitle: "Admin - Update Record",
-      layout: "admin",
-      sermon: data,
-    });
-  } catch (err) {
-    console.log(err)
-    res.status(404).render('errors/404', { error: err });
-  }
+
+    try {
+
+        const sermon = await service.findById(req.params.id);
+
+        res.render("./admins/sermon_update", {
+
+            layout: "admin",
+
+            pageTitle: "Update Sermon",
+
+            sermon
+
+        });
+
+    }
+
+    catch (err) {
+
+        console.log(err);
+
+        res.status(404).render("errors/404", {
+
+            error: err
+
+        });
+
+    }
+
 };
 
 export const create = async (req, res) => {
-  try {
+    try {
 
-    if (!req.files || !req.files['audio'] || !req.files['image']) {
-      return res.status(400).json({
-        success: false,
-        message: 'Missing required files (audio and image)',
-      });
+        if (!req.files?.audio?.[0] || !req.files?.image?.[0]) {
+            return res.status(400).json({
+                success: false,
+                message: "Audio and featured image are required."
+            });
+        }
+
+        const audio = req.files.audio[0];
+        const image = req.files.image[0];
+
+        const allowedAudio = [
+            "audio/mpeg",
+            "audio/mp3",
+            "audio/wav"
+        ];
+
+        const allowedImages = [
+            "image/jpeg",
+            "image/png",
+            "image/webp"
+        ];
+
+        if (!allowedAudio.includes(audio.mimetype)) {
+            return res.status(400).json({
+                success: false,
+                message: "Only MP3 and WAV files are allowed."
+            });
+        }
+
+        if (!allowedImages.includes(image.mimetype)) {
+            return res.status(400).json({
+                success: false,
+                message: "Only JPG, PNG and WEBP images are allowed."
+            });
+        }
+
+        const sermon = await service.create({
+
+            title: req.body.title,
+
+            slug: req.body.slug,
+
+            video_url: req.body.video_url || null,
+
+            audio_url: audio.path,
+
+            image_url: image.path
+
+        });
+
+        return res.status(201).json({
+
+            success: true,
+
+            message: "Sermon created successfully.",
+
+            redirectTo: "/admin/sermon"
+
+        });
+
     }
 
-    const audioFile = req.files['audio'][0];
-    const imageFile = req.files['image'][0];
+    catch (err) {
 
-    const allowedAudioTypes = ['audio/mpeg', 'audio/wav'];
-    const allowedImageTypes = ['image/jpeg', 'image/png'];
+        console.log(err);
 
-    if (!allowedAudioTypes.includes(audioFile.mimetype)) {
-      return res.status(400).json({
-        success: false,
-        message: 'Invalid audio file type (only MP3/WAV allowed)',
-      });
+        return res.status(500).json({
+
+            success: false,
+
+            message: err.message
+
+        });
+
     }
-
-    if (!allowedImageTypes.includes(imageFile.mimetype)) {
-      return res.status(400).json({
-        success: false,
-        message: 'Invalid image file type (only JPEG/PNG allowed)',
-      });
-    }
-
-    const audioNameParts = audioFile.originalname.split('.');
-    const baseName = audioNameParts[0] || 'untitled'; // Fallback if no extension
-    const formattedTitle = capitalizeWords(baseName.replace(/-/g, ' '));
-
-    const req_data = {
-      title: formattedTitle,
-      audio_url: audioFile.path,
-      image_url: imageFile.path,
-      video_url: req.body.video_url || null, // Handle optional video
-    };
-
-    const data = await service.create(req_data);
-    res.status(201).json({ success: true, redirectTo: "/admin/sermon", message: "Created successfully" });
-  } catch (err) {
-    console.log(err)
-    console.log(err.message)
-    res.status(500).json({ success: false, message: err.message });
-  }
 };
 
 export const update = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { title, video_url } = req.body;
-    const audioFile = req.files?.['audio']?.[0];
-    const imageFile = req.files?.['image']?.[0];
-
-    // Find the existing sermon
-    const sermon = await service.findById(id);
-    if (!sermon) {
-      return res.status(404).json({ success: false, message: "Sermon not found" });
-    }
-
-    const { audio_url: currentAudioUrl, image_url: currentImageUrl } = sermon;
-    const updates = { title, video_url };
 
     try {
-      // Handle audio file update
-      if (audioFile) {
-        updates.audio_url = audioFile.path;
-        if (currentAudioUrl) {
-          await cloudinary.uploader.destroy(
-            getPublicIdFromUrl(currentAudioUrl),
-            { resource_type: 'video' }
-          );
-        }
-      }
 
-      // Handle image file update
-      if (imageFile) {
-        updates.image_url = imageFile.path;
-        if (currentImageUrl) {
-          await cloudinary.uploader.destroy(
-            getPublicIdFromUrl(currentImageUrl),
-            { resource_type: 'image' }
-          );
+        const { id } = req.params;
+
+        const sermon = await service.findById(id);
+
+        if (!sermon) {
+
+            return res.status(404).json({
+                success: false,
+                message: "Sermon not found."
+            });
+
         }
-      }
-    } catch (cloudinaryErr) {
-      console.error('Cloudinary error:', cloudinaryErr);
-      return res.status(500).json({
-        success: false,
-        message: "Error updating media files"
-      });
+
+        const updates = {
+
+            title: req.body.title,
+
+            slug: req.body.slug,
+
+            video_url: req.body.video_url || null
+
+        };
+
+        /*
+        --------------------------------
+        Audio
+        --------------------------------
+        */
+
+        if (req.files?.audio?.length) {
+
+            const audio = req.files.audio[0];
+
+            updates.audio_url = audio.path;
+
+            if (sermon.audio_url) {
+
+                await cloudinary.uploader.destroy(
+
+                    getPublicIdFromUrl(sermon.audio_url),
+
+                    { resource_type: "video" }
+
+                );
+
+            }
+
+        }
+
+        /*
+        --------------------------------
+        Image
+        --------------------------------
+        */
+
+        if (req.files?.image?.length) {
+
+            const image = req.files.image[0];
+
+            updates.image_url = image.path;
+
+            if (sermon.image_url) {
+
+                await cloudinary.uploader.destroy(
+
+                    getPublicIdFromUrl(sermon.image_url),
+
+                    { resource_type: "image" }
+
+                );
+
+            }
+
+        }
+
+        await service.update(id, updates);
+
+        return res.status(200).json({
+
+            success: true,
+
+            message: "Sermon updated successfully.",
+
+            redirectTo: `/admin/sermon/${id}`
+
+        });
+
     }
 
-    // Check if any updates are being made
-    if (!Object.values(updates).some(val => val !== undefined)) {
-      return res.status(400).json({
-        success: false,
-        message: "No valid fields provided for update"
-      });
+    catch (err) {
+
+        console.log(err);
+
+        return res.status(500).json({
+
+            success: false,
+
+            message: err.message
+
+        });
+
     }
 
-    // Update the sermon
-    const data = await service.update(id, updates);
-    res.status(200).json({ success: true, data, redirectTo: `/admin/sermon/${req.params.id}`, message: "Updated successfully" });
-  } catch (err) {
-    console.log(err)
-    res.status(500).json({ success: false, message: err.message });
-  }
 };
 
 export const destroy = async (req, res) => {
-  try {
-    const { id } = req.params; // Extract id from params
-
-    const sermon = await service.findById(id);
-    if (!sermon) {
-      return res.status(404).json({
-        success: false,
-        message: "Sermon not found"
-      });
-    }
-
-    const { audio_url: audioUrl, image_url: imageUrl } = sermon;
-
-
 
     try {
-      if (audioUrl) {
-        const audioPublicId = getPublicIdFromUrl(audioUrl);
-        await cloudinary.uploader.destroy(audioPublicId, {
-          resource_type: 'video'
-        });
-      }
 
-      if (imageUrl) {
-        const imagePublicId = getPublicIdFromUrl(imageUrl);
-        await cloudinary.uploader.destroy(imagePublicId, {
-          resource_type: 'image'
+        const sermon = await service.findById(req.params.id);
+
+        if (!sermon) {
+
+            return res.status(404).json({
+
+                success: false,
+
+                message: "Sermon not found."
+
+            });
+
+        }
+
+        /*
+        --------------------------------
+        Delete Cloudinary files
+        --------------------------------
+        */
+
+        if (sermon.audio_url) {
+
+            await cloudinary.uploader.destroy(
+
+                getPublicIdFromUrl(sermon.audio_url),
+
+                { resource_type: "video" }
+
+            );
+
+        }
+
+        if (sermon.image_url) {
+
+            await cloudinary.uploader.destroy(
+
+                getPublicIdFromUrl(sermon.image_url),
+
+                { resource_type: "image" }
+
+            );
+
+        }
+
+        await service.destroy(req.params.id);
+
+        return res.status(200).json({
+
+            success: true,
+
+            message: "Sermon deleted successfully.",
+
+            redirectTo: "/admin/sermon"
+
         });
-      }
-    } catch (cloudinaryErr) {
-      console.error("Cloudinary deletion failed (orphaned files may exist):", cloudinaryErr);
-      res.status(500).json({
-        success: false,
-        message: "Cloudinary deletion failed (orphaned files may exist): " + cloudinaryErr,
-        error: err.message
-      });
+
     }
 
-    const data = await service.destroy(id);
-    res.status(200).json({ success: true, message: 'Deleted successfully', redirectTo: "/admin/sermon" });
-  } catch (err) {
-    console.log(err)
-    res.status(500).json({ error: err });
-  }
+    catch (err) {
+
+        console.log(err);
+
+        return res.status(500).json({
+
+            success: false,
+
+            message: err.message
+
+        });
+
+    }
+
 };
 
-export const renderCreate = async (req, res) => {
-  try {
-    res.status(200).render('./admins/sermon_create', {
-      pageTitle: "Admin - Create Sermon",
-      layout: "admin",
+export const renderCreate = (req, res) => {
+
+    res.render("./admins/sermon_create", {
+
+        layout: "admin",
+
+        pageTitle: "Create Sermon"
+
     });
-  } catch (err) {
-    console.log(err)
-    res.status(500).render('errors/500', { error: err });
-  }
+
 };
