@@ -1,23 +1,30 @@
 import dotenv from 'dotenv';
+
 import * as sermonService from '../modules/sermon/services/Sermon.service.js';
 import { findAll as eventService } from '../modules/event/services/admin.Event.service.js';
+import { findAll as articleService } from '../modules/article/services/Article.service.js';
+import { findAll as projectService } from '../modules/project/services/Project.service.js';
 
 // Derive the equivalent of __dirname
 import { fileURLToPath } from 'url';
 import path from 'path';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-
 dotenv.config();
 
-
-const page_logo = process.env.PAGELOGO
+const page_logo = process.env.PAGELOGO;
 
 export const index_view = async (req, res) => {
+
     try {
 
-        const sermons = await sermonService.findAll({ limit: 6, offset: 0 });
+        const sermons = await sermonService.findAll({
+            limit: 6,
+            offset: 0
+        });
+
         const events = await eventService({
             limit: 5,
             offset: 0,
@@ -26,15 +33,47 @@ export const index_view = async (req, res) => {
                 ['createdAt', 'DESC']
             ]
         });
-        res.render('index', {
-            pageTitle: "Home",
-            pageLogo: page_logo,
-            sermons: sermons.sermons,
-            event: events.events
+
+        const articles = await articleService({
+            limit: 3,
+            offset: 0
         });
+
+        const projects = await projectService({
+            limit: 3,
+            offset: 0
+        });
+
+        res.render('index', {
+
+            pageTitle: "Home",
+
+            pageLogo: page_logo,
+
+            sermons: sermons.sermons,
+
+            event: events.events,
+
+            articles: articles.articles,
+
+            projects: projects.projects
+
+        });
+
     } catch (err) {
-        res.status(500).render('./errors/500', { message: 'Internal Server Error', error: err.message });
+
+        console.log(err);
+
+        res.status(500).render('./errors/500', {
+
+            message: 'Internal Server Error',
+
+            error: err.message
+
+        });
+
     }
+
 };
 
 export const about_view = async (req, res) => {
