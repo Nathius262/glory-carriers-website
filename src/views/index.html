@@ -137,66 +137,7 @@
     {{/each}}
     {{/if}}
 
-
-    <!-- <section class="about pt-5 mt-0" id="event-carol">
-        <div class="container" style="overflow-x: hidden;">
-            <div class="row align-items-center flex-md-row flex-column-reverse">
-
-                <div class="col-lg-4 col-md-5 mb-4 text-md-start text-center scroll-x-down-el">
-                    <h4 class="text-color-blue ft-upper">Christmas</h4>
-                    <h2 class="text-color-blue ft-upper" style="letter-spacing: 0.1em;">
-                        Carol Service
-                    </h2>
-                    <p>
-                        Experience the joy of the season at our <strong>Christmas Carol</strong>,
-                        filled with songs of praise, celebration, and the message of Christ.
-                        Happening on <strong>Friday, December 19th</strong>.
-                    </p>
-                    <a style="letter-spacing: 0.1rem" href="#" data-bs-toggle="modal" data-bs-target="#eventModal"
-                        data-title="Christmas Carol" data-image="/assets/img/event-3.jpg">
-                        see details
-                    </a>
-                </div>
-
-                <div class="col-lg-8 col-md-7 mb-4">
-                    <div>
-                        <img width="100%" src="/assets/img/event-3.jpg" alt="Christmas Carol">
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section> -->
-
     {{> event-modal}}
-
-    <section class="about pt-5 mt-0" id="event">
-        <div class="container" style="overflow-x: hidden;">
-            <div class="row align-items-center">
-                <!-- <div class="col-lg-6 mb-4 justify-content-lg-start justify-content-center text-lg-start text-center align-items-center scroll-x-top-el">
-                    <h4 class="text-color-blue ft-upper text-lg-start text-center">Church</h4>
-                    <h2 class="text-color-blue ft-upper text-lg-start text-center">Project</h2>
-                    <p>
-                        Our current church project focuses on acquiring land for future expansion and development. 
-                        This strategic investment aims to provide a dedicated space for worship, community outreach, 
-                        and various church activities, ensuring we have the facilities needed to support our growing congregation. 
-                        Your prayers and support are essential as we work towards this vision.
-                    </p>
-                    <a href="/giving">
-                        Continue
-                    </a>
-                    
-                </div>  -->
-
-                <div class="col-12 mb-4 scroll-x-down-el">
-                    <div class="">
-                        <img class="" width="100%" src="/assets/img/t1.jpg" alt="about page">
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
 
     {{#if projects.length}}
     <section class="py-5 bg-light">
@@ -310,6 +251,7 @@
     </section>
     {{/if}}
 
+    {{#if sermons.length}}
     <section class="mb-5 mt-4">
         <div class="container">
             <div>
@@ -339,7 +281,7 @@
         </div>
 
     </section>
-
+    
     <!-- LATEST SERMONS -->
     <section class="py-5 bg-light">
         <div class="container">
@@ -372,6 +314,7 @@
 
         </div>
     </section>
+    {{/if}}
 
     {{#if articles.length}}
     <section class="py-5">
