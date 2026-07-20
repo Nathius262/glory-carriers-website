@@ -115,51 +115,6 @@ p {
     color: var(--grey);
 }
 
-/* .intro {
-    position: relative;
-    color: var(--white);
-    padding: 9rem 0;
-    margin-top: 50px;
-    z-index: 1;
-    height: 100vh;
-    overflow: hidden;
-    animation: backgroundTransition 50s infinite;
-} */
-
-/* Add overlay 
-.intro::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
-/*z-index: -1;  Make sure the overlay is behind the text 
-}*/
-
-@keyframes backgroundTransition {
-    0% {
-        background: var(--white) url('../img/theme1.jpg') no-repeat center top/cover;
-    }
-
-    45% {
-        background: var(--white) url('../img/theme1.jpg') no-repeat center top/cover;
-    }
-
-    55% {
-        background: var(--white) url('../img/theme1.jpg') no-repeat center top/cover;
-    }
-
-    70% {
-        background: var(--white) url('../img/theme2.jpg') no-repeat center top/cover;
-    }
-
-    100% {
-        background: var(--blue) url('../img/theme2.jpg') no-repeat center top/cover;
-    }
-}
-
 .hero-fade {
     position: relative;
     width: 100%;
@@ -193,98 +148,102 @@ p {
     animation-delay: 45s;
 }
 
-/* Define all your images here in the keyframes */
-@keyframes fadeBackground {
-    0% {
-        opacity: 1;
-        background-image: url('../img/theme2.jpg');
-    }
-
-    10% {
-        opacity: 1;
-        background-image: url('../img/theme1.jpg');
-    }
-
-    20% {
-        background-image: url('../img/welcome-1.jpg');
-    }
-
-    30% {
-        background-image: url('../img/welcome-2.jpg');
-    }
-
-    40% {
-        background-image: url('../img/welcome-3.jpg');
-    }
-
-    50% {
-        background-image: url('../img/welcome-4.jpg');
-    }
-
-    60% {
-        background-image: url('../img/overflow-1.jpg');
-    }
-
-    70% {
-        background-image: url('../img/overflow-2.jpg');
-    }
-
-    80% {
-        background-image: url('../img/prophet-1.jpg');
-    }
-
-    90% {
-        background-image: url('../img/prayer-1.jpg');
-    }
-
-    100% {
-        opacity: 1;
-        background-image: url('../img/theme2.jpg');
-    }
+.hero-section{
+    position:relative;
 }
 
+.hero-slide{
 
+    position:relative;
 
-.birthing {
-    font-size: 80px;
-    font-weight: bold;
-    text-align: left;
+    min-height:100vh;
 
+    display:flex;
+    align-items:center;
+
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:cover;
 }
 
-.glory {
-    font-size: 30px;
-    font-weight: bold;
-    letter-spacing: 0.35em;
-    text-align: left;
-    line-height: 0%;
+.hero-overlay{
+
+    position:absolute;
+    inset:0;
+
+    background:rgba(0,0,0,.55);
 }
 
-.year {
-    font-size: 16px;
-    font-weight: 400;
-    letter-spacing: 0.35em;
-    text-align: left;
-    position: relative;
+.hero-content{
+
+    position:relative;
+    z-index:5;
+
+    color:#fff;
+
+    max-width:700px;
 }
 
-.text_year {
-    font-family: Nexa;
-    font-size: 40px;
-    font-weight: 300;
-    text-align: left;
-    position: absolute;
-    left: 42px;
-    top: -18px;
+.hero-subtitle{
+
+    display:inline-block;
+
+    font-size:1rem;
+
+    text-transform:uppercase;
+
+    letter-spacing:3px;
+
+    margin-bottom:1rem;
+
+    color:#fff;
 }
 
-.the {
-    font-size: 24px;
-    font-weight: 400;
-    text-align: left;
-    background-color: var(--bg-purplish);
-    border-radius: 10pc;
-    padding: 10px;
+.hero-content h1{
+
+    font-size:4.5rem;
+
+    line-height:1;
+
+    font-weight:800;
+
+    margin-bottom:1.5rem;
+}
+
+.hero-content h1 span{
+
+    color:#FFD700;
+}
+
+.hero-content p{
+
+    font-size:1.2rem;
+
+    max-width:600px;
+
+    margin-bottom:2rem;
+}
+
+.hero-buttons{
+
+    display:flex;
+    gap:1rem;
+
+    flex-wrap:wrap;
+}
+
+.carousel-indicators button{
+
+    width:14px;
+    height:14px;
+
+    border-radius:50%;
+}
+
+.carousel-control-prev,
+.carousel-control-next{
+
+    width:7%;
 }
 
 .ellipse {
@@ -761,6 +720,104 @@ intro
     }
 }
 
+.hero-section{
+    position:relative;
+}
+
+.hero-slide{
+
+    position:relative;
+
+    min-height:100vh;
+
+    display:flex;
+    align-items:center;
+
+    background-position:0% 10%;
+    background-repeat:no-repeat;
+    background-size:cover;
+}
+
+.hero-overlay{
+
+    position:absolute;
+    inset:0;
+
+    background:rgba(0,0,0,.55);
+}
+
+.hero-content{
+
+    position:relative;
+    z-index:5;
+
+    color:#fff;
+
+    max-width:700px;
+}
+
+.hero-subtitle{
+
+    display:inline-block;
+
+    font-size:1rem;
+
+    text-transform:uppercase;
+
+    letter-spacing:3px;
+
+    margin-bottom:1rem;
+
+    color:#fff;
+}
+
+.hero-content h1{
+
+    font-size:4.5rem;
+
+    line-height:1;
+
+    font-weight:800;
+
+    margin-bottom:1.5rem;
+}
+
+.hero-content h1 span{
+
+    color: var(--yellow);
+}
+
+.hero-content p{
+
+    font-size:1.2rem;
+
+    max-width:600px;
+
+    margin-bottom:2rem;
+}
+
+.hero-buttons{
+
+    display:flex;
+    gap:1rem;
+
+    flex-wrap:wrap;
+}
+
+.carousel-indicators button{
+
+    width:14px;
+    height:14px;
+
+    border-radius:50%;
+}
+
+.carousel-control-prev,
+.carousel-control-next{
+
+    width:7%;
+}
+
 /**********
 **********
 **********
@@ -774,31 +831,41 @@ MEDIA QUERY @ screen size below 768px
         width: 100vw;
     }
 
-    .intro {
-        animation: backgroundTransition 50s infinite;
-        height: auto;
+    .hero-slide{
+
+        min-height:100vh;
+
+        background-position:center center;
     }
 
-    @keyframes backgroundTransition {
-        0% {
-            background: var(--white) url('../img/theme1.jpg') no-repeat center top/fit;
-        }
+    .hero-content{
 
-        45% {
-            background: var(--white) url('../img/theme1.jpg') no-repeat center top/contain;
-        }
+        text-align:center;
+    }
 
-        55% {
-            background: var(--white) url('../img/theme1.jpg') no-repeat center top/contain;
-        }
+    .hero-content h1{
 
-        70% {
-            background: var(--white) url('../img/theme2.jpg') no-repeat center top/contain;
-        }
+        font-size:2.3rem;
+    }
 
-        100% {
-            background: var(--blue) url('../img/theme2.jpg') no-repeat center top/contain;
-        }
+    .hero-content p{
+
+        font-size:1rem;
+    }
+
+    .hero-subtitle{
+
+        font-size:.8rem;
+    }
+
+    .hero-buttons{
+
+        flex-direction:column;
+    }
+
+    .hero-buttons .btn{
+
+        width:100%;
     }
 }
 
