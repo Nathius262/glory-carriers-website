@@ -1,27 +1,77 @@
+<main class="py-5 my-5">
 
-  <div class="container py-4">
-    <div class="row">
-      <div class="col-12">
-        <h1 class="h2 mb-4">Article List</h1>
-        
-        <div class="row">
-          {{#each articles}}
-            <div class="col-md-6 col-lg-4 mb-4">
-              <div class="card h-100 shadow-sm">
-                <div class="card-body">
-                  <h5 class="card-title">{{this.name}}</h5>
-                  <p class="card-text text-muted">ID: {{this.id}}</p>
-                  <a href="/article/{{this.id}}" class="btn btn-outline-primary btn-sm">
-                    View Details
-                  </a>
-                </div>
-              </div>
-            </div>
-          {{/each}}
+    <section class="container">
+
+        <div class="text-center mb-5">
+
+            <h1 class="fw-bold">
+                Articles
+            </h1>
+
+            <p class="text-muted">
+                Read inspiring teachings, ministry updates and faith-building articles.
+            </p>
+
         </div>
-        
-        {{> pagination}}
-      </div>
-    </div>
-  </div>
-  
+
+        <div class="row">
+
+            {{#each articles}}
+
+            <div class="col-lg-4 col-md-6 mb-5">
+
+                <div class="card border-0 shadow-sm h-100">
+
+                    <img
+                        src="{{image_url}}"
+                        class="card-img-top"
+                        style="height:240px;object-fit:cover;"
+                        alt="{{title}}">
+
+                    <div class="card-body d-flex flex-column">
+
+                        <small class="text-muted">
+
+                            {{formatDate published_at "MMMM D, YYYY"}}
+
+                        </small>
+
+                        <h4 class="fw-bold mt-2">
+
+                            {{title}}
+
+                        </h4>
+
+                        <p>
+
+                            {{summary}}
+
+                        </p>
+
+                        <a
+                            href="/article/{{slug}}"
+                            class="btn btn-outline-primary mt-auto">
+
+                            Read More
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {{/each}}
+
+        </div>
+
+        <div class="mt-5">
+
+            {{> pagination}}
+
+        </div>
+
+    </section>
+
+</main>
