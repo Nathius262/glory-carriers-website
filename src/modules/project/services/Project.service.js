@@ -58,3 +58,29 @@ export const findById = async (id) => {
     throw new Error(`Error fetching project: ${error.message}`);
   }
 };
+
+export const findBySlug = async (slug) => {
+  try {
+    const project = await Project.findOne({
+      where: { slug },
+      include: [
+        {
+          model: ProjectImage,
+          as: 'images',
+          required: false,
+          separate: true,
+          order: [['sort_order', 'ASC']],
+        },
+      ],
+    });
+
+    if (!project) {
+      throw new Error('Project not found');
+    }
+
+    return project;
+  } catch (error) {
+    console.error(error);
+    throw new Error(`Error fetching project: ${error.message}`);
+  }
+};

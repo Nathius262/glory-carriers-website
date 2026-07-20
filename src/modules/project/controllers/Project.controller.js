@@ -24,14 +24,14 @@ export const findAll = async (req, res) => {
   }
 };
 
-export const findById = async (req, res) => {
+export const findBySlug = async (req, res) => {
   try {
 
-    const project = await service.findById(req.params.id);
+    const project = await service.findBySlug(req.params.slug);
 
-    res.status(200).render("./project_update", {
+    res.status(200).render("./project_single", {
       success: true,
-      PageTitle: "Detail Project",
+      PageTitle: "project - " + project.title,
       project,
     });
 
