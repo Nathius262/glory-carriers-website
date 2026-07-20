@@ -81,60 +81,127 @@
         </div>
     </section>
 
-    {{#if event}}
-    {{#each event}}
-    <section class="about pt-5 mt-0 " id="event-{{this.id}}">
-        <div class="container" style="overflow-x: hidden;">
-            <div class="row align-items-center">
-                <!-- Image -->
-                <div class="col-lg-8 col-md-7 mb-4">
-                    <div class="mb-4">
-                        {{> event-countdown-label e=this}}
-                        {{> event-countdown-boxes e=this}}
-                        {{> event-countdown-js e=this}}
-                    </div>
-                    <div>
+    {{#if event.length}}
+
+        {{#each event}}
+        <section class="about pt-5 mt-0" id="event-{{id}}">
+            <div class="container" style="overflow-x: hidden;">
+                <div class="row align-items-center">
+
+                    <!-- Image -->
+                    <div class="col-lg-8 col-md-7 mb-4">
+                        <div class="mb-4">
+                            {{> event-countdown-label e=this}}
+                            {{> event-countdown-boxes e=this}}
+                            {{> event-countdown-js e=this}}
+                        </div>
+
                         <picture>
                             <!-- Mobile -->
-                            <source srcset="/assets/img/event-mobile.jpeg" media="(max-width: 767px)">
-                            <!-- Default (tablet & desktop) -->
-                            <img width="100%" src="{{this.image_url}}" alt="{{this.title}}">
+                            <source
+                                srcset="/assets/img/event-mobile.jpeg"
+                                media="(max-width: 767px)"
+                            >
+
+                            <!-- Tablet/Desktop -->
+                            <img
+                                width="100%"
+                                src="{{image_url}}"
+                                alt="{{title}}"
+                            >
                         </picture>
                     </div>
+
+                    <!-- Content -->
+                    <div class="col-lg-4 col-md-5 mb-4 text-center text-md-end">
+
+                        <h4 class="text-color-blue ft-upper">
+                            Upcoming Event
+                        </h4>
+
+                        <h2
+                            class="text-color-blue ft-upper fw-bold"
+                            style="letter-spacing:-1px;"
+                        >
+                            {{title}}
+                        </h2>
+
+                        <!-- Date -->
+                        <p class="text-muted mb-2">
+                            {{formatDate start_date "MMMM D, YYYY"}}
+
+                            {{#if end_date}}
+                                -
+                                {{formatDate end_date "MMMM D, YYYY"}}
+                            {{/if}}
+                        </p>
+
+                        <!-- Description -->
+                        <p>
+                            {{{truncateHTML description 40}}}
+                        </p>
+
+                        <!-- CTA -->
+                        {{#if is_headline}}
+                            <a
+                                href="/event"
+                                style="letter-spacing:.1rem"
+                            >
+                                See Details
+                            </a>
+                        {{else}}
+                            <a
+                                href="/event/{{id}}"
+                                style="letter-spacing:.1rem"
+                            >
+                                See Details
+                            </a>
+                        {{/if}}
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        {{/each}}
+
+    {{else}}
+
+    <section class="about py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+
+                <div class="col-lg-7 text-center">
+
+                    <div class="mb-4">
+                        <i
+                            class="fa-solid fa-calendar-xmark text-color-blue"
+                            style="font-size:5rem;"
+                        ></i>
+                    </div>
+
+                    <h2 class="fw-bold text-color-blue">
+                        No Active Events
+                    </h2>
+
+                    <p class="text-muted mt-3 mb-4">
+                        There are no upcoming or ongoing events at the moment.
+                        We invite you to browse our previous events and stay connected for future announcements.
+                    </p>
+
+                    <a
+                        href="/event"
+                        class="btn btn-primary px-4 py-2"
+                    >
+                        View Past Events
+                    </a>
+
                 </div>
 
-                <!-- Content -->
-                <div class="col-lg-4 col-md-5 mb-4 text-md-end text-center">
-                    <h4 class="text-color-blue ft-upper text-center text-md-end">Upcoming Event</h4>
-                    <h2 class="text-color-blue ft-upper text-center text-md-end fw-bold" style="letter-spacing: -1px;">
-                        {{this.title}}
-                    </h2>
-                    <!-- Date -->
-                    <p class="text-muted mb-2">
-                        {{formatDate this.start_date "MMMM D, YYYY"}}
-                        {{#if this.end_date}}
-                        - {{formatDate this.end_date "MMMM D, YYYY"}}
-                        {{/if}}
-                    </p>
-                    <!-- Truncated Description -->
-                    <p>
-                        {{{truncateHTML this.description 40}}}
-                    </p>
-                    <!-- CTA -->
-                    {{#if this.is_headline}}
-                    <a style="letter-spacing: 0.1rem" href="/event">
-                        See Details
-                    </a>
-                    {{else}}
-                    <a style="letter-spacing: 0.1rem" href="/event/{{this.id}}">
-                        See Details
-                    </a>
-                    {{/if}}
-                </div>
             </div>
         </div>
     </section>
-    {{/each}}
+
     {{/if}}
 
     {{> event-modal}}

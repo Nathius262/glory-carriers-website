@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 
 import * as sermonService from '../modules/sermon/services/Sermon.service.js';
-import { findAll as eventService } from '../modules/event/services/admin.Event.service.js';
+import { findAllActiveEvents as eventService } from '../modules/event/services/admin.Event.service.js';
 import { findAll as articleService } from '../modules/article/services/Article.service.js';
 import { findAll as projectService } from '../modules/project/services/Project.service.js';
 

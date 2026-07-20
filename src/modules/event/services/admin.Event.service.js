@@ -1,4 +1,76 @@
 import db from '../../../models/index.cjs';
+import { Op } from 'sequelize';
+
+export const findAllActiveEvents = async ({
+  limit,
+  offset,
+  order = null
+}) => {
+  try {
+    const now = new Date();
+
+    const defaultOrder = [
+      ['start_date', 'ASC'],
+      ['createdAt', 'DESC']
+    ];
+
+    const { rows: events, count: totalItems } =
+      await db.Event.findAndCountAll({
+        where: {
+          [Op.or]: [
+            // Upcoming events
+            {
+              start_date: {
+                [Op.gte]: now
+              }
+            },
+
+            // Live events with an end date
+            {
+              start_date: {
+                [Op.lte]: now
+              },
+              end_date: {
+                [Op.gte]: now
+              }
+            },
+
+            // One-day events (no end date)
+            {
+              start_date: {
+                [Op.gte]: new Date(
+                  now.getFullYear(),
+                  now.getMonth(),
+                  now.getDate()
+                ),
+                [Op.lt]: new Date(
+                  now.getFullYear(),
+                  now.getMonth(),
+                  now.getDate() + 1
+                )
+              },
+              end_date: null
+            }
+          ]
+        },
+        limit,
+        offset,
+        distinct: true,
+        order: order || defaultOrder
+      });
+
+    return {
+      events,
+      totalItems,
+      totalPages: limit
+        ? Math.ceil(totalItems / limit)
+        : 1
+    };
+
+  } catch (error) {
+    throw new Error(`Error fetching active events: ${error.message}`);
+  }
+};
 
 export const findAll = async ({
   limit,
